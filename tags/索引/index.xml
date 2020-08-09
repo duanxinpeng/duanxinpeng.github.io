@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>索引 on Even - A super concise theme for Hugo</title>
+    <link>http://localhost:1313/tags/%E7%B4%A2%E5%BC%95/</link>
+    <description>Recent content in 索引 on Even - A super concise theme for Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 28 Jul 2020 21:26:55 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/%E7%B4%A2%E5%BC%95/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Mysql索引</title>
+      <link>http://localhost:1313/post/mysql%E7%B4%A2%E5%BC%95/</link>
+      <pubDate>Tue, 28 Jul 2020 21:26:55 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/mysql%E7%B4%A2%E5%BC%95/</guid>
+      <description>为什么不用哈希表？ 哈希函数难以设计 需要大量的内存空间 不方便范围查询 会自动为主键创建索引吗？ 如果表设置了主键，会自动为主键创建索引 如果没有主键</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>密码学 on Even - A super concise theme for Hugo</title>
+    <link>http://localhost:1313/categories/%E5%AF%86%E7%A0%81%E5%AD%A6/</link>
+    <description>Recent content in 密码学 on Even - A super concise theme for Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 06 Jun 2020 07:47:41 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/categories/%E5%AF%86%E7%A0%81%E5%AD%A6/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Enigma密码机</title>
+      <link>http://localhost:1313/post/enigma%E5%AF%86%E7%A0%81%E6%9C%BA/</link>
+      <pubDate>Sat, 06 Jun 2020 07:47:41 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/enigma%E5%AF%86%E7%A0%81%E6%9C%BA/</guid>
+      <description>Enigma密码机简介 Enigma密码机属于对称秘钥加密算法的轮转密码的实现。在第二次世界大战中广泛应用。 构造 主要有4个部件：键盘、转子、反</description>
+    </item>
+    
+  </channel>
+</rss>

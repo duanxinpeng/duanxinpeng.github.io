@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>滑动窗口 on Even - A super concise theme for Hugo</title>
+    <link>http://localhost:1313/tags/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/</link>
+    <description>Recent content in 滑动窗口 on Even - A super concise theme for Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 23 Jul 2020 08:44:06 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>滑动窗口中位数</title>
+      <link>http://localhost:1313/post/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E4%B8%AD%E4%BD%8D%E6%95%B0/</link>
+      <pubDate>Thu, 23 Jul 2020 08:44:06 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E4%B8%AD%E4%BD%8D%E6%95%B0/</guid>
+      <description>问题描述 给定一个数组，以及一个窗口，求出窗口中的数字的中位数 https://leetcode-cn.com/problems/sliding-window-median/ 怎么求中位数 插入排序法 用一个 arraylist 存储窗口内的数字 每次去掉窗口尾的一个数据，并按照</description>
+    </item>
+    
+    <item>
+      <title>滑动窗口</title>
+      <link>http://localhost:1313/post/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/</link>
+      <pubDate>Tue, 21 Jul 2020 15:00:14 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/</guid>
+      <description>适用于滑动窗口的题目的特点 滑动窗口模式 最短 先移动右指针，直至满足条件 再移动左指针，直至不满足条件 最长 先移动右指针，直至不满足条件 再移动左指针</description>
+    </item>
+    
+  </channel>
+</rss>

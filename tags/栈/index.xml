@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>栈 on Even - A super concise theme for Hugo</title>
+    <link>http://localhost:1313/tags/%E6%A0%88/</link>
+    <description>Recent content in 栈 on Even - A super concise theme for Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 10 Jul 2020 15:48:46 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/%E6%A0%88/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>最小栈</title>
+      <link>http://localhost:1313/post/%E6%9C%80%E5%B0%8F%E6%A0%88/</link>
+      <pubDate>Fri, 10 Jul 2020 15:48:46 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E6%9C%80%E5%B0%8F%E6%A0%88/</guid>
+      <description>问题描述 实现一个最小栈，push,pop,getMin操作时间复杂度都是O(1) https://leetcode-cn.com/problems/min-stack/ 思路 两个栈，一个queue保存所有数据，一个minQueu</description>
+    </item>
+    
+  </channel>
+</rss>

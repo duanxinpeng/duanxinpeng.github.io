@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>B&#43;树 on Even - A super concise theme for Hugo</title>
+    <link>http://localhost:1313/tags/b&#43;%E6%A0%91/</link>
+    <description>Recent content in B&#43;树 on Even - A super concise theme for Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 02 Jul 2020 06:36:08 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/b+%E6%A0%91/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>树结构总结</title>
+      <link>http://localhost:1313/post/%E6%A0%91%E7%BB%93%E6%9E%84%E6%80%BB%E7%BB%93/</link>
+      <pubDate>Thu, 02 Jul 2020 06:36:08 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E6%A0%91%E7%BB%93%E6%9E%84%E6%80%BB%E7%BB%93/</guid>
+      <description>堆 性质 左右孩子节点的值都小于根节点，且左右孩子都是堆的完全二叉树 最小堆构建 一个数组，从数组的最后一个元素的父亲节点（n/2）开始进行调整，以</description>
+    </item>
+    
+  </channel>
+</rss>

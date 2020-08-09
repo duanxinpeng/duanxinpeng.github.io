@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>TCP - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="段新朋" /><meta name="description" content="TCP 的特点 面向连接 可靠服务 面向字节流 面向连接 连接就是一对一，当双方都确认对方是谁时，连接就建立起来了， 源IP&#43;源端口号&#43;目标IP&#43;目标端口号就" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.72.0 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/tcp/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="TCP" />
+<meta property="og:description" content="TCP 的特点 面向连接 可靠服务 面向字节流 面向连接 连接就是一对一，当双方都确认对方是谁时，连接就建立起来了， 源IP&#43;源端口号&#43;目标IP&#43;目标端口号就" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/tcp/" />
+<meta property="article:published_time" content="2020-06-28T21:33:07+08:00" />
+<meta property="article:modified_time" content="2020-06-28T21:33:07+08:00" />
+<meta itemprop="name" content="TCP">
+<meta itemprop="description" content="TCP 的特点 面向连接 可靠服务 面向字节流 面向连接 连接就是一对一，当双方都确认对方是谁时，连接就建立起来了， 源IP&#43;源端口号&#43;目标IP&#43;目标端口号就">
+<meta itemprop="datePublished" content="2020-06-28T21:33:07&#43;08:00" />
+<meta itemprop="dateModified" content="2020-06-28T21:33:07&#43;08:00" />
+<meta itemprop="wordCount" content="2741">
+
+
+
+<meta itemprop="keywords" content="TCP,三次握手,四次挥手," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="TCP"/>
+<meta name="twitter:description" content="TCP 的特点 面向连接 可靠服务 面向字节流 面向连接 连接就是一对一，当双方都确认对方是谁时，连接就建立起来了， 源IP&#43;源端口号&#43;目标IP&#43;目标端口号就"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">NeverDoubt</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">NeverDoubt</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">TCP</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-06-28 </span>
+        <div class="post-category">
+            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"> 计算机网络 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#tcp-的特点">TCP 的特点</a></li>
+    <li><a href="#面向连接">面向连接</a>
+      <ul>
+        <li><a href="#三次握手建立连接">三次握手建立连接</a></li>
+        <li><a href="#四次挥手断开连接">四次挥手断开连接</a></li>
+      </ul>
+    </li>
+    <li><a href="#可靠传输">可靠传输</a>
+      <ul>
+        <li><a href="#arq">ARQ</a></li>
+        <li><a href="#滑动窗口协议">滑动窗口协议</a></li>
+        <li><a href="#超时重传">超时重传</a></li>
+      </ul>
+    </li>
+    <li><a href="#面向字节流">面向字节流</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="tcp-的特点">TCP 的特点</h2>
+<ol>
+<li>面向连接</li>
+<li>可靠服务</li>
+<li>面向字节流</li>
+</ol>
+<h2 id="面向连接">面向连接</h2>
+<ol>
+<li>连接就是一对一，当双方都确认对方是谁时，连接就建立起来了，</li>
+<li><code>源IP</code>+<code>源端口号</code>+<code>目标IP</code>+<code>目标端口号</code>就可以唯一确定一个连接</li>
+</ol>
+<h3 id="三次握手建立连接">三次握手建立连接</h3>
+<ol>
+<li>三次握手流程
+<ul>
+<li>客户端发送一个SYN包，进入 SYN_SENT 状态；</li>
+<li>服务器收到 syn 包，向服务器发送 syn+ack 包，服务器进入 SYN_RECV 状态；</li>
+<li>客户端接收到 syn+ack 包，向服务器发送 ack 包。</li>
+</ul>
+</li>
+<li>为什么要三次握手？两次可不可以？
+<ul>
+<li>如果客户端发送的 syn 包在网络中绕了很久才到达服务器，但是此时客户端早已经重传 syn 包并且建立连接传输数据关闭连接了。此时服务器接收到迟到的 syn 包，就直接建立连接，但是客户端并不会接受，所以此时只有服务器建立了连接，一直等待客户端，造成了资源的浪费。</li>
+</ul>
+</li>
+</ol>
+<h3 id="四次挥手断开连接">四次挥手断开连接</h3>
+<ol>
+<li>四次挥手流程
+<ul>
+<li>客户端发送 fin 包，用来关闭客户端到服务器的数据传送，并进入FIN_WAIT_1 状态</li>
+<li>服务器收到 fin 包，返回一个 ack 包，客户端收到 ack 之后进入FIN_WAIT_2 状态</li>
+<li>服务器向客户端发送 fin 包，用于关闭服务器到客户端的数据传送</li>
+<li>客户端收到服务器的 fin 包之后，回发 ack 包，进入 TIME_WAIT 状态，等待 2MSL（Maximum Segment Lifetime） 的时间。</li>
+</ul>
+</li>
+<li>为什么最后要等待 2MSL？
+<ul>
+<li>为了防止 ack 丢失，服务器重新发送 fin 包的情况。</li>
+</ul>
+</li>
+<li>为什么要四次握手？
+<ul>
+<li>因为当服务器端收到客户端的 syn 连接请求报文之后，可以直接发送 syn+ack 报文。但是关闭连接时，当服务器接收到 fin 报文时，很可能并不能立即关闭服务器到客户端的数据传输，因为服务器的数据还没有传输完，需要等到服务器端的数据传输完之后才能发送 fin 报文。</li>
+</ul>
+</li>
+</ol>
+<h2 id="可靠传输">可靠传输</h2>
+<ol>
+<li>TCP主要通过<code>超时重传</code>、<code>确认</code>、<code>传输序号</code>（解决失序和重复问题）、<code>校验和</code>等手段来实现可靠的传输。</li>
+</ol>
+<h3 id="arq">ARQ</h3>
+<ol>
+<li>ARQ协议，即<code>自动重传请求</code>（Automatic Repeat-reQuest），是OSI模型中数据链路层和传输层的错误纠正协议之一。</li>
+<li>它通过使用<code>确认</code>和<code>超时</code>这两个机制，在不可靠服务的基础上实现可靠的信息传输。</li>
+<li>ARQ包括<code>停止等待ARQ协议</code>和<code>连续ARQ协议</code>；
+<ul>
+<li>停止等待ARQ协议：每次发送都需要等待确认再进行下一次发送；
+<ul>
+<li>无差错情况：A发送M1并等待B确认，B确认后A继续发送M2</li>
+<li>A发送数据包出错或丢失：超时重传【A需要保存副本以便重传；超时时间应该略长于RTT（数据包往返时间）超时时间以及重传次数会在下面具体讲】</li>
+<li>确认丢失：A会重复发送M1，B收到后根据序号可知该数据包已经收到过了，会直接丢弃该数据包，并再次向A发送确认</li>
+<li>确认延迟：即A会收到重复确认，此时A什么都不做（根据序号可知，已经确认过）</li>
+</ul>
+</li>
+<li>连续ARQ
+<ul>
+<li>提高信道利用率，连续发送多个数据包，不需要每次都等待确认之后再发送</li>
+<li>接收方一般采取累积确认；
+<ul>
+<li>优点：不必对收到的每个分组都进行确认，而是对按序到达的最后一个分组进行确认即可，这表明所有序列号小于等于该分组序列号的分组都已经收到；</li>
+<li>缺点：不能正确的反映收到的分组【？是否为每个数据包都设置一个计时器？】，比如发送方发送了前5个分组，而中间的第3个分组丢失了【如何判断第三个丢了？超时？】，这时候接收方只能对前2个发出确认。而不知道后面3个分组的下落，因此只能把后面的3个分组都重传一次【需要吗？如果是快重传呢？快重传不是这意思，会讲到】，这种机制叫Go-back-N(回退N)，表示需要再退回来重传已发送过的N个分组。</li>
+</ul>
+</li>
+<li>连续ARQ协议通常是结合滑动窗口协议来使用</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="滑动窗口协议">滑动窗口协议</h3>
+<ol>
+<li>滑动窗口使得连续ARQ协议可以连续发送多个分组而不用等待</li>
+<li>以字节为单位；</li>
+<li>滑动窗口协议涉及到三个窗口
+<ul>
+<li>发送窗口（swnd)：在发送方，窗口大小表示可以连续发送的数据量，由接收方接收窗口和拥塞窗口决定（两者更小的那一个）</li>
+<li>接收窗口（rwnd）：在接收方维护，可以表示接收者的接收能力；</li>
+<li>拥塞窗口（cwnd）：主要用于拥塞控制；拥塞窗口的大小取决于网络的拥塞程度，并且动态地在变化。</li>
+</ul>
+</li>
+<li>滑动窗口有两个作用
+<ul>
+<li>流量控制：防止发送方过载接收方</li>
+<li>拥塞控制：防止发送方过载网络，采用控制拥塞窗口大小的方式来进行拥塞控制</li>
+</ul>
+</li>
+<li>流量控制
+<ul>
+<li>接收方返回的 ACK 中会包含自己的接收窗口的大小，从而控制发送方的数据发送</li>
+<li>零窗口和坚持定时器（TCP Persist Timer）
+<ul>
+<li>零窗口：当接收方缓存满时，就会告诉发送方接收窗口为0；发送方接收到后停止发送，直至收到非零通告；【但是如果接收方的非零通告丢失了呢？（因为非零通告是以ACK的方式发送的，发送方并不会对ACK进行确认，所以接收方不会有超时重传非零通告的机制，此时就陷入了死锁）】</li>
+<li>坚持计时器：用于解决zero window可能造成的死锁，当发送方收到zero window之后，就启动一个计时器，计时器超时之后发送方会发送窗口探查报文（window probe）询问接收方窗口是否扩大；</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>拥塞控制
+<ul>
+<li>慢启动：
+<ul>
+<li>指的是拥塞窗口初始化为较小的值，并由小到大增加拥塞窗口数值</li>
+<li>一般开始时会把cwnd设为MSS（也就是一个报文大小）</li>
+<li>慢启动并不意味着拥塞窗口大小增长速度满，每收到一个数据报确认都会将窗口增加MSS；每经过一个传输轮次且报文都收到确认时，拥塞窗口大小加倍(指数增长)；</li>
+<li>当cwnd大小超过慢开始门限(ssthresh)时，慢开始算法转为拥塞避免算法；</li>
+</ul>
+</li>
+<li>拥塞避免
+<ul>
+<li>让cwnd缓慢增大，每经过一个传输轮次增加1个报文大小，而不是加倍；（线性增长）</li>
+<li>无论在拥塞避免阶段还是慢启动阶段，一旦出现拥塞(丢包，吞吐率下降)，就要把慢开始门限设为cwnd的一半（不能小于2个报文大小），把cwnd设为1个报文大小，并进入慢启动阶段；</li>
+</ul>
+</li>
+<li>快重传
+<ul>
+<li>当一个报文丢失，发送方迟迟收不到确认，超时之后就会重传该报文，但超时机制增加了端到端的时延；</li>
+<li>TCP采用的是累积确认机制，当接收方接收到比期望序号大的报文段时，便会重复发送最近一次的报文确认，重复发送的ACK叫做冗余ACK；</li>
+<li>如果在超时之前收到了三个重复的冗余ACK（总共收到了4个ACK），接收端便知道哪个报文丢失了，于是立即重发该报文，而不必等待超时；</li>
+</ul>
+</li>
+<li>快恢复
+<ul>
+<li>与快重传配合</li>
+<li>当连续收到三个重复确认并不能判断该报文是因为网络拥塞丢失还是因为其他原因，所以并不执行慢启动算法，而是将慢开始门限(ssthresh)设为当前cwnd的一半，并将cwnd设为新的ssthresh（也就是将cwnd减半），然后开始拥塞避免算法（cwnd线性增长）；</li>
+</ul>
+</li>
+<li>因为超时造成重传
+<ul>
+<li>表明网络大概率拥塞，所以将ssthresh设为当前cwnd的一半，将cwnd设为1，并开始慢启动算法；</li>
+<li>所以慢启动算法只会在TCP连接建立，或超时重传时采用</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="超时重传">超时重传</h3>
+<ol>
+<li>超时重传等待时长
+<ul>
+<li>第一次发送后设置的超时时间是1.5秒，此后该时间在每次重传时增加1倍并直至64秒；</li>
+</ul>
+</li>
+<li>重传几次
+<ul>
+<li>一共重传12次（1.5，3，6，12，24，48 和多个64），大概需要9分钟才会放弃重传；</li>
+</ul>
+</li>
+</ol>
+<h2 id="面向字节流">面向字节流</h2>
+<ul>
+<li>字节流服务指的是TCP不需要在字节流中间插入标记来标识TCP数据包的边界。</li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">段新朋</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2020-06-28
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/tcp/">TCP</a>
+          <a href="/tags/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B/">三次握手</a>
+          <a href="/tags/%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B/">四次挥手</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/http%E5%8D%8F%E8%AE%AE%E5%8F%91%E5%B1%95%E8%BF%87%E7%A8%8B/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">HTTP协议发展过程</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/java%E5%8F%8D%E5%B0%84/">
+            <span class="next-text nav-default">Java反射</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/duanxinpeng" class="iconfont icon-github" title="github"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author"></span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      TeX: {equationNumbers: {autoNumber: "AMS"}},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

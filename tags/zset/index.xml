@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>zset on Even - A super concise theme for Hugo</title>
+    <link>http://localhost:1313/tags/zset/</link>
+    <description>Recent content in zset on Even - A super concise theme for Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 26 Jul 2020 16:38:19 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/zset/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Redis的zset实现</title>
+      <link>http://localhost:1313/post/redis%E7%9A%84zset%E5%AE%9E%E7%8E%B0/</link>
+      <pubDate>Sun, 26 Jul 2020 16:38:19 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/redis%E7%9A%84zset%E5%AE%9E%E7%8E%B0/</guid>
+      <description>redis的 zset 为什么使用 skiplist 而不用 RB-tree？ 需要更少的指针内存，当晋升概率设为 1/4 时，一个节点平均需要 1.33 个指针。 跳表的范围查询比红黑树效率</description>
+    </item>
+    
+  </channel>
+</rss>

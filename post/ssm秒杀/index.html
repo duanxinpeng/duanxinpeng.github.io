@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>SSM秒杀 - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="段新朋" /><meta name="description" content="设计到的技术 mysql 表设计 sql技巧 事务和行级锁 mybatis dao层的设计与开发 mybatis开发 mybatis和spring整合 spring mvc resful接口设计和" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.72.0 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/ssm%E7%A7%92%E6%9D%80/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="SSM秒杀" />
+<meta property="og:description" content="设计到的技术 mysql 表设计 sql技巧 事务和行级锁 mybatis dao层的设计与开发 mybatis开发 mybatis和spring整合 spring mvc resful接口设计和" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/ssm%E7%A7%92%E6%9D%80/" />
+<meta property="article:published_time" content="2020-07-16T06:16:51+08:00" />
+<meta property="article:modified_time" content="2020-07-16T06:16:51+08:00" />
+<meta itemprop="name" content="SSM秒杀">
+<meta itemprop="description" content="设计到的技术 mysql 表设计 sql技巧 事务和行级锁 mybatis dao层的设计与开发 mybatis开发 mybatis和spring整合 spring mvc resful接口设计和">
+<meta itemprop="datePublished" content="2020-07-16T06:16:51&#43;08:00" />
+<meta itemprop="dateModified" content="2020-07-16T06:16:51&#43;08:00" />
+<meta itemprop="wordCount" content="2932">
+
+
+
+<meta itemprop="keywords" content="SSM," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="SSM秒杀"/>
+<meta name="twitter:description" content="设计到的技术 mysql 表设计 sql技巧 事务和行级锁 mybatis dao层的设计与开发 mybatis开发 mybatis和spring整合 spring mvc resful接口设计和"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">NeverDoubt</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">NeverDoubt</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">SSM秒杀</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-07-16 </span>
+        <div class="post-category">
+            <a href="/categories/%E9%A1%B9%E7%9B%AE/"> 项目 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#设计到的技术">设计到的技术</a></li>
+    <li><a href="#秒杀逻辑">秒杀逻辑</a></li>
+    <li><a href="#idea-快捷键">Idea 快捷键</a></li>
+    <li><a href="#java高并发秒杀api之业务分析与dao层">Java高并发秒杀API之业务分析与DAO层</a>
+      <ul>
+        <li><a href="#开发流程">开发流程</a></li>
+        <li><a href="#dao-层实现逻辑">dao 层实现逻辑</a></li>
+      </ul>
+    </li>
+    <li><a href="#java高并发秒杀api之业务分析与service层">Java高并发秒杀API之业务分析与Service层</a>
+      <ul>
+        <li><a href="#开发流程-1">开发流程</a></li>
+        <li><a href="#service层实现逻辑">service层实现逻辑</a></li>
+        <li><a href="#声明式事务">声明式事务</a></li>
+        <li><a href="#枚举类">枚举类</a></li>
+      </ul>
+    </li>
+    <li><a href="#java高并发秒杀api之业务分析与web层">Java高并发秒杀API之业务分析与web层</a>
+      <ul>
+        <li><a href="#开发流程-2">开发流程</a></li>
+        <li><a href="#springmcv-框架流程">SpringMCV 框架流程</a></li>
+        <li><a href="#controller实现细节">Controller实现细节</a></li>
+        <li><a href="#bootstrap">BootStrap</a></li>
+      </ul>
+    </li>
+    <li><a href="#detail">detail</a>
+      <ul>
+        <li><a href="#restful-规范">restful 规范</a></li>
+      </ul>
+    </li>
+    <li><a href="#java高并发秒杀api之高并发优化">Java高并发秒杀API之高并发优化</a>
+      <ul>
+        <li><a href="#redis-优化秒杀接口暴露">redis 优化秒杀接口暴露</a></li>
+        <li><a href="#利用-mysql-的存储过程优化秒杀操作">利用 mysql 的存储过程优化秒杀操作</a></li>
+        <li><a href="#利用-protostuff-序列化以及反序列化">利用 protostuff 序列化以及反序列化</a></li>
+      </ul>
+    </li>
+    <li><a href="#常用注解">常用注解</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="设计到的技术">设计到的技术</h2>
+<ol>
+<li>mysql
+<ul>
+<li>表设计</li>
+<li>sql技巧</li>
+<li>事务和行级锁</li>
+</ul>
+</li>
+<li>mybatis
+<ul>
+<li>dao层的设计与开发</li>
+<li>mybatis开发</li>
+<li>mybatis和spring整合</li>
+</ul>
+</li>
+<li>spring mvc
+<ul>
+<li>resful接口设计和使用</li>
+<li>框架运作流程</li>
+<li>controller开发技巧</li>
+</ul>
+</li>
+<li>spring
+<ul>
+<li>spring ioc 整合service</li>
+<li>声明式事务</li>
+</ul>
+</li>
+<li>前端
+<ul>
+<li>交互设计</li>
+<li>Bootstrap</li>
+<li>jquery</li>
+</ul>
+</li>
+<li>maven</li>
+<li>高并发优化</li>
+</ol>
+<h2 id="秒杀逻辑">秒杀逻辑</h2>
+<ol>
+<li>秒杀列表</li>
+<li>商品详情页：是否可以秒杀</li>
+<li>cookie操作</li>
+</ol>
+<h2 id="idea-快捷键">Idea 快捷键</h2>
+<ol>
+<li>规整化代码：<!-- raw HTML omitted -->ctrl<!-- raw HTML omitted -->+<!-- raw HTML omitted -->alt<!-- raw HTML omitted -->+<!-- raw HTML omitted -->L<!-- raw HTML omitted --></li>
+<li>插入get、set方法：<!-- raw HTML omitted -->alt<!-- raw HTML omitted -->+<!-- raw HTML omitted -->insert<!-- raw HTML omitted --></li>
+<li>快速创建测试类：<!-- raw HTML omitted -->ctrl<!-- raw HTML omitted -->+<!-- raw HTML omitted -->shift<!-- raw HTML omitted -->+<!-- raw HTML omitted -->T<!-- raw HTML omitted --></li>
+</ol>
+<h2 id="java高并发秒杀api之业务分析与dao层">Java高并发秒杀API之业务分析与DAO层</h2>
+<h3 id="开发流程">开发流程</h3>
+<ol>
+<li>创建项目，配置各种依赖</li>
+<li>设计数据库，以及 sql 表</li>
+<li>针对每一个 sql 表格，编写对对应的实体类，用于封装返回结果</li>
+<li>针对每一个 sql 表格，编写对应的 dao 接口，用于实现对表格的增删改查</li>
+<li>编写 mybatis-config.xml 全局配置文件
+<ul>
+<li>开启驼峰命名转换</li>
+<li>使用 jdbc 的 getGenerateKeys 获取数据库自增主键。</li>
+</ul>
+</li>
+<li>编写对应于每个 dao 接口的 mapper。
+<ul>
+<li>对应于哪个接口的哪个方法</li>
+<li>参数类型</li>
+<li>返回值类型（封装）</li>
+<li>sql 语句</li>
+</ul>
+</li>
+<li>编写 spring-dao.xml 配置文件，整合 spring 和 mybatis
+<ul>
+<li>配置数据库连接池 dataSource（driver、url、username、password等）</li>
+<li>配置 sqlSessionFactory（dataSource, mybatis-config.xml, entity位置, mapper位置）</li>
+<li>配置扫描 dao 接口，利用 sqlSessionFactory 动态实现 dao 接口，注入到spring容器中。</li>
+</ul>
+</li>
+<li>测试
+<ul>
+<li>@RunWith(SpringJUnit4ClassRunner.class)：在启动junit时，启动SpringIOC容器</li>
+<li>@ContextConfiguration({&ldquo;classpath:spring/spring-dao.xml&rdquo;})：，告诉junit，spring的配置文件在哪里</li>
+</ul>
+</li>
+</ol>
+<h3 id="dao-层实现逻辑">dao 层实现逻辑</h3>
+<ol>
+<li>SeckillDao.reduceNumber(seckillId, killTime): 减库存操作，判断库存容量，判断时间是否满足。</li>
+<li>SeckillDao.queryById(seckillId)：通过 id 查询商品详情</li>
+<li>SeckillDao.queryAll(offset, limit): 查询offset之后的limit个商品详情</li>
+<li>SuccessKilledDao.insertSuccessKilled(seckillId,userPhone)：插入成功秒杀信息，以id+userphone为主键，忽略重复插入</li>
+<li>SuccessKilledDao.queryByIdWithSeckill(seckillId, userPhone)：根据id和userphone查询成功秒杀信息。</li>
+</ol>
+<h2 id="java高并发秒杀api之业务分析与service层">Java高并发秒杀API之业务分析与Service层</h2>
+<h3 id="开发流程-1">开发流程</h3>
+<ol>
+<li>编写 service 层接口及其实现。</li>
+<li>编写 dto， 用于封装 service 层各种操作的返回值。</li>
+<li>编写各种 exception 类</li>
+<li>编写秒杀状态枚举类</li>
+<li>编写 spring-service.xml 配置文件
+<ul>
+<li>&lt;context:component-scan base-package=&quot;org.seckill.service&rdquo;/&gt;： 扫描service包下所有使用注解的类型（service类），并初始化这个类。</li>
+<li>配置事务管理器</li>
+<li>配置基于注解的声明式事务</li>
+</ul>
+</li>
+<li>利用注解实现 SeckillServiceImpl 类的依赖注入</li>
+<li>利用注解配置声明式事务</li>
+<li>测试
+<ul>
+<li>和 dao 层的测试过程类似，但是需要将 spring-service.xml 的位置也告诉junit。</li>
+</ul>
+</li>
+</ol>
+<h3 id="service层实现逻辑">service层实现逻辑</h3>
+<ol>
+<li>SeckillService.getSeckillList()：返回从0开始的4个商品的详情。</li>
+<li>SeckillService.getById(seckillId)：返回 seckillId 所对应的商品的详情。</li>
+<li>SeckillService.exportSeckillUrl(seckillId)：
+<ul>
+<li>根据 seckillId 查询并得到商品的详情</li>
+<li>判断秒杀是否已经开始或者已经结束</li>
+<li>根据 seckillId 加盐之后得到一个 md5 码。</li>
+<li>将是否暴露链接、md5码、seckillId、秒杀时间等内容封装到 dto 下的 Exposer 类中返回。</li>
+</ul>
+</li>
+<li>SeckillService.executeSeckill(seckillId,userPhone,md5)
+<ul>
+<li>判断 md5 码是否合法</li>
+<li>根据 seckillId 和 当前时间执行减库存操作</li>
+<li>根据减库存操作判断是否成功，判断是否需要将秒杀成功信息插入数据库。</li>
+<li>将seckillId、秒杀状态、秒杀是否成功等信息封装到 dto 下的 SeckillExecutor 类中并将其返回。</li>
+<li>处理各种异常：重复秒杀异常、秒杀关闭异常等</li>
+</ul>
+</li>
+</ol>
+<h3 id="声明式事务">声明式事务</h3>
+<ol>
+<li>在SeckillService.executeSeckill操作中，因为有两个以上的数据库操作，所以需要配置事务，此处采用声明式事务。</li>
+<li>如果不采用声明式事务，就很麻烦了，需要先得到数据库连接，并且用threadlocal保存该连接，通过该数据库连接进行事务操作。</li>
+</ol>
+<h3 id="枚举类">枚举类</h3>
+<ol>
+<li>它既是一种 class 类型，又比class类型多了些特殊约束，但是这些约束的存在也造就了枚举类型的简洁性、安全性和便捷性。</li>
+<li></li>
+</ol>
+<h2 id="java高并发秒杀api之业务分析与web层">Java高并发秒杀API之业务分析与web层</h2>
+<h3 id="开发流程-2">开发流程</h3>
+<ol>
+<li>按照 restful 规范设计 URL
+<ul>
+<li>GET /seckill/list 获取秒杀列表</li>
+<li>GET /seckill/{id}/detail 获取商品{id}详情页</li>
+<li>GET /seckill/timie/now 获取服务器系统时间</li>
+<li>POST /seckill/{id}/exposer  暴露秒杀地址</li>
+<li>POST /seckill/{id}/{md5}/execution  执行秒杀</li>
+</ul>
+</li>
+<li>配置 SpringMVC 框架
+<ul>
+<li>webapp/WEB-INF/web.xml
+<ul>
+<li>配置 DispatcherServlet
+<ul>
+<li>配置 SpringMVC 需要加载的配置文件 spring-dao.xml, spring-service.xml, spring-web.xml</li>
+</ul>
+</li>
+<li>配置 servlet-mapping，以映射某些请求到 DispatcherServlet 上</li>
+</ul>
+</li>
+<li>spring-web.xml
+<ul>
+<li>开启 SpringMVC 注解模式</li>
+<li>静态资源配置</li>
+<li>配置 ViewResolver，jsp文件的位置、前缀、后缀。</li>
+<li>扫描 web 相关的 bean（SeckillController）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>实现 Restful 接口（用 Controller 实现 URL 对应的功能）</li>
+<li>利用 BootStrap 框架开发前端页面</li>
+<li>用 JavaScript 实现前端页面交互逻辑</li>
+</ol>
+<h3 id="springmcv-框架流程">SpringMCV 框架流程</h3>
+<ol>
+<li>接收到一个 http 请求之后， DispatcherServlet 根据 HandlerMapping 来选择调用适当的 Controller.</li>
+<li>Controller 接收请求，根据请求的 URL 及其 GET/POST 类型，来调用对应的 service 方法。</li>
+<li>Controller 执行完 service 层的逻辑之后，向 DispatcherServlet 返回 ModelAndView， 这里的 mode 就是 service 层的返回数据，view 就是用来装载这些数据的静态页面。</li>
+<li>DispatcherServlet 从 ViewResolver 获取帮助，为请求检取定义试图（将 model 封装到 view 中？）</li>
+<li>DispatcherServlet 将 model 传给 view 并将 view 返回给浏览器。</li>
+</ol>
+<h3 id="controller实现细节">Controller实现细节</h3>
+<ol>
+<li>SeckillControler.list(Model)
+<ul>
+<li>/seckill/list <code>GET</code></li>
+<li>调用 service 层的 getSeckillList()方法，将返回结果添加到 model中</li>
+<li>返回 String &ldquo;list&rdquo;</li>
+</ul>
+</li>
+<li>SeckillControler.detail(seckillId,model)
+<ul>
+<li>/seckill/{seckillId}/detail <code>GET</code></li>
+<li>调用 service 层的getById() 方法, 将返回结果加入到 model 中</li>
+<li>返回 String &ldquo;detail&rdquo; /&ldquo;redirect:/seckill/list&rdquo;/&ldquo;forward:/seckill/list&rdquo;。</li>
+</ul>
+</li>
+<li>SeckillController.time()
+<ul>
+<li>/seckill/time/now <code>GET</code></li>
+<li>@ResponseBody</li>
+<li>生成系统当前时间，并将结果封装到 SeckillResult 中返回。（以 json 的数据格式封装到 response 的 body 区域？）</li>
+</ul>
+</li>
+<li>SeckillControler.exposer(seckillId)
+<ul>
+<li>/seckill/{seckillId}/exposer <code>POST</code></li>
+<li>@ResponseBody</li>
+<li>调用 service 层的 exportSeckillUrl 方法，得到返回值 Exposer，并将其封装到 SeckillResult 中返回。</li>
+</ul>
+</li>
+<li>SeckillControler.execute(seckillId,md5,phone)
+<ul>
+<li>/seckill/{seckillId}/{md5}/execution</li>
+<li>phone 从 cookie 中获取！</li>
+<li>调用 service 层的 executeSeckill 方法，得到 SeckillExecutor 返回值，并将其封装到 SeckillResult 中返回。</li>
+</ul>
+</li>
+</ol>
+<h3 id="bootstrap">BootStrap</h3>
+<ol>
+<li>list
+<ul>
+<li>可从 mode 中直接获取 &ldquo;list&rdquo;。${list}</li>
+</ul>
+</li>
+<li>
+<h2 id="detail">detail</h2>
+</li>
+</ol>
+<h3 id="restful-规范">restful 规范</h3>
+<ol>
+<li>每个 URL 都代表一种资源</li>
+<li>客户端和服务器之间，传递这种资源的某种表现层</li>
+<li>客户端通过四个 Http 动词，对服务器的资源进行操作，实现“表现层状态转化”
+<ul>
+<li>GET 查询操作，获取资源</li>
+<li>POST 添加/修改操作，新建/更新资源</li>
+<li>PUT 修改操作，更新资源</li>
+<li>DELETE 删除操作，删除资源</li>
+</ul>
+</li>
+</ol>
+<h2 id="java高并发秒杀api之高并发优化">Java高并发秒杀API之高并发优化</h2>
+<h3 id="redis-优化秒杀接口暴露">redis 优化秒杀接口暴露</h3>
+<ol>
+<li>配置依赖
+<ul>
+<li>redis 客户端依赖
+<ul>
+<li>jedis</li>
+</ul>
+</li>
+<li>protostuff 序列化依赖
+<ul>
+<li>protostuff-core</li>
+<li>protostuff-runtime</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>在 dao 层添加 RedisDao 类，用于对 redis 的操作
+<ul>
+<li>putSeckill</li>
+<li>getSeckill</li>
+</ul>
+</li>
+<li>通过配置将 RedisDao 注入 Spring 容器</li>
+<li>修改 service 层逻辑
+<ul>
+<li>先通过 redis get</li>
+<li>如果为 null， 再通过  db get，并将结果 put 到 redis 中。</li>
+</ul>
+</li>
+</ol>
+<h3 id="利用-mysql-的存储过程优化秒杀操作">利用 mysql 的存储过程优化秒杀操作</h3>
+<ol>
+<li>在 MySQL 中创建一个执行</li>
+</ol>
+<h3 id="利用-protostuff-序列化以及反序列化">利用 protostuff 序列化以及反序列化</h3>
+<ol>
+<li>protostuff 进行序列化要比 java 自带的序列化效率更高</li>
+<li>序列化
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">private RuntimeSchema&lt;SecKill&gt; schema = RuntimeSchema.createFrom(SecKill.class);
+byte[] bytes = ProtostuffIOUtil.toByteArray(seckill, schema,
+                    LinkedBuffer.allocate(LinkedBuffer.DEFAULT_BUFFER_SIZE));
+</code></pre></td></tr></table>
+</div>
+</div><p>``</p>
+</li>
+<li>反序列化
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">private RuntimeSchema&lt;SecKill&gt; schema = RuntimeSchema.createFrom(SecKill.class);
+SecKill secKill = schema.newMessage();
+ProtostuffIOUtil.mergeFrom(bytes, secKill, schema);
+</code></pre></td></tr></table>
+</div>
+</div><p>``</p>
+</li>
+</ol>
+<h2 id="常用注解">常用注解</h2>
+<ol>
+<li>@PathVariable：将 URL 中占位符参数绑定到处理器的方法形参中。</li>
+<li>@RequestMapping：用来处理请求地址映射。</li>
+<li>@Param(&quot;&quot;) ：mybatis提供的注解，作用是用来传递参数</li>
+<li>@ResponseBody：将方法的返回值以特定的格式写入到 response 的 body 区域，进而将数据返回给客户端。如果不写此注解，方法则将返回值封装为 ModelAndView 对象。</li>
+<li>@Cookie : 利用 jquery-cookie 插件从 cookie 中获取数据。</li>
+</ol>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">段新朋</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2020-07-16
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/ssm/">SSM</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/%E7%A7%BB%E5%8A%A8%E9%9B%B6/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">移动零</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/%E8%B7%AF%E5%BE%84%E5%92%8C3/">
+            <span class="next-text nav-default">路径和3</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/duanxinpeng" class="iconfont icon-github" title="github"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author"></span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      TeX: {equationNumbers: {autoNumber: "AMS"}},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

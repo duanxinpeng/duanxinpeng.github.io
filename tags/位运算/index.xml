@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>位运算 on Even - A super concise theme for Hugo</title>
+    <link>http://localhost:1313/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/</link>
+    <description>Recent content in 位运算 on Even - A super concise theme for Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 13 Jul 2020 09:42:02 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>汉明距离</title>
+      <link>http://localhost:1313/post/%E6%B1%89%E6%98%8E%E8%B7%9D%E7%A6%BB/</link>
+      <pubDate>Mon, 13 Jul 2020 09:42:02 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E6%B1%89%E6%98%8E%E8%B7%9D%E7%A6%BB/</guid>
+      <description>问题描述 返回两个整数之间的汉明距离 https://leetcode-cn.com/problems/hamming-distance/</description>
+    </item>
+    
+    <item>
+      <title>只出现一次的数字</title>
+      <link>http://localhost:1313/post/%E5%8F%AA%E5%87%BA%E7%8E%B0%E4%B8%80%E6%AC%A1%E7%9A%84%E6%95%B0%E5%AD%97/</link>
+      <pubDate>Fri, 10 Jul 2020 09:53:07 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E5%8F%AA%E5%87%BA%E7%8E%B0%E4%B8%80%E6%AC%A1%E7%9A%84%E6%95%B0%E5%AD%97/</guid>
+      <description>问题描述 给定一个飞空数组，除了某个元素只出现一次之外，其他元素均出现两次，找出那个只出现一次的元素。 https://leetcode-cn.com/problems/single-number/ 思路 HashMap 位运算：对所有元素做一次异或运算</description>
+    </item>
+    
+    <item>
+      <title>子集</title>
+      <link>http://localhost:1313/post/%E5%AD%90%E9%9B%86/</link>
+      <pubDate>Fri, 10 Jul 2020 09:11:18 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E5%AD%90%E9%9B%86/</guid>
+      <description>问题描述 给定一个不含重复元素的整数数组nums，返回该数组所有可能的子集 https://leetcode-cn.com/problems/subsets/ 思路 递归：具体的实现其实是用迭代实现的，而并非递归，但思路是递归的</description>
+    </item>
+    
+  </channel>
+</rss>

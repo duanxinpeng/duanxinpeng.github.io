@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>递归 on Even - A super concise theme for Hugo</title>
+    <link>http://localhost:1313/tags/%E9%80%92%E5%BD%92/</link>
+    <description>Recent content in 递归 on Even - A super concise theme for Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 11 Jul 2020 16:17:22 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/%E9%80%92%E5%BD%92/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>二叉树的最近公共祖先</title>
+      <link>http://localhost:1313/post/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88/</link>
+      <pubDate>Sat, 11 Jul 2020 16:17:22 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88/</guid>
+      <description>问题描述 给定一颗二叉树，找到该树种两个指定节点p和q的最近公共祖先 https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/ 我的思路 从root开始，一次判断每个节点是否同时包含节点p，q，重点是同</description>
+    </item>
+    
+    <item>
+      <title>子集</title>
+      <link>http://localhost:1313/post/%E5%AD%90%E9%9B%86/</link>
+      <pubDate>Fri, 10 Jul 2020 09:11:18 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E5%AD%90%E9%9B%86/</guid>
+      <description>问题描述 给定一个不含重复元素的整数数组nums，返回该数组所有可能的子集 https://leetcode-cn.com/problems/subsets/ 思路 递归：具体的实现其实是用迭代实现的，而并非递归，但思路是递归的</description>
+    </item>
+    
+    <item>
+      <title>验证二叉搜索树</title>
+      <link>http://localhost:1313/post/%E9%AA%8C%E8%AF%81%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/</link>
+      <pubDate>Wed, 08 Jul 2020 08:51:38 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E9%AA%8C%E8%AF%81%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/</guid>
+      <description>题目描述 https://leetcode-cn.com/problems/validate-binary-search-tree/ 递归实现 我的想法是先判断左右子树是不是，在判断左孩子的最大元素是否小于根元素，最后判断有孩子的最小元素是否大于根元素，实现起来比较</description>
+    </item>
+    
+    <item>
+      <title>不同的二叉搜索树</title>
+      <link>http://localhost:1313/post/%E4%B8%8D%E5%90%8C%E7%9A%84%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/</link>
+      <pubDate>Wed, 08 Jul 2020 08:25:23 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E4%B8%8D%E5%90%8C%E7%9A%84%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/</guid>
+      <description>题目描述 https://leetcode-cn.com/problems/unique-binary-search-trees/ 解题时间 38 min 解题思路 中序遍历 递归 左右子树 官方解题 动态规划：动态规划思路是比较明确的，毕竟递归过程中做了太多重复性工作 卡特兰数：$C</description>
+    </item>
+    
+  </channel>
+</rss>

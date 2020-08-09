@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Mysql索引 - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="段新朋" /><meta name="description" content="为什么不用哈希表？ 哈希函数难以设计 需要大量的内存空间 不方便范围查询 会自动为主键创建索引吗？ 如果表设置了主键，会自动为主键创建索引 如果没有主键" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.72.0 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/mysql%E7%B4%A2%E5%BC%95/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Mysql索引" />
+<meta property="og:description" content="为什么不用哈希表？ 哈希函数难以设计 需要大量的内存空间 不方便范围查询 会自动为主键创建索引吗？ 如果表设置了主键，会自动为主键创建索引 如果没有主键" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/mysql%E7%B4%A2%E5%BC%95/" />
+<meta property="article:published_time" content="2020-07-28T21:26:55+08:00" />
+<meta property="article:modified_time" content="2020-07-28T21:26:55+08:00" />
+<meta itemprop="name" content="Mysql索引">
+<meta itemprop="description" content="为什么不用哈希表？ 哈希函数难以设计 需要大量的内存空间 不方便范围查询 会自动为主键创建索引吗？ 如果表设置了主键，会自动为主键创建索引 如果没有主键">
+<meta itemprop="datePublished" content="2020-07-28T21:26:55&#43;08:00" />
+<meta itemprop="dateModified" content="2020-07-28T21:26:55&#43;08:00" />
+<meta itemprop="wordCount" content="799">
+
+
+
+<meta itemprop="keywords" content="mysql,索引," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Mysql索引"/>
+<meta name="twitter:description" content="为什么不用哈希表？ 哈希函数难以设计 需要大量的内存空间 不方便范围查询 会自动为主键创建索引吗？ 如果表设置了主键，会自动为主键创建索引 如果没有主键"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">NeverDoubt</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">NeverDoubt</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Mysql索引</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-07-28 </span>
+        <div class="post-category">
+            <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"> 数据库 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#为什么不用哈希表">为什么不用哈希表？</a></li>
+    <li><a href="#会自动为主键创建索引吗">会自动为主键创建索引吗？</a></li>
+    <li><a href="#索引分类">索引分类</a></li>
+    <li><a href="#存储引擎">存储引擎</a></li>
+    <li><a href="#基础概念">基础概念</a></li>
+    <li><a href="#联合索引">联合索引</a></li>
+    <li><a href="#索引创建">索引创建</a></li>
+    <li><a href="#mysql中如果使用like进行模糊匹配的时候是否会使用索引">MySQL中如果使用like进行模糊匹配的时候，是否会使用索引？</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="为什么不用哈希表">为什么不用哈希表？</h2>
+<ol>
+<li>哈希函数难以设计</li>
+<li>需要大量的内存空间</li>
+<li>不方便范围查询</li>
+</ol>
+<h2 id="会自动为主键创建索引吗">会自动为主键创建索引吗？</h2>
+<ol>
+<li>如果表设置了主键，会自动为主键创建索引</li>
+<li>如果没有主键，则会默认为第一个非空且唯一的列创建索引</li>
+<li>以上都没有，则会默认为一个隐藏的 row_id 创建索引</li>
+<li>在InnoDB引擎中，以上索引都是聚簇索引。</li>
+</ol>
+<h2 id="索引分类">索引分类</h2>
+<ol>
+<li>主键索引：主键会被自动建索引。</li>
+<li>唯一索引：要求不能有重复数据，</li>
+<li>普通索引/二级索引/辅助索引：为某一列创建一个索引，其数据存放的是主键，而不是实际的行数据！所以属于非聚簇索引！</li>
+<li>聚簇索引：</li>
+<li>非聚簇索引：</li>
+<li>联合索引：</li>
+</ol>
+<h2 id="存储引擎">存储引擎</h2>
+<ol>
+<li>innodb
+<ul>
+<li>支持事务</li>
+<li>数据索引放一块，innbdb的主键索引，唯一索引都是聚簇索引，叶子节点中存放的都是行数据</li>
+</ul>
+</li>
+<li>memory
+<ul>
+<li>数据存放在内存中</li>
+</ul>
+</li>
+<li>myisam：存储成三个文件
+<ul>
+<li>不支持事务（存储速度更快）</li>
+<li>索引和数据分开放，所以都是非聚簇索引！</li>
+</ul>
+</li>
+</ol>
+<h2 id="基础概念">基础概念</h2>
+<ol>
+<li>回表：两次遍历B+树，一次通过普通索引查找 key，再通过key找到行数据。</li>
+<li>索引覆盖：所查询数据就在辅助索引上，所以不需要回表，实现的方法是建立联合索引！</li>
+</ol>
+<h2 id="联合索引">联合索引</h2>
+<ol>
+<li>为什么不为每一列创建索引？
+<ul>
+<li>索引覆盖</li>
+<li>减少开销</li>
+</ul>
+</li>
+<li>最左匹配：只有在查询条件中使用了创建索引时的第一个字段，索引才会被使用。利用索引对列进行匹配时，从左向右进行匹配，一旦中间某个列不在查询条件中，那么其后的索引都不起作用了。类似字符串通过字典顺序比较大小，中间有个字母跳过了，两个字符串的大小就没办法确定。</li>
+</ol>
+<h2 id="索引创建">索引创建</h2>
+<ol>
+<li>创建普通索引：ALTER TABLE table_name <code>ADD INDEX</code> index_name(column_list)</li>
+<li>创建唯一索引：ALTER TABLE table_name <code>ADD UNIQUE</code> (column_list)</li>
+<li>创建主键索引：ALTER TABLE table_name <code>ADD PRIMARY KEY</code> (column_list)</li>
+<li>创建联合索引：ALTER TABLE table_name <code>ADD INDEX</code> index_name(column_list1，column_list2,&hellip;)</li>
+</ol>
+<h2 id="mysql中如果使用like进行模糊匹配的时候是否会使用索引">MySQL中如果使用like进行模糊匹配的时候，是否会使用索引？</h2>
+<ol>
+<li>模糊匹配时，当前面select查询的字段在索引树上时，会使用索引，但是是通过全局扫描所引树来找到响应的字段，因为需要查询的字段都在索引树上。</li>
+</ol>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">段新朋</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2020-07-28
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/mysql/">mysql</a>
+          <a href="/tags/%E7%B4%A2%E5%BC%95/">索引</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/java%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Java线程同步</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/sql%E8%AF%AD%E5%8F%A5%E7%BB%83%E4%B9%A0/">
+            <span class="next-text nav-default">SQL语句练习</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/duanxinpeng" class="iconfont icon-github" title="github"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author"></span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      TeX: {equationNumbers: {autoNumber: "AMS"}},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

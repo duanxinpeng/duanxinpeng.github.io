@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>组合 - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="段新朋" /><meta name="description" content="组合 问题描述 https://leetcode-cn.com/problems/combinations/submissions/ 收获 组合与排列的不同之处在于，组合只能向后看，排列是删除一个元素，组合是删除该元素以及该元素之前的所有元素！ 组合的另外一个不同" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.72.0 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/%E7%BB%84%E5%90%88/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="组合" />
+<meta property="og:description" content="组合 问题描述 https://leetcode-cn.com/problems/combinations/submissions/ 收获 组合与排列的不同之处在于，组合只能向后看，排列是删除一个元素，组合是删除该元素以及该元素之前的所有元素！ 组合的另外一个不同" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/%E7%BB%84%E5%90%88/" />
+<meta property="article:published_time" content="2020-07-07T00:11:12+08:00" />
+<meta property="article:modified_time" content="2020-07-07T00:11:12+08:00" />
+<meta itemprop="name" content="组合">
+<meta itemprop="description" content="组合 问题描述 https://leetcode-cn.com/problems/combinations/submissions/ 收获 组合与排列的不同之处在于，组合只能向后看，排列是删除一个元素，组合是删除该元素以及该元素之前的所有元素！ 组合的另外一个不同">
+<meta itemprop="datePublished" content="2020-07-07T00:11:12&#43;08:00" />
+<meta itemprop="dateModified" content="2020-07-07T00:11:12&#43;08:00" />
+<meta itemprop="wordCount" content="457">
+
+
+
+<meta itemprop="keywords" content="组合,回溯,动态规划," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="组合"/>
+<meta name="twitter:description" content="组合 问题描述 https://leetcode-cn.com/problems/combinations/submissions/ 收获 组合与排列的不同之处在于，组合只能向后看，排列是删除一个元素，组合是删除该元素以及该元素之前的所有元素！ 组合的另外一个不同"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">NeverDoubt</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">NeverDoubt</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">组合</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-07-07 </span>
+        <div class="post-category">
+            <a href="/categories/%E7%AE%97%E6%B3%95/"> 算法 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#组合">组合</a>
+      <ul>
+        <li><a href="#问题描述">问题描述</a></li>
+        <li><a href="#收获">收获</a></li>
+      </ul>
+    </li>
+    <li><a href="#组合总和">组合总和</a>
+      <ul>
+        <li><a href="#问题描述-1">问题描述</a></li>
+        <li><a href="#收获-1">收获</a></li>
+      </ul>
+    </li>
+    <li><a href="#组合总和2">组合总和2</a>
+      <ul>
+        <li><a href="#问题描述-2">问题描述</a></li>
+        <li><a href="#收获-2">收获</a></li>
+      </ul>
+    </li>
+    <li><a href="#组合总数3">组合总数3</a>
+      <ul>
+        <li><a href="#问题描述-3">问题描述</a></li>
+        <li><a href="#收获-3">收获</a></li>
+      </ul>
+    </li>
+    <li><a href="#组合总数4">组合总数4</a>
+      <ul>
+        <li><a href="#问题描述-4">问题描述</a></li>
+        <li><a href="#收获-4">收获</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="组合">组合</h2>
+<h3 id="问题描述">问题描述</h3>
+<p><a href="https://leetcode-cn.com/problems/combinations/submissions/">https://leetcode-cn.com/problems/combinations/submissions/</a></p>
+<h3 id="收获">收获</h3>
+<ol>
+<li>组合与排列的不同之处在于，组合只能向后看，排列是删除一个元素，组合是删除该元素以及该元素之前的所有元素！</li>
+<li>组合的另外一个不同在于，组合必须有一个停止条件，要么是元素个数，要么是元素之和要满足一定的条件！</li>
+<li>其他的地方与排列无异，都是利用了回溯的思想！</li>
+</ol>
+<h2 id="组合总和">组合总和</h2>
+<h3 id="问题描述-1">问题描述</h3>
+<p><a href="https://leetcode-cn.com/problems/combination-sum/">https://leetcode-cn.com/problems/combination-sum/</a></p>
+<ol>
+<li>无重复元素</li>
+<li>每个元素可被重复选取</li>
+</ol>
+<h3 id="收获-1">收获</h3>
+<ol>
+<li>排序可以用break，不排序就只能用continue；</li>
+</ol>
+<h2 id="组合总和2">组合总和2</h2>
+<h3 id="问题描述-2">问题描述</h3>
+<ol>
+<li>可有重复元素</li>
+<li>元素不可被重复使用
+<a href="https://leetcode-cn.com/problems/combination-sum-ii/">https://leetcode-cn.com/problems/combination-sum-ii/</a></li>
+</ol>
+<h3 id="收获-2">收获</h3>
+<ol>
+<li>比起全排列，这里不再需要visited辅助数组，因为在组合中是把first之前的所有元素都删除掉！只需要对first进行更改即可</li>
+<li>相当于用first和nums结合。</li>
+</ol>
+<h2 id="组合总数3">组合总数3</h2>
+<h3 id="问题描述-3">问题描述</h3>
+<ol>
+<li>和为n的k个数字的组合</li>
+<li>组合中只允许出现1-9的正整数
+<a href="https://leetcode-cn.com/problems/combination-sum-iii/">https://leetcode-cn.com/problems/combination-sum-iii/</a></li>
+</ol>
+<h3 id="收获-3">收获</h3>
+<ol>
+<li>其实比组合总数2简单，唯一的不同点在于两个终止条件的判断</li>
+</ol>
+<h2 id="组合总数4">组合总数4</h2>
+<h3 id="问题描述-4">问题描述</h3>
+<ol>
+<li>不需要列出所有的可能的组合，只需要计算有多少种组合；</li>
+<li>正整数，且不存在重复数字。</li>
+<li>允许元素重复使用。</li>
+<li>顺序不同的序列被视为不同的组合。</li>
+</ol>
+<p><a href="https://leetcode-cn.com/problems/combination-sum-iv/">https://leetcode-cn.com/problems/combination-sum-iv/</a></p>
+<h3 id="收获-4">收获</h3>
+<ol>
+<li>需要利用动态规划的思想，而且是类似背包的思想。</li>
+</ol>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">段新朋</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2020-07-07
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E7%BB%84%E5%90%88/">组合</a>
+          <a href="/tags/%E5%9B%9E%E6%BA%AF/">回溯</a>
+          <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">动态规划</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/%E9%93%BE%E8%A1%A8%E6%8E%92%E5%BA%8F/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">链表排序</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/%E5%85%A8%E6%8E%92%E5%88%97/">
+            <span class="next-text nav-default">全排列</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/duanxinpeng" class="iconfont icon-github" title="github"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author"></span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      TeX: {equationNumbers: {autoNumber: "AMS"}},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

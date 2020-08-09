@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>编码 on Even - A super concise theme for Hugo</title>
+    <link>http://localhost:1313/tags/%E7%BC%96%E7%A0%81/</link>
+    <description>Recent content in 编码 on Even - A super concise theme for Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 05 Jun 2020 20:24:14 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/%E7%BC%96%E7%A0%81/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>字符编码</title>
+      <link>http://localhost:1313/post/%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81/</link>
+      <pubDate>Fri, 05 Jun 2020 20:24:14 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81/</guid>
+      <description>ASCII码：最简单的一种编码方式，一共规定了128个字符的编码。 ANSI码：是对ASCII编码的扩展，其前128个字符与ASCII相同；在</description>
+    </item>
+    
+  </channel>
+</rss>

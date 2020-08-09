@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>raft on Even - A super concise theme for Hugo</title>
+    <link>http://localhost:1313/tags/raft/</link>
+    <description>Recent content in raft on Even - A super concise theme for Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 07 Jul 2020 23:32:08 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/raft/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>MIT6824项目</title>
+      <link>http://localhost:1313/post/mit6824%E9%A1%B9%E7%9B%AE/</link>
+      <pubDate>Tue, 07 Jul 2020 23:32:08 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/mit6824%E9%A1%B9%E7%9B%AE/</guid>
+      <description>##MapReduce Map/Reduce input and output 主要是关于怎么做Map，怎么做Reduce； Map过程主要的思想就是利用一个哈希函数将任务分类，以分别分配给不同的机器，并且保证任</description>
+    </item>
+    
+  </channel>
+</rss>

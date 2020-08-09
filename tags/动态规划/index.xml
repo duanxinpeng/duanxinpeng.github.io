@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>动态规划 on Even - A super concise theme for Hugo</title>
+    <link>http://localhost:1313/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/</link>
+    <description>Recent content in 动态规划 on Even - A super concise theme for Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 21 Jul 2020 06:40:34 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>动态规划专题</title>
+      <link>http://localhost:1313/post/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E4%B8%93%E9%A2%98/</link>
+      <pubDate>Tue, 21 Jul 2020 06:40:34 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E4%B8%93%E9%A2%98/</guid>
+      <description>动态规划 一个模型 多阶段决策最优解模型 三个特征 最优子结构：最优解包含子问题的最优解，或者理解为“后面的状态可以通过前面的状态推导出来”。 无后效</description>
+    </item>
+    
+    <item>
+      <title>打家劫舍</title>
+      <link>http://localhost:1313/post/%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8D/</link>
+      <pubDate>Mon, 20 Jul 2020 18:56:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8D/</guid>
+      <description>打家劫舍 给定一个数组，求数组中不相邻元素的最大和。 https://leetcode-cn.com/problems/house-robber/ 简单动态规划 打家劫舍Ⅱ 数组头和数组尾被视为相邻，求这种情况下数组中不相邻元素的最大和。 https://leetcode-cn.com/problems/house-robber-ii/</description>
+    </item>
+    
+    <item>
+      <title>零钱兑换</title>
+      <link>http://localhost:1313/post/%E9%9B%B6%E9%92%B1%E5%85%91%E6%8D%A2/</link>
+      <pubDate>Mon, 20 Jul 2020 18:42:12 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E9%9B%B6%E9%92%B1%E5%85%91%E6%8D%A2/</guid>
+      <description>问题描述 给定不同面额的硬币 coins 和一个总金额 amount。编写一个函数来计算可以凑成总金额所需的最少的硬币个数。如果没有任何一种硬币组合能组成总</description>
+    </item>
+    
+    <item>
+      <title>买卖股票的最佳时机</title>
+      <link>http://localhost:1313/post/%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA/</link>
+      <pubDate>Sun, 19 Jul 2020 09:01:05 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA/</guid>
+      <description>动态规划框架 状态转移方程 dp[i][k][0] = max(dp[i-1][k][0], dp[i-1][k][1] + prices[i]) dp[i][k][1] = max(dp[i-1][k][1], dp[i-1][k-1][0] - prices[i]) base case i=-1 and k = 0 dp[-1][k][0] = 0 : i = -1 表示第-1天，意味着还没开始 dp[-1][k][1] = -infinity ： 表示还没开始就已经持有股票，</description>
+    </item>
+    
+    <item>
+      <title>背包九讲</title>
+      <link>http://localhost:1313/post/%E8%83%8C%E5%8C%85%E4%B9%9D%E8%AE%B2/</link>
+      <pubDate>Sat, 18 Jul 2020 08:01:20 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E8%83%8C%E5%8C%85%E4%B9%9D%E8%AE%B2/</guid>
+      <description>0/1背包 有 N 件物品和一个容量为 V 的背包。每一件物品 i 的体积和价值分别是 $C_i$ 和 $W_i$, 请问将哪些物品装入背包可使价值总和最大？ 状态转移方程：$dp[</description>
+    </item>
+    
+    <item>
+      <title>完全平方数</title>
+      <link>http://localhost:1313/post/%E5%AE%8C%E5%85%A8%E5%B9%B3%E6%96%B9%E6%95%B0/</link>
+      <pubDate>Fri, 17 Jul 2020 19:27:09 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E5%AE%8C%E5%85%A8%E5%B9%B3%E6%96%B9%E6%95%B0/</guid>
+      <description>有效的完全平方数 https://leetcode-cn.com/problems/valid-perfect-square/ 二分查找 注意发生越界的情况，所以用 long 代替 int。 完全平方数 返回一个正整数最少可以由几个完全平方数构成 https://leetcode-cn.com/problems/perfect-squares/ 数学解法 如果满足$4</description>
+    </item>
+    
+    <item>
+      <title>最长上升子序列</title>
+      <link>http://localhost:1313/post/%E6%9C%80%E9%95%BF%E4%B8%8A%E5%8D%87%E5%AD%90%E5%BA%8F%E5%88%97/</link>
+      <pubDate>Fri, 17 Jul 2020 11:00:05 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E6%9C%80%E9%95%BF%E4%B8%8A%E5%8D%87%E5%AD%90%E5%BA%8F%E5%88%97/</guid>
+      <description>问题描述 给定一个无序的整数数组，找到其中最长上升子序列的长度 https://leetcode-cn.com/problems/longest-increasing-subsequence/ 动态规划 dp[i]代表以nums[i]结尾的最长上升子序列的长度，dp[i]=</description>
+    </item>
+    
+    <item>
+      <title>目标和</title>
+      <link>http://localhost:1313/post/%E7%9B%AE%E6%A0%87%E5%92%8C/</link>
+      <pubDate>Mon, 13 Jul 2020 08:52:10 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E7%9B%AE%E6%A0%87%E5%92%8C/</guid>
+      <description>问题描述 给定一个非负数数组和一个目标和，对于数组中的任意一个元素，都可以选择在前面添加+或-，返回所有使数组和为目标和的所有符号添加方法数;</description>
+    </item>
+    
+    <item>
+      <title>最大正方形</title>
+      <link>http://localhost:1313/post/%E6%9C%80%E5%A4%A7%E6%AD%A3%E6%96%B9%E5%BD%A2/</link>
+      <pubDate>Sat, 11 Jul 2020 14:49:58 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E6%9C%80%E5%A4%A7%E6%AD%A3%E6%96%B9%E5%BD%A2/</guid>
+      <description>问题描述 在一个由0，1组成的矩阵中找到只包含1的最大正方形，并返回其面积。 https://leetcode-cn.com/problems/maximal-square/ 收获 首先你得能把暴力法描述出来 首先遍历矩阵找到所有元素等于1的位</description>
+    </item>
+    
+    <item>
+      <title>单词拆分</title>
+      <link>http://localhost:1313/post/%E5%8D%95%E8%AF%8D%E6%8B%86%E5%88%86/</link>
+      <pubDate>Fri, 10 Jul 2020 11:06:14 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E5%8D%95%E8%AF%8D%E6%8B%86%E5%88%86/</guid>
+      <description>问题描述 给定一个非空字符串s，以及一个包含非空单词列表的字典，判断s是否可以被空格拆分为一个或多个在字典中出现的单词。 https://leetcode-cn.com/problems/word-break/ 思路描述 本质就是单词</description>
+    </item>
+    
+    <item>
+      <title>不同的二叉搜索树</title>
+      <link>http://localhost:1313/post/%E4%B8%8D%E5%90%8C%E7%9A%84%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/</link>
+      <pubDate>Wed, 08 Jul 2020 08:25:23 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E4%B8%8D%E5%90%8C%E7%9A%84%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/</guid>
+      <description>题目描述 https://leetcode-cn.com/problems/unique-binary-search-trees/ 解题时间 38 min 解题思路 中序遍历 递归 左右子树 官方解题 动态规划：动态规划思路是比较明确的，毕竟递归过程中做了太多重复性工作 卡特兰数：$C</description>
+    </item>
+    
+    <item>
+      <title>组合</title>
+      <link>http://localhost:1313/post/%E7%BB%84%E5%90%88/</link>
+      <pubDate>Tue, 07 Jul 2020 00:11:12 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E7%BB%84%E5%90%88/</guid>
+      <description>组合 问题描述 https://leetcode-cn.com/problems/combinations/submissions/ 收获 组合与排列的不同之处在于，组合只能向后看，排列是删除一个元素，组合是删除该元素以及该元素之前的所有元素！ 组合的另外一个不同</description>
+    </item>
+    
+  </channel>
+</rss>

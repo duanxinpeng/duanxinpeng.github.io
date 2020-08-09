@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>bfs on Even - A super concise theme for Hugo</title>
+    <link>http://localhost:1313/tags/bfs/</link>
+    <description>Recent content in bfs on Even - A super concise theme for Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 10 Jul 2020 20:10:04 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/bfs/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>课程表</title>
+      <link>http://localhost:1313/post/%E8%AF%BE%E7%A8%8B%E8%A1%A8/</link>
+      <pubDate>Fri, 10 Jul 2020 20:10:04 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E8%AF%BE%E7%A8%8B%E8%A1%A8/</guid>
+      <description>问题描述 给定课程总量以及他们的先决条件，请判断是否可能完成所有课程的学习。 https://leetcode-cn.com/problems/course-schedule/ 思路 死脑筋啊，题目说先决条件是边缘列表而不是邻接矩阵，我就觉得没</description>
+    </item>
+    
+    <item>
+      <title>岛屿数量</title>
+      <link>http://localhost:1313/post/%E5%B2%9B%E5%B1%BF%E6%95%B0%E9%87%8F/</link>
+      <pubDate>Fri, 10 Jul 2020 18:40:43 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E5%B2%9B%E5%B1%BF%E6%95%B0%E9%87%8F/</guid>
+      <description>问题描述 给定一个由0,1组成的二维表格，计算其中岛屿的数量 https://leetcode-cn.com/problems/number-of-islands/ 思路 深度优先搜索：用递归实现。 广度优先搜索：用队列实现。 并查集。 每做一次dfs，</description>
+    </item>
+    
+  </channel>
+</rss>

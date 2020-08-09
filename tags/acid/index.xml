@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>acid on Even - A super concise theme for Hugo</title>
+    <link>http://localhost:1313/tags/acid/</link>
+    <description>Recent content in acid on Even - A super concise theme for Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 28 Jul 2020 20:25:00 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/acid/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Mysql事务的实现</title>
+      <link>http://localhost:1313/post/mysql%E4%BA%8B%E5%8A%A1%E7%9A%84%E5%AE%9E%E7%8E%B0/</link>
+      <pubDate>Tue, 28 Jul 2020 20:25:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/mysql%E4%BA%8B%E5%8A%A1%E7%9A%84%E5%AE%9E%E7%8E%B0/</guid>
+      <description>ACID 原子性 一致性 隔离性 持久性 原子性 基于日志的REDO/UNDO机制 undo log （回滚日志）：用作回滚 提供回滚操作，一般是逻辑日志（可以认为当delet</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>双指针 on Even - A super concise theme for Hugo</title>
+    <link>http://localhost:1313/tags/%E5%8F%8C%E6%8C%87%E9%92%88/</link>
+    <description>Recent content in 双指针 on Even - A super concise theme for Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 26 Jul 2020 14:24:33 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/%E5%8F%8C%E6%8C%87%E9%92%88/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>接雨水</title>
+      <link>http://localhost:1313/post/%E6%8E%A5%E9%9B%A8%E6%B0%B4/</link>
+      <pubDate>Sun, 26 Jul 2020 14:24:33 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E6%8E%A5%E9%9B%A8%E6%B0%B4/</guid>
+      <description>问题描述 https://leetcode-cn.com/problems/trapping-rain-water/ Solutions 暴力法：遍历数组中的每一个元素，并分别向左、向右寻找比当前元素大的最大元素，两者取其小，减掉当前元素就是当前元素上面可存储的水量</description>
+    </item>
+    
+    <item>
+      <title>寻找重复数</title>
+      <link>http://localhost:1313/post/%E5%AF%BB%E6%89%BE%E9%87%8D%E5%A4%8D%E6%95%B0/</link>
+      <pubDate>Fri, 17 Jul 2020 10:17:33 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E5%AF%BB%E6%89%BE%E9%87%8D%E5%A4%8D%E6%95%B0/</guid>
+      <description>问题描述 包含n+1个整数的数组nums，其数字都在1到n之间，若只存在一个重复的整数，找出这个重复的整数。 https://leetcode-cn.com/problems/find-the-duplicate-number/ 解题 排序，然后遍历数组即可O(n</description>
+    </item>
+    
+    <item>
+      <title>移动零</title>
+      <link>http://localhost:1313/post/%E7%A7%BB%E5%8A%A8%E9%9B%B6/</link>
+      <pubDate>Fri, 17 Jul 2020 08:42:59 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E7%A7%BB%E5%8A%A8%E9%9B%B6/</guid>
+      <description>问题描述 给定一个数组，将其中的0移动到数组末尾，同时保持非零元素的相对顺序。 https://leetcode-cn.com/problems/move-zeroes/ 解法 双指针</description>
+    </item>
+    
+  </channel>
+</rss>

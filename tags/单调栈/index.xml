@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>单调栈 on Even - A super concise theme for Hugo</title>
+    <link>http://localhost:1313/tags/%E5%8D%95%E8%B0%83%E6%A0%88/</link>
+    <description>Recent content in 单调栈 on Even - A super concise theme for Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 26 Jul 2020 14:24:33 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/%E5%8D%95%E8%B0%83%E6%A0%88/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>接雨水</title>
+      <link>http://localhost:1313/post/%E6%8E%A5%E9%9B%A8%E6%B0%B4/</link>
+      <pubDate>Sun, 26 Jul 2020 14:24:33 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E6%8E%A5%E9%9B%A8%E6%B0%B4/</guid>
+      <description>问题描述 https://leetcode-cn.com/problems/trapping-rain-water/ Solutions 暴力法：遍历数组中的每一个元素，并分别向左、向右寻找比当前元素大的最大元素，两者取其小，减掉当前元素就是当前元素上面可存储的水量</description>
+    </item>
+    
+    <item>
+      <title>单调栈（队列）</title>
+      <link>http://localhost:1313/post/%E5%8D%95%E8%B0%83%E6%A0%88%E9%98%9F%E5%88%97/</link>
+      <pubDate>Wed, 22 Jul 2020 17:14:39 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E5%8D%95%E8%B0%83%E6%A0%88%E9%98%9F%E5%88%97/</guid>
+      <description>单调栈（队列） 题目 滑动窗口最大值 https://leetcode-cn.com/problems/sliding-window-maximum/ 应用了单调队列的思想。</description>
+    </item>
+    
+    <item>
+      <title>每日温度</title>
+      <link>http://localhost:1313/post/%E6%AF%8F%E6%97%A5%E6%B8%A9%E5%BA%A6/</link>
+      <pubDate>Sun, 12 Jul 2020 09:21:29 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E6%AF%8F%E6%97%A5%E6%B8%A9%E5%BA%A6/</guid>
+      <description>问题描述 根据每日气温列T表重新生成一个列表，对应位置分别为想要观测到更高的气温至少需要等待的天数。气温都是[30,100]内的整数。 https://leetcode-cn.com/problems/daily-temperatures/ 暴力法</description>
+    </item>
+    
+  </channel>
+</rss>

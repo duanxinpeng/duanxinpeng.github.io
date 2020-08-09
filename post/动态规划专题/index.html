@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>动态规划专题 - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="段新朋" /><meta name="description" content="动态规划 一个模型 多阶段决策最优解模型 三个特征 最优子结构：最优解包含子问题的最优解，或者理解为“后面的状态可以通过前面的状态推导出来”。 无后效" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.72.0 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E4%B8%93%E9%A2%98/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="动态规划专题" />
+<meta property="og:description" content="动态规划 一个模型 多阶段决策最优解模型 三个特征 最优子结构：最优解包含子问题的最优解，或者理解为“后面的状态可以通过前面的状态推导出来”。 无后效" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E4%B8%93%E9%A2%98/" />
+<meta property="article:published_time" content="2020-07-21T06:40:34+08:00" />
+<meta property="article:modified_time" content="2020-07-21T06:40:34+08:00" />
+<meta itemprop="name" content="动态规划专题">
+<meta itemprop="description" content="动态规划 一个模型 多阶段决策最优解模型 三个特征 最优子结构：最优解包含子问题的最优解，或者理解为“后面的状态可以通过前面的状态推导出来”。 无后效">
+<meta itemprop="datePublished" content="2020-07-21T06:40:34&#43;08:00" />
+<meta itemprop="dateModified" content="2020-07-21T06:40:34&#43;08:00" />
+<meta itemprop="wordCount" content="1183">
+
+
+
+<meta itemprop="keywords" content="动态规划,数组," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="动态规划专题"/>
+<meta name="twitter:description" content="动态规划 一个模型 多阶段决策最优解模型 三个特征 最优子结构：最优解包含子问题的最优解，或者理解为“后面的状态可以通过前面的状态推导出来”。 无后效"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">NeverDoubt</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">NeverDoubt</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">动态规划专题</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-07-21 </span>
+        <div class="post-category">
+            <a href="/categories/%E7%AE%97%E6%B3%95/"> 算法 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#动态规划">动态规划</a></li>
+    <li><a href="#子串子序列问题">子串/子序列问题</a>
+      <ul>
+        <li><a href="#和最大连续子数组">和最大连续子数组</a></li>
+        <li><a href="#最长上升子序列">最长上升子序列</a></li>
+        <li><a href="#乘积最大连续子数组">乘积最大连续子数组</a></li>
+        <li><a href="#摆动序列">摆动序列</a></li>
+        <li><a href="#最长回文子串">最长回文子串</a></li>
+        <li><a href="#最长回文子序列">最长回文子序列</a></li>
+        <li><a href="#最长公共子串">最长公共子串</a></li>
+        <li><a href="#最长公共子序列">最长公共子序列</a></li>
+        <li><a href="#最短公共超序列">最短公共超序列</a></li>
+      </ul>
+    </li>
+    <li><a href="#消除后效性问题增加维度使得状态设计满足无后效性">消除后效性问题（增加维度使得状态设计满足无后效性）</a>
+      <ul>
+        <li><a href="#按摩师">按摩师</a></li>
+        <li><a href="#打家劫舍系列问题">打家劫舍系列问题</a></li>
+        <li><a href="#股票买卖时机系列问题">股票买卖时机系列问题</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="动态规划">动态规划</h2>
+<ol>
+<li>一个模型
+<ul>
+<li>多阶段决策最优解模型</li>
+</ul>
+</li>
+<li>三个特征
+<ul>
+<li>最优子结构：最优解包含子问题的最优解，或者理解为“后面的状态可以通过前面的状态推导出来”。</li>
+<li>无后效性：当前阶段的状态和之前阶段经历的过程无关，此后阶段的发展变化也仅和当前阶段的状态有关，而与此前阶段的变化过程无关。也就是说动态规划不关心过程，只关心阶段结果。回溯算法会关注并记录过程，所以复杂度高。</li>
+<li>重复子问题</li>
+</ul>
+</li>
+</ol>
+<h2 id="子串子序列问题">子串/子序列问题</h2>
+<h3 id="和最大连续子数组">和最大连续子数组</h3>
+<ol>
+<li>给定一个整数数组，求其中<code>连续子数组</code>的最大和。</li>
+<li>分为不同的阶段！在每个阶段应用动态规划，同时用一个全局变量记录全局最优。</li>
+<li>dp[i] = Math.max(dp[i-1]+nums[i], nums[i])</li>
+<li>还有一种利用线段树的解法，暂时先放弃了。</li>
+<li><a href="https://leetcode-cn.com/problems/maximum-subarray/">https://leetcode-cn.com/problems/maximum-subarray/</a></li>
+</ol>
+<h3 id="最长上升子序列">最长上升子序列</h3>
+<ol>
+<li>给定一个无序的数组，找到其中<code>最长上升子序列</code>的长度</li>
+<li><a href="https://leetcode-cn.com/problems/longest-increasing-subsequence/">https://leetcode-cn.com/problems/longest-increasing-subsequence/</a></li>
+<li>状态应该是一个一维数组，dp, dp[i]表示以i结尾的最长上升子序列长度。</li>
+<li>也需要一个全局变量记录全局最优</li>
+<li>因为不是连续的，所以不能只看前一个状态，需要把当前状态之前的所有状态都考虑进来！</li>
+<li>$dp[i] = \max(dp[j]+1 | (0\leq j &lt; i &amp;&amp; nums[j] &lt; nums[i]))$</li>
+<li>可以通过二分查找对时间复杂度进行优化，暂不考虑。</li>
+</ol>
+<h3 id="乘积最大连续子数组">乘积最大连续子数组</h3>
+<ol>
+<li>给定一个整数数组，请找出数组中乘积最大的连续子数组，并返回该子数组所对应的乘积。</li>
+<li><a href="https://leetcode-cn.com/problems/maximum-product-subarray/">https://leetcode-cn.com/problems/maximum-product-subarray/</a></li>
+<li>由于数组中的整数有正有负，所以即需要保存最大值，也需要保存最小值。因为负值需要乘以最小值才能得到最大值。这也就是通过扩展状态数组来消除后效性。</li>
+<li>状态转移方程如下：
+<ul>
+<li>$nums[i] \geq 0$
+<ul>
+<li>$dp[i][0] = \min(nums[i], dp[i-1][0]*nums[i])$</li>
+<li>$dp[i][1] = \max(nums[i], dp[i-1][1]*nums[i])$</li>
+</ul>
+</li>
+<li>$nums[i] &lt; 0$
+<ul>
+<li>$dp[i][0] = \min(nums[i], dp[i-1][1]*nums[i])$</li>
+<li>$dp[i][1] = \max(nums[i], dp[i-1][0]*nums[i])$</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>考虑动态规划的两种思路
+<ul>
+<li>自顶向下：递归+记忆化</li>
+<li>自底向上：效率高，但需要逆向思维。</li>
+</ul>
+</li>
+</ol>
+<h3 id="摆动序列">摆动序列</h3>
+<ol>
+<li>给定一个整数序列，返回其最长摆动子序列的长度。</li>
+<li><a href="https://leetcode-cn.com/problems/wiggle-subsequence/">https://leetcode-cn.com/problems/wiggle-subsequence/</a></li>
+<li>思路
+<ul>
+<li>这是一个子序列问题，所以套用子序列的动态规划模板：以 i 结尾； 遍历 i 之前的所有位置求最优；</li>
+<li>另外这道题具有后效性，需要通过扩展dp数组来消除后效性！</li>
+</ul>
+</li>
+<li>状态转移方程如下：
+<ul>
+<li>$nums[i] - nums[j] &gt; 0 $
+<ul>
+<li>$dp[i][1] = \max(dp[j][0]+1 | 0 \leq j &lt; i)$</li>
+</ul>
+</li>
+<li>$nums[i] - nums[j] &lt; 0$
+<ul>
+<li>$dp[i][0] = \max(dp[j][1]+1 | 0 \leq j &lt; i)$</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="最长回文子串">最长回文子串</h3>
+<ol>
+<li><a href="https://leetcode-cn.com/problems/longest-palindromic-substring/">https://leetcode-cn.com/problems/longest-palindromic-substring/</a></li>
+<li>dp[i][j] 代表以i开头， 以j 结尾的子串是否是回文字符串。</li>
+<li>关键在于循环的方式,需要考虑到回文字符串的特点！</li>
+<li>状态转移方程如下：
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">if j-i == 0 
+    dp[i][j] = true 
+else if j-i == 1
+    if s.charAt(i) == s.charAt(j)
+        dp[i][j] = true 
+else 
+    if dp[i+1][j-1] &amp;&amp; s.charAt(i) == s.charAt(j)
+        dp[i][j] = true
+</code></pre></td></tr></table>
+</div>
+</div><p>``</p>
+</li>
+</ol>
+<h3 id="最长回文子序列">最长回文子序列</h3>
+<ol>
+<li><a href="https://leetcode-cn.com/problems/longest-palindromic-subsequence/">https://leetcode-cn.com/problems/longest-palindromic-subsequence/</a></li>
+<li>第一眼看起来比<code>最长回文子串</code>难很多，但是其实并不是，因为这里的 dp[i][j] 并不是用于判断以 i 开头以 j 结尾的字符串是不是回文字符串，而是直接记录以 i 开头以 j 结尾的字符串内的最长回文子序列的长度！</li>
+<li>状态转移过程如下：
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">if j-i == 0
+    dp[i][j] = 0
+else if j-i == 1
+    if s.charAt(i) == s.charAt(j)
+        dp[i][j] = 2
+    else 
+        dp[i][j] = 1
+else 
+    if s.charAt(i) == s.charAt(j)
+        dp[i][j] = dp[i+1][j-1] + 2
+    else 
+        dp[i][j] = max(dp[i+1][j], dp[i][j-1])
+</code></pre></td></tr></table>
+</div>
+</div><p>``</p>
+</li>
+</ol>
+<h3 id="最长公共子串">最长公共子串</h3>
+<ol>
+<li><a href="https://www.nowcoder.com/questionTerminal/210741385d37490c97446aa50874e62d">https://www.nowcoder.com/questionTerminal/210741385d37490c97446aa50874e62d</a></li>
+</ol>
+<h3 id="最长公共子序列">最长公共子序列</h3>
+<ol>
+<li><a href="https://leetcode-cn.com/problems/longest-common-subsequence/">https://leetcode-cn.com/problems/longest-common-subsequence/</a></li>
+<li>伪代码
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">if i==0 || j == 0
+    dp[i][j] = 0
+else if s1.charAt(i) == s2.charAt(j)
+    dp[i][j] = 1+dp[i-1][j-1]
+else 
+    dp[i][j] = max(dp[i-1][j], dp[i][j-1])
+</code></pre></td></tr></table>
+</div>
+</div><p>``</p>
+</li>
+</ol>
+<h3 id="最短公共超序列">最短公共超序列</h3>
+<ol>
+<li><a href="https://leetcode-cn.com/problems/shortest-common-supersequence/">https://leetcode-cn.com/problems/shortest-common-supersequence/</a></li>
+<li>思考方式和最长公共子序列相同，但需要考虑到内存问题，所以需要利用滚动数组对空间复杂度进行优化。</li>
+</ol>
+<h2 id="消除后效性问题增加维度使得状态设计满足无后效性">消除后效性问题（增加维度使得状态设计满足无后效性）</h2>
+<h3 id="按摩师">按摩师</h3>
+<ol>
+<li><a href="https://leetcode-cn.com/problems/the-masseuse-lcci/">https://leetcode-cn.com/problems/the-masseuse-lcci/</a></li>
+</ol>
+<h3 id="打家劫舍系列问题">打家劫舍系列问题</h3>
+<ol>
+<li><a href="https://leetcode-cn.com/problems/house-robber/">https://leetcode-cn.com/problems/house-robber/</a></li>
+<li><a href="https://leetcode-cn.com/problems/house-robber-ii/">https://leetcode-cn.com/problems/house-robber-ii/</a></li>
+<li><a href="https://leetcode-cn.com/problems/house-robber-iii/">https://leetcode-cn.com/problems/house-robber-iii/</a></li>
+</ol>
+<h3 id="股票买卖时机系列问题">股票买卖时机系列问题</h3>
+<ol>
+<li><a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/">https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/</a></li>
+<li><a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-ii/">https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-ii/</a></li>
+<li><a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iii/">https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iii/</a></li>
+<li><a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iv/">https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iv/</a></li>
+<li><a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/">https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/</a></li>
+<li><a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/">https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/</a></li>
+</ol>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">段新朋</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2020-07-21
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">动态规划</a>
+          <a href="/tags/%E6%95%B0%E7%BB%84/">数组</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">滑动窗口</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8D/">
+            <span class="next-text nav-default">打家劫舍</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/duanxinpeng" class="iconfont icon-github" title="github"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author"></span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      TeX: {equationNumbers: {autoNumber: "AMS"}},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

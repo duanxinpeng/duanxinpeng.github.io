@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Mysql事务的实现 - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="段新朋" /><meta name="description" content="ACID 原子性 一致性 隔离性 持久性 原子性 基于日志的REDO/UNDO机制 undo log （回滚日志）：用作回滚 提供回滚操作，一般是逻辑日志（可以认为当delet" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.72.0 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/mysql%E4%BA%8B%E5%8A%A1%E7%9A%84%E5%AE%9E%E7%8E%B0/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Mysql事务的实现" />
+<meta property="og:description" content="ACID 原子性 一致性 隔离性 持久性 原子性 基于日志的REDO/UNDO机制 undo log （回滚日志）：用作回滚 提供回滚操作，一般是逻辑日志（可以认为当delet" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/mysql%E4%BA%8B%E5%8A%A1%E7%9A%84%E5%AE%9E%E7%8E%B0/" />
+<meta property="article:published_time" content="2020-07-28T20:25:00+08:00" />
+<meta property="article:modified_time" content="2020-07-28T20:25:00+08:00" />
+<meta itemprop="name" content="Mysql事务的实现">
+<meta itemprop="description" content="ACID 原子性 一致性 隔离性 持久性 原子性 基于日志的REDO/UNDO机制 undo log （回滚日志）：用作回滚 提供回滚操作，一般是逻辑日志（可以认为当delet">
+<meta itemprop="datePublished" content="2020-07-28T20:25:00&#43;08:00" />
+<meta itemprop="dateModified" content="2020-07-28T20:25:00&#43;08:00" />
+<meta itemprop="wordCount" content="2273">
+
+
+
+<meta itemprop="keywords" content="mysql,acid," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Mysql事务的实现"/>
+<meta name="twitter:description" content="ACID 原子性 一致性 隔离性 持久性 原子性 基于日志的REDO/UNDO机制 undo log （回滚日志）：用作回滚 提供回滚操作，一般是逻辑日志（可以认为当delet"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">NeverDoubt</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">NeverDoubt</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Mysql事务的实现</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-07-28 </span>
+        <div class="post-category">
+            <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"> 数据库 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#acid">ACID</a></li>
+    <li><a href="#原子性">原子性</a></li>
+    <li><a href="#隔离性">隔离性</a></li>
+    <li><a href="#持久性">持久性</a></li>
+    <li><a href="#一致性">一致性</a></li>
+    <li><a href="#补充mvcc在可重复读隔离级别下的增删改查">补充，MVCC在可重复读隔离级别下的增删改查</a></li>
+    <li><a href="#reference">reference</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="acid">ACID</h2>
+<ol>
+<li>原子性</li>
+<li>一致性</li>
+<li>隔离性</li>
+<li>持久性</li>
+</ol>
+<h2 id="原子性">原子性</h2>
+<ol>
+<li>基于日志的REDO/UNDO机制</li>
+<li>undo log （回滚日志）：用作回滚
+<ul>
+<li>提供回滚操作，一般是逻辑日志（可以认为当delete一条记录时，undo log中会记录一条对应的insert记录），用来回滚行记录到某个版本。（undo log也会产生redo log，因为undo log也要实现持久性保护。）</li>
+<li>主要有两个作用：回滚、MVCC；</li>
+<li>为了实现事务原子性，要么全部完成commit，要么全部回滚rollback，Innodb用于实现mvcc（多版本并发控制）</li>
+<li>例如：将user=’A’ 改为 user=’B’，则undo log中会记录下user=’A’和事务版本等信息</li>
+<li>一旦事务完成，所有修改必须被记录下，保证数据一致性（后面redo log解释）</li>
+</ul>
+</li>
+<li>redo log （重做日志）：用作持久化！
+<ul>
+<li>重做日志，提供前滚操作，通常是物理日志，它用来恢复提交后的物理数据页，且只能恢复到最后一次提交的位置</li>
+<li>如果使用undo log作为持久化数据，意味着修改数据和undo log必须同时写入磁盘持久化，这必定带来巨大的磁盘io，解决方案为了平衡磁盘io和一致性，引入redo log。</li>
+<li>数据和undo log可定时从缓冲刷至磁盘，但是redo log必须实时写入磁盘，当系统奔溃时，可依据redo log进行数据重做。</li>
+<li>InnoDB存储引擎层的日志。</li>
+</ul>
+</li>
+</ol>
+<h2 id="隔离性">隔离性</h2>
+<ol>
+<li>主要通过以下两种手段实现
+<ul>
+<li>多版本并发控制(MVCC)
+<ul>
+<li>可以在提高隔离级别的情况下，有效提高数据库并发能力；如果没有MVCC，为了提高隔离级别只能在读操作上加共享锁，所以导致在其他事务为数据加上排他锁的情况下无法读取数据（排他锁和共享锁是互斥的）</li>
+<li>InnoDB对MVCC的实现方式是，在需要时，通过回滚日志构造出历史版本快照！</li>
+<li>InnoDB通过为每行数据后添加两个额外的隐藏值来实现MVCC，这两个值分别用来记录这行数据何时被创建，以及何时过期（被删除），实际操作中记录的并不是时间，而是事务版本号，每开启一个新事务，事务的版本号就会递增。</li>
+</ul>
+</li>
+<li>锁
+<ul>
+<li>共享锁（S锁）：若事务T对数据对象A加上S锁，则事务T只能读A；其他事务只能再对A加S锁，而不能加X锁，直到T释放A上的S锁。这就保证了其他事务可以读A，但在T释放A上的S锁之前不能对A做任何修改。</li>
+<li>排他锁（X锁）：若事务T对数据对象A加上X锁，则只允许T读取和修改A，其它任何事务都不能再对A加任何类型的锁，直到T释放A上的锁。它防止任何其它事务获取资源上的锁，直到在事务的末尾将资源上的原始锁释放为止。在更新操作(INSERT、UPDATE 或 DELETE)过程中始终应用排它锁。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>四种隔离级别
+<ul>
+<li>未提交读
+<ul>
+<li>读不加锁，写加排他锁，直至事务结束。</li>
+<li>脏读：因为读不加锁，所以可以读取到其他事务还没有提交的数据，如果其他事务执行了回滚操作，此时读取的数据就是脏数据</li>
+</ul>
+</li>
+<li>已提交读
+<ul>
+<li>读不加锁（MVCC），写加排他锁，直至事务结束。</li>
+<li>通过MVCC机制获取最新快照，如果事务还没提交，这里的最新快照指的是事务开始前的数据，所以是不会读到其他未提交事务的中间数据的，从而解决了脏读。</li>
+<li>不可重复读：一次事务内的两次读取数据不一致</li>
+<li>原因是在两次读取之间另外一个事务对数据进行了修改并commit。由于在这种隔离级别下，每次 select 都会通过 MVCC 获取当前数据的最新快照，所以会导致不可重复读。</li>
+</ul>
+</li>
+<li>可重复读
+<ul>
+<li>读不加锁（MVCC），写加排他锁，直至事务结束。</li>
+<li>通过调整MVCC快照的生成时机，即一个事务只会在第一次 select 时生成数据快照，后续的 select 都是在这个快照之上进行的，所以无论其他事务是否提交，事务中的两次读取都是相同的，从而解决了不可重复读！</li>
+<li>幻读：幻读有两种理解方式
+<ul>
+<li>两次读取不一致，读取到了其他已提交事务的新增数据（不可重复读指的是读到了修改或删除数据）；<code>但是，这种幻读的理解方式在mysql 的 innodb 搜索引擎下是不存在的，因为已经通过多版本并发控制（MVCC）解决了这种意义上的幻读！</code></li>
+<li>另外一种理解是，同一个事务内，前一次读操作和后一次写操作数据不一致，比如前一次读操作读到的是0，后一次insert操作却因为其他事务在两次操作之间更改数据并提交，数据不为0 从而导致 insert失败或对insert造成其他影响！。</li>
+<li>发生这种情况的原因是MVCC只对读有效，对写无效！</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>可串行化
+<ul>
+<li>读加共享锁，写加排他锁！</li>
+<li>不会有任何问题！</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="持久性">持久性</h2>
+<ol>
+<li>主要是通过各种日志来实现：redo log, undo log, bin log, relay log等。</li>
+<li>redo log （重做日志）：用作持久化！
+<ul>
+<li>重做日志，提供前滚操作，通常是物理日志，它用来恢复提交后的物理数据页，且只能恢复到最后一次提交的位置</li>
+<li>如果使用undo log作为持久化数据，意味着修改数据和undo log必须同时写入磁盘持久化，这必定带来巨大的磁盘io，解决方案为了平衡磁盘io和一致性，引入redo log。</li>
+<li>数据和undo log可定时从缓冲刷至磁盘，但是redo log必须实时写入磁盘，当系统奔溃时，可依据redo log进行数据重做。</li>
+<li>InnoDB存储引擎层的日志。</li>
+</ul>
+</li>
+</ol>
+<h2 id="一致性">一致性</h2>
+<ol>
+<li>一个事务必须使数据库从一个一致性状态变换到另一个一致性状态。</li>
+<li>原子性和一致性的区别：即便原子性保持了，也可能因为隔离性的原因导致原子操作前后两次的状态不一致。</li>
+<li>前面三个特性实现之后，一致性自然也实现了。</li>
+</ol>
+<h2 id="补充mvcc在可重复读隔离级别下的增删改查">补充，MVCC在可重复读隔离级别下的增删改查</h2>
+<ol>
+<li>SELECT时，读取创建版本号 &lt;= 当前事务版本号，删除版本号为空或 &gt; 当前事务版本号。</li>
+<li>INSERT时，保存当前事务版本号为行的创建版本号。</li>
+<li>DELETE时，保存当前事务版本号为行的删除版本号。</li>
+<li>UPDATE时，插入一条新纪录，保存当前事务版本号为行创建版本号，同时保存当前事务版本号到原来删除的行。</li>
+</ol>
+<h2 id="reference">reference</h2>
+<ol>
+<li><a href="https://blog.csdn.net/Vincent2014Linux/article/details/89669762">https://blog.csdn.net/Vincent2014Linux/article/details/89669762</a></li>
+<li><a href="https://www.jianshu.com/p/563612576e6e">https://www.jianshu.com/p/563612576e6e</a></li>
+</ol>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">段新朋</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2020-07-28
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/mysql/">mysql</a>
+          <a href="/tags/acid/">acid</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/http%E5%8D%8F%E8%AE%AE%E5%8F%91%E5%B1%95%E8%BF%87%E7%A8%8B/">
+            <span class="next-text nav-default">HTTP协议发展过程</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/duanxinpeng" class="iconfont icon-github" title="github"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author"></span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      TeX: {equationNumbers: {autoNumber: "AMS"}},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

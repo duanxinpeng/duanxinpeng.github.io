@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Java线程同步 - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="段新朋" /><meta name="description" content="synchronized synchronized 关键字的用法 修饰代码块，指定加锁对象，对给定对象加锁，进入同步代码库前要获得给定对象的锁。 修饰普通方法，对象锁，进入同步代码前要获得当前" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.72.0 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/java%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Java线程同步" />
+<meta property="og:description" content="synchronized synchronized 关键字的用法 修饰代码块，指定加锁对象，对给定对象加锁，进入同步代码库前要获得给定对象的锁。 修饰普通方法，对象锁，进入同步代码前要获得当前" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/java%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5/" />
+<meta property="article:published_time" content="2020-07-30T09:12:47+08:00" />
+<meta property="article:modified_time" content="2020-07-30T09:12:47+08:00" />
+<meta itemprop="name" content="Java线程同步">
+<meta itemprop="description" content="synchronized synchronized 关键字的用法 修饰代码块，指定加锁对象，对给定对象加锁，进入同步代码库前要获得给定对象的锁。 修饰普通方法，对象锁，进入同步代码前要获得当前">
+<meta itemprop="datePublished" content="2020-07-30T09:12:47&#43;08:00" />
+<meta itemprop="dateModified" content="2020-07-30T09:12:47&#43;08:00" />
+<meta itemprop="wordCount" content="5474">
+
+
+
+<meta itemprop="keywords" content="java," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Java线程同步"/>
+<meta name="twitter:description" content="synchronized synchronized 关键字的用法 修饰代码块，指定加锁对象，对给定对象加锁，进入同步代码库前要获得给定对象的锁。 修饰普通方法，对象锁，进入同步代码前要获得当前"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">NeverDoubt</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">NeverDoubt</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Java线程同步</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-07-30 </span>
+        <div class="post-category">
+            <a href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"> 编程语言 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#synchronized">synchronized</a>
+      <ul>
+        <li><a href="#synchronized-关键字的用法">synchronized 关键字的用法</a></li>
+        <li><a href="#synchronized-内部实现">synchronized 内部实现</a></li>
+        <li><a href="#monitor">Monitor</a></li>
+        <li><a href="#synchronized-常见问题">synchronized 常见问题</a></li>
+      </ul>
+    </li>
+    <li><a href="#aqs">AQS</a>
+      <ul>
+        <li><a href="#继承关系">继承关系</a></li>
+        <li><a href="#state">state</a></li>
+        <li><a href="#aqs提供的模板方法模板方法设计模式">AQS提供的模板方法（模板方法设计模式）</a></li>
+        <li><a href="#设计模式">设计模式</a></li>
+        <li><a href="#aqs如何实现线程同步">AQS如何实现线程同步</a></li>
+        <li><a href="#独占锁的获取与释放">独占锁的获取与释放</a></li>
+        <li><a href="#共享锁的获取与释放">共享锁的获取与释放</a></li>
+        <li><a href="#aqs同步队列">AQS同步队列</a></li>
+        <li><a href="#conditionobject">ConditionObject</a></li>
+      </ul>
+    </li>
+    <li><a href="#await">await()</a>
+      <ul>
+        <li><a href="#使用了aqs的同步工具">使用了AQS的同步工具</a></li>
+        <li><a href="#使用aqs实现一个共享锁">使用AQS实现一个共享锁</a></li>
+      </ul>
+    </li>
+    <li><a href="#locksupport">LockSupport</a></li>
+    <li><a href="#cas">CAS</a></li>
+    <li><a href="#volatile">volatile</a></li>
+    <li><a href="#atomic">Atomic</a></li>
+    <li><a href="#常见问题">常见问题</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="synchronized">synchronized</h2>
+<h3 id="synchronized-关键字的用法">synchronized 关键字的用法</h3>
+<ol>
+<li>修饰代码块，指定加锁对象，对给定对象加锁，进入同步代码库前要获得给定对象的锁。</li>
+<li>修饰普通方法，对象锁，进入同步代码前要获得当前对象实例的锁</li>
+<li>修饰静态方法，类锁（Demo.class），所有对象共用一把锁，进入同步代码前要获得当前类对象的锁。</li>
+</ol>
+<h3 id="synchronized-内部实现">synchronized 内部实现</h3>
+<ol>
+<li>锁的状态记录在对象头的 mark word 中
+<ul>
+<li>001 无状态</li>
+<li>101 偏向锁</li>
+<li>00 轻量级锁</li>
+<li>10 重量级锁</li>
+</ul>
+</li>
+<li>Lock Record
+<ul>
+<li>线程在执行同步块之前，JVM会先在当前的线程的栈帧中创建一个 Lock Record</li>
+<li>包括两部分
+<ul>
+<li>Displaced Mark word：用于存储对象头中的 mark word</li>
+<li>Object Reference：指向对象的指针</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>偏向锁
+<ul>
+<li><code>mark word</code> 中存储的是偏向的线程ID；</li>
+<li>当来了新的线程，需要升级为轻量级锁！</li>
+<li>对象创建
+<ul>
+<li>当新创建一个对象时，如果该对象所属的 class 没有关闭偏向锁模式，那新建的对象处于可偏向状态，此时 mark word中的 thread id 为0，表示未偏向任何线程，也叫做匿名偏向。</li>
+</ul>
+</li>
+<li>加锁过程
+<ul>
+<li>如果此时处于匿名偏向状态，将mark word中的thread id 由 0 改为当前线程 id。如果成功，则成功获得偏向锁。</li>
+</ul>
+</li>
+<li>重入过程
+<ul>
+<li>当偏向的线程再次进入同步块时，发现锁对象偏向的就是当前线程，就会往当前的栈中添加一条 Displaced Mark Word 为 null 的 Lock Record，将 Lock Record 的 obj 指向该对象。、</li>
+</ul>
+</li>
+<li>产生竞争
+<ul>
+<li>如果当前对象已经被其他线程获取偏向锁，则会走到<code>撤销偏向锁</code>的过程，如果占用线程还存活，则升级为轻量级锁，原偏向线程继续拥有锁，当前线程进行锁升级。</li>
+</ul>
+</li>
+<li>解锁过程
+<ul>
+<li>遍历栈，将栈中最近一条的 Lock Record 的 obj 字段设为 null，并不会修改对象头中的thread id。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>轻量级锁
+<ul>
+<li>
+<p><code>mark word</code> 中存储的是指向线程栈中的 <code>Lock Record</code> 的指针</p>
+</li>
+<li>
+<p>加锁过程</p>
+<ul>
+<li>在线程中创建一个 <code>Lock Record</code> 将其 <code>obj</code> 字段指向锁对象</li>
+<li>通过 <code>CAS</code> 指令将 <code>Lock Record</code> 的地址存储在对象头的 <code>mark word</code> 中，如果成功，获得轻量级锁，否则进入自旋状态</li>
+<li>当有线程超过10次自旋/自旋线程数超过cpu核数的一半，就需要升级为重量级锁。</li>
+</ul>
+</li>
+<li>
+<p>锁重入</p>
+<ul>
+<li>如果当前线程已经持有锁了，代表这是一次重入过程，添加一个指向该对象的，displaced mark word 为 null，的Lock Record。</li>
+</ul>
+</li>
+<li>
+<p>解锁过程</p>
+<ul>
+<li>遍历线程栈，找到所有 obj 字段等于当前锁对象的 Lock Record。</li>
+<li>如果 Lock Record 的 Displaced Mark Word 为 null， 代表这是一次重入，将 obj 设置为 null 后 continue</li>
+<li>如果 Lock Record 的 Displaced Mark Word 不为 null，利用 CAS 指令将对象头的 mark word 恢复为 Displaced Mark Word。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>重量级锁
+<ul>
+<li>通过 monitorenter 和 monitorexit两个指令来获取/释放 monitor 对象！</li>
+<li><code>mark word</code> 中存储的是指向堆中的 <code>monitor</code> 对象的指针</li>
+<li><code>monitor</code> 对象包括以下几个关键字
+<ul>
+<li>cxq：ObjectWaiter 链表结构，</li>
+<li>EntryList：ObjectWaiter 链表结构</li>
+<li>WaitSet：ObjectWaiter 链表结构</li>
+<li>owner：指向持有锁的线程</li>
+</ul>
+</li>
+<li>当一个线程尝试获取锁时，如果该锁已经被占用，则会将该线程封装成一个 ObjectWaiter 对象插入 cxq 队列尾部，然后暂停该线程。</li>
+<li>当持有锁的线程释放锁前，会将 cxq 中的所有元素移动到 EntryList 中去，并唤醒 EntryList 的队首线程。</li>
+<li>当一个线程在同步块中调用了 <code>Object::wait</code> 方法，会将该线程对应的 <code>ObjectWaiter</code> 从 <code>EntryList</code> 移除，并加入 <code>WaitSet</code> 中，然后释放锁。</li>
+<li>当 <code>wait</code> 的线程被 <code>notify</code> 之后，会将对应的 ObjectWaiter 从 <code>WaitSet</code> 移动到 <code>EntryList</code> 中。</li>
+</ul>
+</li>
+</ol>
+<h3 id="monitor">Monitor</h3>
+<ol>
+<li>Java虚拟机为每个对象和class字节码都设置了一个监听器Monitor，用于检测并发代码的重入。</li>
+<li>Monitor结构
+<ul>
+<li>wait set：存放处于wait状态的线程的ObjectWaiter类型的队列</li>
+<li>entry set：存放等待锁的线程的ObjectWaiter类型的队列</li>
+<li>owner：用于指向获得 monitor 的线程</li>
+</ul>
+</li>
+<li>获取锁
+<ul>
+<li>如果monitor对象的owner为空，那么将owner设置为当前线程</li>
+<li>如果monitor对象的owner是当前线程，那么是重入操作，将 recursions的值+1</li>
+<li>如果owner不是当前线程，先通过多次自旋尝试获取锁（非公平的体现），失败后将当前线程插入 cxq队列，并调用 park 挂起</li>
+</ul>
+</li>
+<li>三个队列
+<ul>
+<li>cxq ：等待竞争锁的队列 （cxq也被称为ContentionList，并不是真实存在的队列，而是由 node 和 next 指针组成的逻辑队列）</li>
+<li>entryset：竞争锁的队列</li>
+<li>waitset：等待队列！</li>
+</ul>
+</li>
+<li>Object.wait()
+<ul>
+<li>将当前线程封装成 ObjectWaiter对象node</li>
+<li>将 node 加入到 wait set队列末尾</li>
+<li>通过 monitorexit释放 monitor</li>
+<li>底层 park 挂起线程</li>
+</ul>
+</li>
+<li>Object.notify()
+<ul>
+<li>从 wait set 中取出一个线程</li>
+<li>唤醒该线程之后，根据策略选择将其放入 cxq队列或者entryset（entrylist）队列。</li>
+<li>notify 并不会释放monitor</li>
+<li>如果 notify 时，没有线程处于等待状态，那么notify不会起作用（这点和 LockSupport.unpart 不同，LockSupport会保留一次 unpark的效果！condition.await和condition.signal 也是这样吗？）</li>
+</ul>
+</li>
+</ol>
+<h3 id="synchronized-常见问题">synchronized 常见问题</h3>
+<ol>
+<li>synchronized 会造成死锁吗
+<ul>
+<li>两个线程在分别获取自己的锁之后再尝试获取对方的锁就会造成死锁
+<a href="https://github.com/duanxinpeng/Java-Examples/blob/master/src/concurrent/SynchronizedTest.java">https://github.com/duanxinpeng/Java-Examples/blob/master/src/concurrent/SynchronizedTest.java</a></li>
+<li>但是，同一个方法内的不同 synchronized 方法之间相互调用并不会造成死锁，因为 synchronized 是可重入的！</li>
+</ul>
+</li>
+<li>用字符串作为 synchronized 锁住的对象时，一旦对字符串做了修改，字符串对象就发生了改变，所以 synchronized 锁就失效了！</li>
+<li>synchronized 和 ReentrantLock 的区别
+<ul>
+<li>Synchronized是JVM层次的锁实现，ReentrantLock是JDK层次的锁实现；</li>
+<li>Synchronized的锁状态是无法在代码中直接判断的，但是ReentrantLock可以通过ReentrantLock#isLocked判断；</li>
+<li>Synchronized是非公平锁，ReentrantLock是可以是公平也可以是非公平的；</li>
+<li>Synchronized是不可以被中断的，而ReentrantLock#lockInterruptibly方法是可以被中断的；</li>
+<li>在发生异常时Synchronized会自动释放锁（由javac编译时自动实现），而ReentrantLock需要开发者在finally块中显示释放锁；</li>
+<li>ReentrantLock获取锁的形式有多种：如立即返回是否成功的tryLock(),以及等待指定时长的获取，更加灵活；</li>
+<li>Synchronized在特定的情况下对于已经在等待的线程是后来的线程先获得锁（FILO），而ReentrantLock对于已经在等待的线程一定是先来的线程先获得锁（FIFO）；</li>
+</ul>
+</li>
+<li>为什么要设计偏向锁？
+<ul>
+<li>大部分情况下都是只有一个线程在运行</li>
+<li>去掉了线程的加锁过程，减轻了线程负担</li>
+</ul>
+</li>
+<li>轻量级锁一定比重量级锁效率高吗？
+<ul>
+<li>不一定，轻量级锁消耗 CPU 资源，</li>
+<li>当一个线程自旋次数过多，或者有过多的线程处于自旋状态的时候，升级锁为重量级锁更好一些。</li>
+</ul>
+</li>
+<li>为什么 JVM 启动四秒之后才会启动偏向锁？
+<ul>
+<li>因为在 JVM 启动过程中肯定有锁竞争。</li>
+</ul>
+</li>
+</ol>
+<h2 id="aqs">AQS</h2>
+<h3 id="继承关系">继承关系</h3>
+<ol>
+<li>AbstractQueuedSynchronizer
+<ul>
+<li>Sync
+<ul>
+<li>FairSync</li>
+<li>NofairSync</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="state">state</h3>
+<ol>
+<li>AQS底层维护一个由 volatile 修饰的 int 类型的变量 setate 来表示当前的同步状态。</li>
+<li>关于 state 主要有以下三个方法
+<ul>
+<li>getState： 获取当前同步状态</li>
+<li>setState： 设置当前同步状态</li>
+<li>compareSetAndSetState：使用 <code>CAS</code> 设置当前同步状态。</li>
+</ul>
+</li>
+</ol>
+<h3 id="aqs提供的模板方法模板方法设计模式">AQS提供的模板方法（模板方法设计模式）</h3>
+<ol>
+<li>独占式地获取和释放锁
+<ul>
+<li>acquire()
+<ul>
+<li>tryAcquire(arg)需要子类实现</li>
+</ul>
+</li>
+<li>release()
+<ul>
+<li>tryRelease(arg)需要子类实现</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>共享式地获取和释放锁
+<ul>
+<li>acquireShared()
+<ul>
+<li>tryAcquireShared(arg)需要子类实现</li>
+</ul>
+</li>
+<li>releaseShared()
+<ul>
+<li>tryReleaseShared(arg)需要子类实现</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>查询 AQS 地同步状态队列正在等待的线程情况</li>
+</ol>
+<h3 id="设计模式">设计模式</h3>
+<ol>
+<li>模板方法设计模式</li>
+<li>为什么不直接定义为抽象方法呢?
+<ul>
+<li>因为子类只要实现模板方法中的一部分就可以实现一个同步器了，所以不需要定义成抽象方法。</li>
+</ul>
+</li>
+</ol>
+<h3 id="aqs如何实现线程同步">AQS如何实现线程同步</h3>
+<ol>
+<li>通过一个 state 来记录当前同步状态</li>
+<li>通过一个同步队列来维护当前获取锁失败，进入阻塞状态的线程。这个同步队列是一个双向链表，获取锁失败的线程会被封装成一个链表节点，加入链表的尾部排队，同时调用 LockSupport.park() 方法阻塞线程。</li>
+</ol>
+<h3 id="独占锁的获取与释放">独占锁的获取与释放</h3>
+<ol>
+<li>acquire()
+<ul>
+<li>尝试获取一次锁（即利用 CAS 尝试修改state） acquire() 方法是AQS的一个模板方法，其中的 tryAcquire() 需要使用者按照需求自行定义！</li>
+<li>若获取锁失败则将当前线程封装成同步队列的节点，利用CAS将其加入等待队列中。（addWaiter）</li>
+<li>将线程阻塞，直到他成为头节点的下一个节点，才能获得锁 （acquireQueued）</li>
+</ul>
+</li>
+<li>release()
+<ul>
+<li>尝试释放锁，release() 也是一个模板方法，其 tryRelease() 需要使用者自己去实现</li>
+<li>唤醒头节点的下一个节点，使其尝试去获得锁。</li>
+</ul>
+</li>
+</ol>
+<h3 id="共享锁的获取与释放">共享锁的获取与释放</h3>
+<ol>
+<li>acquireShared()
+<ul>
+<li>调用 tryAcquireShared 方法尝试获取一次共享锁。acquireShared()是一个模板方法，tryAcquireShared() 就是需要使用者自行实现的方法。</li>
+<li>如果获取锁失败，则执行 doAcquireShared 方法，该方法和 acquireQueued 方法类似，但有一点不同<code>若线程在被唤醒后，成功获取到了共享锁，还需要判断共享锁是否还能被其他线程获取，若可以，则继续向后唤醒他的下一个节点对应的线程</code>。</li>
+</ul>
+</li>
+<li>releaseShared()
+<ul>
+<li>尝试修改 state 的状态</li>
+<li>调用 doReleaseShared 方法唤醒后继节点中的线程。</li>
+</ul>
+</li>
+</ol>
+<h3 id="aqs同步队列">AQS同步队列</h3>
+<ol>
+<li>AQS队列</li>
+<li>Condition队列
+<ul>
+<li>AQS还有一个很重要的内部类ConditionObject，它实现了Condition接口，主要用于实现条件锁</li>
+</ul>
+</li>
+</ol>
+<h3 id="conditionobject">ConditionObject</h3>
+<ol>
+<li>
+<h2 id="await">await()</h2>
+</li>
+<li>signal()
+<ul>
+<li>从条件队列中取出一个线程，并将其唤醒</li>
+<li>只有条件队列不为空时，才会做唤醒操作，否则什么都不用做，所以先调用signal，再调用await是无法唤醒的！</li>
+<li>上面这一点和 Object.wait()/Object.notify()是一致的，但是和 LockSupport.park/LockSupport.unpart是不一致的。</li>
+</ul>
+</li>
+</ol>
+<h3 id="使用了aqs的同步工具">使用了AQS的同步工具</h3>
+<ol>
+<li>ReentrantLock</li>
+<li>ReentrantReadWriteLock</li>
+<li>Semaphore</li>
+<li>CountDownLatch</li>
+</ol>
+<h3 id="使用aqs实现一个共享锁">使用AQS实现一个共享锁</h3>
+<p><code>实现一个锁，它是一个共享锁，但是每次至多支持两个线程同时获取锁，若当前已经有两个线程获取了锁，则其他获取锁的线程需要等待</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span><span class="lnt">85
+</span><span class="lnt">86
+</span><span class="lnt">87
+</span><span class="lnt">88
+</span><span class="lnt">89
+</span><span class="lnt">90
+</span><span class="lnt">91
+</span><span class="lnt">92
+</span><span class="lnt">93
+</span><span class="lnt">94
+</span><span class="lnt">95
+</span><span class="lnt">96
+</span><span class="lnt">97
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="cm">/**
+</span><span class="cm"> * 抽象队列同步器（AQS）使用：
+</span><span class="cm"> *      实现一个同一时刻至多只支持两个线程同时执行的同步器
+</span><span class="cm"> */</span>
+
+<span class="c1">// 让当前类继承Lock接口
+</span><span class="c1"></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">TwinLock</span> <span class="kd">implements</span> <span class="n">Lock</span> <span class="o">{</span>
+
+	<span class="c1">// 定义锁允许的最大线程数
+</span><span class="c1"></span>	<span class="kd">private</span> <span class="kd">final</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">DEFAULT_SYNC_COUNT</span> <span class="o">=</span> <span class="n">2</span><span class="o">;</span>
+	<span class="c1">// 创建一个锁对象，用以进行线程同步，Sync继承自AQS
+</span><span class="c1"></span>	<span class="kd">private</span> <span class="kd">final</span> <span class="n">Sync</span> <span class="n">sync</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Sync</span><span class="o">(</span><span class="n">DEFAULT_SYNC_COUNT</span><span class="o">);</span>
+
+	<span class="c1">// 以内部类的形式实现一个同步器类，也就是锁，这个锁继承自AQS
+</span><span class="c1"></span>	<span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kd">class</span> <span class="nc">Sync</span> <span class="kd">extends</span> <span class="n">AbstractQueuedSynchronizer</span> <span class="o">{</span>
+
+		<span class="c1">// 构造方法中指定锁支持的线程数量
+</span><span class="c1"></span>		<span class="n">Sync</span><span class="o">(</span><span class="kt">int</span> <span class="n">count</span><span class="o">)</span> <span class="o">{</span>
+			<span class="c1">// 若count小于0，则默认为2
+</span><span class="c1"></span>			<span class="k">if</span> <span class="o">(</span><span class="n">count</span> <span class="o">&lt;=</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
+				<span class="n">count</span> <span class="o">=</span> <span class="n">DEFAULT_SYNC_COUNT</span><span class="o">;</span>
+			<span class="o">}</span>
+			<span class="c1">// 设置初始同步状态
+</span><span class="c1"></span>			<span class="n">setState</span><span class="o">(</span><span class="n">count</span><span class="o">);</span>
+		<span class="o">}</span>
+		
+		<span class="cm">/**
+</span><span class="cm">		 * 重写tryAcquireShared方法，这个方法用来修改同步状态state，也就是获取锁
+</span><span class="cm">		 */</span>
+		<span class="nd">@Override</span>
+		<span class="kd">protected</span> <span class="kt">int</span> <span class="nf">tryAcquireShared</span><span class="o">(</span><span class="kt">int</span> <span class="n">arg</span><span class="o">)</span> <span class="o">{</span>
+			<span class="c1">// 循环尝试
+</span><span class="c1"></span>			<span class="k">for</span> <span class="o">(;</span> <span class="o">;</span> <span class="o">)</span> <span class="o">{</span>
+				<span class="c1">// 获取当前的同步状态
+</span><span class="c1"></span>				<span class="kt">int</span> <span class="n">nowState</span> <span class="o">=</span> <span class="n">getState</span><span class="o">();</span>
+				<span class="c1">// 计算当前线程获取锁后，新的同步状态
+</span><span class="c1"></span>				<span class="c1">// 注意这里使用了减法，因为此时的state表示的是还能支持多少个线程
+</span><span class="c1"></span>				<span class="c1">// 而当前线程如果获得了锁，则state就要减小
+</span><span class="c1"></span>				<span class="kt">int</span> <span class="n">newState</span> <span class="o">=</span> <span class="n">nowState</span> <span class="o">-</span> <span class="n">arg</span><span class="o">;</span>
+				
+				<span class="c1">// 如果newState小于0，表示当前已经没有剩余的资源了
+</span><span class="c1"></span>				<span class="c1">// 则当前线程不能获取锁，此时将直接返回小于0的newState；
+</span><span class="c1"></span>				<span class="c1">// 或者newState&gt;0，就会执行compareAndSetState方法修改state的值，
+</span><span class="c1"></span>				<span class="c1">// 若修改成功将，将返回大于0的newState；
+</span><span class="c1"></span>				<span class="c1">// 若修改失败，则表示有其他线程也在尝试修改state，此时循环一次后，再次尝试
+</span><span class="c1"></span>				<span class="k">if</span> <span class="o">(</span><span class="n">newState</span> <span class="o">&lt;</span> <span class="n">0</span> <span class="o">||</span> <span class="n">compareAndSetState</span><span class="o">(</span><span class="n">nowState</span><span class="o">,</span> <span class="n">newState</span><span class="o">))</span> <span class="o">{</span>
+					<span class="k">return</span> <span class="n">newState</span><span class="o">;</span>
+				<span class="o">}</span>
+			<span class="o">}</span>
+		<span class="o">}</span>
+
+		<span class="cm">/**
+</span><span class="cm">		 * 尝试释放同步状态
+</span><span class="cm">		 */</span>
+		<span class="nd">@Override</span>
+		<span class="kd">protected</span> <span class="kt">boolean</span> <span class="nf">tryReleaseShared</span><span class="o">(</span><span class="kt">int</span> <span class="n">arg</span><span class="o">)</span> <span class="o">{</span>
+			<span class="k">for</span> <span class="o">(;</span> <span class="o">;</span> <span class="o">)</span> <span class="o">{</span>
+				<span class="c1">// 获取当前同步状态
+</span><span class="c1"></span>				<span class="kt">int</span> <span class="n">nowState</span> <span class="o">=</span> <span class="n">getState</span><span class="o">();</span>
+				<span class="c1">// 计算释放后的新同步状态，这里使用加法，
+</span><span class="c1"></span>				<span class="c1">// 表示有线程释放锁后，当前锁可以支持的线程数量增加了
+</span><span class="c1"></span>				<span class="kt">int</span> <span class="n">newState</span> <span class="o">=</span> <span class="n">nowState</span> <span class="o">+</span> <span class="n">arg</span><span class="o">;</span>
+				<span class="c1">// 使用CAS修改同步状态，若成功则返回true，否则自旋
+</span><span class="c1"></span>				<span class="k">if</span> <span class="o">(</span><span class="n">compareAndSetState</span><span class="o">(</span><span class="n">nowState</span><span class="o">,</span> <span class="n">newState</span><span class="o">))</span> <span class="o">{</span>
+					<span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+				<span class="o">}</span>
+			<span class="o">}</span>
+		<span class="o">}</span>
+		
+	<span class="o">}</span>
+
+
+	<span class="cm">/**
+</span><span class="cm">	 * 获取锁的方法
+</span><span class="cm">	 */</span>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">lock</span><span class="o">()</span> <span class="o">{</span>
+		<span class="c1">// 这里调用的是AQS的模板方法acquireShared，
+</span><span class="c1"></span>		<span class="c1">// 在acquireShared中将调用我们重写的tryAcquireShared方法
+</span><span class="c1"></span>		<span class="c1">// 传入参数为1表示当前线程，当前线程获取锁后，state将-1
+</span><span class="c1"></span>		<span class="n">sync</span><span class="o">.</span><span class="na">acquireShared</span><span class="o">(</span><span class="n">1</span><span class="o">);</span>
+	<span class="o">}</span>
+
+	<span class="cm">/**
+</span><span class="cm">	 * 解锁
+</span><span class="cm">	 */</span>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">unlock</span><span class="o">()</span> <span class="o">{</span>
+		<span class="c1">// 这里调用的是AQS的模板方法releaseShared，
+</span><span class="c1"></span>		<span class="c1">// 在acquireShared中将调用我们重写的tryReleaseShared方法
+</span><span class="c1"></span>		<span class="c1">// 传入参数为1表示当前线程，当前线程释放锁后，state将+1
+</span><span class="c1"></span>		<span class="n">sync</span><span class="o">.</span><span class="na">releaseShared</span><span class="o">(</span><span class="n">1</span><span class="o">);</span>
+	<span class="o">}</span>
+
+	<span class="cm">/*******************其他需要实现的方法省略***************************/</span>
+
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">InterruptedException</span> <span class="o">{</span>
+	<span class="c1">// 创建一个我们自定义的锁对象
+</span><span class="c1"></span>    <span class="n">Lock</span> <span class="n">lock</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TwinLock</span><span class="o">();</span>
+
+    <span class="c1">// 启动10个线程去尝试获取锁
+</span><span class="c1"></span>    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">10</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="n">Thread</span> <span class="n">t</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Thread</span><span class="o">(()-&gt;{</span>
+            <span class="c1">// 循环执行
+</span><span class="c1"></span>            <span class="k">while</span> <span class="o">(</span><span class="kc">true</span><span class="o">)</span> <span class="o">{</span>
+                <span class="c1">// 获取锁
+</span><span class="c1"></span>                <span class="n">lock</span><span class="o">.</span><span class="na">lock</span><span class="o">();</span>
+                <span class="k">try</span> <span class="o">{</span>
+                    <span class="c1">// 休眠1秒
+</span><span class="c1"></span>                    <span class="n">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="n">1000</span><span class="o">);</span>
+                    <span class="c1">// 输出线程名称
+</span><span class="c1"></span>                    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">().</span><span class="na">getName</span><span class="o">());</span>
+                    <span class="c1">// 再次休眠一秒
+</span><span class="c1"></span>                    <span class="n">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="n">1000</span><span class="o">);</span>
+                <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+                <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+                    <span class="c1">// 释放锁
+</span><span class="c1"></span>                    <span class="n">lock</span><span class="o">.</span><span class="na">unlock</span><span class="o">();</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+        <span class="o">});</span>
+		<span class="c1">// 将线程设置为守护线程，主线程结束后，收获线程自动结束
+</span><span class="c1"></span>        <span class="n">t</span><span class="o">.</span><span class="na">setDaemon</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+        <span class="n">t</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
+    <span class="o">}</span>
+
+	<span class="c1">// 主线程每隔1秒输出一个分割行
+</span><span class="c1"></span>    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">10</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="n">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="n">1000</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;********************************&#34;</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="locksupport">LockSupport</h2>
+<ol>
+<li>用 LockSupport 实现一个 FIFO（公平）的 不可重入的锁！
+<ul>
+<li>用一个 AtomicBoolean 变量来表示锁的获取状态</li>
+<li>用 LockSupport 的 park，unpark 来阻塞、唤醒线程</li>
+<li>用一个 ConcurrentLinkedQueue 来存放被阻塞的线程。</li>
+</ul>
+</li>
+<li>LockSupport.park() 会释放锁吗？
+<ul>
+<li>不会，condition.await() 才会释放锁</li>
+</ul>
+</li>
+<li>先调用 LockSupport.unpark(thread1), 再调用 LockSupport.park() 会怎样？
+<ul>
+<li>LockSupport.park()会被直接跳过！</li>
+</ul>
+</li>
+<li>LockSupport 原理
+<ul>
+<li>LockSupport 会为每一个调用它的线程搭配一个许可（permit），这一点类似于 Semaphore，每次调用 park 时，如果许可可用，则会直接返回，否则该线程会被阻塞。</li>
+<li>调用 unpark 时，会使许可可用，但是如果许可已经可用，这个许可并不会累积，这一点和 Semaphore 不同！所以最多只会有一个许可！</li>
+</ul>
+</li>
+</ol>
+<h2 id="cas">CAS</h2>
+<ol>
+<li>本质上就是一个乐观锁</li>
+<li>无法保证代码块的原子性，只能保证变量的原子操作</li>
+<li>ABA问题
+<ul>
+<li>指的是其他线程进行了多次操作之后，将变量恢复为原来的样子，线程无法区分是否发生了改变。</li>
+<li>通过加版本号可以解决该问题，jdk1.5之后提供了 AtomicStampedReference类来解决这个问题。</li>
+</ul>
+</li>
+<li>是否具有原子性：底层实现，通过对总线加锁！</li>
+</ol>
+<h2 id="volatile">volatile</h2>
+<ol>
+<li></li>
+</ol>
+<h2 id="atomic">Atomic</h2>
+<ol>
+<li></li>
+</ol>
+<h2 id="常见问题">常见问题</h2>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">段新朋</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2020-07-30
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/java/">java</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E7%AE%97%E6%B3%95/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">最短路径算法</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/mysql%E7%B4%A2%E5%BC%95/">
+            <span class="next-text nav-default">Mysql索引</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/duanxinpeng" class="iconfont icon-github" title="github"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author"></span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      TeX: {equationNumbers: {autoNumber: "AMS"}},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

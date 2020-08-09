@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>组合 on Even - A super concise theme for Hugo</title>
+    <link>http://localhost:1313/tags/%E7%BB%84%E5%90%88/</link>
+    <description>Recent content in 组合 on Even - A super concise theme for Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 07 Jul 2020 00:11:12 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/%E7%BB%84%E5%90%88/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>组合</title>
+      <link>http://localhost:1313/post/%E7%BB%84%E5%90%88/</link>
+      <pubDate>Tue, 07 Jul 2020 00:11:12 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E7%BB%84%E5%90%88/</guid>
+      <description>组合 问题描述 https://leetcode-cn.com/problems/combinations/submissions/ 收获 组合与排列的不同之处在于，组合只能向后看，排列是删除一个元素，组合是删除该元素以及该元素之前的所有元素！ 组合的另外一个不同</description>
+    </item>
+    
+  </channel>
+</rss>

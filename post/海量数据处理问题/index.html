@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>海量数据处理问题 - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="段新朋" /><meta name="description" content="知识点回顾 布隆过滤器 流程 准备 k 个 hash 函数，每个函数可以把 key 散列成为一个整数 初始化一个尽可能长的比特数组，每个比特位初始化为0 某个key加入集合" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.72.0 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/%E6%B5%B7%E9%87%8F%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E9%97%AE%E9%A2%98/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="海量数据处理问题" />
+<meta property="og:description" content="知识点回顾 布隆过滤器 流程 准备 k 个 hash 函数，每个函数可以把 key 散列成为一个整数 初始化一个尽可能长的比特数组，每个比特位初始化为0 某个key加入集合" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/%E6%B5%B7%E9%87%8F%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E9%97%AE%E9%A2%98/" />
+<meta property="article:published_time" content="2020-08-05T17:48:48+08:00" />
+<meta property="article:modified_time" content="2020-08-05T17:48:48+08:00" />
+<meta itemprop="name" content="海量数据处理问题">
+<meta itemprop="description" content="知识点回顾 布隆过滤器 流程 准备 k 个 hash 函数，每个函数可以把 key 散列成为一个整数 初始化一个尽可能长的比特数组，每个比特位初始化为0 某个key加入集合">
+<meta itemprop="datePublished" content="2020-08-05T17:48:48&#43;08:00" />
+<meta itemprop="dateModified" content="2020-08-05T17:48:48&#43;08:00" />
+<meta itemprop="wordCount" content="1913">
+
+
+
+<meta itemprop="keywords" content="bitmap,bloom filter," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="海量数据处理问题"/>
+<meta name="twitter:description" content="知识点回顾 布隆过滤器 流程 准备 k 个 hash 函数，每个函数可以把 key 散列成为一个整数 初始化一个尽可能长的比特数组，每个比特位初始化为0 某个key加入集合"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">NeverDoubt</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">NeverDoubt</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">海量数据处理问题</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-08-05 </span>
+        <div class="post-category">
+            <a href="/categories/%E7%AE%97%E6%B3%95/"> 算法 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#知识点回顾">知识点回顾</a>
+      <ul>
+        <li><a href="#布隆过滤器">布隆过滤器</a></li>
+        <li><a href="#bitmap">bitmap</a></li>
+        <li><a href="#哈希分桶">哈希分桶</a></li>
+        <li><a href="#需要保持敏感的数据">需要保持敏感的数据</a></li>
+      </ul>
+    </li>
+    <li><a href="#常见题目">常见题目</a>
+      <ul>
+        <li><a href="#出现次数最多的ip">出现次数最多的IP</a></li>
+        <li><a href="#只出现一次的数">只出现一次的数</a></li>
+        <li><a href="#两个文件的交集">两个文件的交集</a></li>
+        <li><a href="#给出若干个文件统计这些文件中不重复数据的个数">给出若干个文件，统计这些文件中不重复数据的个数。</a></li>
+        <li><a href="#如何扩展布隆过滤器使得它支持删除计数操作">如何扩展布隆过滤器使得它支持删除/计数操作？</a></li>
+        <li><a href="#有一个词典包含n个英文单词现在任意给一个字符串设计算法找出包含这个字符串的所有英文单词">有一个词典，包含N个英文单词，现在任意给一个字符串，设计算法找出包含这个字符串的所有英文单词。</a></li>
+        <li><a href="#有一百万个数是在1到一亿当中随机取值找出这一亿个数中没出现的数">有一百万个数，是在1到一亿当中随机取值，找出这一亿个数中没出现的数</a></li>
+        <li><a href="#100亿个整数如何找到中位数">100亿个整数如何找到中位数？</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="知识点回顾">知识点回顾</h2>
+<h3 id="布隆过滤器">布隆过滤器</h3>
+<ol>
+<li>流程
+<ul>
+<li>准备 k 个 hash 函数，每个函数可以把 key 散列成为一个整数</li>
+<li>初始化一个尽可能长的比特数组，每个比特位初始化为0</li>
+<li>某个key加入集合时，用k个 hash 函数算出 k 个散列值，并把比特数组中对应的比特位置为1</li>
+<li>判断某个key是否在集合时，用 k 个hash 函数算出k 个散列值，并查询比特数组中所有的 k 个位置，如果都为 1，认为在集合中。</li>
+</ul>
+</li>
+<li>特点
+<ul>
+<li>如果 key 在集合中，那么一定可以判断出来在；但是如果元素不在集合中，有可能会误判这个元素在集合中。</li>
+<li>无法删除！（因为并不能确定某个位置是因为删除的元素而被设为1的！）</li>
+</ul>
+</li>
+</ol>
+<h3 id="bitmap">bitmap</h3>
+<ol>
+<li>利用内存中连续的二进制位，来对大量整形数据做重和查询！</li>
+<li>不仅方便，还可以去掉重复的整型数，而且做<code>并集</code>和<code>交集</code>也很方便</li>
+<li>可以解决<code>用户和标签</code>的问题，以标签为key，然后将用户存储在bitmap中</li>
+<li>bitmap无法做<code>非运算</code>，比如从标签<code>90后</code>对应的bitmap中可以查询到哪些用户是<code>90后</code>，但是无法查出哪些不是九零后；解决方法是添加一个全量bitmap，那些在全量位图，且不在<code>90后</code>位图中的用户都是非90后。</li>
+<li>可以用 int 类型的数组或者 long 类型的数组来实现 bitmap。</li>
+<li>java中的两个优化的比较好的位图包：<code>RoaringBitmap</code> 和 <code>JavaEWAH</code>.</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">BitMap</span> <span class="o">{</span>
+    <span class="c1">// 需要存放的数据个数
+</span><span class="c1"></span>    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">N</span> <span class="o">=</span> <span class="n">200000000</span><span class="o">;</span>
+    <span class="c1">// 用一个 int 类型的数组作为位图，一个int最多可以存放32个整型数（4字节32位！）
+</span><span class="c1"></span>    <span class="c1">// 相当于压缩了 32 倍的空间！
+</span><span class="c1"></span>    <span class="kd">private</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">a</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">N</span> <span class="o">&gt;&gt;</span> <span class="n">32</span> <span class="o">+</span> <span class="n">1</span><span class="o">];</span>
+
+    <span class="cm">/**
+</span><span class="cm">     * 设置 n 所在的bit位为 1
+</span><span class="cm">     *
+</span><span class="cm">     * @param n
+</span><span class="cm">     */</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">addValue</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// 计算 n 在数组 a 中的下标
+</span><span class="c1"></span>        <span class="kt">int</span> <span class="n">row</span> <span class="o">=</span> <span class="n">n</span> <span class="o">&gt;&gt;</span> <span class="n">5</span><span class="o">;</span>
+        <span class="c1">// 计算 n 在a[row] 元素中的下标
+</span><span class="c1"></span>        <span class="c1">// 相当于 a[row] = a[row] | (2^(n%32))
+</span><span class="c1"></span>        <span class="n">a</span><span class="o">[</span><span class="n">row</span><span class="o">]</span> <span class="o">|=</span> <span class="n">1</span> <span class="o">&lt;&lt;</span> <span class="o">(</span><span class="n">n</span> <span class="o">&amp;</span> <span class="n">0x1F</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isExist</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
+        <span class="cm">/**
+</span><span class="cm">         * 判断 n 所在比特位是否为1
+</span><span class="cm">         */</span>
+        <span class="kt">int</span> <span class="n">row</span> <span class="o">=</span> <span class="n">n</span> <span class="o">&gt;&gt;</span> <span class="n">5</span><span class="o">;</span>
+        <span class="k">return</span> <span class="o">(</span><span class="n">a</span><span class="o">[</span><span class="n">row</span><span class="o">]</span> <span class="o">&amp;</span> <span class="o">(</span><span class="n">1</span> <span class="o">&lt;&lt;</span> <span class="o">(</span><span class="n">n</span> <span class="o">&amp;</span> <span class="n">0x1F</span><span class="o">)))</span> <span class="o">!=</span> <span class="n">0</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">display</span><span class="o">(</span><span class="kt">int</span> <span class="n">begin</span><span class="o">,</span> <span class="kt">int</span> <span class="n">end</span><span class="o">)</span> <span class="o">{</span>
+        <span class="cm">/**
+</span><span class="cm">         * 展示部分位图
+</span><span class="cm">         */</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;BitMap位图展示&#34;</span><span class="o">);</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">begin</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">end</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;();</span>
+            <span class="kt">int</span> <span class="n">temp</span> <span class="o">=</span> <span class="n">a</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">32</span><span class="o">;</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span>
+                <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">temp</span> <span class="o">&amp;</span> <span class="n">1</span><span class="o">);</span>
+                <span class="n">temp</span> <span class="o">&gt;&gt;=</span> <span class="n">1</span><span class="o">;</span>
+            <span class="o">}</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;a[&#34;</span> <span class="o">+</span> <span class="n">i</span> <span class="o">+</span> <span class="s">&#34;]&#34;</span> <span class="o">+</span> <span class="n">list</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">BitMap</span> <span class="n">bm</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BitMap</span><span class="o">();</span>
+        <span class="n">bm</span><span class="o">.</span><span class="na">addValue</span><span class="o">(</span><span class="n">12</span><span class="o">);</span>
+        <span class="n">bm</span><span class="o">.</span><span class="na">addValue</span><span class="o">(</span><span class="n">100000000</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">bm</span><span class="o">.</span><span class="na">isExist</span><span class="o">(</span><span class="n">100000000</span><span class="o">));</span>
+        <span class="n">bm</span><span class="o">.</span><span class="na">display</span><span class="o">(</span><span class="n">0</span><span class="o">,</span> <span class="n">1</span><span class="o">);</span>
+    <span class="o">}</span>
+
+<span class="o">}</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="哈希分桶">哈希分桶</h3>
+<ol>
+<li>通过哈希函数来对数据进行划分，将不同的划分安排给不同的机器或者分为不同的文件批次处理。</li>
+<li>哈希分桶的优点在于可以将相同的数据分到同一文件中，也就是说不同的划分间不存在相同的元素！</li>
+<li>MapReduce的本质就是哈希分桶？</li>
+</ol>
+<h3 id="需要保持敏感的数据">需要保持敏感的数据</h3>
+<ol>
+<li>$1GB = 2^{10}MB = 2^{20}KB = 2^{30}B = 2^{33}bit$</li>
+<li>$100亿 \approx 2^{34} $, $10亿 \approx 2^{30}$</li>
+<li>所以 1GB 用位图的话，至少可以存放10亿个数。</li>
+</ol>
+<h2 id="常见题目">常见题目</h2>
+<h3 id="出现次数最多的ip">出现次数最多的IP</h3>
+<p><code>给一个超过100G大小的log file，log中存着IP地址，设计算法找到出现次数最多的IP地址.</code></p>
+<ol>
+<li>哈希分桶法
+<ul>
+<li>将100G文件分成1000份，将每个IP地址映射到相应文件中（%1000）</li>
+<li>在每个文件中分别找出出现频率最高的IP，得到1000个IP</li>
+<li>再从1000个IP中找出频率最高的IP</li>
+</ul>
+</li>
+</ol>
+<h3 id="只出现一次的数">只出现一次的数</h3>
+<p><code>给定100亿个整数，设计算法找到只出现一次的整数</code></p>
+<ol>
+<li>哈希分桶法</li>
+<li>位图法
+<ul>
+<li>00 表示没出现过</li>
+<li>01 表示出现一次</li>
+<li>10 表示出现过一次以上</li>
+</ul>
+</li>
+</ol>
+<h3 id="两个文件的交集">两个文件的交集</h3>
+<p><code>给两个我呢见，分别有100亿个整数（去重后不超过10亿）</code>，我们只有1G内存，如何找到两个文件的交集</p>
+<ol>
+<li>位图法
+<ul>
+<li>每个数用两位表示，00表示在两个文件中均没出现过，01表示在文件1中出现，10 表示izai文件2中出现，11表示在两个文件中都出现过</li>
+<li>先遍历文件1中所有整数作出标记，再遍历文件2中的整数。</li>
+<li>所有被标为 11 的数都是在两个文件中都出现过的数</li>
+</ul>
+</li>
+<li>哈希分桶
+<ul>
+<li>将两个文件分别分为N个小文件，然后小文件之间分别求交集</li>
+<li>将所有的N个交集合并即可</li>
+</ul>
+</li>
+<li>布隆过滤器（近似算法？？？）</li>
+</ol>
+<h3 id="给出若干个文件统计这些文件中不重复数据的个数">给出若干个文件，统计这些文件中不重复数据的个数。</h3>
+<ol>
+<li>哈希分桶法</li>
+<li>位图法</li>
+</ol>
+<h3 id="如何扩展布隆过滤器使得它支持删除计数操作">如何扩展布隆过滤器使得它支持删除/计数操作？</h3>
+<ol>
+<li>将BloomFilter中的每一位扩展为一个计数器，记录有多少个hash函数映射到这一位；删除的时候，只有当引用计数变为0时，才真正将该位置为0。</li>
+<li>将BloomFilter中的每一位扩展为一个计数器，每个输入元素都要把对应位置加1，从而支持计数操作。计数个数为所有映射到的位置计数的最小值（？？？）</li>
+</ol>
+<h3 id="有一个词典包含n个英文单词现在任意给一个字符串设计算法找出包含这个字符串的所有英文单词">有一个词典，包含N个英文单词，现在任意给一个字符串，设计算法找出包含这个字符串的所有英文单词。</h3>
+<ol>
+<li>字典树？</li>
+</ol>
+<h3 id="有一百万个数是在1到一亿当中随机取值找出这一亿个数中没出现的数">有一百万个数，是在1到一亿当中随机取值，找出这一亿个数中没出现的数</h3>
+<ol>
+<li>位图</li>
+<li></li>
+</ol>
+<h3 id="100亿个整数如何找到中位数">100亿个整数如何找到中位数？</h3>
+<ol>
+<li>内存够用：快速选择（快排变形）（时间复杂度是O(N)和构建堆的时间复杂度一样）</li>
+<li>内存不够用且无重复数据：bitmap</li>
+<li>内存不够，且有重复数据：哈希分桶？按照每个数的最高8位进行分桶（最多255个桶），这样的话桶之间就有了大小关系，方便找中位数。</li>
+</ol>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">段新朋</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2020-08-05
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/bitmap/">bitmap</a>
+          <a href="/tags/bloom-filter/">bloom filter</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/java%E5%8F%8D%E5%B0%84/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Java反射</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E7%AE%97%E6%B3%95/">
+            <span class="next-text nav-default">最短路径算法</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/duanxinpeng" class="iconfont icon-github" title="github"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author"></span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      TeX: {equationNumbers: {autoNumber: "AMS"}},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

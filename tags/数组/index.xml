@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>数组 on Even - A super concise theme for Hugo</title>
+    <link>http://localhost:1313/tags/%E6%95%B0%E7%BB%84/</link>
+    <description>Recent content in 数组 on Even - A super concise theme for Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 26 Jul 2020 14:24:33 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/%E6%95%B0%E7%BB%84/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>接雨水</title>
+      <link>http://localhost:1313/post/%E6%8E%A5%E9%9B%A8%E6%B0%B4/</link>
+      <pubDate>Sun, 26 Jul 2020 14:24:33 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E6%8E%A5%E9%9B%A8%E6%B0%B4/</guid>
+      <description>问题描述 https://leetcode-cn.com/problems/trapping-rain-water/ Solutions 暴力法：遍历数组中的每一个元素，并分别向左、向右寻找比当前元素大的最大元素，两者取其小，减掉当前元素就是当前元素上面可存储的水量</description>
+    </item>
+    
+    <item>
+      <title>单调栈（队列）</title>
+      <link>http://localhost:1313/post/%E5%8D%95%E8%B0%83%E6%A0%88%E9%98%9F%E5%88%97/</link>
+      <pubDate>Wed, 22 Jul 2020 17:14:39 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E5%8D%95%E8%B0%83%E6%A0%88%E9%98%9F%E5%88%97/</guid>
+      <description>单调栈（队列） 题目 滑动窗口最大值 https://leetcode-cn.com/problems/sliding-window-maximum/ 应用了单调队列的思想。</description>
+    </item>
+    
+    <item>
+      <title>动态规划专题</title>
+      <link>http://localhost:1313/post/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E4%B8%93%E9%A2%98/</link>
+      <pubDate>Tue, 21 Jul 2020 06:40:34 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E4%B8%93%E9%A2%98/</guid>
+      <description>动态规划 一个模型 多阶段决策最优解模型 三个特征 最优子结构：最优解包含子问题的最优解，或者理解为“后面的状态可以通过前面的状态推导出来”。 无后效</description>
+    </item>
+    
+    <item>
+      <title>打家劫舍</title>
+      <link>http://localhost:1313/post/%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8D/</link>
+      <pubDate>Mon, 20 Jul 2020 18:56:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8D/</guid>
+      <description>打家劫舍 给定一个数组，求数组中不相邻元素的最大和。 https://leetcode-cn.com/problems/house-robber/ 简单动态规划 打家劫舍Ⅱ 数组头和数组尾被视为相邻，求这种情况下数组中不相邻元素的最大和。 https://leetcode-cn.com/problems/house-robber-ii/</description>
+    </item>
+    
+    <item>
+      <title>买卖股票的最佳时机</title>
+      <link>http://localhost:1313/post/%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA/</link>
+      <pubDate>Sun, 19 Jul 2020 09:01:05 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA/</guid>
+      <description>动态规划框架 状态转移方程 dp[i][k][0] = max(dp[i-1][k][0], dp[i-1][k][1] + prices[i]) dp[i][k][1] = max(dp[i-1][k][1], dp[i-1][k-1][0] - prices[i]) base case i=-1 and k = 0 dp[-1][k][0] = 0 : i = -1 表示第-1天，意味着还没开始 dp[-1][k][1] = -infinity ： 表示还没开始就已经持有股票，</description>
+    </item>
+    
+    <item>
+      <title>最长上升子序列</title>
+      <link>http://localhost:1313/post/%E6%9C%80%E9%95%BF%E4%B8%8A%E5%8D%87%E5%AD%90%E5%BA%8F%E5%88%97/</link>
+      <pubDate>Fri, 17 Jul 2020 11:00:05 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E6%9C%80%E9%95%BF%E4%B8%8A%E5%8D%87%E5%AD%90%E5%BA%8F%E5%88%97/</guid>
+      <description>问题描述 给定一个无序的整数数组，找到其中最长上升子序列的长度 https://leetcode-cn.com/problems/longest-increasing-subsequence/ 动态规划 dp[i]代表以nums[i]结尾的最长上升子序列的长度，dp[i]=</description>
+    </item>
+    
+    <item>
+      <title>寻找重复数</title>
+      <link>http://localhost:1313/post/%E5%AF%BB%E6%89%BE%E9%87%8D%E5%A4%8D%E6%95%B0/</link>
+      <pubDate>Fri, 17 Jul 2020 10:17:33 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E5%AF%BB%E6%89%BE%E9%87%8D%E5%A4%8D%E6%95%B0/</guid>
+      <description>问题描述 包含n+1个整数的数组nums，其数字都在1到n之间，若只存在一个重复的整数，找出这个重复的整数。 https://leetcode-cn.com/problems/find-the-duplicate-number/ 解题 排序，然后遍历数组即可O(n</description>
+    </item>
+    
+    <item>
+      <title>根据身高重建队列</title>
+      <link>http://localhost:1313/post/%E6%A0%B9%E6%8D%AE%E8%BA%AB%E9%AB%98%E9%87%8D%E5%BB%BA%E9%98%9F%E5%88%97/</link>
+      <pubDate>Fri, 17 Jul 2020 09:11:43 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E6%A0%B9%E6%8D%AE%E8%BA%AB%E9%AB%98%E9%87%8D%E5%BB%BA%E9%98%9F%E5%88%97/</guid>
+      <description>问题描述 根据数据大小以及数据位置（前面有几个比他大的元素）来重排这些元素 https://leetcode-cn.com/problems/queue-reconstruction-by-height/ 思路 相同身高的人，按照其所处位置排序 不同身高的人，应该先排身高高的</description>
+    </item>
+    
+    <item>
+      <title>移动零</title>
+      <link>http://localhost:1313/post/%E7%A7%BB%E5%8A%A8%E9%9B%B6/</link>
+      <pubDate>Fri, 17 Jul 2020 08:42:59 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E7%A7%BB%E5%8A%A8%E9%9B%B6/</guid>
+      <description>问题描述 给定一个数组，将其中的0移动到数组末尾，同时保持非零元素的相对顺序。 https://leetcode-cn.com/problems/move-zeroes/ 解法 双指针</description>
+    </item>
+    
+    <item>
+      <title>找到所有数组中消失的数字</title>
+      <link>http://localhost:1313/post/%E6%89%BE%E5%88%B0%E6%89%80%E6%9C%89%E6%95%B0%E7%BB%84%E4%B8%AD%E6%B6%88%E5%A4%B1%E7%9A%84%E6%95%B0%E5%AD%97/</link>
+      <pubDate>Mon, 13 Jul 2020 09:58:59 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E6%89%BE%E5%88%B0%E6%89%80%E6%9C%89%E6%95%B0%E7%BB%84%E4%B8%AD%E6%B6%88%E5%A4%B1%E7%9A%84%E6%95%B0%E5%AD%97/</guid>
+      <description>问题描述 给定范围内 $[1,n]$ 的整形数组，n同时为数组长度，返回在数组中没有出现的元素。 https://leetcode-cn.com/problems/find-all-numbers-disappeared-in-an-array/ 思路 因为数组内的元素都在 $[1,n]$ 之间，全都是正数且都不会大于数组的</description>
+    </item>
+    
+    <item>
+      <title>和为k的子数组</title>
+      <link>http://localhost:1313/post/%E5%92%8C%E4%B8%BAk%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84/</link>
+      <pubDate>Sun, 12 Jul 2020 17:01:04 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E5%92%8C%E4%B8%BAk%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84/</guid>
+      <description>问题描述 给定一个整数数组和一个整数K，返回该数组中和为k的连续子数组的个数 https://leetcode-cn.com/problems/subarray-sum-equals-k/ 实现 暴力枚举法,O(n*n) 利用HashMap数据结构进行优化 遍</description>
+    </item>
+    
+    <item>
+      <title>每日温度</title>
+      <link>http://localhost:1313/post/%E6%AF%8F%E6%97%A5%E6%B8%A9%E5%BA%A6/</link>
+      <pubDate>Sun, 12 Jul 2020 09:21:29 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E6%AF%8F%E6%97%A5%E6%B8%A9%E5%BA%A6/</guid>
+      <description>问题描述 根据每日气温列T表重新生成一个列表，对应位置分别为想要观测到更高的气温至少需要等待的天数。气温都是[30,100]内的整数。 https://leetcode-cn.com/problems/daily-temperatures/ 暴力法</description>
+    </item>
+    
+    <item>
+      <title>除自身以外数组的乘积</title>
+      <link>http://localhost:1313/post/%E9%99%A4%E8%87%AA%E8%BA%AB%E4%BB%A5%E5%A4%96%E6%95%B0%E7%BB%84%E7%9A%84%E4%B9%98%E7%A7%AF/</link>
+      <pubDate>Sat, 11 Jul 2020 17:48:53 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E9%99%A4%E8%87%AA%E8%BA%AB%E4%BB%A5%E5%A4%96%E6%95%B0%E7%BB%84%E7%9A%84%E4%B9%98%E7%A7%AF/</guid>
+      <description>问题描述 给定一个数组，输出output，output[i] 等于nums中，出nums[i]之外的所有元素的乘积 https://leetcode-cn.com/problems/product-of-array-except-self/ 思路 两遍循环</description>
+    </item>
+    
+    <item>
+      <title>数组中的第K个最大元素</title>
+      <link>http://localhost:1313/post/%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E7%AC%ACk%E4%B8%AA%E6%9C%80%E5%A4%A7%E5%85%83%E7%B4%A0/</link>
+      <pubDate>Sat, 11 Jul 2020 10:50:22 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E7%AC%ACk%E4%B8%AA%E6%9C%80%E5%A4%A7%E5%85%83%E7%B4%A0/</guid>
+      <description>问题描述 找出数组中第k大的数 快速选择算法 第K大的元素在nums中的下标是nums.length-k, 把k转换成index之后，就很简单了，i</description>
+    </item>
+    
+    <item>
+      <title>多数元素</title>
+      <link>http://localhost:1313/post/%E5%A4%9A%E6%95%B0%E5%85%83%E7%B4%A0/</link>
+      <pubDate>Fri, 10 Jul 2020 17:35:51 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E5%A4%9A%E6%95%B0%E5%85%83%E7%B4%A0/</guid>
+      <description>问题描述 找出数组中数量大于n/2的数字 https://leetcode-cn.com/problems/majority-element/ 思路 HashMap：先用HashMap统计每个数字出现的次数，然后再返回次数大于n/2的数字； 随机法</description>
+    </item>
+    
+    <item>
+      <title>只出现一次的数字</title>
+      <link>http://localhost:1313/post/%E5%8F%AA%E5%87%BA%E7%8E%B0%E4%B8%80%E6%AC%A1%E7%9A%84%E6%95%B0%E5%AD%97/</link>
+      <pubDate>Fri, 10 Jul 2020 09:53:07 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E5%8F%AA%E5%87%BA%E7%8E%B0%E4%B8%80%E6%AC%A1%E7%9A%84%E6%95%B0%E5%AD%97/</guid>
+      <description>问题描述 给定一个飞空数组，除了某个元素只出现一次之外，其他元素均出现两次，找出那个只出现一次的元素。 https://leetcode-cn.com/problems/single-number/ 思路 HashMap 位运算：对所有元素做一次异或运算</description>
+    </item>
+    
+    <item>
+      <title>颜色分类</title>
+      <link>http://localhost:1313/post/%E9%A2%9C%E8%89%B2%E5%88%86%E7%B1%BB/</link>
+      <pubDate>Thu, 09 Jul 2020 16:40:05 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E9%A2%9C%E8%89%B2%E5%88%86%E7%B1%BB/</guid>
+      <description>问题描述 一个数组中只包含0，1，2三个数，将0放到数组最左边，2放到数组最右边，1在数组中间 https://leetcode-cn.com/problems/sort-colors/ 思路 三个指针，p0,p,p2 循环条件(p &amp;lt;= p2) =</description>
+    </item>
+    
+    <item>
+      <title>合并区间</title>
+      <link>http://localhost:1313/post/%E5%90%88%E5%B9%B6%E5%8C%BA%E9%97%B4/</link>
+      <pubDate>Thu, 09 Jul 2020 16:05:56 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E5%90%88%E5%B9%B6%E5%8C%BA%E9%97%B4/</guid>
+      <description>问题描述 给出一个区间的集合，请合并所有重叠的区间 https://leetcode-cn.com/problems/merge-intervals/ 思路 如果我们按照区间的左端点排序，那么在排完序的列表中，可以合并的区间一定是连续的。这是本</description>
+    </item>
+    
+    <item>
+      <title>跳跃游戏</title>
+      <link>http://localhost:1313/post/%E8%B7%B3%E8%B7%83%E6%B8%B8%E6%88%8F/</link>
+      <pubDate>Thu, 09 Jul 2020 15:28:14 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E8%B7%B3%E8%B7%83%E6%B8%B8%E6%88%8F/</guid>
+      <description>问题描述 给定一个数组，数组中的每个元素代表你能向前走的最大步数，如果你当前在数组的第一个位置，判断你能否达到数组的最后一个位置。 https://leetcode-cn.com/problems/jump-game/ 解题思路 我</description>
+    </item>
+    
+    <item>
+      <title>旋转图像</title>
+      <link>http://localhost:1313/post/%E6%97%8B%E8%BD%AC%E5%9B%BE%E5%83%8F/</link>
+      <pubDate>Thu, 09 Jul 2020 11:51:12 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E6%97%8B%E8%BD%AC%E5%9B%BE%E5%83%8F/</guid>
+      <description>问题描述 将一个NxN的二维矩阵顺时针反转90度。 https://leetcode-cn.com/problems/rotate-image/ 思路 先转置，再逐行反转。 以空间复杂度O(1)反转数组的方法；</description>
+    </item>
+    
+    <item>
+      <title>在排序数组中查找元素的第一个位置和最后一个位置</title>
+      <link>http://localhost:1313/post/%E5%9C%A8%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E6%9F%A5%E6%89%BE%E5%85%83%E7%B4%A0%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E4%BD%8D%E7%BD%AE%E5%92%8C%E6%9C%80%E5%90%8E%E4%B8%80%E4%B8%AA%E4%BD%8D%E7%BD%AE/</link>
+      <pubDate>Thu, 09 Jul 2020 11:32:37 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E5%9C%A8%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E6%9F%A5%E6%89%BE%E5%85%83%E7%B4%A0%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E4%BD%8D%E7%BD%AE%E5%92%8C%E6%9C%80%E5%90%8E%E4%B8%80%E4%B8%AA%E4%BD%8D%E7%BD%AE/</guid>
+      <description>问题描述 本质是范围查找，可以用二分查找来解决 https://leetcode-cn.com/problems/find-first-and-last-position-of-element-in-sorted-array/ 代码实现细节 寻找左边界和有边界可以用一个函数来完成，但是需要传入一个参数来表示究竟寻找的是左边</description>
+    </item>
+    
+    <item>
+      <title>搜索旋转排序数组</title>
+      <link>http://localhost:1313/post/%E6%90%9C%E7%B4%A2%E6%97%8B%E8%BD%AC%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84/</link>
+      <pubDate>Thu, 09 Jul 2020 10:50:00 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E6%90%9C%E7%B4%A2%E6%97%8B%E8%BD%AC%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84/</guid>
+      <description>问题描述 在一个有序旋转数组中查找一个数。 有序旋转数组指的是从有序数组中选择一个位置，颠倒前后两部分形成的数组。 时间复杂度为O(logn) https://leetcode-cn.com/problems/search-in-rotated-sorted-array/ #</description>
+    </item>
+    
+    <item>
+      <title>三数之和</title>
+      <link>http://localhost:1313/post/%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/</link>
+      <pubDate>Thu, 09 Jul 2020 07:45:30 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/</guid>
+      <description>问题描述 从一个整数数组中找出所有的和为0的不重复的三元组。 https://leetcode-cn.com/problems/3sum/ 解题思路 首先想到的是“组合之和”这种解题思路，但是这种解题思路的复杂度太高了。 其</description>
+    </item>
+    
+    <item>
+      <title>最长连续序列</title>
+      <link>http://localhost:1313/post/%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E5%BA%8F%E5%88%97/</link>
+      <pubDate>Sat, 06 Jun 2020 10:53:45 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E5%BA%8F%E5%88%97/</guid>
+      <description>Leecode-128 https://leetcode-cn.com/problems/longest-consecutive-sequence/ 问题描述 给定一个未排序的整数数组，找出最长连续序列的长度。 要求时间复杂度为 O(n). 示例: 输入：[100,4,200,1,3,2] 输出：4 解释：</description>
+    </item>
+    
+  </channel>
+</rss>

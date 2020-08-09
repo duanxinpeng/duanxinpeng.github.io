@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Linux命令 - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="段新朋" /><meta name="description" content="常用命令及其参数 find 用于在指定目录查找文件 kill 用于删除执行中的任务 export [-fnp][变量名称]=[变量设置值] 用于设置或显示环境变量 top 用于实时显示" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.72.0 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/linux%E5%91%BD%E4%BB%A4/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Linux命令" />
+<meta property="og:description" content="常用命令及其参数 find 用于在指定目录查找文件 kill 用于删除执行中的任务 export [-fnp][变量名称]=[变量设置值] 用于设置或显示环境变量 top 用于实时显示" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/linux%E5%91%BD%E4%BB%A4/" />
+<meta property="article:published_time" content="2020-06-06T08:37:13+08:00" />
+<meta property="article:modified_time" content="2020-06-06T08:37:13+08:00" />
+<meta itemprop="name" content="Linux命令">
+<meta itemprop="description" content="常用命令及其参数 find 用于在指定目录查找文件 kill 用于删除执行中的任务 export [-fnp][变量名称]=[变量设置值] 用于设置或显示环境变量 top 用于实时显示">
+<meta itemprop="datePublished" content="2020-06-06T08:37:13&#43;08:00" />
+<meta itemprop="dateModified" content="2020-06-06T08:37:13&#43;08:00" />
+<meta itemprop="wordCount" content="936">
+
+
+
+<meta itemprop="keywords" content="Linux," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Linux命令"/>
+<meta name="twitter:description" content="常用命令及其参数 find 用于在指定目录查找文件 kill 用于删除执行中的任务 export [-fnp][变量名称]=[变量设置值] 用于设置或显示环境变量 top 用于实时显示"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">NeverDoubt</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">NeverDoubt</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Linux命令</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-06-06 </span>
+        <div class="post-category">
+            <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"> 操作系统 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#常用命令及其参数">常用命令及其参数</a>
+      <ul>
+        <li><a href="#find-用于在指定目录查找文件">find 用于在指定目录查找文件</a></li>
+        <li><a href="#kill-用于删除执行中的任务">kill 用于删除执行中的任务</a></li>
+        <li><a href="#export--fnp变量名称变量设置值-用于设置或显示环境变量">export [-fnp][变量名称]=[变量设置值] 用于设置或显示环境变量</a></li>
+        <li><a href="#top--用于实时显示进程动态例如查看进程占用内存cpu资源等">top  用于实时显示进程动态，例如查看进程占用内存、CPU资源等</a></li>
+        <li><a href="#free-用于显示内存状态">free 用于显示内存状态</a></li>
+        <li><a href="#ps--用于显示当前进程的状态">ps  用于显示当前进程的状态</a></li>
+        <li><a href="#jobs-用于查看当前终端后台运行的任务查看工作号n">jobs 用于查看当前终端后台运行的任务（查看工作号n）</a></li>
+        <li><a href="#命令后面跟--用于将命令在后台执行">命令后面跟 &amp; 用于将命令在后台执行</a></li>
+        <li><a href="#kbdctrlkbdkbdzkbd-用于将当前正在运行的前台进程暂停并变成后台进程"><!-- raw HTML omitted -->Ctrl<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Z<!-- raw HTML omitted --> 用于将当前正在运行的前台进程暂停，并变成后台进程</a></li>
+        <li><a href="#bg-n-用于将后台暂停的进程继续运行">bg [%n] 用于将后台暂停的进程继续运行</a></li>
+        <li><a href="#fg-n-用于将后台执行的进程变成前台进程">fg [%n] 用于将后台执行的进程变成前台进程</a></li>
+        <li><a href="#kill-n-用于杀掉指定的任务">kill %n 用于杀掉指定的任务</a></li>
+        <li><a href="#wc--clw--help--version文件-用于计算字数">wc [-clw][&ndash;help][&ndash;version][文件&hellip;] 用于计算字数</a></li>
+        <li><a href="#grep--abcefghhillnqrsvvwxy-a显示列数-b显示列数-c显示列数-d进行动作-e范本样式-f范本文件--help范本样式文件或目录">grep [-abcEFGhHilLnqrsvVwxy][-A&lt;显示列数&gt;][-B&lt;显示列数&gt;][-C&lt;显示列数&gt;][-d&lt;进行动作&gt;][-e&lt;范本样式&gt;][-f&lt;范本文件&gt;][&ndash;help][范本样式][文件或目录&hellip;]</a></li>
+        <li><a href="#chmod-件调用权限分为三级--文件拥有者群组其他利用-chmod-可以藉以控制文件如何被他人所调用">chmod 件调用权限分为三级 : 文件拥有者、群组、其他。利用 chmod 可以藉以控制文件如何被他人所调用。</a></li>
+        <li><a href="#netstat-用于显示网络状态">netstat 用于显示网络状态</a></li>
+        <li><a href="#ab-以a的输出作为b的输入">A|B 以A的输出作为B的输入</a></li>
+      </ul>
+    </li>
+    <li><a href="#常见面试题">常见面试题</a>
+      <ul>
+        <li><a href="#kill--9-和-kill的区别">kill -9 和 kill的区别</a></li>
+        <li><a href="#查看端口占用情况--netstat--anp--grep-端口号">查看端口占用情况  netstat -anp | grep 端口号</a></li>
+        <li><a href="#查询文件中某个单词出现的次数-cat-filegrep--o-python--wc--l">查询文件中某个单词出现的次数 cat file|grep -o python | wc -l</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="常用命令及其参数">常用命令及其参数</h2>
+<h3 id="find-用于在指定目录查找文件">find 用于在指定目录查找文件</h3>
+<h3 id="kill-用于删除执行中的任务">kill 用于删除执行中的任务</h3>
+<h3 id="export--fnp变量名称变量设置值-用于设置或显示环境变量">export [-fnp][变量名称]=[变量设置值] 用于设置或显示环境变量</h3>
+<h3 id="top--用于实时显示进程动态例如查看进程占用内存cpu资源等">top  用于实时显示进程动态，例如查看进程占用内存、CPU资源等</h3>
+<h3 id="free-用于显示内存状态">free 用于显示内存状态</h3>
+<h3 id="ps--用于显示当前进程的状态">ps  用于显示当前进程的状态</h3>
+<h3 id="jobs-用于查看当前终端后台运行的任务查看工作号n">jobs 用于查看当前终端后台运行的任务（查看工作号n）</h3>
+<h3 id="命令后面跟--用于将命令在后台执行">命令后面跟 &amp; 用于将命令在后台执行</h3>
+<h3 id="kbdctrlkbdkbdzkbd-用于将当前正在运行的前台进程暂停并变成后台进程"><!-- raw HTML omitted -->Ctrl<!-- raw HTML omitted -->+<!-- raw HTML omitted -->Z<!-- raw HTML omitted --> 用于将当前正在运行的前台进程暂停，并变成后台进程</h3>
+<h3 id="bg-n-用于将后台暂停的进程继续运行">bg [%n] 用于将后台暂停的进程继续运行</h3>
+<h3 id="fg-n-用于将后台执行的进程变成前台进程">fg [%n] 用于将后台执行的进程变成前台进程</h3>
+<h3 id="kill-n-用于杀掉指定的任务">kill %n 用于杀掉指定的任务</h3>
+<h3 id="wc--clw--help--version文件-用于计算字数">wc [-clw][&ndash;help][&ndash;version][文件&hellip;] 用于计算字数</h3>
+<ol>
+<li>-c或&ndash;bytes或&ndash;chars 只显示Bytes数。</li>
+<li>-l或&ndash;lines 只显示行数。</li>
+<li>-w或&ndash;words 只显示字数。</li>
+</ol>
+<h3 id="grep--abcefghhillnqrsvvwxy-a显示列数-b显示列数-c显示列数-d进行动作-e范本样式-f范本文件--help范本样式文件或目录">grep [-abcEFGhHilLnqrsvVwxy][-A&lt;显示列数&gt;][-B&lt;显示列数&gt;][-C&lt;显示列数&gt;][-d&lt;进行动作&gt;][-e&lt;范本样式&gt;][-f&lt;范本文件&gt;][&ndash;help][范本样式][文件或目录&hellip;]</h3>
+<ol>
+<li><strong>grep test *file</strong> 在当前目录中，查找后缀有file字样的文件中包含test字符的文件，并打印处该字符的行。</li>
+<li><strong>grep -r update /etc/acpi</strong> 以递归的方式查询符合条件的文件</li>
+<li><strong>grep -v test *file</strong> 反向查找，打印出不含test的行</li>
+<li><strong>grep -o test *file</strong> 只显示匹配的那部分，而不是打印一行</li>
+</ol>
+<h3 id="chmod-件调用权限分为三级--文件拥有者群组其他利用-chmod-可以藉以控制文件如何被他人所调用">chmod 件调用权限分为三级 : 文件拥有者、群组、其他。利用 chmod 可以藉以控制文件如何被他人所调用。</h3>
+<ol>
+<li>chmod 777 file ：777 三个数字分别代表拥有者、群组、其他，r=4代表读取，w=2代表写入，x=1代表执行，所以这条命令意思是所有用户都用于读、写、执行的权力！</li>
+</ol>
+<h3 id="netstat-用于显示网络状态">netstat 用于显示网络状态</h3>
+<ol>
+<li>-a 用于显示所有连线中的socket</li>
+<li>-t 显示TCP传输协议的连线情况</li>
+<li>-u 显示UDP传输协议的连线情况</li>
+<li>-p 显示正在使用Socket的程序识别码和程序名称</li>
+<li>-i 显示网卡列表</li>
+</ol>
+<h3 id="ab-以a的输出作为b的输入">A|B 以A的输出作为B的输入</h3>
+<ol>
+<li>cat file|head -n 10 查看file文件的前10行内容</li>
+</ol>
+<h2 id="常见面试题">常见面试题</h2>
+<h3 id="kill--9-和-kill的区别">kill -9 和 kill的区别</h3>
+<p>kill 命令可能会被阻塞，kill -9命令会直接杀死进程；</p>
+<h3 id="查看端口占用情况--netstat--anp--grep-端口号">查看端口占用情况  netstat -anp | grep 端口号</h3>
+<h3 id="查询文件中某个单词出现的次数-cat-filegrep--o-python--wc--l">查询文件中某个单词出现的次数 cat file|grep -o python | wc -l</h3>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">段新朋</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2020-06-06
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/linux/">Linux</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E5%BA%8F%E5%88%97/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">最长连续序列</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/enigma%E5%AF%86%E7%A0%81%E6%9C%BA/">
+            <span class="next-text nav-default">Enigma密码机</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/duanxinpeng" class="iconfont icon-github" title="github"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author"></span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      TeX: {equationNumbers: {autoNumber: "AMS"}},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

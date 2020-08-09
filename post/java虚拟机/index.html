@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Java虚拟机 - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="段新朋" /><meta name="description" content="JVM组成 类加载器 运行时数据区 执行引擎 本地接口库 类加载器 JVM把描述类的数据从二进制字节码文件加载到内存，并对数据进行校验、转换解析和初始化" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.72.0 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/java%E8%99%9A%E6%8B%9F%E6%9C%BA/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Java虚拟机" />
+<meta property="og:description" content="JVM组成 类加载器 运行时数据区 执行引擎 本地接口库 类加载器 JVM把描述类的数据从二进制字节码文件加载到内存，并对数据进行校验、转换解析和初始化" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/java%E8%99%9A%E6%8B%9F%E6%9C%BA/" />
+<meta property="article:published_time" content="2020-07-13T15:38:32+08:00" />
+<meta property="article:modified_time" content="2020-07-13T15:38:32+08:00" />
+<meta itemprop="name" content="Java虚拟机">
+<meta itemprop="description" content="JVM组成 类加载器 运行时数据区 执行引擎 本地接口库 类加载器 JVM把描述类的数据从二进制字节码文件加载到内存，并对数据进行校验、转换解析和初始化">
+<meta itemprop="datePublished" content="2020-07-13T15:38:32&#43;08:00" />
+<meta itemprop="dateModified" content="2020-07-13T15:38:32&#43;08:00" />
+<meta itemprop="wordCount" content="1440">
+
+
+
+<meta itemprop="keywords" content="java," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Java虚拟机"/>
+<meta name="twitter:description" content="JVM组成 类加载器 运行时数据区 执行引擎 本地接口库 类加载器 JVM把描述类的数据从二进制字节码文件加载到内存，并对数据进行校验、转换解析和初始化"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">NeverDoubt</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">NeverDoubt</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Java虚拟机</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-07-13 </span>
+        <div class="post-category">
+            <a href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"> 编程语言 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#jvm组成">JVM组成</a></li>
+    <li><a href="#类加载器">类加载器</a>
+      <ul>
+        <li><a href="#类加载过程">类加载过程</a></li>
+      </ul>
+    </li>
+    <li><a href="#运行时数据区">运行时数据区</a>
+      <ul>
+        <li><a href="#jvm内存模型">JVM内存模型</a></li>
+        <li><a href="#垃圾回收算法">垃圾回收算法</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="jvm组成">JVM组成</h2>
+<ol>
+<li>类加载器</li>
+<li>运行时数据区</li>
+<li>执行引擎</li>
+<li>本地接口库</li>
+</ol>
+<p><img src="/media/jvm.jpg" alt=""></p>
+<p><img src="/media/jvm2.jpg" alt=""></p>
+<h2 id="类加载器">类加载器</h2>
+<p><code>JVM把描述类的数据从二进制字节码文件加载到内存，并对数据进行校验、转换解析和初始化，最终形成可以被虚拟机直接使用的java类型，这个过程被称为虚拟机的类加载机制。</code>
+###分类</p>
+<ol>
+<li>启动类加载器</li>
+<li>扩展类加载器</li>
+<li>应用程序类加载器</li>
+<li>双亲委派模型
+<ul>
+<li>一个类加载器接收到类加载任务，会先交给父类加载器去完成，只有确认父类加载器无法完成加载任务时，才会尝试进行类加载</li>
+<li>类加载器和全限定类名才能确定其在JVM中的唯一性。</li>
+</ul>
+</li>
+</ol>
+<h3 id="类加载过程">类加载过程</h3>
+<ol>
+<li>加载
+<ul>
+<li>通过一个类的全限定类名来获取其定义的二进制字节流</li>
+<li>将这个字节流所代表的静态存储结构转化为方法区的运行时数据结构</li>
+<li>在<code>堆</code>中生成一个代表这个类的Class对象，作为方法区中这些数据的访问入口</li>
+<li>类变量（静态变量）随着 Class 对象一起存放到堆中。</li>
+</ul>
+</li>
+<li>连接
+<ul>
+<li>验证
+<ul>
+<li>确保 Class 文件的字节流中包含的信息符合JVM规范的全部约束要求，确保这些信息被当作代码运行以后不会危害JVM自身。</li>
+</ul>
+</li>
+<li>准备
+<ul>
+<li>正式为类中定义的变量（静态变量）分配内存并设置类变量初始值的阶段（类变量、实例变量、局部变量）</li>
+<li>实例对象会在对象实例化时随着对象一起分配到堆中。</li>
+</ul>
+</li>
+<li>解析
+<ul>
+<li>JVM将常量池内的符号引用替换为直接引用的过程（符号引用：在二进制字节码内定位常量；直接引用：在JVM虚拟机内定位常量）。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>初始化
+<ul>
+<li>执行类构造器方法的过程。</li>
+</ul>
+</li>
+</ol>
+<h2 id="运行时数据区">运行时数据区</h2>
+<h3 id="jvm内存模型">JVM内存模型</h3>
+<ol>
+<li>程序计数器
+<ul>
+<li>当前线程所执行的字节码的行号指示器，控制程序执行流程：分支，循环，跳转，异常处理，线程恢复。</li>
+<li>每条线程都有一个独立的程序计数器，是“线程的私有”内存。</li>
+<li>若执行的是本地（Native）方法，这个计数器的值应该为空</li>
+</ul>
+</li>
+<li>Java虚拟机栈
+<ul>
+<li>描述的是“Java方法执行的线程内存模型”</li>
+<li>也是线程私有的！</li>
+<li>每个方法执行的时候，Java虚拟机都会同步创建一个栈帧用于存储：局部变量表（存放了编译期可知的各种Java虚拟机基本数据类型，对象引用，returnAddress）、操作数栈、动态链接、方法出口等信息。</li>
+</ul>
+</li>
+<li>本地方法栈
+<ul>
+<li>为虚拟机使用到的本地（Native）方法服务。</li>
+</ul>
+</li>
+<li>Java堆
+<ul>
+<li>被所有线程共享</li>
+<li>从分配内存的角度看，所有线程共享的Java堆可以划分出多个线程私有的分配缓冲区（Thread Local Allocation Buffer）（TLAB）</li>
+<li>只存放对象实例。</li>
+<li>逻辑上连续</li>
+<li>字符串常量池</li>
+</ul>
+</li>
+<li>方法区
+<ul>
+<li>线程共享</li>
+<li>用于存储已被虚拟机加载的类型信息、常量、静态变量、即时编译器编译后的代码缓存等数据。</li>
+<li>JDK6之前，永久代是方法区的一种实现，但JDK6之后已经开始逐渐放弃永久代，转用本地内存来实现方法区了。</li>
+<li>JDK8完全放弃永久代的概念，改用在本地内存中实现的元空间（Mate-space）来代替
+<ul>
+<li>永久代容易导致内存溢出问题</li>
+</ul>
+</li>
+<li>运行时常量池、静态常量池保存在元空间中</li>
+<li>字符串常量池保存在堆中！
+<ul>
+<li>字面量：java语言层面的常量概念</li>
+<li>符号引用： 类和接口的全限定类名；字段名称和描述符；方法名和描述符；</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="垃圾回收算法">垃圾回收算法</h3>
+<table>
+<thead>
+<tr>
+<th>收集器</th>
+<th>串行/并行/并发</th>
+<th>新生代/老年代</th>
+<th>算法</th>
+<th>目标</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Serial</td>
+<td>串行</td>
+<td>新生代</td>
+<td>复制算法</td>
+<td>响应速度优先</td>
+<td>单CPU环境下的client模式</td>
+</tr>
+<tr>
+<td>Serial Old</td>
+<td>串行</td>
+<td>老年代</td>
+<td>标记-整理</td>
+<td>响应速度优先</td>
+<td>单CPU环境下的client模式</td>
+</tr>
+<tr>
+<td>Parallel Scavenge</td>
+<td>并行</td>
+<td>新生代</td>
+<td>复制算法</td>
+<td>吞吐量优先</td>
+<td>在后台运算而不需要太多交互的任务</td>
+</tr>
+<tr>
+<td>Parallel Old</td>
+<td>并行</td>
+<td>老年代</td>
+<td>标记-整理</td>
+<td>吞吐量优先</td>
+<td>在后台运算而不需要太多交互的任务</td>
+</tr>
+<tr>
+<td>ParNew</td>
+<td>并行</td>
+<td>新生代</td>
+<td>复制算法</td>
+<td>响应速度优先</td>
+<td>多CPU环境时在Server模式下与CMS配合</td>
+</tr>
+<tr>
+<td>CMS</td>
+<td>并发</td>
+<td>老年代</td>
+<td>标记-清除</td>
+<td>响应速度优先</td>
+<td>集中在互联网站或B/S系统服务端上的java应用</td>
+</tr>
+<tr>
+<td>G1</td>
+<td>并发</td>
+<td>both</td>
+<td>标记-整理+复制算法</td>
+<td>响应速度优先</td>
+<td>面型服务端应用</td>
+</tr>
+</tbody>
+</table>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">段新朋</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2020-07-13
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/java/">java</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/%E8%B7%AF%E5%BE%84%E5%92%8C3/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">路径和3</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/">
+            <span class="next-text nav-default">Java内存模型</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/duanxinpeng" class="iconfont icon-github" title="github"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author"></span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      TeX: {equationNumbers: {autoNumber: "AMS"}},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Graph on Even - A super concise theme for Hugo</title>
+    <link>http://localhost:1313/tags/graph/</link>
+    <description>Recent content in Graph on Even - A super concise theme for Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 03 Aug 2020 11:57:23 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/graph/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>最短路径算法</title>
+      <link>http://localhost:1313/post/%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E7%AE%97%E6%B3%95/</link>
+      <pubDate>Mon, 03 Aug 2020 11:57:23 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E7%AE%97%E6%B3%95/</guid>
+      <description>Dijkstra 算法流程 用一个数组 dist 存储每个节点到 source 的距离; source 初始化为0，其他初始化为 Integer.MAX_VALUE; 从 dist 中选出距离最短的那个节点 N（这意味着节点 N 的最短距离已经求出来</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>二叉树 on Even - A super concise theme for Hugo</title>
+    <link>http://localhost:1313/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/</link>
+    <description>Recent content in 二叉树 on Even - A super concise theme for Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 20 Jul 2020 18:56:11 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>打家劫舍</title>
+      <link>http://localhost:1313/post/%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8D/</link>
+      <pubDate>Mon, 20 Jul 2020 18:56:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8D/</guid>
+      <description>打家劫舍 给定一个数组，求数组中不相邻元素的最大和。 https://leetcode-cn.com/problems/house-robber/ 简单动态规划 打家劫舍Ⅱ 数组头和数组尾被视为相邻，求这种情况下数组中不相邻元素的最大和。 https://leetcode-cn.com/problems/house-robber-ii/</description>
+    </item>
+    
+    <item>
+      <title>路径和3</title>
+      <link>http://localhost:1313/post/%E8%B7%AF%E5%BE%84%E5%92%8C3/</link>
+      <pubDate>Wed, 15 Jul 2020 20:45:39 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E8%B7%AF%E5%BE%84%E5%92%8C3/</guid>
+      <description>问题描述 给定一棵在每个节点都存放着一个整数值的二叉树，找出路径和等于给定数值的路径总数。路径不需要从根节点开始，也不需要在叶子节点结束，但是</description>
+    </item>
+    
+    <item>
+      <title>把二叉树转换为累加树</title>
+      <link>http://localhost:1313/post/%E6%8A%8A%E4%BA%8C%E5%8F%89%E6%A0%91%E8%BD%AC%E6%8D%A2%E4%B8%BA%E7%B4%AF%E5%8A%A0%E6%A0%91/</link>
+      <pubDate>Sun, 12 Jul 2020 17:40:39 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E6%8A%8A%E4%BA%8C%E5%8F%89%E6%A0%91%E8%BD%AC%E6%8D%A2%E4%B8%BA%E7%B4%AF%E5%8A%A0%E6%A0%91/</guid>
+      <description>问题描述 https://leetcode-cn.com/problems/convert-bst-to-greater-tree/ 思路 中序遍历而已，只不过要先遍历右子树！</description>
+    </item>
+    
+    <item>
+      <title>二叉树的直径</title>
+      <link>http://localhost:1313/post/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E7%9B%B4%E5%BE%84/</link>
+      <pubDate>Sun, 12 Jul 2020 17:26:23 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E7%9B%B4%E5%BE%84/</guid>
+      <description>问题描述 给定一颗二叉树，返回其直径 https://leetcode-cn.com/problems/diameter-of-binary-tree/ 收获 优化该问题的关键在于同时利用dfs的返回值以及在dfs过程中对一个全局变量进行设置这两种dfs的功能</description>
+    </item>
+    
+    <item>
+      <title>二叉树的最近公共祖先</title>
+      <link>http://localhost:1313/post/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88/</link>
+      <pubDate>Sat, 11 Jul 2020 16:17:22 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88/</guid>
+      <description>问题描述 给定一颗二叉树，找到该树种两个指定节点p和q的最近公共祖先 https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/ 我的思路 从root开始，一次判断每个节点是否同时包含节点p，q，重点是同</description>
+    </item>
+    
+    <item>
+      <title>二叉树中的最大路径和</title>
+      <link>http://localhost:1313/post/%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%AD%E7%9A%84%E6%9C%80%E5%A4%A7%E8%B7%AF%E5%BE%84%E5%92%8C/</link>
+      <pubDate>Thu, 09 Jul 2020 06:41:20 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%AD%E7%9A%84%E6%9C%80%E5%A4%A7%E8%B7%AF%E5%BE%84%E5%92%8C/</guid>
+      <description>题目描述 类似于从数组中找到最大子数组。 不同于寻找二叉树的最大直径。 https://leetcode-cn.com/problems/binary-tree-maximum-path-sum/ 思路 首先转换为寻找每个节点的最大贡献值：即以该节点为起点的最大路径和，这</description>
+    </item>
+    
+    <item>
+      <title>二叉树展开为链表</title>
+      <link>http://localhost:1313/post/%E4%BA%8C%E5%8F%89%E6%A0%91%E5%B1%95%E5%BC%80%E4%B8%BA%E9%93%BE%E8%A1%A8/</link>
+      <pubDate>Wed, 08 Jul 2020 17:16:28 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E4%BA%8C%E5%8F%89%E6%A0%91%E5%B1%95%E5%BC%80%E4%B8%BA%E9%93%BE%E8%A1%A8/</guid>
+      <description>问题描述 将一颗二叉树以先序遍历的顺序展开为一个单链表。 其本质上是将二叉树扁平化，变为一颗只有右子树的二叉树。 https://leetcode-cn.com/problems/flatten-binary-tree-to-linked-list/ 实现 如果左子树为空则不需要修改</description>
+    </item>
+    
+    <item>
+      <title>二叉树最大深度</title>
+      <link>http://localhost:1313/post/%E4%BA%8C%E5%8F%89%E6%A0%91%E6%9C%80%E5%A4%A7%E6%B7%B1%E5%BA%A6/</link>
+      <pubDate>Wed, 08 Jul 2020 15:37:59 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E4%BA%8C%E5%8F%89%E6%A0%91%E6%9C%80%E5%A4%A7%E6%B7%B1%E5%BA%A6/</guid>
+      <description>问题描述 求出二叉搜索树的最大深度，其实可以转换为求最大高度！ https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/ 递归实现 很简单 时间复杂度O(n)， 因为每个节点只遍历一次！ 循环实现 官方答案没看</description>
+    </item>
+    
+    <item>
+      <title>二叉树的层次遍历</title>
+      <link>http://localhost:1313/post/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%82%E6%AC%A1%E9%81%8D%E5%8E%86/</link>
+      <pubDate>Wed, 08 Jul 2020 15:18:33 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%82%E6%AC%A1%E9%81%8D%E5%8E%86/</guid>
+      <description>问题描述 层次遍历 层与层之间分开 https://leetcode-cn.com/problems/binary-tree-level-order-traversal/ 分析 层次遍历很简单，只需要一个队列就可以完成。 层与层之间分开是参考的官方解法：每次循环之前都求一下queue</description>
+    </item>
+    
+    <item>
+      <title>二叉树的中序遍历</title>
+      <link>http://localhost:1313/post/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86/</link>
+      <pubDate>Mon, 06 Jul 2020 16:01:12 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86/</guid>
+      <description>递归实现 https://leetcode-cn.com/problems/binary-tree-inorder-traversal/submissions/ 非递归实现 https://leetcode-cn.com/problems/binary-tree-inorder-traversal/submissions/ 非递归实现的关键在于理清楚在递归实现过程中的入栈、出栈情况；</description>
+    </item>
+    
+  </channel>
+</rss>

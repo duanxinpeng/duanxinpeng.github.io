@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>拓扑排序 on Even - A super concise theme for Hugo</title>
+    <link>http://localhost:1313/tags/%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F/</link>
+    <description>Recent content in 拓扑排序 on Even - A super concise theme for Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 10 Jul 2020 20:10:04 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>课程表</title>
+      <link>http://localhost:1313/post/%E8%AF%BE%E7%A8%8B%E8%A1%A8/</link>
+      <pubDate>Fri, 10 Jul 2020 20:10:04 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E8%AF%BE%E7%A8%8B%E8%A1%A8/</guid>
+      <description>问题描述 给定课程总量以及他们的先决条件，请判断是否可能完成所有课程的学习。 https://leetcode-cn.com/problems/course-schedule/ 思路 死脑筋啊，题目说先决条件是边缘列表而不是邻接矩阵，我就觉得没</description>
+    </item>
+    
+  </channel>
+</rss>

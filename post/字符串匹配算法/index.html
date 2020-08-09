@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>字符串匹配算法 - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="段新朋" /><meta name="description" content="问题描述 给定一个主字符串 text 和一个模式字符串 pattern，返回字符串 text 中和字符串 pattern 相同的子串的起始位置。 实现方法 BR暴力法 先找到和 s 中和 p 的" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.72.0 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D%E7%AE%97%E6%B3%95/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="字符串匹配算法" />
+<meta property="og:description" content="问题描述 给定一个主字符串 text 和一个模式字符串 pattern，返回字符串 text 中和字符串 pattern 相同的子串的起始位置。 实现方法 BR暴力法 先找到和 s 中和 p 的" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D%E7%AE%97%E6%B3%95/" />
+<meta property="article:published_time" content="2020-07-24T09:37:19+08:00" />
+<meta property="article:modified_time" content="2020-07-24T09:37:19+08:00" />
+<meta itemprop="name" content="字符串匹配算法">
+<meta itemprop="description" content="问题描述 给定一个主字符串 text 和一个模式字符串 pattern，返回字符串 text 中和字符串 pattern 相同的子串的起始位置。 实现方法 BR暴力法 先找到和 s 中和 p 的">
+<meta itemprop="datePublished" content="2020-07-24T09:37:19&#43;08:00" />
+<meta itemprop="dateModified" content="2020-07-24T09:37:19&#43;08:00" />
+<meta itemprop="wordCount" content="1608">
+
+
+
+<meta itemprop="keywords" content="字符串," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="字符串匹配算法"/>
+<meta name="twitter:description" content="问题描述 给定一个主字符串 text 和一个模式字符串 pattern，返回字符串 text 中和字符串 pattern 相同的子串的起始位置。 实现方法 BR暴力法 先找到和 s 中和 p 的"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">NeverDoubt</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">NeverDoubt</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">字符串匹配算法</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-07-24 </span>
+        <div class="post-category">
+            <a href="/categories/%E7%AE%97%E6%B3%95/"> 算法 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#问题描述">问题描述</a></li>
+    <li><a href="#实现方法">实现方法</a>
+      <ul>
+        <li><a href="#br暴力法">BR暴力法</a></li>
+        <li><a href="#rk算法">RK算法</a></li>
+        <li><a href="#bm-算法">BM 算法</a></li>
+        <li><a href="#kmp-算法">KMP 算法</a></li>
+        <li><a href="#sunday-算法">Sunday 算法</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="问题描述">问题描述</h2>
+<p><code>给定一个主字符串 text 和一个模式字符串 pattern，返回字符串 text 中和字符串 pattern 相同的子串的起始位置</code>。</p>
+<h2 id="实现方法">实现方法</h2>
+<h3 id="br暴力法">BR暴力法</h3>
+<ol>
+<li>先找到和 s 中和 p 的第一个字符相等的字符的位置</li>
+<li>从步骤 1 返回的位置开始，判断 s 中从此处开始的子串能否与 p 完全匹配</li>
+<li>步骤 2 的判断方法是逐个字符进行比较，采用java 的 equals() 方法并不能优化时间复杂度，因为 equals 的底层实现依然是逐字符比较。</li>
+<li>java 的 indexOf 采用的就是这种方法。</li>
+</ol>
+<h3 id="rk算法">RK算法</h3>
+<ol>
+<li>RK 算法是对BR暴力实现的一种优化，优化的方式是加快模式串的比较，而不是加快模式串的移动！</li>
+<li>通过为模式串以及主串中和模式串等长的子串生成 hashcode，进而通过比较 hashcode 来确定两个字符串是否相等。如果不相等再进行逐字符的比较。</li>
+<li>在此算法中，最重要的就是哈希函数的选择
+<ul>
+<li>必须采用滚动哈希，从而将每次哈希值的生成的复杂度将为1.</li>
+<li>主要利用了 Rabin fingerprint 的思想。</li>
+<li>计算字符串 $t[0,m-1]$ 的哈希值的公式：$Hash(t[0,m-1]) = t[0]*b^{m-1} + t[1]*b^{m-2}+&hellip;+t[m-1]*b^0 (t[0]表示该字符的ASCII码,b是一个常数，取值256)$</li>
+<li>那么计算 t[1,m] 的哈希值公式为：$Hash(t[1,m]) = (Hash(t[0,m-1])-t[0]*b^{m-1})*b + t[m]*b^0$</li>
+<li>同时为了防止溢出，还需要对其取模，这个值应该是尽可能大的质数，可以取 101.</li>
+</ul>
+</li>
+<li>代码
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">//Rabin-Karp
+final int BASE = 256;
+final int MODULES = 101;
+
+public int rabinKarp(String text, String pattern) {
+    int tLen = text.length();
+    int pLen = pattern.length();
+    int tHash = 0;
+    int pHash = 0;
+    for (int i = 0; i &lt; pLen; i++) {
+        tHash = (BASE * tHash + text.charAt(i)) % MODULES;
+        pHash = (BASE * pHash + pattern.charAt(i)) % MODULES;
+    }
+    // 作滚动哈希用
+    int h = 1;
+    for (int i = 0; i &lt; pLen - 1; i++) {
+        h = (h * BASE) % MODULES;
+    }
+    int i = 0;
+    while (i &lt;= tLen - pLen) {
+        //先通过哈希值比较，再通过 equals 方法进行比较
+        if (tHash == pHash &amp;&amp; pattern.equals(text.substring(i, i + pLen)))
+            return i;
+        //比较失败，生成下一个哈希值
+        if (i &lt; tLen - pLen)
+            tHash = (BASE * (tHash + MODULES - text.charAt(i) * h ) + text.charAt(i + pLen)) % MODULES;
+
+        //防止出现负数？？？？？
+        if (tHash &lt; 0) {
+            tHash = tHash + MODULES;
+        }
+        i++;
+    }
+    return -1;
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>``</p>
+</li>
+<li>reference
+<ul>
+<li><a href="https://en.jinzhao.wiki/wiki/Rabin%E2%80%93Karp_algorithm">https://en.jinzhao.wiki/wiki/Rabin%E2%80%93Karp_algorithm</a></li>
+<li><a href="https://ethsonliu.com/2019/12/rabin-karp.html">https://ethsonliu.com/2019/12/rabin-karp.html</a></li>
+</ul>
+</li>
+</ol>
+<h3 id="bm-算法">BM 算法</h3>
+<ol>
+<li>模式串的比较<code>从右到左</code>，模式串的移动<code>从左到右</code>！</li>
+<li>是对<code>后缀匹配</code>暴力算法的改进。</li>
+<li>为了实现更快移动模式串，定义了<code>坏字符</code>和<code>好后缀</code>两个规则，移动模式串时不再是简单的 $j++$， 而是 $j+max(shift(好后缀),shitf(坏字符))$。
+<ul>
+<li>坏字符
+<ul>
+<li>从后向前比，主串中第一个和模式串不匹配的字符被称为坏字符。</li>
+<li>找到坏字符之后，将模式串向后移动，直到模式串中与坏字符相同的字符移动到与坏字符相同的位置为止</li>
+<li>如果模式串中没有和坏字符相同的字符，就会将模式串整个移动到坏字符之后。</li>
+</ul>
+</li>
+<li>好后缀
+<ul>
+<li>好后缀指的是模式串和子串当中相匹配的后缀。</li>
+<li>如果模式串中包含好后缀，就将模式串中的好后缀与主串中的好后缀对齐</li>
+<li>如果没有好后缀，则需要确定既是好后缀又是patter的前缀的最长子串的长度</li>
+<li>如果以上两种情况都没有，直接将pattern向后移动pattern.length。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>代码
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">public void preBc(int[] bmBc, String pattern) {
+    int m = pattern.length();
+    int num = bmBc.length;
+    for (int i = 0; i &lt; num; i++) {
+        bmBc[i] = m;
+    }
+    for (int i = 0; i &lt; m; i++) {
+        bmBc[pattern.charAt(i)] = m - 1 - i;
+    }
+}
+
+public void suffiOld(String pattern, int[] suff) {
+    int m = pattern.length();
+    suff[m - 1] = m;
+    for (int i = m - 2; i &gt;= 0; i--) {
+        int j = i;
+        while (j &gt;= 0 &amp;&amp; pattern.charAt(j) == pattern.charAt(m - 1 - i + j))
+            j--;
+        suff[i] = i - j;
+    }
+}
+
+public void suffix(String pattern, int[] suff) {
+    int m = pattern.length();
+    suff[m - 1] = m;
+    int g = m - 1, f = 0;
+    for (int i = m - 2; i &gt;= 0; i--) {
+        if (i &gt; g &amp;&amp; suff[i + m - 1 - f] &lt; i - g) {
+            suff[i] = suff[i + m - 1 - f];
+        } else {
+            if (i &lt; g)
+                g = i;
+            f = i;
+            while (g &gt;= 0 &amp;&amp; pattern.charAt(g) == pattern.charAt(g + m - 1 - f))
+                g--;
+            suff[i] = f - g;
+        }
+    }
+}
+
+public void preBmGs(String pattern, int[] bmGs) {
+    int m = pattern.length();
+    int[] suff = new int[m];
+    suffix(pattern, suff);
+    //case 3
+    for (int i = 0; i &lt; m; i++) {
+        bmGs[i] = m;
+    }
+    //case 2
+    for (int i = m - 1; i &gt;= 0; i--) {
+        if (suff[i] == i + 1) {
+            for (int j = 0; j &lt; m - 1; j++) {
+                if (bmGs[j] == m)
+                    bmGs[j] = m - 1 - j;
+            }
+        }
+    }
+    //case 1
+    for (int i = 0; i &lt;= m - 2; i++) {
+        bmGs[m - 1 - suff[i]] = m - 1 - i;
+    }
+}
+
+public int BoyerMoore(String pattern, String text) {
+    int m = pattern.length();
+    int n = text.length();
+    int[] bmBc = new int[256];
+    int[] bmGs = new int[m];
+    preBc(bmBc, pattern);
+    preBmGs(pattern, bmGs);
+    int j = 0;
+    while (j &lt;= n - m) {
+        int i;
+        for (i = m - 1; i &gt;= 0 &amp;&amp; pattern.charAt(i) == text.charAt(i + j); i--) ;
+        if (i &lt; 0) {
+            return j;
+        } else {
+            j += Math.max(bmBc[text.charAt(i + j)] - m + 1 + i, bmGs[i]);
+        }
+    }
+    return -1;
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>``</p>
+</li>
+<li>reference
+<ul>
+<li><a href="https://www.cnblogs.com/lanxuezaipiao/p/3452579.html">https://www.cnblogs.com/lanxuezaipiao/p/3452579.html</a></li>
+<li><a href="http://www-igm.univ-mlv.fr/~lecroq/string/node14.html">http://www-igm.univ-mlv.fr/~lecroq/string/node14.html</a></li>
+<li><a href="http://www.cs.utexas.edu/users/moore/publications/fstrpos.pdf">http://www.cs.utexas.edu/users/moore/publications/fstrpos.pdf</a></li>
+<li><a href="https://www.cnblogs.com/wxgblogs/p/5701101.html">https://www.cnblogs.com/wxgblogs/p/5701101.html</a></li>
+</ul>
+</li>
+</ol>
+<h3 id="kmp-算法">KMP 算法</h3>
+<ol>
+<li>通过更快移动模式串来优化 BR 算法。</li>
+<li>reference
+<ul>
+<li><a href="https://ethsonliu.com/2018/04/kmp.html">https://ethsonliu.com/2018/04/kmp.html</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2013/05/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm.html">http://www.ruanyifeng.com/blog/2013/05/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm.html</a></li>
+</ul>
+</li>
+</ol>
+<h3 id="sunday-算法">Sunday 算法</h3>
+<ol>
+<li>reference
+<ul>
+<li><a href="https://ethsonliu.com/2019/08/sunday-algorithm.html">https://ethsonliu.com/2019/08/sunday-algorithm.html</a></li>
+</ul>
+</li>
+</ol>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">段新朋</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2020-07-24
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/">字符串</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/%E6%8E%A5%E9%9B%A8%E6%B0%B4/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">接雨水</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E4%B8%AD%E4%BD%8D%E6%95%B0/">
+            <span class="next-text nav-default">滑动窗口中位数</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/duanxinpeng" class="iconfont icon-github" title="github"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author"></span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      TeX: {equationNumbers: {autoNumber: "AMS"}},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

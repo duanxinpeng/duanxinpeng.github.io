@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>背包问题 on Even - A super concise theme for Hugo</title>
+    <link>http://localhost:1313/tags/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/</link>
+    <description>Recent content in 背包问题 on Even - A super concise theme for Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 18 Jul 2020 08:01:20 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>背包九讲</title>
+      <link>http://localhost:1313/post/%E8%83%8C%E5%8C%85%E4%B9%9D%E8%AE%B2/</link>
+      <pubDate>Sat, 18 Jul 2020 08:01:20 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E8%83%8C%E5%8C%85%E4%B9%9D%E8%AE%B2/</guid>
+      <description>0/1背包 有 N 件物品和一个容量为 V 的背包。每一件物品 i 的体积和价值分别是 $C_i$ 和 $W_i$, 请问将哪些物品装入背包可使价值总和最大？ 状态转移方程：$dp[</description>
+    </item>
+    
+  </channel>
+</rss>

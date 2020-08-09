@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>三次握手 on Even - A super concise theme for Hugo</title>
+    <link>http://localhost:1313/tags/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B/</link>
+    <description>Recent content in 三次握手 on Even - A super concise theme for Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 28 Jun 2020 21:33:07 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>TCP</title>
+      <link>http://localhost:1313/post/tcp/</link>
+      <pubDate>Sun, 28 Jun 2020 21:33:07 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/tcp/</guid>
+      <description>TCP 的特点 面向连接 可靠服务 面向字节流 面向连接 连接就是一对一，当双方都确认对方是谁时，连接就建立起来了， 源IP+源端口号+目标IP+目标端口号就</description>
+    </item>
+    
+  </channel>
+</rss>

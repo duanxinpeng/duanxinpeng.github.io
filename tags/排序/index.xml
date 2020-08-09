@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>排序 on Even - A super concise theme for Hugo</title>
+    <link>http://localhost:1313/tags/%E6%8E%92%E5%BA%8F/</link>
+    <description>Recent content in 排序 on Even - A super concise theme for Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 07 Jul 2020 15:26:33 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/%E6%8E%92%E5%BA%8F/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>链表排序</title>
+      <link>http://localhost:1313/post/%E9%93%BE%E8%A1%A8%E6%8E%92%E5%BA%8F/</link>
+      <pubDate>Tue, 07 Jul 2020 15:26:33 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E9%93%BE%E8%A1%A8%E6%8E%92%E5%BA%8F/</guid>
+      <description>链表排序 https://leetcode-cn.com/problems/insertion-sort-list/submissions/ https://leetcode-cn.com/problems/sort-list/ 插入排序 哑节点的合理运用 链表遍历需要两个指针 插入排序的细节：寻找插入位置有两种情况，一种是在原位置，一种需要位置变动 快速排序 前闭</description>
+    </item>
+    
+  </channel>
+</rss>

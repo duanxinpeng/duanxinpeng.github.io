@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Javas细节 - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="段新朋" /><meta name="description" content="java Queue add/offer add：向队列末尾添加一个元素，若队列已满，则抛出异常 offer：不会抛异常，返回false。 remove/poll remove：移除队列队头元素，若队列" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.72.0 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/java%E7%BB%86%E8%8A%82/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Javas细节" />
+<meta property="og:description" content="java Queue add/offer add：向队列末尾添加一个元素，若队列已满，则抛出异常 offer：不会抛异常，返回false。 remove/poll remove：移除队列队头元素，若队列" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/java%E7%BB%86%E8%8A%82/" />
+<meta property="article:published_time" content="2020-07-20T10:22:53+08:00" />
+<meta property="article:modified_time" content="2020-07-20T10:22:53+08:00" />
+<meta itemprop="name" content="Javas细节">
+<meta itemprop="description" content="java Queue add/offer add：向队列末尾添加一个元素，若队列已满，则抛出异常 offer：不会抛异常，返回false。 remove/poll remove：移除队列队头元素，若队列">
+<meta itemprop="datePublished" content="2020-07-20T10:22:53&#43;08:00" />
+<meta itemprop="dateModified" content="2020-07-20T10:22:53&#43;08:00" />
+<meta itemprop="wordCount" content="2466">
+
+
+
+<meta itemprop="keywords" content="java," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Javas细节"/>
+<meta name="twitter:description" content="java Queue add/offer add：向队列末尾添加一个元素，若队列已满，则抛出异常 offer：不会抛异常，返回false。 remove/poll remove：移除队列队头元素，若队列"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">NeverDoubt</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">NeverDoubt</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Javas细节</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-07-20 </span>
+        <div class="post-category">
+            <a href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"> 编程语言 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#java-queue">java Queue</a></li>
+    <li><a href="#形参实参">形参/实参</a></li>
+    <li><a href="#泛型">泛型</a></li>
+    <li><a href="#concurrenthashmap-的-get-方法为什么不需要加锁">ConcurrentHashMap 的 get 方法为什么不需要加锁</a></li>
+    <li><a href="#concurrenthashmap-的-putval-是如何做的">ConcurrentHashMap 的 putVal 是如何做的？</a></li>
+    <li><a href="#hashmap的扰动函数的作用">HashMap的扰动函数的作用？</a></li>
+    <li><a href="#hashmap-的-rehash-与-redis-的-rehash-有什么不同">HashMap 的 rehash 与 redis 的 rehash 有什么不同？</a></li>
+    <li><a href="#concurrenthashmapjdk8的多线程协同-rehash-是怎么回事">ConcurrentHashMap（jdk8）的多线程协同 rehash 是怎么回事?</a></li>
+    <li><a href="#为什么hashmap-允许-keyvalue-为-null但concurrenthashmap不允许">为什么HashMap 允许 key/value 为 null，但ConcurrentHashMap不允许？</a></li>
+    <li><a href="#java类名是否允许相同比如和jdk中某个类相同">java类名是否允许相同？比如和jdk中某个类相同？</a></li>
+    <li><a href="#lambda-表达式">lambda 表达式</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="java-queue">java Queue</h2>
+<ol>
+<li>add/offer
+<ul>
+<li>add：向队列末尾添加一个元素，若队列已满，则抛出异常</li>
+<li>offer：不会抛异常，返回false。</li>
+</ul>
+</li>
+<li>remove/poll
+<ul>
+<li>remove：移除队列队头元素，若队列为空，则抛出异常</li>
+<li>poll：不抛出异常，返回null</li>
+</ul>
+</li>
+<li>element/peek
+<ul>
+<li>element：查询队列头部元素，若队列为空，则抛出异常</li>
+<li>peek：不会抛出异常，返回null</li>
+</ul>
+</li>
+</ol>
+<h2 id="形参实参">形参/实参</h2>
+<ol>
+<li>用来接收调用该方法时传递的参数。只有在被调用的时候才分配内存空间，一旦调用结束，就释放内存空间。因此仅仅在方法内有效。</li>
+<li>传递给被调用方法的值，预先创建并赋予确定值。</li>
+<li>传值调用：传值调用中传递的参数为基本数据类型，参数视为形参。</li>
+<li>传引用调用：传引用调用中，如果传递的参数是引用数据类型，参数视为实参。在调用的过程中，将实参的地址传递给了形参，形参上的改变都发生在实参上。</li>
+</ol>
+<h2 id="泛型">泛型</h2>
+<ol>
+<li>参数化类型，也就是将类型参数化，可以通过传递参数来设置变量类型。</li>
+<li>ArrayList 默认是Object类型的，所以只要是Object的子类，什么都可以放</li>
+<li>为什么ArrayList的传入参数类型不是Object，而是一个泛型？可以规范传入参数类型，只允许传入某种类型，从而在编译期就发现问题，不要将问题遗留到运行期。</li>
+<li>泛型只有在编译期才有效</li>
+<li>三种用法
+<ul>
+<li>泛型类：在实例化类的时候指明泛型类型</li>
+<li>泛型接口</li>
+<li>泛型方法：在调用方法的时候指明泛型类型</li>
+</ul>
+</li>
+<li><a href="https://www.cnblogs.com/coprince/p/8603492.html">https://www.cnblogs.com/coprince/p/8603492.html</a></li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">GenericTest</span> <span class="o">{</span>
+   <span class="c1">//这个类是个泛型类，在上面已经介绍过
+</span><span class="c1"></span>   <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Generic</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;{</span>     
+        <span class="kd">private</span> <span class="n">T</span> <span class="n">key</span><span class="o">;</span>
+
+        <span class="kd">public</span> <span class="nf">Generic</span><span class="o">(</span><span class="n">T</span> <span class="n">key</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">key</span> <span class="o">=</span> <span class="n">key</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="c1">//我想说的其实是这个，虽然在方法中使用了泛型，但是这并不是一个泛型方法。
+</span><span class="c1"></span>        <span class="c1">//这只是类中一个普通的成员方法，只不过他的返回值是在声明泛型类已经声明过的泛型。
+</span><span class="c1"></span>        <span class="c1">//所以在这个方法中才可以继续使用 T 这个泛型。
+</span><span class="c1"></span>        <span class="kd">public</span> <span class="n">T</span> <span class="nf">getKey</span><span class="o">(){</span>
+            <span class="k">return</span> <span class="n">key</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="cm">/**
+</span><span class="cm">         * 这个方法显然是有问题的，在编译器会给我们提示这样的错误信息&#34;cannot reslove symbol E&#34;
+</span><span class="cm">         * 因为在类的声明中并未声明泛型E，所以在使用E做形参和返回值类型时，编译器会无法识别。
+</span><span class="cm">        public E setKey(E key){
+</span><span class="cm">             this.key = keu
+</span><span class="cm">        }
+</span><span class="cm">        */</span>
+    <span class="o">}</span>
+
+    <span class="cm">/** 
+</span><span class="cm">     * 这才是一个真正的泛型方法。
+</span><span class="cm">     * 首先在public与返回值之间的&lt;T&gt;必不可少，这表明这是一个泛型方法，并且声明了一个泛型T
+</span><span class="cm">     * 这个T可以出现在这个泛型方法的任意位置.
+</span><span class="cm">     * 泛型的数量也可以为任意多个 
+</span><span class="cm">     *    如：public &lt;T,K&gt; K showKeyName(Generic&lt;T&gt; container){
+</span><span class="cm">     *        ...
+</span><span class="cm">     *        }
+</span><span class="cm">     */</span>
+    <span class="kd">public</span> <span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">T</span> <span class="nf">showKeyName</span><span class="o">(</span><span class="n">Generic</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">container</span><span class="o">){</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;container key :&#34;</span> <span class="o">+</span> <span class="n">container</span><span class="o">.</span><span class="na">getKey</span><span class="o">());</span>
+        <span class="c1">//当然这个例子举的不太合适，只是为了说明泛型方法的特性。
+</span><span class="c1"></span>        <span class="n">T</span> <span class="n">test</span> <span class="o">=</span> <span class="n">container</span><span class="o">.</span><span class="na">getKey</span><span class="o">();</span>
+        <span class="k">return</span> <span class="n">test</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="c1">//这也不是一个泛型方法，这就是一个普通的方法，只是使用了Generic&lt;Number&gt;这个泛型类做形参而已。
+</span><span class="c1"></span>    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">showKeyValue1</span><span class="o">(</span><span class="n">Generic</span><span class="o">&lt;</span><span class="n">Number</span><span class="o">&gt;</span> <span class="n">obj</span><span class="o">){</span>
+        <span class="n">Log</span><span class="o">.</span><span class="na">d</span><span class="o">(</span><span class="s">&#34;泛型测试&#34;</span><span class="o">,</span><span class="s">&#34;key value is &#34;</span> <span class="o">+</span> <span class="n">obj</span><span class="o">.</span><span class="na">getKey</span><span class="o">());</span>
+    <span class="o">}</span>
+
+    <span class="c1">//这也不是一个泛型方法，这也是一个普通的方法，只不过使用了泛型通配符?
+</span><span class="c1"></span>    <span class="c1">//同时这也印证了泛型通配符章节所描述的，?是一种类型实参，可以看做为Number等所有类的父类
+</span><span class="c1"></span>    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">showKeyValue2</span><span class="o">(</span><span class="n">Generic</span><span class="o">&lt;?&gt;</span> <span class="n">obj</span><span class="o">){</span>
+        <span class="n">Log</span><span class="o">.</span><span class="na">d</span><span class="o">(</span><span class="s">&#34;泛型测试&#34;</span><span class="o">,</span><span class="s">&#34;key value is &#34;</span> <span class="o">+</span> <span class="n">obj</span><span class="o">.</span><span class="na">getKey</span><span class="o">());</span>
+    <span class="o">}</span>
+
+     <span class="cm">/**
+</span><span class="cm">     * 这个方法是有问题的，编译器会为我们提示错误信息：&#34;UnKnown class &#39;E&#39; &#34;
+</span><span class="cm">     * 虽然我们声明了&lt;T&gt;,也表明了这是一个可以处理泛型的类型的泛型方法。
+</span><span class="cm">     * 但是只声明了泛型类型T，并未声明泛型类型E，因此编译器并不知道该如何处理E这个类型。
+</span><span class="cm">    public &lt;T&gt; T showKeyName(Generic&lt;E&gt; container){
+</span><span class="cm">        ...
+</span><span class="cm">    }  
+</span><span class="cm">    */</span>
+
+    <span class="cm">/**
+</span><span class="cm">     * 这个方法也是有问题的，编译器会为我们提示错误信息：&#34;UnKnown class &#39;T&#39; &#34;
+</span><span class="cm">     * 对于编译器来说T这个类型并未项目中声明过，因此编译也不知道该如何编译这个类。
+</span><span class="cm">     * 所以这也不是一个正确的泛型方法声明。
+</span><span class="cm">    public void showkey(T genericObj){
+</span><span class="cm">
+</span><span class="cm">    }
+</span><span class="cm">    */</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+
+
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="concurrenthashmap-的-get-方法为什么不需要加锁">ConcurrentHashMap 的 get 方法为什么不需要加锁</h2>
+<ol>
+<li>获取 hash 桶的根节点通过 <code>tabAt</code> 来完成，线程安全</li>
+<li>遍历的时候用到了节点的 next 属性，被 volative 关键字修饰，线程间可见，线程安全</li>
+<li>获取节点的 value 时，节点的 value 值也是被 volatile 修饰，线程间可见，线程安全。</li>
+<li>如果正在扩容中，会根据 ForwardingNode get到新表中的内容。</li>
+</ol>
+<h2 id="concurrenthashmap-的-putval-是如何做的">ConcurrentHashMap 的 putVal 是如何做的？</h2>
+<ol>
+<li>根据 hashcode 利用 tabAt 函数得到插入位置的下标</li>
+<li>判读数组中此处元素是否为 null，如果为 null，直接采用 CAS 进行插入操作即可。</li>
+<li>如果不为空并且发现正在进行 rehash，此线程就会帮忙 rehash 操作。</li>
+<li>如果部位空，且没在进行 rehash，会用 synchronized 关键字锁住头节点，进行插入操作（尾插法）</li>
+</ol>
+<h2 id="hashmap的扰动函数的作用">HashMap的扰动函数的作用？</h2>
+<ol>
+<li>主要作用就是使哈希更加均匀，避免过多的哈希冲突</li>
+<li>由于哈希过程相当于对hashmap的 length 取模（length 必须是2的n次方，这样和 <code>length-1</code> 与操作就等同于取模操作了），会使得 hashcode 的高位信息丢失，导致哈希不均匀。</li>
+<li>扰动函数就是将 hashcode 的高位与其低位进行异或操作，这样低位就既包含了整个 hashcode 的信息。</li>
+<li>对经过扰动函数处理之后的 hashcode 再进行取模，获得的结果就更均匀了。</li>
+</ol>
+<h2 id="hashmap-的-rehash-与-redis-的-rehash-有什么不同">HashMap 的 rehash 与 redis 的 rehash 有什么不同？</h2>
+<ol>
+<li>redis 采用的是 渐进式哈希，hashmap 采用的是一次性哈希</li>
+<li>渐进式哈希
+<ul>
+<li>保存两个哈希表，一个新，一个旧。</li>
+<li>每次进行增删改查时，都会检测是否正在进行 rehash，如果正在进行 rehash 操作，就会将 rehashindex 指向的桶中的所有元素移到新表中。</li>
+<li>如果系统比较闲，则会出发定时函数来完成 rehash 操作</li>
+<li>增操作直接在新表上进行</li>
+<li>删改查操作先在旧表上操作，旧表上没有再去新表查找。</li>
+</ul>
+</li>
+</ol>
+<h2 id="concurrenthashmapjdk8的多线程协同-rehash-是怎么回事">ConcurrentHashMap（jdk8）的多线程协同 rehash 是怎么回事?</h2>
+<ol>
+<li>多线程协助扩容，每个线程默认处理16个桶</li>
+<li>读操作线程不需要帮忙扩容，写操作线程必须先帮忙扩容之后再进行写操作。</li>
+<li>对于每个桶内的元素进行移动时，将其 hahscode 与 新 <code>length</code>(这里不是 length-1 !) 做与操作，结果为0 放在低位，结果为1 放在高位</li>
+<li>之所以这样做，是因为一个元素在扩容后的数组中的位置要么是在原位置，要么是原位置的基础上加上旧表的length得到新位置。</li>
+<li>与旧表的 length = 4（100） ，只是单纯的看最高位是否为 1， 不为 1 放低位，为1 放高位。</li>
+</ol>
+<h2 id="为什么hashmap-允许-keyvalue-为-null但concurrenthashmap不允许">为什么HashMap 允许 key/value 为 null，但ConcurrentHashMap不允许？</h2>
+<ol>
+<li>ConcurrentHashMap 遇到 key/value 为 null 会报空指针错误</li>
+</ol>
+<h2 id="java类名是否允许相同比如和jdk中某个类相同">java类名是否允许相同？比如和jdk中某个类相同？</h2>
+<ol>
+<li>可以，只要不在同一个 packet 中即可！</li>
+</ol>
+<h2 id="lambda-表达式">lambda 表达式</h2>
+<ol>
+<li>lambda 表达式中只允许引用声明为常量的局部变量</li>
+</ol>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">段新朋</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2020-07-20
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/java/">java</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/%E9%9B%B6%E9%92%B1%E5%85%91%E6%8D%A2/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">零钱兑换</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA/">
+            <span class="next-text nav-default">买卖股票的最佳时机</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/duanxinpeng" class="iconfont icon-github" title="github"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author"></span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      TeX: {equationNumbers: {autoNumber: "AMS"}},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

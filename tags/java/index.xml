@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>java on Even - A super concise theme for Hugo</title>
+    <link>http://localhost:1313/tags/java/</link>
+    <description>Recent content in java on Even - A super concise theme for Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 06 Aug 2020 09:12:30 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/java/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Java反射</title>
+      <link>http://localhost:1313/post/java%E5%8F%8D%E5%B0%84/</link>
+      <pubDate>Thu, 06 Aug 2020 09:12:30 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/java%E5%8F%8D%E5%B0%84/</guid>
+      <description>反射基础 Java反射机制是在运行状态中，对任意一个类，都能够知道这个类的所有属性和方法；对于任意一个对象，都能够调用它的任意方法和属性；这种</description>
+    </item>
+    
+    <item>
+      <title>Java线程同步</title>
+      <link>http://localhost:1313/post/java%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5/</link>
+      <pubDate>Thu, 30 Jul 2020 09:12:47 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/java%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5/</guid>
+      <description>synchronized synchronized 关键字的用法 修饰代码块，指定加锁对象，对给定对象加锁，进入同步代码库前要获得给定对象的锁。 修饰普通方法，对象锁，进入同步代码前要获得当前</description>
+    </item>
+    
+    <item>
+      <title>Javas细节</title>
+      <link>http://localhost:1313/post/java%E7%BB%86%E8%8A%82/</link>
+      <pubDate>Mon, 20 Jul 2020 10:22:53 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/java%E7%BB%86%E8%8A%82/</guid>
+      <description>java Queue add/offer add：向队列末尾添加一个元素，若队列已满，则抛出异常 offer：不会抛异常，返回false。 remove/poll remove：移除队列队头元素，若队列</description>
+    </item>
+    
+    <item>
+      <title>Java对象模型</title>
+      <link>http://localhost:1313/post/java%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B/</link>
+      <pubDate>Sat, 18 Jul 2020 22:41:29 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/java%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B/</guid>
+      <description>对象在内存中的存储布局 对象存储在堆中，对象的引用在栈中，对象在内存中的存储布局如下： 对象头 mark word GC分代年龄 锁状态标记 哈希码 类型指针 lengt</description>
+    </item>
+    
+    <item>
+      <title>Java虚拟机</title>
+      <link>http://localhost:1313/post/java%E8%99%9A%E6%8B%9F%E6%9C%BA/</link>
+      <pubDate>Mon, 13 Jul 2020 15:38:32 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/java%E8%99%9A%E6%8B%9F%E6%9C%BA/</guid>
+      <description>JVM组成 类加载器 运行时数据区 执行引擎 本地接口库 类加载器 JVM把描述类的数据从二进制字节码文件加载到内存，并对数据进行校验、转换解析和初始化</description>
+    </item>
+    
+    <item>
+      <title>Java内存模型</title>
+      <link>http://localhost:1313/post/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/</link>
+      <pubDate>Mon, 13 Jul 2020 15:37:21 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Java线程</title>
+      <link>http://localhost:1313/post/java%E7%BA%BF%E7%A8%8B/</link>
+      <pubDate>Mon, 13 Jul 2020 15:12:43 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/java%E7%BA%BF%E7%A8%8B/</guid>
+      <description>java线程状态 我们都知道进程的状态有五种：创建、就绪、运行、阻塞、终止。但java线程状态不同于进程状态，java进程包括一下六种状态： N</description>
+    </item>
+    
+    <item>
+      <title>Java8新特性</title>
+      <link>http://localhost:1313/post/java8%E6%96%B0%E7%89%B9%E6%80%A7/</link>
+      <pubDate>Mon, 13 Jul 2020 10:49:45 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/java8%E6%96%B0%E7%89%B9%E6%80%A7/</guid>
+      <description>https://www.runoob.com/java/java8-new-features.html Lambda表达式 允许把函数作为一个参数传进方法中。 作用 主要用来定义行内执行的方法类型接口 简化部分匿名类的写法 方法引用 通过方法的名字来指向</description>
+    </item>
+    
+    <item>
+      <title>String，StringBuilder和StringBuffer之间的区别</title>
+      <link>http://localhost:1313/post/stringstringbuilder%E5%92%8Cstringbuffer%E4%B9%8B%E9%97%B4%E7%9A%84%E5%8C%BA%E5%88%AB/</link>
+      <pubDate>Thu, 09 Jul 2020 08:04:08 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/stringstringbuilder%E5%92%8Cstringbuffer%E4%B9%8B%E9%97%B4%E7%9A%84%E5%8C%BA%E5%88%AB/</guid>
+      <description>String String属于对象（引用在栈中，对象在堆中），但String是不可变的，每次操作都会生成新的对象，如下图所示 StringBuilder,StringBuffer StringBuilder</description>
+    </item>
+    
+  </channel>
+</rss>

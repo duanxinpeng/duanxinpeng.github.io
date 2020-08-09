@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>链表 on Even - A super concise theme for Hugo</title>
+    <link>http://localhost:1313/tags/%E9%93%BE%E8%A1%A8/</link>
+    <description>Recent content in 链表 on Even - A super concise theme for Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 11 Jul 2020 15:28:19 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/%E9%93%BE%E8%A1%A8/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>回文链表</title>
+      <link>http://localhost:1313/post/%E5%9B%9E%E6%96%87%E9%93%BE%E8%A1%A8/</link>
+      <pubDate>Sat, 11 Jul 2020 15:28:19 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E5%9B%9E%E6%96%87%E9%93%BE%E8%A1%A8/</guid>
+      <description>问题描述 判断一个链表是否是回文链表 https://leetcode-cn.com/problems/palindrome-linked-list/ 收获 先将链表转换为数组，再对数组进行判断。 如果用List作为数组的话，需要注意Integer的比较要用e</description>
+    </item>
+    
+    <item>
+      <title>反转链表</title>
+      <link>http://localhost:1313/post/%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8/</link>
+      <pubDate>Fri, 10 Jul 2020 18:48:57 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8/</guid>
+      <description>问题描述 反转链表 https://leetcode-cn.com/problems/reverse-linked-list/ sil 头插法</description>
+    </item>
+    
+    <item>
+      <title>相交链表</title>
+      <link>http://localhost:1313/post/%E7%9B%B8%E4%BA%A4%E9%93%BE%E8%A1%A8/</link>
+      <pubDate>Fri, 10 Jul 2020 16:32:09 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E7%9B%B8%E4%BA%A4%E9%93%BE%E8%A1%A8/</guid>
+      <description>问题描述 返回两个链表相交的起始节点。 https://leetcode-cn.com/problems/intersection-of-two-linked-lists/ 思路 先同时遍历，找到两个链表相差的节点数。 此时就可以让两个链表从长度相等的地方同时开始向后遍历，此时一</description>
+    </item>
+    
+    <item>
+      <title>环形链表2</title>
+      <link>http://localhost:1313/post/%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A82/</link>
+      <pubDate>Fri, 10 Jul 2020 15:26:40 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A82/</guid>
+      <description>问题描述 判断一个链表是否有环，并返回环的入口节点。 https://leetcode-cn.com/problems/linked-list-cycle-ii/ 思路 首先用快慢指针判断是否有环，如果有环，返回快慢指针相遇的节点。 初始化一个指针p1指向</description>
+    </item>
+    
+    <item>
+      <title>合并k个排序链表</title>
+      <link>http://localhost:1313/post/%E5%90%88%E5%B9%B6k%E4%B8%AA%E6%8E%92%E5%BA%8F%E9%93%BE%E8%A1%A8/</link>
+      <pubDate>Thu, 09 Jul 2020 08:58:29 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E5%90%88%E5%B9%B6k%E4%B8%AA%E6%8E%92%E5%BA%8F%E9%93%BE%E8%A1%A8/</guid>
+      <description>问题描述 合并k个排序链表 https://leetcode-cn.com/problems/merge-k-sorted-lists/ 复杂度分析 顺序合并：时间复杂度：O(kkn)； 空间复杂度：O(1);其中k是链表个数，n是链表长度； 分治合并：时间</description>
+    </item>
+    
+    <item>
+      <title>链表中是否有环</title>
+      <link>http://localhost:1313/post/%E9%93%BE%E8%A1%A8%E4%B8%AD%E6%98%AF%E5%90%A6%E6%9C%89%E7%8E%AF/</link>
+      <pubDate>Wed, 08 Jul 2020 00:16:01 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E9%93%BE%E8%A1%A8%E4%B8%AD%E6%98%AF%E5%90%A6%E6%9C%89%E7%8E%AF/</guid>
+      <description>哈希表 时间复杂度O(n) 空间复杂度O(n) 快慢指针 时间复杂度分析 如果不存在环 O(n) 非环部分长N，环部分长K，最差情况也就O(N+K),O(n) 空</description>
+    </item>
+    
+    <item>
+      <title>链表排序</title>
+      <link>http://localhost:1313/post/%E9%93%BE%E8%A1%A8%E6%8E%92%E5%BA%8F/</link>
+      <pubDate>Tue, 07 Jul 2020 15:26:33 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E9%93%BE%E8%A1%A8%E6%8E%92%E5%BA%8F/</guid>
+      <description>链表排序 https://leetcode-cn.com/problems/insertion-sort-list/submissions/ https://leetcode-cn.com/problems/sort-list/ 插入排序 哑节点的合理运用 链表遍历需要两个指针 插入排序的细节：寻找插入位置有两种情况，一种是在原位置，一种需要位置变动 快速排序 前闭</description>
+    </item>
+    
+    <item>
+      <title>LRU原理和Redis实现</title>
+      <link>http://localhost:1313/post/lru%E5%8E%9F%E7%90%86%E5%92%8Credis%E5%AE%9E%E7%8E%B0/</link>
+      <pubDate>Sun, 05 Jul 2020 09:57:55 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/lru%E5%8E%9F%E7%90%86%E5%92%8Credis%E5%AE%9E%E7%8E%B0/</guid>
+      <description>LRU原理 HashMap+双向链表实现（hashmap用于查询，双向链表主要用于保证新旧顺序） put O(1) 判断是否存在，如果存在，替换（这里存在替换</description>
+    </item>
+    
+  </channel>
+</rss>

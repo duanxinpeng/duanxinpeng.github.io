@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>bloom filter on Even - A super concise theme for Hugo</title>
+    <link>http://localhost:1313/tags/bloom-filter/</link>
+    <description>Recent content in bloom filter on Even - A super concise theme for Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 05 Aug 2020 17:48:48 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/bloom-filter/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>海量数据处理问题</title>
+      <link>http://localhost:1313/post/%E6%B5%B7%E9%87%8F%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E9%97%AE%E9%A2%98/</link>
+      <pubDate>Wed, 05 Aug 2020 17:48:48 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E6%B5%B7%E9%87%8F%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E9%97%AE%E9%A2%98/</guid>
+      <description>知识点回顾 布隆过滤器 流程 准备 k 个 hash 函数，每个函数可以把 key 散列成为一个整数 初始化一个尽可能长的比特数组，每个比特位初始化为0 某个key加入集合</description>
+    </item>
+    
+  </channel>
+</rss>

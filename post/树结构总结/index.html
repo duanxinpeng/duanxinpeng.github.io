@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>树结构总结 - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="段新朋" /><meta name="description" content="堆 性质 左右孩子节点的值都小于根节点，且左右孩子都是堆的完全二叉树 最小堆构建 一个数组，从数组的最后一个元素的父亲节点（n/2）开始进行调整，以" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.72.0 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/%E6%A0%91%E7%BB%93%E6%9E%84%E6%80%BB%E7%BB%93/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="树结构总结" />
+<meta property="og:description" content="堆 性质 左右孩子节点的值都小于根节点，且左右孩子都是堆的完全二叉树 最小堆构建 一个数组，从数组的最后一个元素的父亲节点（n/2）开始进行调整，以" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/%E6%A0%91%E7%BB%93%E6%9E%84%E6%80%BB%E7%BB%93/" />
+<meta property="article:published_time" content="2020-07-02T06:36:08+08:00" />
+<meta property="article:modified_time" content="2020-07-02T06:36:08+08:00" />
+<meta itemprop="name" content="树结构总结">
+<meta itemprop="description" content="堆 性质 左右孩子节点的值都小于根节点，且左右孩子都是堆的完全二叉树 最小堆构建 一个数组，从数组的最后一个元素的父亲节点（n/2）开始进行调整，以">
+<meta itemprop="datePublished" content="2020-07-02T06:36:08&#43;08:00" />
+<meta itemprop="dateModified" content="2020-07-02T06:36:08&#43;08:00" />
+<meta itemprop="wordCount" content="1718">
+
+
+
+<meta itemprop="keywords" content="红黑树,AVL树,B树,B&#43;树," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="树结构总结"/>
+<meta name="twitter:description" content="堆 性质 左右孩子节点的值都小于根节点，且左右孩子都是堆的完全二叉树 最小堆构建 一个数组，从数组的最后一个元素的父亲节点（n/2）开始进行调整，以"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">NeverDoubt</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">NeverDoubt</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">树结构总结</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-07-02 </span>
+        <div class="post-category">
+            <a href="/categories/%E7%AE%97%E6%B3%95/"> 算法 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#堆">堆</a>
+      <ul>
+        <li><a href="#性质">性质</a></li>
+        <li><a href="#最小堆构建">最小堆构建</a></li>
+        <li><a href="#插入">插入</a></li>
+        <li><a href="#删除">删除</a></li>
+        <li><a href="#堆排序">堆排序</a></li>
+      </ul>
+    </li>
+    <li><a href="#二叉搜索树">二叉搜索树</a>
+      <ul>
+        <li><a href="#性质-1">性质</a></li>
+        <li><a href="#查询">查询</a></li>
+        <li><a href="#插入-1">插入</a></li>
+        <li><a href="#删除-logn">删除 logn</a></li>
+      </ul>
+    </li>
+    <li><a href="#avl树">AVL树</a>
+      <ul>
+        <li><a href="#定义">定义</a></li>
+      </ul>
+    </li>
+    <li><a href="#查找">查找</a>
+      <ul>
+        <li><a href="#插入节点">插入节点</a></li>
+        <li><a href="#删除-1">删除</a></li>
+        <li><a href="#avl和红黑树的区别">AVL和红黑树的区别</a></li>
+      </ul>
+    </li>
+    <li><a href="#红黑树">红黑树</a>
+      <ul>
+        <li><a href="#定义-1">定义</a></li>
+        <li><a href="#插入-2">插入</a></li>
+        <li><a href="#删除-2">删除</a></li>
+      </ul>
+    </li>
+    <li><a href="#b树">B树</a>
+      <ul>
+        <li><a href="#定义-2">定义</a></li>
+        <li><a href="#插入-3">插入</a></li>
+        <li><a href="#删除-3">删除</a></li>
+        <li><a href="#和红黑树的关系">和红黑树的关系</a></li>
+      </ul>
+    </li>
+    <li><a href="#b树-1">B+树</a>
+      <ul>
+        <li><a href="#定义-3">定义：</a></li>
+        <li><a href="#和b树的区别">和B树的区别</a></li>
+        <li><a href="#优点">优点</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="堆">堆</h2>
+<h3 id="性质">性质</h3>
+<p>左右孩子节点的值都小于根节点，且左右孩子都是堆的完全二叉树</p>
+<h3 id="最小堆构建">最小堆构建</h3>
+<p>一个数组，从数组的最后一个元素的父亲节点（n/2）开始进行调整，以保证该父亲节点比所有的子节点都小（需要递归向下），然后对节点(n/2-1)进行调整, n(logn)</p>
+<h3 id="插入">插入</h3>
+<p>插入最后一个位置，然后上浮（O(logn)）【可以发现根节点到这个新数据的父亲节点之间必为一个有序数列，现在的任务就是将新数据插入这个有序数列中】(O(logn))</p>
+<h3 id="删除">删除</h3>
+<p>删除操作都是针对的根节点，方法是将最后一个数据赋值给根节点，然后进行一次下沉操作 O(logn)</p>
+<h3 id="堆排序">堆排序</h3>
+<p>将根元素与最后一个根元素交换位置，再进行下沉操作即可</p>
+<h2 id="二叉搜索树">二叉搜索树</h2>
+<h3 id="性质-1">性质</h3>
+<p>左子树的值都小于根节点，右子树的值均大于根节点，且左右子树都是二叉搜索树；</p>
+<h3 id="查询">查询</h3>
+<p>递归查找是否存在key。 logn</p>
+<h3 id="插入-1">插入</h3>
+<p>原树中不存在key，插入key返回true，否则返回false。 logn</p>
+<h3 id="删除-logn">删除 logn</h3>
+<ol>
+<li>叶子节点：直接删除，不影响原树。</li>
+<li>仅仅有左或右子树的节点：节点删除后，将它的左子树或右子树整个移动到删除节点的位置就可以，子承父业。</li>
+<li>既有左又有右子树的节点：找到须要删除的节点p的直接前驱（左子树最大值）或者直接后继（右子树最小值）s，用s来替换节点p，然后再删除节点s。</li>
+</ol>
+<h2 id="avl树">AVL树</h2>
+<h3 id="定义">定义</h3>
+<p>一颗左右孩子的高度差不会超过1的二叉搜索树</p>
+<h2 id="查找">查找</h2>
+<h3 id="插入节点">插入节点</h3>
+<p>插入新节点O(logn)&ndash;&gt; 从新插入的节点向上搜索第一个失衡节点O(logn)&ndash;&gt;判断失衡类型&ndash;&gt;调整</p>
+<h3 id="删除-1">删除</h3>
+<p>前半部分和二叉搜索树的删除过程相同，删除之后调整平衡，更新高度  O(logn)</p>
+<h3 id="avl和红黑树的区别">AVL和红黑树的区别</h3>
+<ol>
+<li>AVL平衡性更高，适用于查询频繁的情况；</li>
+<li>红黑树插入、删除操作进行的旋转次数更少，所以适用于插入、删除频繁的情况；</li>
+</ol>
+<h2 id="红黑树">红黑树</h2>
+<h3 id="定义-1">定义</h3>
+<ol>
+<li>根节点是黑色；</li>
+<li>不能有连续的两个红色；</li>
+<li>根节点到叶子节点的所有路径包含相同个数的黑色节点</li>
+</ol>
+<h3 id="插入-2">插入</h3>
+<p>将新节点插入红黑树并将其标为红色&ndash;&gt;若插入位置是根节点直接将此节点涂为黑色即可&ndash;&gt;若其父亲节点是黑色则什么都不需要做&ndash;&gt;若父亲节点是红色，违背了不能有连续两个红色节点的要求，所以需要根据其叔叔节点的颜色进行调整；</p>
+<h3 id="删除-2">删除</h3>
+<p>前半部分和二叉搜索树删除过程相同；若删除的节点是红色，则不会影响；若是黑色则会影响红黑树性质，此时需要进行recolor或rotation进行调整；</p>
+<h2 id="b树">B树</h2>
+<h3 id="定义-2">定义</h3>
+<p>一颗平衡m叉搜索树：
+1. 根节点至少两个子女；
+2.  每个中间节点都包含k-1个元素和k个孩子，其中（$\lceil m/2 \rceil \leq k\leq m$）
+3. 每一个叶子节点都包含k-1个元素，其中（$\lceil m/2 \rceil \leq k\leq m$）
+4. 所有的叶子节点都在同一层；（叶节点等深）
+5. 每个节点中的元素从小到大排列，节点当中k-1个元素正好是k个孩子包含的元素的值域划分</p>
+<h3 id="插入-3">插入</h3>
+<p>查找B树，找到新元素应该插入的叶子节点的位置，然后按照以下步骤进行插入：
+1. 如果该叶子节点所包含元素个数少于要求的最大值，则直接将新元素按照大小关系直接插入叶子节点即可
+2. 如果该叶子节点已经满了，将叶子节点中的元素按照中间元素分裂为两部分，小于中间元素的做左子树，大于中间元素的做右子树，并将中间元素插入其父亲节点（若没有父亲节点，则创建一个父亲节点）。
+3. 如果向父亲节点插入时发生了上述问题，则重复步骤1-3；</p>
+<h3 id="删除-3">删除</h3>
+<p>可能引起合并、自旋</p>
+<h3 id="和红黑树的关系">和红黑树的关系</h3>
+<p>一颗4阶b树（2-3-4树）与红黑树是等价的</p>
+<h2 id="b树-1">B+树</h2>
+<h3 id="定义-3">定义：</h3>
+<ol>
+<li>有k个子树的中间节点包含有k个元素（B树是k-1个元素），每个元素不保存数据，只用来索引，所有数据都保存在叶子节点</li>
+<li>所有的叶子结点中包含了全部元素的信息，及指向含这些元素记录的指针，且叶子结点本身依关键字的大小自小而大顺序链接</li>
+<li>所有的中间节点元素都同时存在于子节点，在子节点元素中是最大（或最小）元素。</li>
+</ol>
+<h3 id="和b树的区别">和B树的区别</h3>
+<ol>
+<li>父节点中的元素都包含在子节点中，所以叶子节点中包含所有的元素；</li>
+<li>并且每个叶子节点都带有指向下一个节点的指针，形成了一个有序链表</li>
+<li>中间节点只包含索引，不包含数据，所有的数据都在叶子节点</li>
+</ol>
+<h3 id="优点">优点</h3>
+<ol>
+<li>由于不包含卫星数据，所以中间节点可以包含更多元素，树会更“矮”从而可以减少IO次数</li>
+<li>由于所有数据都在叶子节点，所以查询性能更稳定</li>
+<li>由于叶子节点形成一个有序链表，所以更方便进行范围查询</li>
+</ol>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">段新朋</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2020-07-02
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E7%BA%A2%E9%BB%91%E6%A0%91/">红黑树</a>
+          <a href="/tags/avl%E6%A0%91/">AVL树</a>
+          <a href="/tags/b%E6%A0%91/">B树</a>
+          <a href="/tags/b&#43;%E6%A0%91/">B&#43;树</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/lru%E5%8E%9F%E7%90%86%E5%92%8Credis%E5%AE%9E%E7%8E%B0/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">LRU原理和Redis实现</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/redis/">
+            <span class="next-text nav-default">Redis</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/duanxinpeng" class="iconfont icon-github" title="github"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author"></span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      TeX: {equationNumbers: {autoNumber: "AMS"}},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

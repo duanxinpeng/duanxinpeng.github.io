@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Redis - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="段新朋" /><meta name="description" content="常规数据类型 string SDS 简单动态字符串 二进制安全（意思是输入任何字节都能正确处理，不会依赖于\0来判断字符是否结束），所以可以存储任何数据 最大能存储" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.72.0 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/redis/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Redis" />
+<meta property="og:description" content="常规数据类型 string SDS 简单动态字符串 二进制安全（意思是输入任何字节都能正确处理，不会依赖于\0来判断字符是否结束），所以可以存储任何数据 最大能存储" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/redis/" />
+<meta property="article:published_time" content="2020-07-01T01:13:27+08:00" />
+<meta property="article:modified_time" content="2020-07-01T01:13:27+08:00" />
+<meta itemprop="name" content="Redis">
+<meta itemprop="description" content="常规数据类型 string SDS 简单动态字符串 二进制安全（意思是输入任何字节都能正确处理，不会依赖于\0来判断字符是否结束），所以可以存储任何数据 最大能存储">
+<meta itemprop="datePublished" content="2020-07-01T01:13:27&#43;08:00" />
+<meta itemprop="dateModified" content="2020-07-01T01:13:27&#43;08:00" />
+<meta itemprop="wordCount" content="2945">
+
+
+
+<meta itemprop="keywords" content="redis," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Redis"/>
+<meta name="twitter:description" content="常规数据类型 string SDS 简单动态字符串 二进制安全（意思是输入任何字节都能正确处理，不会依赖于\0来判断字符是否结束），所以可以存储任何数据 最大能存储"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">NeverDoubt</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">NeverDoubt</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Redis</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-07-01 </span>
+        <div class="post-category">
+            <a href="/categories/redis/"> redis </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#常规数据类型">常规数据类型</a>
+      <ul>
+        <li><a href="#string">string</a></li>
+        <li><a href="#hash">hash</a></li>
+        <li><a href="#list">list</a></li>
+        <li><a href="#set">set</a></li>
+        <li><a href="#zset">zset</a></li>
+      </ul>
+    </li>
+    <li><a href="#redis的底层数据结构">Redis的底层数据结构</a>
+      <ul>
+        <li><a href="#简单动态字符串">简单动态字符串</a></li>
+        <li><a href="#字典">字典</a></li>
+        <li><a href="#双向链表">双向链表</a></li>
+        <li><a href="#压缩列表">压缩列表</a></li>
+        <li><a href="#跳表">跳表</a></li>
+        <li><a href="#整数集合">整数集合</a></li>
+      </ul>
+    </li>
+    <li><a href="#持久化">持久化</a>
+      <ul>
+        <li><a href="#rdb">RDB</a></li>
+        <li><a href="#aofappend-only-file">AOF（Append-only file）</a></li>
+        <li><a href="#aof-and-rdb">AOF and RDB</a></li>
+        <li><a href="#如何选择">如何选择</a></li>
+      </ul>
+    </li>
+    <li><a href="#分布式锁">分布式锁</a></li>
+    <li><a href="#主从复制">主从复制</a></li>
+    <li><a href="#命令传播阶段">命令传播阶段</a></li>
+    <li><a href="#redis-单线程模型">redis 单线程模型</a></li>
+    <li><a href="#集群">集群</a></li>
+    <li><a href="#常见问题">常见问题</a>
+      <ul>
+        <li><a href="#缓存预热">缓存预热</a></li>
+        <li><a href="#缓存雪崩">缓存雪崩</a></li>
+        <li><a href="#缓存击穿">缓存击穿</a></li>
+        <li><a href="#缓存穿透">缓存穿透</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="常规数据类型">常规数据类型</h2>
+<h3 id="string">string</h3>
+<ol>
+<li>SDS 简单动态字符串</li>
+<li>二进制安全（意思是输入任何字节都能正确处理，不会依赖于\0来判断字符是否结束），所以可以存储任何数据</li>
+<li>最大能存储512MB</li>
+<li>不仅能是字符串，还可以是数字</li>
+<li>常用命令
+<ul>
+<li>get key</li>
+<li>set key  value</li>
+<li>incr key ：遇到这种指令时，会转换为int</li>
+<li>decr key</li>
+<li>mset key value [key value]</li>
+<li>setex key seconds value ：设置时效性</li>
+<li>psetex key millionseconds value</li>
+<li>strlen key</li>
+<li>append key value</li>
+</ul>
+</li>
+<li>场景
+<ul>
+<li>少量数据</li>
+<li>普通缓存：存储对象，
+<ul>
+<li>将对象名和属性名结合到一起作为 key，值作为value</li>
+<li>利用json存储对象 set key {id:10,name:duan}  get</li>
+</ul>
+</li>
+<li>计数(因为是单线程的无需考虑并发问题)：比如控制数据库表主键id，长地址转短地址的计数器</li>
+<li>时效性（setex）：比如投票，一段时间内只能投一票</li>
+</ul>
+</li>
+</ol>
+<h3 id="hash">hash</h3>
+<ol>
+<li>短的时候用类数组（压缩列表？）、长的时候用字典（HashMap）。</li>
+<li>常用命令
+<ul>
+<li>hget</li>
+<li>hset</li>
+<li>hdel</li>
+<li>hmget</li>
+</ul>
+</li>
+<li>使用场景
+<ul>
+<li>多数据，部分变更</li>
+<li>存储<code>部分变更数据</code>，比如用户信息</li>
+<li>购物车</li>
+</ul>
+</li>
+</ol>
+<h3 id="list">list</h3>
+<ol>
+<li>常用命令
+<ul>
+<li>lpush</li>
+<li>rpush</li>
+<li>lpop</li>
+<li>rpop</li>
+</ul>
+</li>
+<li>使用场景
+<ul>
+<li>多数据，<code>有顺序</code></li>
+<li>关注列表：最新消息的展示</li>
+<li>消息队列：多路日志合并，多服务器日志有序合并！</li>
+</ul>
+</li>
+</ol>
+<h3 id="set">set</h3>
+<ol>
+<li>常用命令
+<ul>
+<li>sadd</li>
+<li>spop</li>
+<li>smembers key 得到所有数据</li>
+<li>srandmember key 随机得到一个数据！</li>
+<li>sunion</li>
+</ul>
+</li>
+<li>使用场景
+<ul>
+<li>大量数据，便于查询，不重复元素</li>
+<li>朋友圈，交并差</li>
+<li>网站访问量统计
+<ul>
+<li>PV（网站被访问次数） string 计数器</li>
+<li>UV（网站被不同用户访问的次数） set记录不同的cookie数量</li>
+<li>IP（网站被不同IP地址访问的总次数 set记录不同的ip</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>用字典的key来存储数据，不仅查询快，还不允许重复！</li>
+</ol>
+<h3 id="zset">zset</h3>
+<ol>
+<li>常用命令
+<ul>
+<li>zadd key value</li>
+<li>zcard key ：查询集合的成员个数</li>
+<li>zrank key value：成员排名（下标位置）</li>
+<li>zscore key value 获取指定值的分数</li>
+</ul>
+</li>
+<li>使用场景
+<ul>
+<li>大量数据、不重复、有序</li>
+<li>排行榜</li>
+</ul>
+</li>
+</ol>
+<h2 id="redis的底层数据结构">Redis的底层数据结构</h2>
+<h3 id="简单动态字符串">简单动态字符串</h3>
+<ol>
+<li>c语言的字符串本质是以‘\0’为结尾的字符数组（字符指针）</li>
+<li>redis的简单动态字符串本质同样是字符指针，但多了一个header，其中包括字符串的长度、容量等内容</li>
+<li>简单动态字符串的指针指向的并不是其header的开头，而是真正数据的开头。</li>
+<li>简单动态字符串是二进制安全的。</li>
+<li><a href="https://segmentfault.com/p/1210000009155695/read#top">https://segmentfault.com/p/1210000009155695/read#top</a></li>
+</ol>
+<h3 id="字典">字典</h3>
+<ol>
+<li>redis的字典本质就是哈希表。</li>
+<li>redis的rehash部分采用的是渐进式哈希，所谓的渐进式哈希简单来说就是分配一个新的哈希表，但并不立即把旧的哈希表中的元素转移到新的哈希表，而是将此过程分摊到之后的每一次的增删改查上，增操作直接在新表上进行，其余操作先在旧表上操作，找不到时再到新表上操作。每次增删改查操作之后都会判断一下是否正在进行rehash操作，并用一个变量来标注rehash的进度，用以在操作完成之后进行一次rehash操作。将以此变量为下标的旧表中的值转移到新表中，并将此变量加1.</li>
+<li>何时进行rehash
+<ul>
+<li>服务器没有执行 bgsave ：哈希表负载因子大于等于1</li>
+<li>服务器正在执行 bgsave：负载因子大于等于5</li>
+</ul>
+</li>
+</ol>
+<h3 id="双向链表">双向链表</h3>
+<h3 id="压缩列表">压缩列表</h3>
+<ol>
+<li>压缩列表和数组类似，但是不同于数组的是：数组的每个元素大小必须相同，但是为了节省空间，redis的压缩列表取消了这一限制，通过保存上一个节点的长度、数据长度等内容来计算每个元素的下标。</li>
+</ol>
+<h3 id="跳表">跳表</h3>
+<h3 id="整数集合">整数集合</h3>
+<h2 id="持久化">持久化</h2>
+<h3 id="rdb">RDB</h3>
+<ol>
+<li>保存数据快照</li>
+<li>save
+<ul>
+<li>立即执行</li>
+</ul>
+</li>
+<li>bgsave
+<ul>
+<li>在后台选择合适的时间执行 save 操作。</li>
+</ul>
+</li>
+<li>save配置何时启动 RDB
+4 优点
+<ul>
+<li>存储的是二进制文件，存储效率高</li>
+<li>存储的是某个时间点的数据快照，适用于数据备份</li>
+<li>恢复数据的速度比AOF快</li>
+</ul>
+</li>
+<li>缺点
+<ul>
+<li>无法做大实时持久化，只能对某个时间点做备份</li>
+<li>bgsave需要fork子进程</li>
+<li>redis多版本的rdb文件格式不统一</li>
+</ul>
+</li>
+</ol>
+<h3 id="aofappend-only-file">AOF（Append-only file）</h3>
+<ol>
+<li>以独立日志的方式记录每次写命令，重启时在重新执行命令以恢复数据</li>
+<li>当客户端发送一条指令时，先将命令存放到缓冲区，再按照一定的策略将命令写入aof文件，然后再执行</li>
+<li>aof写数据的三种策略
+<ul>
+<li>always（每次）</li>
+<li>everysec（每秒）</li>
+<li>no（系统控制）</li>
+</ul>
+</li>
+</ol>
+<h3 id="aof-and-rdb">AOF and RDB</h3>
+<table>
+<thead>
+<tr>
+<th>持久化方式</th>
+<th>RDB</th>
+<th>AOF</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>占用存储空间</td>
+<td>小（二进制，压缩）</td>
+<td>大（指令）</td>
+</tr>
+<tr>
+<td>存储速度</td>
+<td>慢（快照）</td>
+<td>快（部分指令）</td>
+</tr>
+<tr>
+<td>恢复速度</td>
+<td>快</td>
+<td>慢（指令重新执行）</td>
+</tr>
+<tr>
+<td>数据安全性</td>
+<td>会丢失数据</td>
+<td>依据策略决定</td>
+</tr>
+<tr>
+<td>启动优先级</td>
+<td>低</td>
+<td>高</td>
+</tr>
+</tbody>
+</table>
+<h3 id="如何选择">如何选择</h3>
+<ol>
+<li>对数据非常敏感，建议使用AOF</li>
+<li>数据呈现阶段有效性，建议使用RDB，比如游戏回档</li>
+</ol>
+<h2 id="分布式锁">分布式锁</h2>
+<ol>
+<li>setnx key value 获得锁，如果 key为空，则获取锁成功，否则失败</li>
+<li>使用完之后用 del 操作释放锁</li>
+<li>解决死锁问题：在加锁之后，为key设置一个时间限制。
+<ul>
+<li>expire lock-key second</li>
+<li>pexpire lock-key millionseconds</li>
+</ul>
+</li>
+</ol>
+<h2 id="主从复制">主从复制</h2>
+<ol>
+<li>定义
+<ul>
+<li>master 写数据/数据同步，slaves 读数据</li>
+</ul>
+</li>
+<li>作用（高可用）
+<ul>
+<li>读写分离</li>
+<li>负载均衡</li>
+<li>故障恢复</li>
+</ul>
+</li>
+<li>工作流程
+<ul>
+<li>建立连接（slave连master）
+<ul>
+<li>slave: slaveof(master_ip，master_port)</li>
+<li>master 接收到指令，做出响应</li>
+<li>slave 保存 master 的 ip,port</li>
+<li>slave 根据保存信息建立 master 的socket</li>
+<li>slave 周期性发送命令：ping</li>
+<li>master 响应：pong</li>
+<li>master验证授权</li>
+<li>slave 发送自己的端口号</li>
+<li>master 保存 slave 的端口号</li>
+</ul>
+</li>
+<li>数据同步
+<ul>
+<li>slave: psync2 请求同步数据</li>
+<li>master：bgsave(RDB)</li>
+<li>master：创建命令缓冲区</li>
+<li>master：生成RDB文件，通过socket发送给slave</li>
+<li>slave：接收RDB，清空数据，执行RDB恢复过程（以上是全量复制）</li>
+<li>slave：发送命令告知master RDB恢复完成。</li>
+<li>master：发送复制缓冲区信息。</li>
+<li>slave：接收信息，执行 bgrewriteaof，恢复数据。（以上是增量复制/部分复制，获取master在RDB期间收到的数据）</li>
+<li>master：保存 slave 当前数据同步的位置。</li>
+</ul>
+</li>
+<li>
+<h2 id="命令传播阶段">命令传播阶段</h2>
+<ul>
+<li></li>
+<li></li>
+<li></li>
+</ul>
+</li>
+<li>复制缓冲区
+<ul>
+<li>是一个先进先出的队列，用于存储服务器执行过的命令，每次传播命令，master都会将传播的命令记录下来，并存储在复制缓冲区。</li>
+<li>将命令按照AOF存储格式拆分并添加\r\n之后，按照字节写入复制缓冲区。</li>
+<li>根据offset来区分不同slave当前数据传播的差异。</li>
+<li>master和slave需要同时记录 offset 值。</li>
+</ul>
+</li>
+<li>心跳机制
+<ul>
+<li>master
+<ul>
+<li>指令：ping</li>
+<li>周期：10s</li>
+<li>作用：判断slave是否在线</li>
+</ul>
+</li>
+<li>slave
+<ul>
+<li>指令：REPLCONF ACK(offset)</li>
+<li>周期：1s</li>
+<li>作用：汇报自己的复制偏移量，判断master是否在线</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>哨兵
+<ul>
+<li>作用
+<ul>
+<li>监控</li>
+<li>故障转移</li>
+</ul>
+</li>
+<li>监控
+<ul>
+<li>获取其他哨兵的状态</li>
+<li>获取master的状态</li>
+<li>获取所有slave的状态。</li>
+</ul>
+</li>
+<li>故障转移
+<ul>
+<li>哨兵发现 master 挂了，会将这个信息发送到哨兵内网中，如果超过半数的哨兵都认为 master 挂了，就说明 master 真的挂了。</li>
+<li>每个哨兵都竞选任命新 master 的任务</li>
+<li>每个哨兵都发起投票，每个哨兵都只有一票。</li>
+<li>获得超过半数票的哨兵来进行新 master 的任命。</li>
+<li>将在线的、反应快的、与原 master 断开时间最短的 slave 任命为 master。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>集群</li>
+</ol>
+<h2 id="redis-单线程模型">redis 单线程模型</h2>
+<ol>
+<li>指的是 server 和 client 之间交互过程是单线程的。</li>
+</ol>
+<h2 id="集群">集群</h2>
+<ol>
+<li></li>
+</ol>
+<h2 id="常见问题">常见问题</h2>
+<h3 id="缓存预热">缓存预热</h3>
+<ol>
+<li>问题
+<ul>
+<li>服务器启动后快速宕机</li>
+</ul>
+</li>
+<li>问题排查
+<ul>
+<li>请求数量高</li>
+<li>主从之间数据吞吐量较大，数据同步操作频率高</li>
+</ul>
+</li>
+<li>解决方案
+<ul>
+<li>统计访问频率较高的热点数据</li>
+<li>利用LRu数据删除策略</li>
+<li>根据统计结果中的数据分类，根据级别，redis优先加载级别较高的热点数据</li>
+<li>利用分布式多服务器同时进行数据读取，提速数据加载过程</li>
+<li>使用脚本程序固定出发数据预热过程</li>
+</ul>
+</li>
+</ol>
+<h3 id="缓存雪崩">缓存雪崩</h3>
+<ol>
+<li>问题
+<ul>
+<li>系统平稳运行过程中，忽然数据库连接量激增</li>
+<li>应用服务器无法及时处理请求</li>
+<li>大量408，500错误页面</li>
+<li>客户反复刷新页面获取数据</li>
+<li>数据库崩溃</li>
+<li>应用服务崩溃</li>
+<li>重启应用服务器无效</li>
+<li>redis服务器崩溃</li>
+<li>redis集群崩溃</li>
+</ul>
+</li>
+<li>问题排查
+<ul>
+<li>在一个较短时间内，缓存中较多的key集中过期！</li>
+<li>在周期内请求访问过期数据，redis未命中，redis向数据库获取数据</li>
+<li>数据库同时接收到大量请求无法及时处理</li>
+<li>redis大量请求被积压，开始出现超时</li>
+<li>数据库流量激增，数据库崩溃</li>
+</ul>
+</li>
+<li>解决方案
+<ul>
+<li>更多页面静态化处理</li>
+<li>构建多级缓存架构
+<ul>
+<li>NGinx+redis+ehcache</li>
+</ul>
+</li>
+<li>灾难预警</li>
+<li>限流、降级</li>
+</ul>
+</li>
+</ol>
+<h3 id="缓存击穿">缓存击穿</h3>
+<h3 id="缓存穿透">缓存穿透</h3>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">段新朋</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2020-07-01
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/redis/">redis</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/%E6%A0%91%E7%BB%93%E6%9E%84%E6%80%BB%E7%BB%93/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">树结构总结</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/cnn/">
+            <span class="next-text nav-default">Cnn</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/duanxinpeng" class="iconfont icon-github" title="github"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author"></span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      TeX: {equationNumbers: {autoNumber: "AMS"}},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

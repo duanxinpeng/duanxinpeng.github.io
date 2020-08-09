@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>课程表 - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="段新朋" /><meta name="description" content="问题描述 给定课程总量以及他们的先决条件，请判断是否可能完成所有课程的学习。 https://leetcode-cn.com/problems/course-schedule/ 思路 死脑筋啊，题目说先决条件是边缘列表而不是邻接矩阵，我就觉得没" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.72.0 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/%E8%AF%BE%E7%A8%8B%E8%A1%A8/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="课程表" />
+<meta property="og:description" content="问题描述 给定课程总量以及他们的先决条件，请判断是否可能完成所有课程的学习。 https://leetcode-cn.com/problems/course-schedule/ 思路 死脑筋啊，题目说先决条件是边缘列表而不是邻接矩阵，我就觉得没" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/%E8%AF%BE%E7%A8%8B%E8%A1%A8/" />
+<meta property="article:published_time" content="2020-07-10T20:10:04+08:00" />
+<meta property="article:modified_time" content="2020-07-10T20:10:04+08:00" />
+<meta itemprop="name" content="课程表">
+<meta itemprop="description" content="问题描述 给定课程总量以及他们的先决条件，请判断是否可能完成所有课程的学习。 https://leetcode-cn.com/problems/course-schedule/ 思路 死脑筋啊，题目说先决条件是边缘列表而不是邻接矩阵，我就觉得没">
+<meta itemprop="datePublished" content="2020-07-10T20:10:04&#43;08:00" />
+<meta itemprop="dateModified" content="2020-07-10T20:10:04&#43;08:00" />
+<meta itemprop="wordCount" content="408">
+
+
+
+<meta itemprop="keywords" content="dfs,bfs,拓扑排序," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="课程表"/>
+<meta name="twitter:description" content="问题描述 给定课程总量以及他们的先决条件，请判断是否可能完成所有课程的学习。 https://leetcode-cn.com/problems/course-schedule/ 思路 死脑筋啊，题目说先决条件是边缘列表而不是邻接矩阵，我就觉得没"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">NeverDoubt</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">NeverDoubt</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">课程表</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-07-10 </span>
+        <div class="post-category">
+            <a href="/categories/%E7%AE%97%E6%B3%95/"> 算法 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#问题描述">问题描述</a></li>
+    <li><a href="#思路">思路</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="问题描述">问题描述</h2>
+<ol>
+<li>给定课程总量以及他们的先决条件，请判断是否可能完成所有课程的学习。</li>
+<li><a href="https://leetcode-cn.com/problems/course-schedule/">https://leetcode-cn.com/problems/course-schedule/</a></li>
+</ol>
+<h2 id="思路">思路</h2>
+<ol>
+<li>死脑筋啊，题目说先决条件是边缘列表而不是邻接矩阵，我就觉得没办法做了？就不能做个转换吗！转成邻接矩阵或者邻接链表就可以了！这就是经典的空间换时间啊。</li>
+<li>邻接链表不知道怎么写？List&lt;List<!-- raw HTML omitted -->&gt;，用一个嵌套的ArrayList就搞定了！</li>
+<li>拓扑排序怎么搞？起始就是统计一下入度，然后从入度为0的节点开始广度优先遍历就可以了！</li>
+<li>深度优先遍历的思路：用深度优先遍历判断每一个课程能否成功完成，采用深度优先遍历时，需要有一个flags数组来判断当前课程状态，如果是-1，表明该课程可以被成功完成，如果是1，则表明发现循环。</li>
+<li>广度优先遍历是向前看，或者说从前往后看，如果一个课程没有前置课程或者前置课程都被成功完成了，那么该课程一定可以成功完成；时间复杂度是O(N*M)</li>
+<li>深度优先遍历是往后看，往后一直走，看是否会有圈发生。时间复杂度O(N*M)</li>
+</ol>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">段新朋</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2020-07-10
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/dfs/">dfs</a>
+          <a href="/tags/bfs/">bfs</a>
+          <a href="/tags/%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F/">拓扑排序</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/trie%E5%89%8D%E7%BC%80%E6%A0%91/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Trie（前缀树）</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8/">
+            <span class="next-text nav-default">反转链表</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/duanxinpeng" class="iconfont icon-github" title="github"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author"></span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      TeX: {equationNumbers: {autoNumber: "AMS"}},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

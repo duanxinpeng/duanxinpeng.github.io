@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>HashMap on Even - A super concise theme for Hugo</title>
+    <link>http://localhost:1313/tags/hashmap/</link>
+    <description>Recent content in HashMap on Even - A super concise theme for Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 17 Jul 2020 09:52:36 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/hashmap/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>前K个高频元素</title>
+      <link>http://localhost:1313/post/%E5%89%8Dk%E4%B8%AA%E9%AB%98%E9%A2%91%E5%85%83%E7%B4%A0/</link>
+      <pubDate>Fri, 17 Jul 2020 09:52:36 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E5%89%8Dk%E4%B8%AA%E9%AB%98%E9%A2%91%E5%85%83%E7%B4%A0/</guid>
+      <description>问题描述 找出数组中出现频率最高的k个元素 https://leetcode-cn.com/problems/top-k-frequent-elements/ 思路 用HashMap统计频率 用小根堆求出前K大的数 java实现 在实现最小堆时，可以对元素建堆，并通</description>
+    </item>
+    
+    <item>
+      <title>路径和3</title>
+      <link>http://localhost:1313/post/%E8%B7%AF%E5%BE%84%E5%92%8C3/</link>
+      <pubDate>Wed, 15 Jul 2020 20:45:39 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E8%B7%AF%E5%BE%84%E5%92%8C3/</guid>
+      <description>问题描述 给定一棵在每个节点都存放着一个整数值的二叉树，找出路径和等于给定数值的路径总数。路径不需要从根节点开始，也不需要在叶子节点结束，但是</description>
+    </item>
+    
+    <item>
+      <title>和为k的子数组</title>
+      <link>http://localhost:1313/post/%E5%92%8C%E4%B8%BAk%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84/</link>
+      <pubDate>Sun, 12 Jul 2020 17:01:04 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E5%92%8C%E4%B8%BAk%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84/</guid>
+      <description>问题描述 给定一个整数数组和一个整数K，返回该数组中和为k的连续子数组的个数 https://leetcode-cn.com/problems/subarray-sum-equals-k/ 实现 暴力枚举法,O(n*n) 利用HashMap数据结构进行优化 遍</description>
+    </item>
+    
+    <item>
+      <title>只出现一次的数字</title>
+      <link>http://localhost:1313/post/%E5%8F%AA%E5%87%BA%E7%8E%B0%E4%B8%80%E6%AC%A1%E7%9A%84%E6%95%B0%E5%AD%97/</link>
+      <pubDate>Fri, 10 Jul 2020 09:53:07 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E5%8F%AA%E5%87%BA%E7%8E%B0%E4%B8%80%E6%AC%A1%E7%9A%84%E6%95%B0%E5%AD%97/</guid>
+      <description>问题描述 给定一个飞空数组，除了某个元素只出现一次之外，其他元素均出现两次，找出那个只出现一次的元素。 https://leetcode-cn.com/problems/single-number/ 思路 HashMap 位运算：对所有元素做一次异或运算</description>
+    </item>
+    
+    <item>
+      <title>字母异位词分组</title>
+      <link>http://localhost:1313/post/%E5%AD%97%E6%AF%8D%E5%BC%82%E4%BD%8D%E8%AF%8D%E5%88%86%E7%BB%84/</link>
+      <pubDate>Thu, 09 Jul 2020 14:49:53 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E5%AD%97%E6%AF%8D%E5%BC%82%E4%BD%8D%E8%AF%8D%E5%88%86%E7%BB%84/</guid>
+      <description>问题描述 将一个字符串数组中的字母异位词分组，字母异位词指的是含有字母相同，但排列不同的单词。 https://leetcode-cn.com/problems/group-anagrams/ 解题思路 用到了HashMap&amp;lt;Strin</description>
+    </item>
+    
+    <item>
+      <title>LFU的原理和实现</title>
+      <link>http://localhost:1313/post/lfu%E7%9A%84%E5%8E%9F%E7%90%86%E5%92%8C%E5%AE%9E%E7%8E%B0/</link>
+      <pubDate>Sun, 05 Jul 2020 14:45:51 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/lfu%E7%9A%84%E5%8E%9F%E7%90%86%E5%92%8C%E5%AE%9E%E7%8E%B0/</guid>
+      <description>LFU https://leetcode-cn.com/problems/lfu-cache/ HashMap+TreeSet实现 在HashMap中存放键值对，在TreeSet中存放节点的使用频率、更新时间的先后关系； get O(logN) 判断Has</description>
+    </item>
+    
+    <item>
+      <title>LRU原理和Redis实现</title>
+      <link>http://localhost:1313/post/lru%E5%8E%9F%E7%90%86%E5%92%8Credis%E5%AE%9E%E7%8E%B0/</link>
+      <pubDate>Sun, 05 Jul 2020 09:57:55 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/lru%E5%8E%9F%E7%90%86%E5%92%8Credis%E5%AE%9E%E7%8E%B0/</guid>
+      <description>LRU原理 HashMap+双向链表实现（hashmap用于查询，双向链表主要用于保证新旧顺序） put O(1) 判断是否存在，如果存在，替换（这里存在替换</description>
+    </item>
+    
+  </channel>
+</rss>

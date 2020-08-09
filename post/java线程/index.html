@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Java线程 - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="段新朋" /><meta name="description" content="java线程状态 我们都知道进程的状态有五种：创建、就绪、运行、阻塞、终止。但java线程状态不同于进程状态，java进程包括一下六种状态： N" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.72.0 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/java%E7%BA%BF%E7%A8%8B/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Java线程" />
+<meta property="og:description" content="java线程状态 我们都知道进程的状态有五种：创建、就绪、运行、阻塞、终止。但java线程状态不同于进程状态，java进程包括一下六种状态： N" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/java%E7%BA%BF%E7%A8%8B/" />
+<meta property="article:published_time" content="2020-07-13T15:12:43+08:00" />
+<meta property="article:modified_time" content="2020-07-13T15:12:43+08:00" />
+<meta itemprop="name" content="Java线程">
+<meta itemprop="description" content="java线程状态 我们都知道进程的状态有五种：创建、就绪、运行、阻塞、终止。但java线程状态不同于进程状态，java进程包括一下六种状态： N">
+<meta itemprop="datePublished" content="2020-07-13T15:12:43&#43;08:00" />
+<meta itemprop="dateModified" content="2020-07-13T15:12:43&#43;08:00" />
+<meta itemprop="wordCount" content="2938">
+
+
+
+<meta itemprop="keywords" content="java," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Java线程"/>
+<meta name="twitter:description" content="java线程状态 我们都知道进程的状态有五种：创建、就绪、运行、阻塞、终止。但java线程状态不同于进程状态，java进程包括一下六种状态： N"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">NeverDoubt</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">NeverDoubt</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Java线程</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-07-13 </span>
+        <div class="post-category">
+            <a href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"> 编程语言 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#java线程状态">java线程状态</a></li>
+    <li><a href="#线程的实现">线程的实现</a></li>
+    <li><a href="#java线程的实现">java线程的实现</a></li>
+    <li><a href="#线程调度">线程调度</a></li>
+    <li><a href="#java线程和协程">java线程和协程</a></li>
+    <li><a href="#java创建线程的几种方式">java创建线程的几种方式</a></li>
+    <li><a href="#线程池">线程池</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="java线程状态">java线程状态</h2>
+<p>我们都知道进程的状态有五种：创建、就绪、运行、阻塞、终止。但java线程状态不同于进程状态，java进程包括一下六种状态：</p>
+<ol>
+<li>New（初始）：新创建了一个线程对象，但还没有调用start()方法；</li>
+<li>Runnable（运行）：java将进程中的就绪(ready)和运行(running)统称为“运行”。调用start()方法之后，线程或处于就绪队列中等待调度或已经获得CPU时间片正在运行。</li>
+<li>Blocked（阻塞）：阻塞于锁，synchronized关键字，线程位于锁的等待队列中，和等待的区别在于，处于阻塞状态的线程在等待获取一个排他锁，这个事件将在另外一个线程放弃这个锁时发生。</li>
+<li>Waiting（等待）：调用wiat、join、park等方法，不会被分配处理器执行时间，需要等待其他线程显式唤醒。</li>
+<li>Timed_Waiting（超时等待）：调用sleep等方法，也不会被分配处理器执行时间，但不需要其他线程显式唤醒，一定时间之后系统自动唤醒线程。</li>
+<li>Terminated（终止）：表示该线程已经执行完毕。</li>
+</ol>
+<p>线程状态变化如下图所示：
+<img src="/media/threadstate.png" alt=""></p>
+<h2 id="线程的实现">线程的实现</h2>
+<ol>
+<li>内核线程实现，也被称为1:1实现（进程和线程1:1），直接由操作系统内核支持的线程，由内核完成切换，内核通过操纵调度器对线程进行调度，这种需要操作系统配合的都是重量级线程。</li>
+<li>用户线程实现，也被称为1:N实现（进程和用户级线程1:N），完全建立在用户空间的线程库上，系统内核完全不能感知到用户线程的存在，用户线程的建立、销毁、同步、调度完全在用户态中完成，不需要内核帮助；其优点是不需要系统内核支援，其劣势也在于此：由于操作系统只把处理器资源分配到进程，那诸如“阻塞如何处理（自旋）”，“多处理器系统如何将线程映射到其他处理器上”这类问题解决起来会异常困难。</li>
+<li>混合实现，也被称为N:M实现（进程和线程N:M）。</li>
+</ol>
+<h2 id="java线程的实现">java线程的实现</h2>
+<p>java采用内核线程实现，即1:1实现。每一个java线程都会直接映射到一个操作系统原生线程，线程的切换、调度全权由操作系统完成。</p>
+<h2 id="线程调度">线程调度</h2>
+<p>线程调度指系统为线程分配处理器使用权的过程，主要分为两种方式：协同式、抢占式；</p>
+<ul>
+<li>协同式：线程把自己的工作执行完之后，要主动通知系统切换到另外一个线程；优点是简单，缺点是线程执行时间不可控。</li>
+<li>抢占式：每个线程由系统来分配执行时间，线程的切换不由线程本身决定。优点是线程执行时间可控。java采用抢占式调度。</li>
+</ul>
+<h2 id="java线程和协程">java线程和协程</h2>
+<ol>
+<li>内核线程的调度成本高：用户态与和心态之间的状态转换，响应中断、保护和回复现场。</li>
+<li>如果采用用户线程，保护和恢复现场的花销能省略掉吗？不能，但是如果把保护和恢复现场及调度的工作从操作系统交到程序员手上，那我们就可以打开脑洞，通过玩出各种花样来缩减这些开销
+<ul>
+<li>有栈协程：用户自己模拟多线程，在内存中划分出一片额外空间来模拟调用栈。java里的纤程就是有栈协程。</li>
+<li>无栈协程：本质上是一种有限状态机，状态保存在闭包里。</li>
+</ul>
+</li>
+</ol>
+<h2 id="java创建线程的几种方式">java创建线程的几种方式</h2>
+<ol>
+<li>三种方式：
+<a href="https://github.com/duanxinpeng/Java-E-xamples/blob/master/src/concurrent/ThreadCreate.java">https://github.com/duanxinpeng/Java-E-xamples/blob/master/src/concurrent/ThreadCreate.java</a>
+<ul>
+<li>继承Thread类，重写该类的run方法</li>
+<li>Runnable接口（run）+ Thread</li>
+<li>Callable接口(call) + FutureTask + Thread</li>
+</ul>
+</li>
+<li>三种方式的对比
+<ul>
+<li>Thread类的方式在继承Thread类之后就不能再继承其他类。</li>
+<li>Runnable/Callable接口适合多个线程进行资源共享</li>
+<li>Callable接口的call方法可以有返回值，Runnable接口的run方法不能有返回值</li>
+<li>运行一个Callable任务可以拿到一个FutureTask对象，通过FutureTask对象可以了解任务执行情况，可取消任务的执行，还可以获取线程返回值。</li>
+</ul>
+</li>
+<li>思考
+<ul>
+<li>多线程发起多个任务，如果所有校验结果均为true，则返回true，只要有一个返回false则返回false，尽量快，请完成isAllTrue方法。</li>
+<li>分布式事务的实现：collable？</li>
+<li>jdk8之前没有线程返回之后及时反馈的机制，所以要用到guava？</li>
+<li>或者用jdk8之后才有的 CompleteableFuture、ListeningFutre实现！</li>
+</ul>
+</li>
+</ol>
+<h2 id="线程池">线程池</h2>
+<ol>
+<li>作用：通过维护一定数量的线程来达到多个线程的复用！</li>
+<li>好处：线程复用节省了线程创建消耗掉的资源</li>
+<li>本质：本质就是一个生产者消费者模型，系统不断生成task（本质就是一个Runnbale接口的实现类），线程不断从阻塞队列中取任务。</li>
+<li>线程池的几种重要参数
+<ul>
+<li>corePoolSize：核心线程池的大小</li>
+<li>maximumPoolSize：线程池最大线程数</li>
+<li>keepAliveTime：（核心）线程的最大存活时间</li>
+<li>unit：keepAliveTime的时间单位</li>
+<li>workQueue：阻塞队列，用来存储等待执行的任务</li>
+<li>threadFactory：创建线程的工厂</li>
+<li>handler：拒绝任务时的策略</li>
+</ul>
+</li>
+<li>线程池工作流程
+<ul>
+<li>向线程池提交一个任务，如果此时线程池中线程数小于corePoolSize，线程池会创建一个线程去处理提交的任务</li>
+<li>如果线程数大于等于corePoolSize， 新提交的任务会被放入任务队列中。</li>
+<li>若线程数等于corePoolSize且任务队列已满，则进一步判断线程数是否达到最大线程数（maximumPoolSize）如果还没达到，则继续创建一个线程执行任务。</li>
+<li>如果线程数已经达到最大线程数，对新来的任务采用拒绝策略。</li>
+</ul>
+</li>
+<li>线程池中的常用阻塞队列：（大概和生产者消费者的实现类似，由很多种方式比如Synchronized关键字+wait/notify，可重入锁+condition）
+<ul>
+<li>ArrayBlockingQueue：基于数组的阻塞队列，有界队列，FIFO</li>
+<li>LinkedBlockingQueue：基于链表的阻塞队列，无界队列，FIFO</li>
+<li>SynchronousBlockingQueue：容量为0，不存储任务，有一个处理一个</li>
+<li>PriorityBlockingQueue：基于堆的阻塞队列，无界有序!</li>
+</ul>
+</li>
+<li>常见线程池（利用Executors直接生成）
+<ul>
+<li>newCachedThreadPool：corePoolSize=0，maximumPoolSize=Max_value，workQueue=synchronoutQueue，适用于很多短期异步的小程序。</li>
+<li>newFixedThreadPool：corePoolSize=maximumPoolSize=nThread，workQueue=LinkedBlockingQueue，keepAlivetimie=0（不限时），适用于长期任务</li>
+<li>newSingleThreadExecutor</li>
+<li>newScheduledThreadPool</li>
+</ul>
+</li>
+<li>拒绝策略
+<ul>
+<li>抛异常</li>
+<li>丢弃</li>
+<li>丢弃最老的任务</li>
+</ul>
+</li>
+<li>如何提交一个线程
+<ul>
+<li>execute：没有返回值</li>
+<li>submit：返回一个Future对象，有返回值</li>
+</ul>
+</li>
+<li>如何关闭线程池
+<ul>
+<li>shutdown：不接受新任务，将线程池内任务执行完毕</li>
+<li>shutdownNow：不接受新任务，并试图停止线程池中的任务。</li>
+</ul>
+</li>
+<li>使用Executors构建线程池的缺点，应该使用(ThreadPoolExecutor)
+<ul>
+<li>Executors提供的很多方法都是默认无界的，无界队列容易导致OOM。</li>
+<li>FixedThreadPool和SingleThreadPool：阻塞队列无界！</li>
+<li>CachedThreadPool和Scheduled THreadPool：maximumPoolSize=Integer.MAX_VALUE；</li>
+</ul>
+</li>
+<li><a href="https://github.com/duanxinpeng/Java-E-xamples/blob/master/src/concurrent/TheadPoolTest.java">https://github.com/duanxinpeng/Java-E-xamples/blob/master/src/concurrent/TheadPoolTest.java</a></li>
+</ol>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">段新朋</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2020-07-13
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/java/">java</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Java内存模型</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/java8%E6%96%B0%E7%89%B9%E6%80%A7/">
+            <span class="next-text nav-default">Java8新特性</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/duanxinpeng" class="iconfont icon-github" title="github"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author"></span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      TeX: {equationNumbers: {autoNumber: "AMS"}},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

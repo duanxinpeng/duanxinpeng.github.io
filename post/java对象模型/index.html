@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Java对象模型 - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="段新朋" /><meta name="description" content="对象在内存中的存储布局 对象存储在堆中，对象的引用在栈中，对象在内存中的存储布局如下： 对象头 mark word GC分代年龄 锁状态标记 哈希码 类型指针 lengt" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.72.0 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/java%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Java对象模型" />
+<meta property="og:description" content="对象在内存中的存储布局 对象存储在堆中，对象的引用在栈中，对象在内存中的存储布局如下： 对象头 mark word GC分代年龄 锁状态标记 哈希码 类型指针 lengt" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/java%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B/" />
+<meta property="article:published_time" content="2020-07-18T22:41:29+08:00" />
+<meta property="article:modified_time" content="2020-07-18T22:41:29+08:00" />
+<meta itemprop="name" content="Java对象模型">
+<meta itemprop="description" content="对象在内存中的存储布局 对象存储在堆中，对象的引用在栈中，对象在内存中的存储布局如下： 对象头 mark word GC分代年龄 锁状态标记 哈希码 类型指针 lengt">
+<meta itemprop="datePublished" content="2020-07-18T22:41:29&#43;08:00" />
+<meta itemprop="dateModified" content="2020-07-18T22:41:29&#43;08:00" />
+<meta itemprop="wordCount" content="1121">
+
+
+
+<meta itemprop="keywords" content="java," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Java对象模型"/>
+<meta name="twitter:description" content="对象在内存中的存储布局 对象存储在堆中，对象的引用在栈中，对象在内存中的存储布局如下： 对象头 mark word GC分代年龄 锁状态标记 哈希码 类型指针 lengt"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">NeverDoubt</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">NeverDoubt</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Java对象模型</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-07-18 </span>
+        <div class="post-category">
+            <a href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"> 编程语言 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#对象在内存中的存储布局">对象在内存中的存储布局</a></li>
+    <li><a href="#对象的创建过程">对象的创建过程</a></li>
+    <li><a href="#内存分配方式">内存分配方式</a></li>
+    <li><a href="#对象定位方式">对象定位方式</a></li>
+    <li><a href="#对象空间分配过程">对象空间分配过程</a></li>
+    <li><a href="#指针压缩">指针压缩</a></li>
+    <li><a href="#object-o--new-object在内存中占用多少字节">Object o = new Object()在内存中占用多少字节</a></li>
+    <li><a href="#hotspot为什么不使用c对象来代表java对象">HotSpot为什么不使用C++对象来代表java对象？</a></li>
+    <li><a href="#class对象位于堆还是方法区">Class对象位于堆，还是方法区？</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="对象在内存中的存储布局">对象在内存中的存储布局</h2>
+<p>对象存储在堆中，对象的引用在栈中，对象在内存中的存储布局如下：</p>
+<ol>
+<li>对象头
+<ul>
+<li>mark word
+<ul>
+<li>GC分代年龄</li>
+<li>锁状态标记</li>
+<li>哈希码</li>
+</ul>
+</li>
+<li>类型指针</li>
+<li>length（只有数组对象包含）</li>
+</ul>
+</li>
+<li>实例数据</li>
+<li>对齐填充</li>
+</ol>
+<h2 id="对象的创建过程">对象的创建过程</h2>
+<ol>
+<li>类加载</li>
+<li>内存分配</li>
+<li>初始化零值</li>
+<li>实际的初始化</li>
+<li>返回引用</li>
+</ol>
+<h2 id="内存分配方式">内存分配方式</h2>
+<ol>
+<li>指针碰撞 : 用于Serial和ParNew等不会产生内存碎片的垃圾收集器
+<ul>
+<li>为了解决多线程并发问题，引入TLAB。</li>
+</ul>
+</li>
+<li>空闲列表： CMS垃圾收集器就是采用的这种方法</li>
+</ol>
+<h2 id="对象定位方式">对象定位方式</h2>
+<ol>
+<li>句柄方式
+<ul>
+<li>在堆中划分一块区域作为句柄池，句柄中包含了类数据地址和实例数据地址</li>
+<li>好处是对象位置发生改变时，只需要改变句柄就好，而不需要改变栈中的引用</li>
+<li>坏处是访问麻烦</li>
+</ul>
+</li>
+<li>直接引用：HotSpot采用的时直接引用的方式。
+<ul>
+<li>引用直接指向对象的实例数据地址（实例对象的对象头总包含类数据地址）</li>
+<li>好处是访问简单</li>
+<li>坏处是对象位置改变时，需要改变栈中的引用。</li>
+</ul>
+</li>
+</ol>
+<h2 id="对象空间分配过程">对象空间分配过程</h2>
+<ol>
+<li>尝试栈上分配
+<ul>
+<li>逃逸分析：对象的作用范围只局限在方法内部</li>
+</ul>
+</li>
+<li>大对象可直接分配到老年代</li>
+<li>尝试TLAB分配</li>
+<li>伊甸分配</li>
+</ol>
+<h2 id="指针压缩">指针压缩</h2>
+<ol>
+<li>在64位平台的HotSpot中使用64位（8字节）指针，会占用更多内存，而且使用较大指针在主内存和缓存之间移动数据会占用较大宽带，GC也会承受更大压力</li>
+<li>为了减小64位平台下的内存消耗，启用指针压缩功能</li>
+<li>堆内存小于4G时，不需要启动指针压缩，jvm会直接除去高32位地址，使用低虚拟地址空间</li>
+<li>堆内存大于32G时，压缩指针会失效，会强制使用64位来对java对象寻址</li>
+<li>指针压缩原理：编码、解码</li>
+<li>哪些信息会被压缩
+<ul>
+<li>对象的全局静态变量</li>
+<li>对象头信息：64位平台下，原生对象头大小位16字节（markword 8字节，类型指针8字节），压缩后为12字节（markword 8字节，classpointer 4字节）</li>
+<li>对象的引用类型，由8字节压缩至4字节</li>
+<li>对象数组类型，由24字节压缩到16字节</li>
+</ul>
+</li>
+<li>哪些信息不会被压缩
+<ul>
+<li>指向非Heap对象的指针</li>
+<li>局部变量、传参、返回值、Null指针</li>
+</ul>
+</li>
+</ol>
+<h2 id="object-o--new-object在内存中占用多少字节">Object o = new Object()在内存中占用多少字节</h2>
+<ol>
+<li>64位平台下，采用压缩指针：16字节：8(mark word) + 4(class pointer)+4(对齐)</li>
+<li>64位平台下，不采用压缩指针：16字节：8(mark word)+8(class pointer)</li>
+<li>o也占4个字节，所以满分答案是20字节。</li>
+</ol>
+<h2 id="hotspot为什么不使用c对象来代表java对象">HotSpot为什么不使用C++对象来代表java对象？</h2>
+<ol>
+<li>为了避免在每个对象中都含有一个虚函数指针。</li>
+<li>oop中不含任何虚函数，虚函数都在Klass对象中</li>
+<li>在C++中，非虚函数在编译时就已经确定调用目标。</li>
+<li>为了实现多态，也就是通过基类的指针调用子类的方法，才引入了虚函数</li>
+<li>在C++中，只有虚函数才能被重写！java中的每个函数都是虚函数。</li>
+</ol>
+<h2 id="class对象位于堆还是方法区">Class对象位于堆，还是方法区？</h2>
+<ol>
+<li>位于方法区。</li>
+<li>但是Class对象还会在堆区生成一个对象用于反射！</li>
+</ol>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">段新朋</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2020-07-18
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/java/">java</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">买卖股票的最佳时机</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/%E8%83%8C%E5%8C%85%E4%B9%9D%E8%AE%B2/">
+            <span class="next-text nav-default">背包九讲</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/duanxinpeng" class="iconfont icon-github" title="github"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author"></span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      TeX: {equationNumbers: {autoNumber: "AMS"}},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

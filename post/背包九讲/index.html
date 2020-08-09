@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>背包九讲 - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="段新朋" /><meta name="description" content="0/1背包 有 N 件物品和一个容量为 V 的背包。每一件物品 i 的体积和价值分别是 $C_i$ 和 $W_i$, 请问将哪些物品装入背包可使价值总和最大？ 状态转移方程：$dp[" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.72.0 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/%E8%83%8C%E5%8C%85%E4%B9%9D%E8%AE%B2/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="背包九讲" />
+<meta property="og:description" content="0/1背包 有 N 件物品和一个容量为 V 的背包。每一件物品 i 的体积和价值分别是 $C_i$ 和 $W_i$, 请问将哪些物品装入背包可使价值总和最大？ 状态转移方程：$dp[" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/%E8%83%8C%E5%8C%85%E4%B9%9D%E8%AE%B2/" />
+<meta property="article:published_time" content="2020-07-18T08:01:20+08:00" />
+<meta property="article:modified_time" content="2020-07-18T08:01:20+08:00" />
+<meta itemprop="name" content="背包九讲">
+<meta itemprop="description" content="0/1背包 有 N 件物品和一个容量为 V 的背包。每一件物品 i 的体积和价值分别是 $C_i$ 和 $W_i$, 请问将哪些物品装入背包可使价值总和最大？ 状态转移方程：$dp[">
+<meta itemprop="datePublished" content="2020-07-18T08:01:20&#43;08:00" />
+<meta itemprop="dateModified" content="2020-07-18T08:01:20&#43;08:00" />
+<meta itemprop="wordCount" content="2766">
+
+
+
+<meta itemprop="keywords" content="动态规划,背包问题," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="背包九讲"/>
+<meta name="twitter:description" content="0/1背包 有 N 件物品和一个容量为 V 的背包。每一件物品 i 的体积和价值分别是 $C_i$ 和 $W_i$, 请问将哪些物品装入背包可使价值总和最大？ 状态转移方程：$dp["/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">NeverDoubt</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">NeverDoubt</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">背包九讲</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-07-18 </span>
+        <div class="post-category">
+            <a href="/categories/%E7%AE%97%E6%B3%95/"> 算法 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#01背包">0/1背包</a></li>
+    <li><a href="#完全背包">完全背包</a></li>
+    <li><a href="#多重背包">多重背包</a></li>
+    <li><a href="#混合三种背包问题">混合三种背包问题</a></li>
+    <li><a href="#二维费用的背包问题">二维费用的背包问题</a></li>
+    <li><a href="#分组的背包问题">分组的背包问题</a></li>
+    <li><a href="#有依赖的背包问题">有依赖的背包问题</a></li>
+    <li><a href="#泛化物品">泛化物品</a></li>
+    <li><a href="#背包问题问法的变化">背包问题问法的变化</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="01背包">0/1背包</h2>
+<ol>
+<li>有 N 件物品和一个容量为 V 的背包。每一件物品 i 的体积和价值分别是 $C_i$ 和 $W_i$, 请问将哪些物品装入背包可使价值总和最大？</li>
+<li>状态转移方程：$dp[i,v] = \max(dp[i-1,v],dp[i-1,v-C_i]+W_i)$，对应伪代码为：
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">dp[0][0...V] = 0
+for i=1 to N
+    for v = C_i to V
+        dp[i][v] = max(dp[i-1][v],dp[i-1][v-C_i]+W_i)
+</code></pre></td></tr></table>
+</div>
+</div><p>``</p>
+</li>
+<li>优化空间复杂度：只需要逆序遍历v值即可，即从0~v 变为 v~0，同时将F数组中的每一个位置初始化为0，此时状态转移方程变为 $dp[v] = \max(dp[v], dp[v-C_i]+W_i)$.
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">dp[0...V] = 0
+for i=1 to N
+    for v = V to C_i
+        dp[v] = max(dp[v],dp[v-C_i]+W_i)
+</code></pre></td></tr></table>
+</div>
+</div><p>``</p>
+</li>
+<li>恰好装满问题：如果题目要求恰好装满时的最优解，那么在初始化时，把 dp[0]初始化为0，同时把其他所有的位置初始化为负无穷即可。这样的话，就只有在 $C_i$ 和容量相等的时候，才能恰好到dp[0]的位置，也只有当 $C_i$ 和 v 相等时，才能恰好装满背包。
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">dp[0] = 0
+dp[1...V] = 0
+for i=1 to N
+    for v = V to C_i
+        dp[v] = max(dp[v],dp[v-C_i]+W_i)
+</code></pre></td></tr></table>
+</div>
+</div><p>``</p>
+</li>
+<li><a href="https://www.nowcoder.com/questionTerminal/7e157ce9a8c249daa3ddafad322dbf1e">https://www.nowcoder.com/questionTerminal/7e157ce9a8c249daa3ddafad322dbf1e</a></li>
+</ol>
+<h2 id="完全背包">完全背包</h2>
+<ol>
+<li>与0/1背包的区别在于每件物品有无穷多个，所以每件物品可重复选择</li>
+<li>转换为0/1背包
+<ul>
+<li>考虑到第 i 件最多选 $\lfloor V/C_i \rfloor$ 件，于是可以把第 i 种物品转化为 $\lfloor V/C_i \rfloor$ 件费用及价值均不变的物品，然后求解这个0/1背包问题。</li>
+<li>把第 i 种物品拆分成费用为 $C_i2^k$, 价值为 $W_i2^k$ 的若干件物品，其中 k 取满足 $C_i2^k \leq V$ 的非负整数。（二进制思想，因为任何整数都可以拆分为若干个 $2^k$ 之和，比如 13 可以拆分为 8+4+1, 这是因为二进制可以表示出任何一个整数！）</li>
+</ul>
+</li>
+<li>最简单的方法是调整0/1背包的遍历顺序即可！这是因为调整顺序之后的算法对应的状态转移方程变为：$$dp[i][v] = \max(dp[i-1][v],dp[i][v-C_i]+W_i)$$
+<ul>
+<li>倒着来就是第 i 件物品不可以重复使用：$（V - C_i）$：$dp[v] = \max(dp[v], dp[v-C_i]+W_i)$，即 $dp[i,v] = \max(dp[i-1,v],dp[i-1,v-C_i]+W_i)$.</li>
+<li>正着来就是第 i 件物品可以重复使用：$(C_i - V$：$dp[v] = \max(dp[v], dp[v-C_i]+W_i)$，即 $dp[i][v] = \max(dp[i-1][v],dp[i][v-C_i]+W_i)$。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">dp[0...V] = 0
+for i=1 to N
+    for v = C_i to V
+        dp[v] = max(dp[v],dp[v-C_i]+W_i)
+</code></pre></td></tr></table>
+</div>
+</div><p>``</p>
+</li>
+</ol>
+<h2 id="多重背包">多重背包</h2>
+<ol>
+<li>类似0/1背包和完全背包，只不过每种物品的件数是固定的</li>
+<li>转换为0/1背包
+<ul>
+<li>将第 i 种物品视为 $M_i$ 件物品，即可转为0/1背包问题。</li>
+<li>二进制优化：将第 i 种物品视为容量和价值分别以 $1, 2, 2^2, &hellip;, 2^{k-1},M-2^k+1$ 为系数的物品。此时，k 应该是满足 $M_i - 2^k +1 &gt; 0$ 的最大整数。对应的伪代码为；</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">def MultiplePack(dp,C,W,M)
+    if C*M &gt;= M
+        CompletePack(dp,C,W)
+    k=1
+    while k &lt; M 
+        ZeroOnPack(kC,kW)
+        M = M-k
+        k = 2k
+    ZeroOnePack(C*M,W*M)
+</code></pre></td></tr></table>
+</div>
+</div><p>``</p>
+</li>
+<li><a href="https://www.nowcoder.com/questionTerminal/6ce78d70a25347058004691035d7540b">https://www.nowcoder.com/questionTerminal/6ce78d70a25347058004691035d7540b</a></li>
+</ol>
+<h2 id="混合三种背包问题">混合三种背包问题</h2>
+<ol>
+<li>之所以能混合，是因为一个元素是否可以重复选取只和该元素有关，和其他元素无关，也就是说无需考虑外层循环之间的关系对dp的影响！</li>
+<li>0/1背包与完全背包的混合
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">for i=1 to N
+    if 第 i 件物品属于0/1背包
+        for v = V to C_i
+            dp[v] = max(dp[v], dp[v-C_i)] + W_i)
+    else if 第 i 件物品属于完全背包
+        for v = C_i to V
+            dp[v] = max(dp[v], dp[v-c_i] + w_i)
+</code></pre></td></tr></table>
+</div>
+</div><p>``</p>
+</li>
+<li>三种背包的混合
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">for i = 1 to N
+    if 第 i 件物品属于 01 背包
+        ZeroOnePack(dp,C_i,W_i)
+    else if 第 i 件物品属于完全背包
+        CompletePack(dp, C_i, W_i)
+    else if 第 i 件物品属于多重背包
+        MultiplePack(dp, C_i,W_i, M_i)
+</code></pre></td></tr></table>
+</div>
+</div><p>``</p>
+</li>
+</ol>
+<h2 id="二维费用的背包问题">二维费用的背包问题</h2>
+<ol>
+<li>指的是该背包问题不但有容量的限制，还有重量的限制，在体积和重量的双重限制之下，找到最大的价值。</li>
+<li>费用加了一维，只需状态也增加一维即可</li>
+<li>状态转移方程：$dp[i][v][u] = \max(dp[i-1][v][u], dp[i-1][v-C_i][u-D_i] + W_i)</li>
+<li>0/1背包二维费用伪代码
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">for i=1 to N
+    for v=V to C_i
+        for u=U to D_i 
+            dp[v][u] = max(dp[v][u], dp[v-C_i][u-D_i] + W_i)
+</code></pre></td></tr></table>
+</div>
+</div><p>``</p>
+</li>
+<li>物品总个数限制：有时“二位费用”的条件是以一种隐含的方式给出的：最多只能取 U 件物品。</li>
+</ol>
+<h2 id="分组的背包问题">分组的背包问题</h2>
+<ol>
+<li>有 N 件物品和一个容量为 V 的背包。第 i 件物品的费用是 $C_i$ ，价值是 $W_i$ 。这些 物品被划分为 K 组，每组中的物品互相冲突，最多选一件。求解将哪些物品装入背包 可使这些物品的费用总和不超过背包容量，且价值总和最大。</li>
+<li>状态转移方程：$dp[k][v] = \max(dp[k-1][v], dp[k-1][v-C_i] + W_i| i \in group k)$</li>
+<li>伪代码，下面的三层循环，保证了每组中最多只有一个会被添加到背包中。
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">for k=1 to K
+    for v = V to 0
+        for all i in group k
+            dp[v] = max(dp[v], dp[v-C_i]+W_i)
+</code></pre></td></tr></table>
+</div>
+</div><p>``</p>
+</li>
+</ol>
+<h2 id="有依赖的背包问题">有依赖的背包问题</h2>
+<ol>
+<li>不依赖于别的物品的物品被称为“主体”，依赖于某主件的物品称为“附件”。本问题的简化条件是没有某个物品即依赖别的物品又被别的物品所依赖，且没有某件物品同时依赖多件物品。由这个问题的简化条件可知所有的物品由若干主件和依赖于每个主件的一个附件集合组成。</li>
+<li>首先将一个主件和它的附件集看作<code>分组背包问题</code>中的一个分组，在分组之中每个可用的选择策略对应于一个物品（选了主件又选了若干附件，共$2^n+1$种）；为了减少物品组种“物品（策略）”的个数，先在物品组中做一次0/1背包，得到费用依次为 $0&hellip;V-C_k$ 所有这些值对应的最大价值 $dp[0&hellip;V-C_k]$, 那么，这个主件及他的附件集合相当于 $V-C_k+1$ 个物品的物品组，其中费用为 $v$ 的物品的价值为 $dp[v-C_k]+W_k$, v 的取值范围是 $C_k\leq v \leq V$。之后就可以采用<code>分组背包问题</code>的解决方法了。</li>
+<li>较一般的问题：依赖关系以“森林”的形式给出，也就是说主件的附件仍然可以拥有自己的附件集合。限制是每个物品最多只依赖于一个物品，且不出现循环依赖。</li>
+<li>解决这个问题仍然可以用将每个主件及其附件集合转化为物品组的方式。唯一不同的是，由于附件可能还有附件，就不能将每个附件都看作一个一般的01背包中的物品了。若这个附件也有附件集合，则它必定要被先转化为物品组，然后用分组的背包问题解出主件及其附件集合所对应的附件组中各个费用的附件所对应的价值。</li>
+<li>事实上，这是一种树形动态规划，其特点是，在用动态规划求每个父节点的属性之前，需要对它的各个儿子的属性进行一次动态规划式的求值。这已经触及到了“泛化物品”的思想。</li>
+<li>这个“依赖关系树”每一个子树都等价于一件泛化物品，求某节点为根的子树对应的泛化物品相当于求其所有儿子的对应的泛化物品之和。</li>
+</ol>
+<h2 id="泛化物品">泛化物品</h2>
+<ol>
+<li>考虑这样一种物品，它并没有固定的费用和价值，而是它的价值随着你分配给它的费用而变化。这就是泛化物品的概念。</li>
+<li>在背包容量为 V 的背包问题中，泛化物品是一个定义域为 $0&hellip;V$ 中的整数的函数 h ，当分配给它的费用为 v 时，能得到的价值就是 h(v)。</li>
+<li>一个泛化物品就是一个数组 $h[0&hellip;V ]$，给它费用 $v$ ，可得到价值 $h[v]$ 。</li>
+<li>一个费用为 $c$ 价值为 $w$ 的物品，如果它是 01 背包中的物品，那么把它看成泛化物品，它就是除了 $h(c) = w$ 外，其它函数值都为 0 的一个函数。</li>
+<li>如果它是完全背包中的物品，那么它可以看成这样一个函数，仅当 $v$ 被 $c$ 整除时有 $h(v) = w*\frac{v}{c}$，其它函数值均为 0 。</li>
+<li>如果它是多重背包中重复次数最多为 $m$ 的物品，那么它对应的泛化物品的函数有 $h(v) = w*\frac{v}{c}$ 仅当 $v$ 被 $c$ 整除且 $\frac{v}{c} \leq n$ ，其它情况函数值均为 0 。</li>
+<li>一个物品组可以看作一个泛化物品 $h$ 。对于一个 $0&hellip;V$ 中的 $v$ ，若物品组中不存在费用为 $v$ 的物品，则 $h(v) = 0$ ，否则 $h(v)$ 取值为所有费用为 $v$ 的物品的最大价值。</li>
+<li>泛化物品的和：$f(v) = \max (h(k) + l(v-k)|0 \leq k \leq v)$ , 即 $f$ 是一个由泛化物品 $h$ 和 $l$ 决定的泛化物品。</li>
+<li>一般而言，求解背包问题，即求解这个问题所对应的一个函数，即该问题的泛化物品。而求解某个泛化物品的一种常用方法就是将它表示为若干泛化物品的和然后求之。</li>
+</ol>
+<h2 id="背包问题问法的变化">背包问题问法的变化</h2>
+<ol>
+<li>输出方案</li>
+<li>输出字典序最小的最优方案</li>
+<li>求方案总数</li>
+<li>最优方案的总数</li>
+<li>求次优解，第K优解</li>
+</ol>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">段新朋</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2020-07-18
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">动态规划</a>
+          <a href="/tags/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/">背包问题</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/java%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Java对象模型</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/%E5%AE%8C%E5%85%A8%E5%B9%B3%E6%96%B9%E6%95%B0/">
+            <span class="next-text nav-default">完全平方数</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/duanxinpeng" class="iconfont icon-github" title="github"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author"></span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      TeX: {equationNumbers: {autoNumber: "AMS"}},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

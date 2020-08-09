@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>LFU的原理和实现 - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="段新朋" /><meta name="description" content="LFU https://leetcode-cn.com/problems/lfu-cache/ HashMap&#43;TreeSet实现 在HashMap中存放键值对，在TreeSet中存放节点的使用频率、更新时间的先后关系； get O(logN) 判断Has" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.72.0 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/lfu%E7%9A%84%E5%8E%9F%E7%90%86%E5%92%8C%E5%AE%9E%E7%8E%B0/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="LFU的原理和实现" />
+<meta property="og:description" content="LFU https://leetcode-cn.com/problems/lfu-cache/ HashMap&#43;TreeSet实现 在HashMap中存放键值对，在TreeSet中存放节点的使用频率、更新时间的先后关系； get O(logN) 判断Has" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/lfu%E7%9A%84%E5%8E%9F%E7%90%86%E5%92%8C%E5%AE%9E%E7%8E%B0/" />
+<meta property="article:published_time" content="2020-07-05T14:45:51+08:00" />
+<meta property="article:modified_time" content="2020-07-05T14:45:51+08:00" />
+<meta itemprop="name" content="LFU的原理和实现">
+<meta itemprop="description" content="LFU https://leetcode-cn.com/problems/lfu-cache/ HashMap&#43;TreeSet实现 在HashMap中存放键值对，在TreeSet中存放节点的使用频率、更新时间的先后关系； get O(logN) 判断Has">
+<meta itemprop="datePublished" content="2020-07-05T14:45:51&#43;08:00" />
+<meta itemprop="dateModified" content="2020-07-05T14:45:51&#43;08:00" />
+<meta itemprop="wordCount" content="925">
+
+
+
+<meta itemprop="keywords" content="算法,字节,LFU,TreeSet,HashMap," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="LFU的原理和实现"/>
+<meta name="twitter:description" content="LFU https://leetcode-cn.com/problems/lfu-cache/ HashMap&#43;TreeSet实现 在HashMap中存放键值对，在TreeSet中存放节点的使用频率、更新时间的先后关系； get O(logN) 判断Has"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">NeverDoubt</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">NeverDoubt</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">LFU的原理和实现</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-07-05 </span>
+        <div class="post-category">
+            <a href="/categories/%E7%AE%97%E6%B3%95/"> 算法 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#lfu">LFU</a></li>
+    <li><a href="#hashmaptreeset实现">HashMap+TreeSet实现</a>
+      <ul>
+        <li><a href="#get-ologn">get O(logN)</a></li>
+        <li><a href="#put-ologn">put O(logN)</a></li>
+        <li><a href="#代码">代码</a></li>
+      </ul>
+    </li>
+    <li><a href="#hashmaphashmap双向链表实现">HashMap+HashMap+双向链表实现</a>
+      <ul>
+        <li><a href="#get-o1">get O(1)</a></li>
+        <li><a href="#put-o1">put O(1)</a></li>
+        <li><a href="#实现">实现</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="lfu">LFU</h2>
+<p><a href="https://leetcode-cn.com/problems/lfu-cache/">https://leetcode-cn.com/problems/lfu-cache/</a></p>
+<h2 id="hashmaptreeset实现">HashMap+TreeSet实现</h2>
+<p>在HashMap中存放键值对，在TreeSet中存放节点的使用频率、更新时间的先后关系；</p>
+<h3 id="get-ologn">get O(logN)</h3>
+<ol>
+<li>判断HashMap中是否存在key，若不存在返回-1；</li>
+<li>若存在则将对应的value值返回，更新其使用频率及更新时间，并在TreeSet中更新其位置（更新用到了一次删除+一次插入，都是logn的时间）</li>
+</ol>
+<h3 id="put-ologn">put O(logN)</h3>
+<ol>
+<li>判断HashMap中是否存在key，若存在，则过程和get过程类似，只不过还需要改一下对应的node的value值。</li>
+<li>若不存在，则需要插入新节点，此时需要判断 size和capacity的关系</li>
+<li>若size==capacity，需要删除（HashMap，TreeSet中都要删）其使用频率最小（时间最久）的node，也就是TreeSet.first。</li>
+<li>生成新的node，并分别将其插入HashMap与TreeSet中。</li>
+</ol>
+<h3 id="代码">代码</h3>
+<p><a href="https://leetcode-cn.com/problems/lfu-cache/submissions/">https://leetcode-cn.com/problems/lfu-cache/submissions/</a></p>
+<ol>
+<li>Comparable的使用方式</li>
+<li>TreeSet的first()函数</li>
+<li>get只需要改TreeSet即可，当put时无需插入新node时（已经含有原key）和get类似</li>
+<li>get如果需要插入新node时，即需要改TreeSet，也需要改HashMap。</li>
+</ol>
+<h2 id="hashmaphashmap双向链表实现">HashMap+HashMap+双向链表实现</h2>
+<p>LFU和LRU的本质不同在于，对频率进行更改之后，并不是简单地将该节点提到链表头，而是需要更精细粒度的定位应该提前到的位置，所以不能简单地用双向链表来存储node间的优先关系，而是要用HashMap来存储；而且当频率相同的时候，LFU相当于嵌套了一个LRU，所以实现起来稍显麻烦。需要的两个HashMap分别为fmap（频率为key，双向链表为value），nmap（key为key，node为value）！还需要一个变量minFreq来表明当前最小的频率。</p>
+<h3 id="get-o1">get O(1)</h3>
+<ol>
+<li>判断nmap中是否存在key，若不存在则返回-1；</li>
+<li>如果存在该节点，对该节点的频率加1之后，会影响两个地方：fmap和minFreq，并不会影响nmap；</li>
+</ol>
+<h3 id="put-o1">put O(1)</h3>
+<ol>
+<li>首先判断存不存在与nmap，如果存在，流程和get差不多</li>
+<li>如果不存在，需要插入新的节点，此时需要判断是否还有容量，没有容量的话，需要删除一个minFreq对应的节点。</li>
+<li>分别向nmap，fmap插入新节点</li>
+</ol>
+<h3 id="实现">实现</h3>
+<p><a href="https://leetcode-cn.com/problems/lfu-cache/submissions/">https://leetcode-cn.com/problems/lfu-cache/submissions/</a></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">段新朋</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2020-07-05
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E7%AE%97%E6%B3%95/">算法</a>
+          <a href="/tags/%E5%AD%97%E8%8A%82/">字节</a>
+          <a href="/tags/lfu/">LFU</a>
+          <a href="/tags/treeset/">TreeSet</a>
+          <a href="/tags/hashmap/">HashMap</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/topk%E9%97%AE%E9%A2%98/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">TopK问题</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/lru%E5%8E%9F%E7%90%86%E5%92%8Credis%E5%AE%9E%E7%8E%B0/">
+            <span class="next-text nav-default">LRU原理和Redis实现</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/duanxinpeng" class="iconfont icon-github" title="github"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author"></span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      TeX: {equationNumbers: {autoNumber: "AMS"}},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

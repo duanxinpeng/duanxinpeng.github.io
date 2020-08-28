@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Mybatis - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="段新朋" /><meta name="description" content="自定义mybatis mybatis环境搭建 mybatis表格之间的关系 一对一 使用 typeMap 定义映射关系 在typeMap中使用association定" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.72.0 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/mybatis/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Mybatis" />
+<meta property="og:description" content="自定义mybatis mybatis环境搭建 mybatis表格之间的关系 一对一 使用 typeMap 定义映射关系 在typeMap中使用association定" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/mybatis/" />
+<meta property="article:published_time" content="2020-08-18T09:28:27+08:00" />
+<meta property="article:modified_time" content="2020-08-18T09:28:27+08:00" />
+<meta itemprop="name" content="Mybatis">
+<meta itemprop="description" content="自定义mybatis mybatis环境搭建 mybatis表格之间的关系 一对一 使用 typeMap 定义映射关系 在typeMap中使用association定">
+<meta itemprop="datePublished" content="2020-08-18T09:28:27&#43;08:00" />
+<meta itemprop="dateModified" content="2020-08-18T09:28:27&#43;08:00" />
+<meta itemprop="wordCount" content="1305">
+
+
+
+<meta itemprop="keywords" content="mybatis," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Mybatis"/>
+<meta name="twitter:description" content="自定义mybatis mybatis环境搭建 mybatis表格之间的关系 一对一 使用 typeMap 定义映射关系 在typeMap中使用association定"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">NeverDoubt</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">NeverDoubt</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Mybatis</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-08-18 </span>
+        <div class="post-category">
+            <a href="/categories/%E6%A1%86%E6%9E%B6/"> 框架 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#自定义mybatis">自定义mybatis</a></li>
+    <li><a href="#mybatis环境搭建">mybatis环境搭建</a></li>
+    <li><a href="#mybatis表格之间的关系">mybatis表格之间的关系</a>
+      <ul>
+        <li><a href="#一对一">一对一</a></li>
+        <li><a href="#一对多">一对多</a></li>
+        <li><a href="#多对多">多对多</a></li>
+      </ul>
+    </li>
+    <li><a href="#延迟加载">延迟加载</a></li>
+    <li><a href="#mybatis缓存">mybatis缓存</a></li>
+    <li><a href="#mybatis注解开发">mybatis注解开发</a>
+      <ul>
+        <li><a href="#注解开发环境搭建">注解开发环境搭建</a></li>
+        <li><a href="#常用注解">常用注解</a></li>
+      </ul>
+    </li>
+    <li><a href="#mybatis细节">mybatis细节</a>
+      <ul>
+        <li><a href="#mybatis开启别名">mybatis开启别名</a></li>
+        <li><a href="#mybatis事务">mybatis事务</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="自定义mybatis">自定义mybatis</h2>
+<h2 id="mybatis环境搭建">mybatis环境搭建</h2>
+<h2 id="mybatis表格之间的关系">mybatis表格之间的关系</h2>
+<h3 id="一对一">一对一</h3>
+<ol>
+<li>使用 typeMap 定义映射关系</li>
+<li>在typeMap中使用association定义另外一个表的内容</li>
+<li>例如在account中包含user的typeMap定义如下</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">&lt;resultMap id=&#34;accountUserMap&#34; type=&#34;account&#34;&gt;
+	&lt;id property=&#34;id&#34; column=&#34;aid&#34;&gt;&lt;/id&gt;
+	&lt;result property=&#34;uid&#34; column=&#34;uid&#34;&gt;&lt;/result&gt;
+	&lt;result property=&#34;money&#34; column=&#34;money&#34;&gt;&lt;/result&gt;
+	&lt;association property=&#34;user&#34; column=&#34;uid&#34; javaType=&#34;user&#34;&gt;
+		&lt;id property=&#34;id&#34; column=&#34;id&#34;&gt;&lt;/id&gt;
+		&lt;result column=&#34;username&#34; property=&#34;username&#34;&gt;&lt;/result&gt;
+		&lt;result column=&#34;sex&#34; property=&#34;sex&#34;&gt;&lt;/result&gt;
+		&lt;result column=&#34;birthday&#34; property=&#34;birthday&#34;&gt;&lt;/result&gt;
+		&lt;result column=&#34;address&#34; property=&#34;address&#34;&gt;&lt;/result&gt;
+	&lt;/association&gt;
+&lt;/resultMap&gt;
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="一对多">一对多</h3>
+<ol>
+<li>使用 typeMap 定义映射关系</li>
+<li>在 typeMap 中，使用collection关键字定义一对多映射关系</li>
+<li>例如在user中包含多个account，定义如下</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">&lt;resultMap id=&#34;userAccountMap&#34; type=&#34;user&#34;&gt;
+	&lt;id property=&#34;id&#34; column=&#34;id&#34;&gt;&lt;/id&gt;
+	&lt;result property=&#34;username&#34; column=&#34;username&#34;&gt;&lt;/result&gt;
+	&lt;result property=&#34;address&#34; column=&#34;address&#34;&gt;&lt;/result&gt;
+	&lt;result property=&#34;sex&#34; column=&#34;sex&#34;&gt;&lt;/result&gt;
+	&lt;result property=&#34;birthday&#34; column=&#34;birthday&#34;&gt;&lt;/result&gt;
+	&lt;collection property=&#34;accounts&#34; ofType=&#34;account&#34;&gt;
+		&lt;id property=&#34;id&#34; column=&#34;aid&#34;&gt;&lt;/id&gt;
+		&lt;result property=&#34;uid&#34; column=&#34;uid&#34;&gt;&lt;/result&gt;
+		&lt;result property=&#34;money&#34; column=&#34;money&#34;&gt;&lt;/result&gt;
+	&lt;/collection&gt;
+&lt;/resultMap&gt;
+</code></pre></td></tr></table>
+</div>
+</div><ol start="4">
+<li>join, left join, right join
+<ul>
+<li>join: 左右两边都不为null</li>
+<li>left join: 左边的数据都选出来，右边的数据可以为null</li>
+<li>right join: 右边的数据都选出来，左边的数据可以为null</li>
+</ul>
+</li>
+</ol>
+<h3 id="多对多">多对多</h3>
+<h2 id="延迟加载">延迟加载</h2>
+<ol>
+<li>延迟加载：在真正使用时才发起查询，不用的时候不查询</li>
+<li>立即加载：不管用不用，立即发起查询。</li>
+<li>使用 association 时使用延迟加载
+<ul>
+<li>开启mybatis对延迟加载的支持</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">&lt;settings&gt;
+    &lt;!--开启mybatis支持延迟加载--&gt;
+    &lt;setting name=&#34;lazyLoadingEnabled&#34; value=&#34;true&#34;/&gt;
+    &lt;setting name=&#34;aggressiveLazyLoading&#34; value=&#34;false&#34;/&gt;
+&lt;/settings&gt;
+</code></pre></td></tr></table>
+</div>
+</div><p>``</p>
+<ul>
+<li>更改select语句以及resultMap</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">&lt;resultMap id=&#34;accountUserMap&#34; type=&#34;account&#34;&gt;
+    &lt;id property=&#34;id&#34; column=&#34;id&#34;&gt;&lt;/id&gt;
+    &lt;result property=&#34;uid&#34; column=&#34;uid&#34;&gt;&lt;/result&gt;
+    &lt;result property=&#34;money&#34; column=&#34;money&#34;&gt;&lt;/result&gt;
+    &lt;!-- 使用select属性指定的内容，查询用户的唯一标识
+     column属性指定的内容，是用户根据id查询时所需要的参数--&gt;
+    &lt;association property=&#34;user&#34; column=&#34;uid&#34; javaType=&#34;user&#34; select=&#34;cn.dxp.dao.IUserDao.findById&#34;&gt;&lt;/association&gt;
+&lt;/resultMap&gt;
+
+&lt;select id=&#34;findAll&#34; resultMap=&#34;accountUserMap&#34;&gt;
+    select * from account;
+&lt;/select&gt;
+</code></pre></td></tr></table>
+</div>
+</div><p>``</p>
+</li>
+<li>使用 collection时延迟加载
+<ul>
+<li>更改查询语句</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">&lt;select id=&#34;findAll&#34; resultMap=&#34;userAccountMap&#34;&gt;
+    select * from user;
+&lt;/select&gt;
+</code></pre></td></tr></table>
+</div>
+</div><p>``</p>
+<ul>
+<li>更改resultMap</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">&lt;resultMap id=&#34;userAccountMap&#34; type=&#34;user&#34;&gt;
+    &lt;id property=&#34;id&#34; column=&#34;id&#34;&gt;&lt;/id&gt;
+    &lt;result property=&#34;username&#34; column=&#34;username&#34;&gt;&lt;/result&gt;
+    &lt;result property=&#34;address&#34; column=&#34;address&#34;&gt;&lt;/result&gt;
+    &lt;result property=&#34;sex&#34; column=&#34;sex&#34;&gt;&lt;/result&gt;
+    &lt;result property=&#34;birthday&#34; column=&#34;birthday&#34;&gt;&lt;/result&gt;
+    &lt;collection property=&#34;accounts&#34; column=&#34;id&#34; ofType=&#34;account&#34; select=&#34;cn.dxp.dao.IAccountDao.findAccountByUid&#34;&gt;
+    &lt;/collection&gt;
+&lt;/resultMap&gt;
+</code></pre></td></tr></table>
+</div>
+</div><p>``</p>
+<ul>
+<li>为Account添加findAccountByUid方法</li>
+</ul>
+</li>
+</ol>
+<h2 id="mybatis缓存">mybatis缓存</h2>
+<ol>
+<li>减少和数据库的交互次数，提高执行效率</li>
+<li>适用于缓存
+<ul>
+<li>经常查询</li>
+<li>不经常改变</li>
+<li>而且数据的正确与否对结果影响不大</li>
+</ul>
+</li>
+<li>不适用缓存
+<ul>
+<li>经常改变</li>
+<li>数据的正确与否对结果影响很大</li>
+</ul>
+</li>
+<li>一级缓存
+<ul>
+<li>指的是mybatis中SqlSession对象的缓存</li>
+<li>执行查询之后，查询结果会同时存入SqlSession为我们提供的一块区域中，该区域构造是一个map。</li>
+<li>当SqlSession消失时，mybatis一级缓存也消失了！</li>
+<li>SqlSession.clearCache() 可以清空一级缓存</li>
+<li>当SqlSession 调用修改、添加、删除、commit、close等方法时，就会清空一级缓存。</li>
+</ul>
+</li>
+<li>二级缓存
+<ul>
+<li>指的是Mybatis中SqlSessionFactory对象的缓存，由同一个SqlSessionFactory对象创建的SqlSession共享这个缓存。</li>
+<li>但是二级缓存中存放的不是对象，而是数据！</li>
+<li>二级缓存的使用步骤
+<ul>
+<li>让mybatis框架支持二级缓存 （cacheEnable，默认true，无需配置）</li>
+<li>让当前的映射文件支持二级缓存（添加<!-- raw HTML omitted -->标签即可）</li>
+<li>让当前的操作支持二级缓存（useCache=true）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="mybatis注解开发">mybatis注解开发</h2>
+<h3 id="注解开发环境搭建">注解开发环境搭建</h3>
+<h3 id="常用注解">常用注解</h3>
+<ol>
+<li>SQL语句映射
+<ul>
+<li>@Insert</li>
+<li>@Select</li>
+<li>@SelectKey</li>
+<li>@Update</li>
+<li>@Delete</li>
+</ul>
+</li>
+<li>结果集映射
+<ul>
+<li>@Result</li>
+<li>@Results</li>
+<li>@ResultMap</li>
+</ul>
+</li>
+<li>关系映射
+<ul>
+<li>@one</li>
+<li>@many</li>
+</ul>
+</li>
+</ol>
+<h2 id="mybatis细节">mybatis细节</h2>
+<h3 id="mybatis开启别名">mybatis开启别名</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="p">&lt;</span><span class="nx">typeAliases</span><span class="p">&gt;</span>
+	<span class="p">&lt;!</span><span class="o">--</span> <span class="nx">配置扫描的包</span><span class="err">，</span><span class="nx">该包内的类就可以使用别名</span><span class="err">，</span><span class="nx">而无需使用全限定类名了</span> <span class="o">--</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="kn">package</span> <span class="nx">name</span><span class="p">=</span><span class="s">&#34;cn.dxp.entities&#34;</span><span class="o">/</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="o">/</span><span class="nx">typeAliases</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="mybatis事务">mybatis事务</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">config = Resources.getResourceAsStream(&#34;sqlconfig.xml&#34;);
+SqlSessionFactoryBuilder builder=new SqlSessionFactoryBuilder();
+SqlSessionFactory factory = builder.build(config);
+// true：关闭事务，自动便会提交
+// false：开启事务，需要用 session.commit() 手动提交事务
+session = factory.openSession(true);
+accountDao = session.getMapper(IAccountDao.class);
+</code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">段新朋</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2020-08-18
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/mybatis/">mybatis</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/spring/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Spring</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/">
+            <span class="next-text nav-default">分布式事务</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/duanxinpeng" class="iconfont icon-github" title="github"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author"></span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      TeX: {equationNumbers: {autoNumber: "AMS"}},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

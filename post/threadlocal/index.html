@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>ThreadLocal - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="段新朋" /><meta name="description" content="强软弱虚 强引用： 只要强引用存在，被引用的对象就永远不会被回收 软引用： 只被软引用关联着的对象在系统将要发生内存溢出时就会被列入回收范进行回收 j" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.72.0 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/threadlocal/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="ThreadLocal" />
+<meta property="og:description" content="强软弱虚 强引用： 只要强引用存在，被引用的对象就永远不会被回收 软引用： 只被软引用关联着的对象在系统将要发生内存溢出时就会被列入回收范进行回收 j" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/threadlocal/" />
+<meta property="article:published_time" content="2020-08-18T22:46:20+08:00" />
+<meta property="article:modified_time" content="2020-08-18T22:46:20+08:00" />
+<meta itemprop="name" content="ThreadLocal">
+<meta itemprop="description" content="强软弱虚 强引用： 只要强引用存在，被引用的对象就永远不会被回收 软引用： 只被软引用关联着的对象在系统将要发生内存溢出时就会被列入回收范进行回收 j">
+<meta itemprop="datePublished" content="2020-08-18T22:46:20&#43;08:00" />
+<meta itemprop="dateModified" content="2020-08-18T22:46:20&#43;08:00" />
+<meta itemprop="wordCount" content="1140">
+
+
+
+<meta itemprop="keywords" content="java,threadlocal," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="ThreadLocal"/>
+<meta name="twitter:description" content="强软弱虚 强引用： 只要强引用存在，被引用的对象就永远不会被回收 软引用： 只被软引用关联着的对象在系统将要发生内存溢出时就会被列入回收范进行回收 j"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">NeverDoubt</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">NeverDoubt</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">ThreadLocal</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-08-18 </span>
+        <div class="post-category">
+            <a href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"> 编程语言 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#强软弱虚">强软弱虚</a></li>
+    <li><a href="#threadlocal">ThreadLocal</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="强软弱虚">强软弱虚</h2>
+<ol>
+<li>强引用：
+<ul>
+<li>只要强引用存在，被引用的对象就永远不会被回收</li>
+</ul>
+</li>
+<li>软引用：
+<ul>
+<li>只被软引用关联着的对象在系统将要发生内存溢出时就会被列入回收范进行回收</li>
+<li>jdk1.2版本之后提供了SoftReference类来实现软引用</li>
+<li>一般被用于缓存</li>
+</ul>
+</li>
+<li>弱引用
+<ul>
+<li>只被弱引用关联的对象只能存活到下一次垃圾回收为止</li>
+<li>jdk1.2 之后提供了 WeakReference类来实现弱引用</li>
+</ul>
+</li>
+<li>虚引用
+<ul>
+<li>它是最弱的一种引用关系</li>
+<li>一个对象是否有虚引用，完全不会对其生存时间产生影响</li>
+<li>无法通过虚引用来取得一个对象的实例</li>
+<li>唯一作用是当这个对象被回收时收到一个系统通知</li>
+<li>jdk1.2 之后提供了PhantomReference类来实现虚引用</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kn">import</span> <span class="nn">java.lang.ref.PhantomReference</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.lang.ref.ReferenceQueue</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.lang.ref.SoftReference</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.lang.ref.WeakReference</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Reference</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">softReferenceTest</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">SoftReference</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">softReference</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SoftReference</span><span class="o">&lt;&gt;(</span><span class="k">new</span> <span class="n">String</span><span class="o">(</span><span class="s">&#34;hello&#34;</span><span class="o">));</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">softReference</span><span class="o">.</span><span class="na">get</span><span class="o">());</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">gc</span><span class="o">();</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">softReference</span><span class="o">.</span><span class="na">get</span><span class="o">());</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">weakReferenceTest</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">WeakReference</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">weakReference</span> <span class="o">=</span> <span class="k">new</span> <span class="n">WeakReference</span><span class="o">&lt;&gt;(</span><span class="k">new</span> <span class="n">String</span><span class="o">(</span><span class="s">&#34;hello&#34;</span><span class="o">));</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">weakReference</span><span class="o">.</span><span class="na">get</span><span class="o">());</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">gc</span><span class="o">();</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">weakReference</span><span class="o">.</span><span class="na">get</span><span class="o">());</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">phantomReferenceTest</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">ReferenceQueue</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">referenceQueue</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ReferenceQueue</span><span class="o">&lt;&gt;();</span>
+        <span class="c1">// 不同于前面几种引用，该引用有两个参数
+</span><span class="c1"></span>        <span class="n">PhantomReference</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">phantomReference</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PhantomReference</span><span class="o">&lt;&gt;(</span><span class="k">new</span> <span class="n">String</span><span class="o">(</span><span class="s">&#34;hello&#34;</span><span class="o">),</span><span class="n">referenceQueue</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">phantomReference</span><span class="o">.</span><span class="na">get</span><span class="o">());</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">gc</span><span class="o">();</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">referenceQueue</span><span class="o">.</span><span class="na">poll</span><span class="o">());</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">//softReferenceTest();
+</span><span class="c1"></span>        <span class="c1">//weakReferenceTest();
+</span><span class="c1"></span>        <span class="n">phantomReferenceTest</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="threadlocal">ThreadLocal</h2>
+<ol>
+<li>作用
+<ul>
+<li>将变量于线程绑定，某个线程内的一系列调用保证每个调用都使用同一个变量。</li>
+<li>比如同一个事务内如果使用不同的连接，就饿没办法统一管理事务，所以需要用ThreadLocal保证同一个线程得到的连接都是同一个。</li>
+</ul>
+</li>
+<li>ThreadLocal
+<ul>
+<li>将ThreadLcoal本身作为key，将变量作为value，放入当前线程的ThreadLocalMap中！</li>
+<li>本质上其实是将key和value封装到一个Entry对象中，而Entry的本质是一个指向key（ThreadLocal对象）的弱引用，但是Entry中还有一个指向value的强引用，这也是导致threadlocal内存泄露的关键</li>
+</ul>
+</li>
+<li>ThreadLocalMap
+<ul>
+<li>本质是一个散列表（一个Entry数组！），不同于HashMap的是，ThreadLocalMap采用的是线性探测法来解决哈希冲突。</li>
+<li>set(): 先用哈希函数得到key（ThreadLocal对象）的哈希值，再通过取模找到数组中的位置，如果不为空，则从当前位置向后查找直到找到第一个不为空的位置</li>
+<li>get(): 哈希函数得到ke的哈希值，再取模找到在数组中的位置，再比较是否和key相等，如果不等则向后寻找直到找到目标或者空桶为止</li>
+<li>remove(): 除了将对应位置置空外，还需要将其后不为null的元素进行rehash！</li>
+</ul>
+</li>
+<li>存在的问题
+<ul>
+<li>正如上面所说，Entry是一个指向ThreadLocal的弱引用，当ThreadLocal的强引用（在代码中自己声明的）被置为空时，ThreadLocal对象会在下一次垃圾回收发生时自动被回收。</li>
+<li>但是Entry中还有一个指向value的强引用（this.value)，这将导致value一直无法被回收进而导致内存泄漏。</li>
+<li>如何避免？及时调用remove方法，去掉Entry与map的联系，那么在下一次垃圾回收时Entry对象（包括其中的value）就会被自动回收了！</li>
+</ul>
+</li>
+</ol>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">段新朋</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2020-08-18
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/java/">java</a>
+          <a href="/tags/threadlocal/">threadlocal</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">动态代理</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/spring/">
+            <span class="next-text nav-default">Spring</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/duanxinpeng" class="iconfont icon-github" title="github"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author"></span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      TeX: {equationNumbers: {autoNumber: "AMS"}},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

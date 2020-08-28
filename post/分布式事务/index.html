@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>分布式事务 - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="段新朋" /><meta name="description" content="CAP 理论 一致性(Consistency)、可用性(Availability)、分区容忍性(Partition Tolerance) 一致性：分布式系统中的所有数据是" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.72.0 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="分布式事务" />
+<meta property="og:description" content="CAP 理论 一致性(Consistency)、可用性(Availability)、分区容忍性(Partition Tolerance) 一致性：分布式系统中的所有数据是" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/" />
+<meta property="article:published_time" content="2020-08-16T16:47:56+08:00" />
+<meta property="article:modified_time" content="2020-08-16T16:47:56+08:00" />
+<meta itemprop="name" content="分布式事务">
+<meta itemprop="description" content="CAP 理论 一致性(Consistency)、可用性(Availability)、分区容忍性(Partition Tolerance) 一致性：分布式系统中的所有数据是">
+<meta itemprop="datePublished" content="2020-08-16T16:47:56&#43;08:00" />
+<meta itemprop="dateModified" content="2020-08-16T16:47:56&#43;08:00" />
+<meta itemprop="wordCount" content="1365">
+
+
+
+<meta itemprop="keywords" content="分布式事务,cap,base," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="分布式事务"/>
+<meta name="twitter:description" content="CAP 理论 一致性(Consistency)、可用性(Availability)、分区容忍性(Partition Tolerance) 一致性：分布式系统中的所有数据是"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">NeverDoubt</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">NeverDoubt</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">分布式事务</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-08-16 </span>
+        <div class="post-category">
+            <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/"> 分布式 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#cap-理论">CAP 理论</a></li>
+    <li><a href="#base-理论">BASE 理论</a></li>
+    <li><a href="#分布式事务的解决方案">分布式事务的解决方案</a>
+      <ul>
+        <li><a href="#两阶段提交2pc">两阶段提交(2PC)</a></li>
+        <li><a href="#三阶段提交">三阶段提交</a></li>
+        <li><a href="#补偿事务tcc-try-confirm-cancel">补偿事务（TCC Try Confirm Cancel）</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="cap-理论">CAP 理论</h2>
+<ol>
+<li>一致性(Consistency)、可用性(Availability)、分区容忍性(Partition Tolerance)
+<ul>
+<li>一致性：分布式系统中的所有数据是否一直满足系统的限制约束。</li>
+<li>可用性：快速响应用户请求的能力</li>
+<li>分区容错性：</li>
+</ul>
+</li>
+<li>以上三个特性只能同时满足两个，其中分区容忍性又是不可或缺的！</li>
+<li>分区是分布式系统不可避免地问题，分区一旦发生就意味着要在一致性和可用性之间作出选择。</li>
+</ol>
+<h2 id="base-理论">BASE 理论</h2>
+<ol>
+<li>BASE理论是对CAP中地一致性和可用性进行一个权衡的结果</li>
+<li>核心思想就是用最终一致性来代替强一致性。</li>
+<li>基本可用(Basically Available)、软状态(Soft state)、最终一致性(Eventually consistent)</li>
+</ol>
+<h2 id="分布式事务的解决方案">分布式事务的解决方案</h2>
+<h3 id="两阶段提交2pc">两阶段提交(2PC)</h3>
+<ol>
+<li>为了满足事务的 ACID，需要引入一个协调者，其他节点被称为参与者。</li>
+<li>阶段一：准备阶段
+<ul>
+<li>协调者向所有参与者发送事务内容，询问是否可以提交事务，并等待答复</li>
+<li>各个参与者执行事务操作，并将 undo 和 redo 写入事务日志中</li>
+<li>如果参与者执行成功，给协调者返回yes，否则返回 no</li>
+</ul>
+</li>
+<li>阶段二：提交阶段
+<ul>
+<li>如果所有参与者都回复了 yes 则协调者向所有参与者发送commit指令</li>
+<li>如果有一个参与者回复了 no，或者触发了协调者的超时机制，则向所有参与者发送rollback指令。</li>
+</ul>
+</li>
+<li>一致性：
+<ul>
+<li>强一致性</li>
+</ul>
+</li>
+<li>缺点
+<ul>
+<li>同步阻塞问题：所有参与者在事务提交阶段都处于<code>同步阻塞</code>状态，占用系统资源，容易造成性能瓶颈</li>
+<li>单点故障问题：如果协调者存在<code>单点故障</code>，参与者将一直处于锁定状态！</li>
+<li>数据一致性：在阶段2中，如果参与者与协调者都挂了，可能会导致数据不一致。</li>
+</ul>
+</li>
+</ol>
+<h3 id="三阶段提交">三阶段提交</h3>
+<ol>
+<li>主要由两个改动点
+<ul>
+<li>将准备阶段一分为二，解决了<code>同步阻塞问题</code></li>
+<li>在参与者也引入了超时机制，解决了<code>单点故障问题</code>。</li>
+</ul>
+</li>
+<li>阶段一：决定阶段（我感觉第一阶段的意义就是打声招呼，确定一下参与者的状态，如果参与者状态都很好再执行具体的事务操作，从而避免了同步阻塞问题）
+<ul>
+<li>协调者向所有参与者发出准备消息（同2PC）</li>
+<li>参与者收到消息并执行事务之后，返回是否yes or no</li>
+</ul>
+</li>
+<li>阶段二：准备提交
+<ul>
+<li>协调者准备提交消息，向所有参与者发送准备提交消息（若有一个no或者`超时，则进入第三阶段回滚阶段，若全为yes，则进入第二阶段））</li>
+<li>参与者收到该消息之后写入log record中，并回答确认消息 ack。如果参与者一直接收不到预提交命令<code>超时</code>，则会进行回滚操作。</li>
+</ul>
+</li>
+<li>阶段三：执行段
+<ul>
+<li>协调者感觉参与者回答的ack/abort消息（如果有一个no或超时，则进行rollback操作），向参与者发送commit/rollback命令</li>
+<li>参与者根据协调者的命令决定执行提交或者回滚，完成事务的处理。</li>
+<li>如果参与者一直没有收到协调者的命令<code>超时</code>，会继续执行commit操作（因为在第一阶段已经确定过参与者的状态都是ok的，所以在这一阶段虽然没有收到协调者的消息，但是成功提交的概率很大）。</li>
+</ul>
+</li>
+<li>一致性
+<ul>
+<li>强一致性</li>
+</ul>
+</li>
+<li>缺点
+<ul>
+<li>通信次数更多</li>
+<li>无论是2PC还是3PC都无法彻底解决数据一致性问题，想要解决数据一致性问题，还是要依赖于 paxo</li>
+</ul>
+</li>
+</ol>
+<h3 id="补偿事务tcc-try-confirm-cancel">补偿事务（TCC Try Confirm Cancel）</h3>
+<ol>
+<li>服务化的二阶段编程模型，采用的补偿机制</li>
+<li>条件
+<ul>
+<li>需要实现确认和补偿逻辑</li>
+<li>需要支持幂等（一次执行和多次执行效果相同）</li>
+</ul>
+</li>
+<li>流程
+<ul>
+<li>Try:对业务系统做检测及资源预留（第一阶段)</li>
+<li>Confirm：对业务系统做确认提交(第二阶段）</li>
+<li>Cancel：在业务执行错误，需要回滚的状态下执行业务的取消，预留资源释放。（第二阶段）</li>
+</ul>
+</li>
+</ol>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">段新朋</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2020-08-16
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/">分布式事务</a>
+          <a href="/tags/cap/">cap</a>
+          <a href="/tags/base/">base</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/mybatis/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Mybatis</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/java%E5%8F%8D%E5%B0%84/">
+            <span class="next-text nav-default">Java反射</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/duanxinpeng" class="iconfont icon-github" title="github"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author"></span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      TeX: {equationNumbers: {autoNumber: "AMS"}},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

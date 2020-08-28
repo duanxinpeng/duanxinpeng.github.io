@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Spring - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="段新朋" /><meta name="description" content="spring中bean的细节 创建bean的三种方式 使用默认构造函数创建：使用bean标签，配置id和class属性并且没有其他属性和标签时，" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.72.0 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/spring/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Spring" />
+<meta property="og:description" content="spring中bean的细节 创建bean的三种方式 使用默认构造函数创建：使用bean标签，配置id和class属性并且没有其他属性和标签时，" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/spring/" />
+<meta property="article:published_time" content="2020-08-18T14:51:07+08:00" />
+<meta property="article:modified_time" content="2020-08-18T14:51:07+08:00" />
+<meta itemprop="name" content="Spring">
+<meta itemprop="description" content="spring中bean的细节 创建bean的三种方式 使用默认构造函数创建：使用bean标签，配置id和class属性并且没有其他属性和标签时，">
+<meta itemprop="datePublished" content="2020-08-18T14:51:07&#43;08:00" />
+<meta itemprop="dateModified" content="2020-08-18T14:51:07&#43;08:00" />
+<meta itemprop="wordCount" content="1665">
+
+
+
+<meta itemprop="keywords" content="spring," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Spring"/>
+<meta name="twitter:description" content="spring中bean的细节 创建bean的三种方式 使用默认构造函数创建：使用bean标签，配置id和class属性并且没有其他属性和标签时，"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">NeverDoubt</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">NeverDoubt</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Spring</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-08-18 </span>
+        <div class="post-category">
+            <a href="/categories/%E6%A1%86%E6%9E%B6/"> 框架 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#spring中bean的细节">spring中bean的细节</a></li>
+    <li><a href="#spring常用注解">Spring常用注解</a></li>
+    <li><a href="#spring注解配置">Spring注解配置</a></li>
+    <li><a href="#spring-xml-配置bean">Spring xml 配置bean</a></li>
+    <li><a href="#spring-aop配置">Spring AOP配置</a></li>
+    <li><a href="#spring-通过注解配置aop">Spring 通过注解配置AOP</a></li>
+    <li><a href="#spring-bean的生命周期">Spring bean的生命周期</a></li>
+    <li><a href="#spring-如何解决循环依赖">Spring 如何解决循环依赖</a></li>
+    <li><a href="#springaop-代理对象的创建">SpringAOP 代理对象的创建</a></li>
+    <li><a href="#如何控制多个aop的执行顺序">如何控制多个aop的执行顺序？</a></li>
+    <li><a href="#aop链式调用">AOP链式调用</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="spring中bean的细节">spring中bean的细节</h2>
+<ol>
+<li>创建bean的三种方式
+<ul>
+<li>使用默认构造函数创建：使用bean标签，配置id和class属性并且没有其他属性和标签时，采用的就是默认构造函数创建bean对象，如果没有默认构造函数，则对象无法创建。</li>
+<li>使用普通工厂中的方法创建对象：使用某个类中的方法创建对象，并存入核心容器。</li>
+<li>使用静态工厂中的静态方法（使用某个类中的静态方法创建对象）</li>
+</ul>
+</li>
+<li>bean作用范围
+<ul>
+<li>单例</li>
+</ul>
+</li>
+</ol>
+<h2 id="spring常用注解">Spring常用注解</h2>
+<ol>
+<li>@Component</li>
+<li>@Autowired</li>
+<li>@Qualifier</li>
+</ol>
+<h2 id="spring注解配置">Spring注解配置</h2>
+<p><code>&lt;context:component-scan base-package=&quot;被扫描的包&quot;&gt;&lt;/context:component-scan&gt;</code></p>
+<h2 id="spring-xml-配置bean">Spring xml 配置bean</h2>
+<p><code>&lt;bean id=&quot;runner&quot; class=&quot;org.apache.commons.dbutils.QueryRunner&quot; scope=&quot;prototype&quot;&gt;&lt;/bean&gt;</code></p>
+<h2 id="spring-aop配置">Spring AOP配置</h2>
+<ol>
+<li>先配置切面</li>
+<li>再配置通知</li>
+<li>在通知中配置切入点表达式</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">    &lt;!--
+        1. 使用aop:config标签表明开始aop的配置
+        2. 使用aop:aspect标签配置切面
+            id属性：给切面一个唯一标识
+            ref属性：指定通知类bean的id
+        3. 在aop:aspect标签内部使用对应标签来配置通知的类型
+                aop:before 表示前置通知
+                method属性，用用户指定哪个方法是通知
+                pointcut属性，用于指定切入点表达式，该表达式的含义指的是对业务中哪些方法增强
+        4. 切入点表达式的写法
+            关键字：execution
+            表达式
+                访问修饰符 返回值 包名...类名.方法名(参数列表）
+                public void service.impl.AccountServiceImpl.saveAccount()
+            访问修饰符可以省略
+            返回值可以用*代替
+            可以使用..表示当前包及其子包
+            类名和方法名都可以使用*来实现通配
+            参数列表：可以使用..表示有无皆可！--&gt;
+    &lt;aop:config&gt;
+        &lt;aop:aspect id=&#34;logAdvice&#34; ref=&#34;logger&#34;&gt;
+            &lt;aop:pointcut id=&#34;pt1&#34; expression=&#34;execution(* service.impl.AccountServiceImpl.*(..))&#34;&gt;&lt;/aop:pointcut&gt;
+&lt;!--            &lt;aop:before method=&#34;printLog&#34; pointcut-ref=&#34;pt1&#34;&gt;&lt;/aop:before&gt;--&gt;
+&lt;!--            --&gt;
+            &lt;aop:around method=&#34;arountPrintLog&#34; pointcut-ref=&#34;pt1&#34;&gt;&lt;/aop:around&gt;
+        &lt;/aop:aspect&gt;
+        
+    &lt;/aop:config&gt;
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="spring-通过注解配置aop">Spring 通过注解配置AOP</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">&lt;aop:aspectj-autoproxy&gt;&lt;/aop:aspectj-autoproxy&gt;
+@Component
+@Aspect
+public class Logger {
+    @Pointcut(&#34;execution(* service.impl.AccountServiceImpl.*(..))&#34;)
+    private void pt1(){}
+
+    //@Before(&#34;pt1()&#34;)
+    public void printLog() {
+        System.out.println(&#34;Logger开始记录日志--------&#34;);
+    }
+
+    /**
+     * Spring框架提供了一个接口，ProceedingJoinPoint，该接口有一个方法proceed() 此方法用于明确调用切入点方法
+     * 该接口可以作为环绕通知的方法参数，在程序执行时，spring框架为我们提供该接口的实现类供我们使用
+     */
+    @Around(&#34;pt1()&#34;)
+    public Object arountPrintLog(ProceedingJoinPoint pjp) {
+        Object rtValue = null;
+        Object[] args = pjp.getArgs();
+
+        try {
+            System.out.println(&#34;前置通知&#34;);
+            pjp.proceed(args);
+            System.out.println(&#34;后置通知&#34;);
+        } catch (Throwable throwable) {
+            System.out.println(&#34;异常通知&#34;);
+            throwable.printStackTrace();
+        } finally {
+            System.out.println(&#34;最终通知&#34;);
+        }
+        return rtValue;
+    }
+}
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="spring-bean的生命周期">Spring bean的生命周期</h2>
+<ol>
+<li>声明周期大概包括以下部分
+<ul>
+<li>实例化：createBeanInstance</li>
+<li>填充属性：populateBean</li>
+<li>初始化：initializeBean</li>
+</ul>
+</li>
+</ol>
+<h2 id="spring-如何解决循环依赖">Spring 如何解决循环依赖</h2>
+<ol>
+<li>Spring的循环依赖包括以下三种
+<ul>
+<li>构造函数注入产生的循环依赖：无法解决</li>
+<li>set方法注入产生的循环依赖：无法解决</li>
+<li>prototype属性的循环依赖：无法解决</li>
+</ul>
+</li>
+<li>三级缓存
+<ul>
+<li>实例化bean之后将其放入缓存中</li>
+<li>然后对bean进行属性注入时，如果有依赖其他的bean，就会首先从缓存中获取该bean，如果没有再去实例化bean</li>
+<li>三级缓存解决bean的本质其实就是利用了bean处在实例化但还未初始化的这种中间状态</li>
+</ul>
+</li>
+</ol>
+<h2 id="springaop-代理对象的创建">SpringAOP 代理对象的创建</h2>
+<ol>
+<li>代理对象是在bean实例化完成之后再去创建的</li>
+<li>具体是在BeanPostProcessor的postProcessorAfterInitialization()方法中进行</li>
+<li>首先找到所有带有@Aspect注解的类，并获取其中没有@Pointcut注解的方法，循环创建切面（切面需要增强和切入点两个要素）根据通知的类型，创建对应的Advance类。切面创建好之后则需要循环判断哪些切面能对当前的bean实例的方法进行增强并排序，最后通过ProxyFactory创建代理对象。</li>
+</ol>
+<h2 id="如何控制多个aop的执行顺序">如何控制多个aop的执行顺序？</h2>
+<ol>
+<li>使用@Order(1)注解，order值越小优先级越高</li>
+<li>@Order注解其实是决定了bean的执行顺序！</li>
+</ol>
+<h2 id="aop链式调用">AOP链式调用</h2>
+<ol>
+<li></li>
+</ol>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">段新朋</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2020-08-18
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/spring/">spring</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/threadlocal/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">ThreadLocal</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/mybatis/">
+            <span class="next-text nav-default">Mybatis</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/duanxinpeng" class="iconfont icon-github" title="github"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author"></span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      TeX: {equationNumbers: {autoNumber: "AMS"}},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

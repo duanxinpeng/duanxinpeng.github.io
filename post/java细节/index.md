@@ -102,6 +102,10 @@ public class GenericTest {
     }
 }
 ```
+## exception、error的区别
+1. 两者父类都是 throwable类
+2. error一般是指与JVM相关的问题，比如系统崩溃、内存不足、栈溢出等，这类问题导致的应用中断仅靠程序本身无法恢复和预防
+3. Exception表示程序可以处理的异常，可以捕获且可能恢复。
 
 ## ConcurrentHashMap 的 get 方法为什么不需要加锁
 1. 获取 hash 桶的根节点通过 `tabAt` 来完成，线程安全
@@ -145,3 +149,20 @@ public class GenericTest {
 
 ## lambda 表达式
 1. lambda 表达式中只允许引用声明为常量的局部变量
+
+## java 接口特性
+1. 一个接口的实现类可以实现多个接口
+2. 接口的实现类`（如果不是抽象类的话!）`则必须实现接口中的全部抽象方法
+3. 接口中的方法被默认设置为 `public abstract`； 接口中的变量被默认设置为 `final static`, 所以必须初始化；
+5. 接口没有构造函数，无法实例化
+
+## java四种访问权限
+1. public：跨类、跨包访问
+2. default：属性前什么都不加，只能跨类，不能跨包
+3. protected：子类可访问
+4. private：只有自己可以访问
+## java数组存储
+1. java数组是按维存储的！
+2. 比如二维数组相当于多个一维数组
+## Integer valueOf 缓存
+1. -128到127之间直接在缓存中取！

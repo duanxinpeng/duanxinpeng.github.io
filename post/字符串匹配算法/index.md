@@ -6,6 +6,7 @@
 2. 从步骤 1 返回的位置开始，判断 s 中从此处开始的子串能否与 p 完全匹配
 3. 步骤 2 的判断方法是逐个字符进行比较，采用java 的 equals() 方法并不能优化时间复杂度，因为 equals 的底层实现依然是逐字符比较。
 3. java 的 indexOf 采用的就是这种方法。
+4. 时间复杂度O(nm)(n和m分别为匹配（长）串、被匹配（短）串的长度)
 ### RK算法
 1. RK 算法是对BR暴力实现的一种优化，优化的方式是加快模式串的比较，而不是加快模式串的移动！
 2. 通过为模式串以及主串中和模式串等长的子串生成 hashcode，进而通过比较 hashcode 来确定两个字符串是否相等。如果不相等再进行逐字符的比较。
@@ -56,6 +57,7 @@
 5. reference
 	- https://en.jinzhao.wiki/wiki/Rabin%E2%80%93Karp_algorithm
 	- https://ethsonliu.com/2019/12/rabin-karp.html
+
 ### BM 算法
 1. 模式串的比较`从右到左`，模式串的移动`从左到右`！
 2. 是对`后缀匹配`暴力算法的改进。
@@ -162,6 +164,7 @@
 
 ### KMP 算法
 1. 通过更快移动模式串来优化 BR 算法。
+2. 时间复杂度 $O(n+m)$
 2. reference
 	- https://ethsonliu.com/2018/04/kmp.html
 	- http://www.ruanyifeng.com/blog/2013/05/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm.html

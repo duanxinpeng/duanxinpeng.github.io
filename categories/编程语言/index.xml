@@ -6,10 +6,28 @@
     <description>Recent content in 编程语言 on Even - A super concise theme for Hugo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 06 Aug 2020 09:12:30 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 19 Aug 2020 01:10:15 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>动态代理</title>
+      <link>http://localhost:1313/post/%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/</link>
+      <pubDate>Wed, 19 Aug 2020 01:10:15 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/</guid>
+      <description>代理模式 控制对基础对象的访问 在访问时增加额外的功能 动态代理 静态代理需要生成代理类，代理类的Class文件在编译期生成 动态代理利用反射机制在运</description>
+    </item>
+    
+    <item>
+      <title>ThreadLocal</title>
+      <link>http://localhost:1313/post/threadlocal/</link>
+      <pubDate>Tue, 18 Aug 2020 22:46:20 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/threadlocal/</guid>
+      <description>强软弱虚 强引用： 只要强引用存在，被引用的对象就永远不会被回收 软引用： 只被软引用关联着的对象在系统将要发生内存溢出时就会被列入回收范进行回收 j</description>
+    </item>
     
     <item>
       <title>Java反射</title>

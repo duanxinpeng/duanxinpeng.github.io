@@ -45,7 +45,7 @@
 <meta property="og:description" content="Hugo theme even example site." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="http://localhost:1313/" />
-<meta property="og:updated_time" content="2020-08-06T09:12:30+08:00" />
+<meta property="og:updated_time" content="2020-08-28T20:11:22+08:00" />
 <meta itemprop="name" content="Even - A super concise theme for Hugo">
 <meta itemprop="description" content="Hugo theme even example site."><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Even - A super concise theme for Hugo"/>
@@ -112,9 +112,9 @@
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/%E6%9C%80%E9%95%BF%E4%B8%8A%E5%8D%87%E5%AD%90%E5%BA%8F%E5%88%97/">最长上升子序列</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/%E9%9B%B6%E9%92%B1%E5%85%91%E6%8D%A2/">零钱兑换</a></h1>
     <div class="post-meta">
-      <span class="post-time"> 2020-07-17 </span>
+      <span class="post-time"> 2020-07-20 </span>
       <div class="post-category">
           <a href="/categories/%E7%AE%97%E6%B3%95/"> 算法 </a>
           </div>
@@ -123,40 +123,40 @@
   
   <div class="post-content">
     <div class="post-summary">
-      问题描述 给定一个无序的整数数组，找到其中最长上升子序列的长度 https://leetcode-cn.com/problems/longest-increasing-subsequence/ 动态规划 dp[i]代表以nums[i]结尾的最长上升子序列的长度，dp[i]=
+      问题描述 给定不同面额的硬币 coins 和一个总金额 amount。编写一个函数来计算可以凑成总金额所需的最少的硬币个数。如果没有任何一种硬币组合能组成总
     </div>
     <div class="read-more">
-      <a href="/post/%E6%9C%80%E9%95%BF%E4%B8%8A%E5%8D%87%E5%AD%90%E5%BA%8F%E5%88%97/" class="read-more-link">Read more...</a>
+      <a href="/post/%E9%9B%B6%E9%92%B1%E5%85%91%E6%8D%A2/" class="read-more-link">Read more...</a>
     </div>
   </div>
 </article>
 
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/%E5%AF%BB%E6%89%BE%E9%87%8D%E5%A4%8D%E6%95%B0/">寻找重复数</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/java%E7%BB%86%E8%8A%82/">Javas细节</a></h1>
     <div class="post-meta">
-      <span class="post-time"> 2020-07-17 </span>
+      <span class="post-time"> 2020-07-20 </span>
       <div class="post-category">
-          <a href="/categories/%E7%AE%97%E6%B3%95/"> 算法 </a>
+          <a href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"> 编程语言 </a>
           </div>
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      问题描述 包含n+1个整数的数组nums，其数字都在1到n之间，若只存在一个重复的整数，找出这个重复的整数。 https://leetcode-cn.com/problems/find-the-duplicate-number/ 解题 排序，然后遍历数组即可O(n
+      java Queue add/offer add：向队列末尾添加一个元素，若队列已满，则抛出异常 offer：不会抛异常，返回false。 remove/poll remove：移除队列队头元素，若队列
     </div>
     <div class="read-more">
-      <a href="/post/%E5%AF%BB%E6%89%BE%E9%87%8D%E5%A4%8D%E6%95%B0/" class="read-more-link">Read more...</a>
+      <a href="/post/java%E7%BB%86%E8%8A%82/" class="read-more-link">Read more...</a>
     </div>
   </div>
 </article>
 
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/%E5%89%8Dk%E4%B8%AA%E9%AB%98%E9%A2%91%E5%85%83%E7%B4%A0/">前K个高频元素</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA/">买卖股票的最佳时机</a></h1>
     <div class="post-meta">
-      <span class="post-time"> 2020-07-17 </span>
+      <span class="post-time"> 2020-07-19 </span>
       <div class="post-category">
           <a href="/categories/%E7%AE%97%E6%B3%95/"> 算法 </a>
           </div>
@@ -165,40 +165,40 @@
   
   <div class="post-content">
     <div class="post-summary">
-      问题描述 找出数组中出现频率最高的k个元素 https://leetcode-cn.com/problems/top-k-frequent-elements/ 思路 用HashMap统计频率 用小根堆求出前K大的数 java实现 在实现最小堆时，可以对元素建堆，并通
+      动态规划框架 状态转移方程 dp[i][k][0] = max(dp[i-1][k][0], dp[i-1][k][1] + prices[i]) dp[i][k][1] = max(dp[i-1][k][1], dp[i-1][k-1][0] - prices[i]) base case i=-1 and k = 0 dp[-1][k][0] = 0 : i = -1 表示第-1天，意味着还没开始 dp[-1][k][1] = -infinity ： 表示还没开始就已经持有股票，
     </div>
     <div class="read-more">
-      <a href="/post/%E5%89%8Dk%E4%B8%AA%E9%AB%98%E9%A2%91%E5%85%83%E7%B4%A0/" class="read-more-link">Read more...</a>
+      <a href="/post/%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA/" class="read-more-link">Read more...</a>
     </div>
   </div>
 </article>
 
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/%E6%A0%B9%E6%8D%AE%E8%BA%AB%E9%AB%98%E9%87%8D%E5%BB%BA%E9%98%9F%E5%88%97/">根据身高重建队列</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/java%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B/">Java对象模型</a></h1>
     <div class="post-meta">
-      <span class="post-time"> 2020-07-17 </span>
+      <span class="post-time"> 2020-07-18 </span>
       <div class="post-category">
-          <a href="/categories/%E7%AE%97%E6%B3%95/"> 算法 </a>
+          <a href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"> 编程语言 </a>
           </div>
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      问题描述 根据数据大小以及数据位置（前面有几个比他大的元素）来重排这些元素 https://leetcode-cn.com/problems/queue-reconstruction-by-height/ 思路 相同身高的人，按照其所处位置排序 不同身高的人，应该先排身高高的
+      对象在内存中的存储布局 对象存储在堆中，对象的引用在栈中，对象在内存中的存储布局如下： 对象头 mark word GC分代年龄 锁状态标记 哈希码 类型指针 lengt
     </div>
     <div class="read-more">
-      <a href="/post/%E6%A0%B9%E6%8D%AE%E8%BA%AB%E9%AB%98%E9%87%8D%E5%BB%BA%E9%98%9F%E5%88%97/" class="read-more-link">Read more...</a>
+      <a href="/post/java%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B/" class="read-more-link">Read more...</a>
     </div>
   </div>
 </article>
 
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/%E7%A7%BB%E5%8A%A8%E9%9B%B6/">移动零</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/%E8%83%8C%E5%8C%85%E4%B9%9D%E8%AE%B2/">背包九讲</a></h1>
     <div class="post-meta">
-      <span class="post-time"> 2020-07-17 </span>
+      <span class="post-time"> 2020-07-18 </span>
       <div class="post-category">
           <a href="/categories/%E7%AE%97%E6%B3%95/"> 算法 </a>
           </div>
@@ -207,10 +207,10 @@
   
   <div class="post-content">
     <div class="post-summary">
-      问题描述 给定一个数组，将其中的0移动到数组末尾，同时保持非零元素的相对顺序。 https://leetcode-cn.com/problems/move-zeroes/ 解法 双指针
+      0/1背包 有 N 件物品和一个容量为 V 的背包。每一件物品 i 的体积和价值分别是 $C_i$ 和 $W_i$, 请问将哪些物品装入背包可使价值总和最大？ 状态转移方程：$dp[
     </div>
     <div class="read-more">
-      <a href="/post/%E7%A7%BB%E5%8A%A8%E9%9B%B6/" class="read-more-link">Read more...</a>
+      <a href="/post/%E8%83%8C%E5%8C%85%E4%B9%9D%E8%AE%B2/" class="read-more-link">Read more...</a>
     </div>
   </div>
 </article>

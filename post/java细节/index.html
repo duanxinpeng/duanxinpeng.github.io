@@ -49,7 +49,7 @@
 <meta itemprop="description" content="java Queue add/offer add：向队列末尾添加一个元素，若队列已满，则抛出异常 offer：不会抛异常，返回false。 remove/poll remove：移除队列队头元素，若队列">
 <meta itemprop="datePublished" content="2020-07-20T10:22:53&#43;08:00" />
 <meta itemprop="dateModified" content="2020-07-20T10:22:53&#43;08:00" />
-<meta itemprop="wordCount" content="2466">
+<meta itemprop="wordCount" content="2842">
 
 
 
@@ -137,6 +137,7 @@
     <li><a href="#java-queue">java Queue</a></li>
     <li><a href="#形参实参">形参/实参</a></li>
     <li><a href="#泛型">泛型</a></li>
+    <li><a href="#exceptionerror的区别">exception、error的区别</a></li>
     <li><a href="#concurrenthashmap-的-get-方法为什么不需要加锁">ConcurrentHashMap 的 get 方法为什么不需要加锁</a></li>
     <li><a href="#concurrenthashmap-的-putval-是如何做的">ConcurrentHashMap 的 putVal 是如何做的？</a></li>
     <li><a href="#hashmap的扰动函数的作用">HashMap的扰动函数的作用？</a></li>
@@ -145,6 +146,10 @@
     <li><a href="#为什么hashmap-允许-keyvalue-为-null但concurrenthashmap不允许">为什么HashMap 允许 key/value 为 null，但ConcurrentHashMap不允许？</a></li>
     <li><a href="#java类名是否允许相同比如和jdk中某个类相同">java类名是否允许相同？比如和jdk中某个类相同？</a></li>
     <li><a href="#lambda-表达式">lambda 表达式</a></li>
+    <li><a href="#java-接口特性">java 接口特性</a></li>
+    <li><a href="#java四种访问权限">java四种访问权限</a></li>
+    <li><a href="#java数组存储">java数组存储</a></li>
+    <li><a href="#integer-valueof-缓存">Integer valueOf 缓存</a></li>
   </ul>
 </nav>
   </div>
@@ -349,7 +354,13 @@
 <span class="o">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="concurrenthashmap-的-get-方法为什么不需要加锁">ConcurrentHashMap 的 get 方法为什么不需要加锁</h2>
+</div><h2 id="exceptionerror的区别">exception、error的区别</h2>
+<ol>
+<li>两者父类都是 throwable类</li>
+<li>error一般是指与JVM相关的问题，比如系统崩溃、内存不足、栈溢出等，这类问题导致的应用中断仅靠程序本身无法恢复和预防</li>
+<li>Exception表示程序可以处理的异常，可以捕获且可能恢复。</li>
+</ol>
+<h2 id="concurrenthashmap-的-get-方法为什么不需要加锁">ConcurrentHashMap 的 get 方法为什么不需要加锁</h2>
 <ol>
 <li>获取 hash 桶的根节点通过 <code>tabAt</code> 来完成，线程安全</li>
 <li>遍历的时候用到了节点的 next 属性，被 volative 关键字修饰，线程间可见，线程安全</li>
@@ -402,6 +413,29 @@
 <h2 id="lambda-表达式">lambda 表达式</h2>
 <ol>
 <li>lambda 表达式中只允许引用声明为常量的局部变量</li>
+</ol>
+<h2 id="java-接口特性">java 接口特性</h2>
+<ol>
+<li>一个接口的实现类可以实现多个接口</li>
+<li>接口的实现类<code>（如果不是抽象类的话!）</code>则必须实现接口中的全部抽象方法</li>
+<li>接口中的方法被默认设置为 <code>public abstract</code>； 接口中的变量被默认设置为 <code>final static</code>, 所以必须初始化；</li>
+<li>接口没有构造函数，无法实例化</li>
+</ol>
+<h2 id="java四种访问权限">java四种访问权限</h2>
+<ol>
+<li>public：跨类、跨包访问</li>
+<li>default：属性前什么都不加，只能跨类，不能跨包</li>
+<li>protected：子类可访问</li>
+<li>private：只有自己可以访问</li>
+</ol>
+<h2 id="java数组存储">java数组存储</h2>
+<ol>
+<li>java数组是按维存储的！</li>
+<li>比如二维数组相当于多个一维数组</li>
+</ol>
+<h2 id="integer-valueof-缓存">Integer valueOf 缓存</h2>
+<ol>
+<li>-128到127之间直接在缓存中取！</li>
 </ol>
 
     </div>

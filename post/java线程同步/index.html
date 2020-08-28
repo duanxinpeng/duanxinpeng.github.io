@@ -49,7 +49,7 @@
 <meta itemprop="description" content="synchronized synchronized 关键字的用法 修饰代码块，指定加锁对象，对给定对象加锁，进入同步代码库前要获得给定对象的锁。 修饰普通方法，对象锁，进入同步代码前要获得当前">
 <meta itemprop="datePublished" content="2020-07-30T09:12:47&#43;08:00" />
 <meta itemprop="dateModified" content="2020-07-30T09:12:47&#43;08:00" />
-<meta itemprop="wordCount" content="5474">
+<meta itemprop="wordCount" content="5499">
 
 
 
@@ -157,7 +157,7 @@
     </li>
     <li><a href="#await">await()</a>
       <ul>
-        <li><a href="#使用了aqs的同步工具">使用了AQS的同步工具</a></li>
+        <li><a href="#使用了aqs的同步工具只需要实现tryacquire和tryrelease其他的逻辑都是固定的">使用了AQS的同步工具（只需要实现tryAcquire和tryRelease，其他的逻辑都是固定的！）</a></li>
         <li><a href="#使用aqs实现一个共享锁">使用AQS实现一个共享锁</a></li>
       </ul>
     </li>
@@ -337,7 +337,7 @@
 <li>Synchronized是不可以被中断的，而ReentrantLock#lockInterruptibly方法是可以被中断的；</li>
 <li>在发生异常时Synchronized会自动释放锁（由javac编译时自动实现），而ReentrantLock需要开发者在finally块中显示释放锁；</li>
 <li>ReentrantLock获取锁的形式有多种：如立即返回是否成功的tryLock(),以及等待指定时长的获取，更加灵活；</li>
-<li>Synchronized在特定的情况下对于已经在等待的线程是后来的线程先获得锁（FILO），而ReentrantLock对于已经在等待的线程一定是先来的线程先获得锁（FIFO）；</li>
+<li>Synchronized在特定的情况下对于已经在等待的线程是后来的线程先获得锁（FILO），而ReentrantLock对于已经在等待的线程一定是先来的线程先获得锁（FIFO）？</li>
 </ul>
 </li>
 <li>为什么要设计偏向锁？
@@ -374,7 +374,7 @@
 </ol>
 <h3 id="state">state</h3>
 <ol>
-<li>AQS底层维护一个由 volatile 修饰的 int 类型的变量 setate 来表示当前的同步状态。</li>
+<li>AQS底层维护一个由 volatile 修饰的 int 类型的变量 state 来表示当前的同步状态。</li>
 <li>关于 state 主要有以下三个方法
 <ul>
 <li>getState： 获取当前同步状态</li>
@@ -433,14 +433,14 @@
 <ol>
 <li>acquire()
 <ul>
-<li>尝试获取一次锁（即利用 CAS 尝试修改state） acquire() 方法是AQS的一个模板方法，其中的 tryAcquire() 需要使用者按照需求自行定义！</li>
+<li>尝试获取一次锁（tryAcquire() 需要使用者按照需求自行定义！）</li>
 <li>若获取锁失败则将当前线程封装成同步队列的节点，利用CAS将其加入等待队列中。（addWaiter）</li>
 <li>将线程阻塞，直到他成为头节点的下一个节点，才能获得锁 （acquireQueued）</li>
 </ul>
 </li>
 <li>release()
 <ul>
-<li>尝试释放锁，release() 也是一个模板方法，其 tryRelease() 需要使用者自己去实现</li>
+<li>尝试释放锁，（ tryRelease() 自定义）</li>
 <li>唤醒头节点的下一个节点，使其尝试去获得锁。</li>
 </ul>
 </li>
@@ -449,13 +449,13 @@
 <ol>
 <li>acquireShared()
 <ul>
-<li>调用 tryAcquireShared 方法尝试获取一次共享锁。acquireShared()是一个模板方法，tryAcquireShared() 就是需要使用者自行实现的方法。</li>
+<li>尝试获取一次锁。（tryAcquireShared() 自定义）。</li>
 <li>如果获取锁失败，则执行 doAcquireShared 方法，该方法和 acquireQueued 方法类似，但有一点不同<code>若线程在被唤醒后，成功获取到了共享锁，还需要判断共享锁是否还能被其他线程获取，若可以，则继续向后唤醒他的下一个节点对应的线程</code>。</li>
 </ul>
 </li>
 <li>releaseShared()
 <ul>
-<li>尝试修改 state 的状态</li>
+<li>尝试释放锁（tryRelease() 自定义)</li>
 <li>调用 doReleaseShared 方法唤醒后继节点中的线程。</li>
 </ul>
 </li>
@@ -482,7 +482,7 @@
 </ul>
 </li>
 </ol>
-<h3 id="使用了aqs的同步工具">使用了AQS的同步工具</h3>
+<h3 id="使用了aqs的同步工具只需要实现tryacquire和tryrelease其他的逻辑都是固定的">使用了AQS的同步工具（只需要实现tryAcquire和tryRelease，其他的逻辑都是固定的！）</h3>
 <ol>
 <li>ReentrantLock</li>
 <li>ReentrantReadWriteLock</li>
@@ -787,7 +787,7 @@
 </li>
 <li>先调用 LockSupport.unpark(thread1), 再调用 LockSupport.park() 会怎样？
 <ul>
-<li>LockSupport.park()会被直接跳过！</li>
+<li>LockSupport.park()会被直接跳过，（如何理解？会被直接跳过的意思是unpartk生效了，但只会生效一次，但是wait和notify就不是这样）</li>
 </ul>
 </li>
 <li>LockSupport 原理

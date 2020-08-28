@@ -89,7 +89,7 @@
 	- Synchronized是不可以被中断的，而ReentrantLock#lockInterruptibly方法是可以被中断的；
 	- 在发生异常时Synchronized会自动释放锁（由javac编译时自动实现），而ReentrantLock需要开发者在finally块中显示释放锁；
 	- ReentrantLock获取锁的形式有多种：如立即返回是否成功的tryLock(),以及等待指定时长的获取，更加灵活；
-	- Synchronized在特定的情况下对于已经在等待的线程是后来的线程先获得锁（FILO），而ReentrantLock对于已经在等待的线程一定是先来的线程先获得锁（FIFO）；
+	- Synchronized在特定的情况下对于已经在等待的线程是后来的线程先获得锁（FILO），而ReentrantLock对于已经在等待的线程一定是先来的线程先获得锁（FIFO）？
 4. 为什么要设计偏向锁？
 	- 大部分情况下都是只有一个线程在运行
 	- 去掉了线程的加锁过程，减轻了线程负担
@@ -105,7 +105,7 @@
 		- FairSync
 		- NofairSync 
 ### state
-1. AQS底层维护一个由 volatile 修饰的 int 类型的变量 setate 来表示当前的同步状态。
+1. AQS底层维护一个由 volatile 修饰的 int 类型的变量 state 来表示当前的同步状态。
 2. 关于 state 主要有以下三个方法
 	- getState： 获取当前同步状态
 	- setState： 设置当前同步状态
@@ -133,19 +133,20 @@
 2. 通过一个同步队列来维护当前获取锁失败，进入阻塞状态的线程。这个同步队列是一个双向链表，获取锁失败的线程会被封装成一个链表节点，加入链表的尾部排队，同时调用 LockSupport.park() 方法阻塞线程。
 ### 独占锁的获取与释放
 1. acquire() 
-	- 尝试获取一次锁（即利用 CAS 尝试修改state） acquire() 方法是AQS的一个模板方法，其中的 tryAcquire() 需要使用者按照需求自行定义！
+	- 尝试获取一次锁（tryAcquire() 需要使用者按照需求自行定义！）
 	- 若获取锁失败则将当前线程封装成同步队列的节点，利用CAS将其加入等待队列中。（addWaiter）
 	- 将线程阻塞，直到他成为头节点的下一个节点，才能获得锁 （acquireQueued）
 2. release()
-	- 尝试释放锁，release() 也是一个模板方法，其 tryRelease() 需要使用者自己去实现
+	- 尝试释放锁，（ tryRelease() 自定义）
 	- 唤醒头节点的下一个节点，使其尝试去获得锁。
 ### 共享锁的获取与释放
 1. acquireShared()
-	- 调用 tryAcquireShared 方法尝试获取一次共享锁。acquireShared()是一个模板方法，tryAcquireShared() 就是需要使用者自行实现的方法。
+	- 尝试获取一次锁。（tryAcquireShared() 自定义）。
 	- 如果获取锁失败，则执行 doAcquireShared 方法，该方法和 acquireQueued 方法类似，但有一点不同`若线程在被唤醒后，成功获取到了共享锁，还需要判断共享锁是否还能被其他线程获取，若可以，则继续向后唤醒他的下一个节点对应的线程`。
 2. releaseShared()
-	- 尝试修改 state 的状态
+	- 尝试释放锁（tryRelease() 自定义)
 	- 调用 doReleaseShared 方法唤醒后继节点中的线程。
+	
 ### AQS同步队列
 1. AQS队列 
 2. Condition队列
@@ -157,7 +158,7 @@
 	- 从条件队列中取出一个线程，并将其唤醒
 	- 只有条件队列不为空时，才会做唤醒操作，否则什么都不用做，所以先调用signal，再调用await是无法唤醒的！
 	- 上面这一点和 Object.wait()/Object.notify()是一致的，但是和 LockSupport.park/LockSupport.unpart是不一致的。
-### 使用了AQS的同步工具
+### 使用了AQS的同步工具（只需要实现tryAcquire和tryRelease，其他的逻辑都是固定的！）
 1. ReentrantLock
 2. ReentrantReadWriteLock
 3. Semaphore
@@ -313,7 +314,7 @@ public static void main(String[] args) throws InterruptedException {
 2. LockSupport.park() 会释放锁吗？
 	- 不会，condition.await() 才会释放锁
 3. 先调用 LockSupport.unpark(thread1), 再调用 LockSupport.park() 会怎样？
-	- LockSupport.park()会被直接跳过！
+	- LockSupport.park()会被直接跳过，（如何理解？会被直接跳过的意思是unpartk生效了，但只会生效一次，但是wait和notify就不是这样）
 4. LockSupport 原理
 	- LockSupport 会为每一个调用它的线程搭配一个许可（permit），这一点类似于 Semaphore，每次调用 park 时，如果许可可用，则会直接返回，否则该线程会被阻塞。
 	- 调用 unpark 时，会使许可可用，但是如果许可已经可用，这个许可并不会累积，这一点和 Semaphore 不同！所以最多只会有一个许可！

@@ -49,7 +49,7 @@
 <meta itemprop="description" content="问题描述 给定一个主字符串 text 和一个模式字符串 pattern，返回字符串 text 中和字符串 pattern 相同的子串的起始位置。 实现方法 BR暴力法 先找到和 s 中和 p 的">
 <meta itemprop="datePublished" content="2020-07-24T09:37:19&#43;08:00" />
 <meta itemprop="dateModified" content="2020-07-24T09:37:19&#43;08:00" />
-<meta itemprop="wordCount" content="1608">
+<meta itemprop="wordCount" content="1649">
 
 
 
@@ -158,6 +158,7 @@
 <li>从步骤 1 返回的位置开始，判断 s 中从此处开始的子串能否与 p 完全匹配</li>
 <li>步骤 2 的判断方法是逐个字符进行比较，采用java 的 equals() 方法并不能优化时间复杂度，因为 equals 的底层实现依然是逐字符比较。</li>
 <li>java 的 indexOf 采用的就是这种方法。</li>
+<li>时间复杂度O(nm)(n和m分别为匹配（长）串、被匹配（短）串的长度)</li>
 </ol>
 <h3 id="rk算法">RK算法</h3>
 <ol>
@@ -466,6 +467,7 @@ public int BoyerMoore(String pattern, String text) {
 <h3 id="kmp-算法">KMP 算法</h3>
 <ol>
 <li>通过更快移动模式串来优化 BR 算法。</li>
+<li>时间复杂度 $O(n+m)$</li>
 <li>reference
 <ul>
 <li><a href="https://ethsonliu.com/2018/04/kmp.html">https://ethsonliu.com/2018/04/kmp.html</a></li>

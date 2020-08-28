@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>threadlocal on Even - A super concise theme for Hugo</title>
+    <link>http://localhost:1313/tags/threadlocal/</link>
+    <description>Recent content in threadlocal on Even - A super concise theme for Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 18 Aug 2020 22:46:20 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/threadlocal/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>ThreadLocal</title>
+      <link>http://localhost:1313/post/threadlocal/</link>
+      <pubDate>Tue, 18 Aug 2020 22:46:20 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/threadlocal/</guid>
+      <description>强软弱虚 强引用： 只要强引用存在，被引用的对象就永远不会被回收 软引用： 只被软引用关联着的对象在系统将要发生内存溢出时就会被列入回收范进行回收 j</description>
+    </item>
+    
+  </channel>
+</rss>

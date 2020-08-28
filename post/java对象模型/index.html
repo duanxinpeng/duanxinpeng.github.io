@@ -49,7 +49,7 @@
 <meta itemprop="description" content="对象在内存中的存储布局 对象存储在堆中，对象的引用在栈中，对象在内存中的存储布局如下： 对象头 mark word GC分代年龄 锁状态标记 哈希码 类型指针 lengt">
 <meta itemprop="datePublished" content="2020-07-18T22:41:29&#43;08:00" />
 <meta itemprop="dateModified" content="2020-07-18T22:41:29&#43;08:00" />
-<meta itemprop="wordCount" content="1121">
+<meta itemprop="wordCount" content="1206">
 
 
 
@@ -180,6 +180,8 @@
 <li>指针碰撞 : 用于Serial和ParNew等不会产生内存碎片的垃圾收集器
 <ul>
 <li>为了解决多线程并发问题，引入TLAB。</li>
+<li>TLAB：预先为每个线程分配一块较大的空间，这样每个线程直接在自己的TLAB中进行内存分配，就不用考虑多线程的问题了！</li>
+<li>可以用CAS为TLAB分配内存！</li>
 </ul>
 </li>
 <li>空闲列表： CMS垃圾收集器就是采用的这种方法</li>
@@ -250,7 +252,7 @@
 </ol>
 <h2 id="class对象位于堆还是方法区">Class对象位于堆，还是方法区？</h2>
 <ol>
-<li>位于方法区。</li>
+<li>位于方法区。？？应该位于堆中吧？</li>
 <li>但是Class对象还会在堆区生成一个对象用于反射！</li>
 </ol>
 

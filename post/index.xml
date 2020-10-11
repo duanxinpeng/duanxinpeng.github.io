@@ -6,7 +6,7 @@
     <description>Recent content in Posts on Even - A super concise theme for Hugo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 28 Aug 2020 20:11:22 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 11 Sep 2020 20:55:42 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
     
@@ -36,6 +36,42 @@
       
       <guid>http://localhost:1313/post/tcp/</guid>
       <description>TCP 的特点 面向连接 可靠服务 面向字节流 面向连接 连接就是一对一，当双方都确认对方是谁时，连接就建立起来了， 源IP+源端口号+目标IP+目标端口号就</description>
+    </item>
+    
+    <item>
+      <title>二进制运算</title>
+      <link>http://localhost:1313/post/%E4%BA%8C%E8%BF%9B%E5%88%B6%E8%BF%90%E7%AE%97/</link>
+      <pubDate>Fri, 11 Sep 2020 20:55:42 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E4%BA%8C%E8%BF%9B%E5%88%B6%E8%BF%90%E7%AE%97/</guid>
+      <description>LeetCode-1073 负二进制相加 https://leetcode-cn.com/problems/adding-two-negabinary-numbers/ LeetCode-1017 负二进制转换 https://leetcode-cn.com/problems/convert-to-base-2/ LeetCode-406 数字转换为16进制数 https://leetcode-cn.com/problems/convert-a-number-to-hexadecimal/</description>
+    </item>
+    
+    <item>
+      <title>快速幂</title>
+      <link>http://localhost:1313/post/%E5%BF%AB%E9%80%9F%E5%B9%82/</link>
+      <pubDate>Fri, 11 Sep 2020 20:30:52 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E5%BF%AB%E9%80%9F%E5%B9%82/</guid>
+      <description>java 移位运算符总结 &amp;lt;&amp;lt; 左移运算符，相当于乘以2 &amp;gt;&amp;gt; 右移运算法，相当于除以2 1 右移1位变为0 -1右移移位仍然是-1 &amp;gt;&amp;gt;&amp;gt; 无符号右移，忽略符号位，空位补零</description>
+    </item>
+    
+    <item>
+      <title>Java容器</title>
+      <link>http://localhost:1313/post/java%E5%AE%B9%E5%99%A8/</link>
+      <pubDate>Tue, 01 Sep 2020 10:06:52 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/java%E5%AE%B9%E5%99%A8/</guid>
+      <description>继承关系 Iterable/Collection List CopyOnWriteList Vector &amp;mdash; Stack ArrayList LinkedList Set HashSet &amp;mdash; LinkedHashSet SortedSet &amp;mdash; TreeSet EnumSet CopyOnWriteArraySet ConcurrentSkipListSet Queue Deque ArrayDeque BlockingDeque BlockingQueue ArrayBlocingQueue LinkedBlockingQueue SynchronousQueue PriorityBlockingQueue PriorityQueue Map HashMap HashTable TreeMap ConcurrentHashMap 常见问题 Map没有实现iterable怎么遍历？ 通过内部生成Col</description>
+    </item>
+    
+    <item>
+      <title>消息队列</title>
+      <link>http://localhost:1313/post/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/</link>
+      <pubDate>Sat, 29 Aug 2020 10:49:05 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/</guid>
+      <description>作用 解耦 异步处理 负载均衡/削峰/限流 两种模式 点对点模式 消息队列 生产者 消费者 发布/订阅模式 角色主题 发布者 订阅者 常用消息队列 RabbitMQ ActiveMQ RocketMQ Kafka 需要解决哪些</description>
     </item>
     
     <item>

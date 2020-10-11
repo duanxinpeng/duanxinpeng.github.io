@@ -49,7 +49,7 @@
 <meta itemprop="description" content="java线程状态 我们都知道进程的状态有五种：创建、就绪、运行、阻塞、终止。但java线程状态不同于进程状态，java进程包括一下六种状态： N">
 <meta itemprop="datePublished" content="2020-07-13T15:12:43&#43;08:00" />
 <meta itemprop="dateModified" content="2020-07-13T15:12:43&#43;08:00" />
-<meta itemprop="wordCount" content="2938">
+<meta itemprop="wordCount" content="3463">
 
 
 
@@ -276,6 +276,33 @@
 </ul>
 </li>
 <li><a href="https://github.com/duanxinpeng/Java-E-xamples/blob/master/src/concurrent/TheadPoolTest.java">https://github.com/duanxinpeng/Java-E-xamples/blob/master/src/concurrent/TheadPoolTest.java</a></li>
+<li>线程池状态（五种）
+<ul>
+<li>RUNNING：接受新任务并且处理阻塞队列中的任务</li>
+<li>SHUTDOWN：拒绝新任务但是处理阻塞队列中的任务（shutdown())</li>
+<li>STOP：拒绝新任务并且抛弃阻塞队列中的任务，同时中断正在处理的任务(shutdownNow())</li>
+<li>TIDYING：所有任务都执行完</li>
+<li>TERMINATED</li>
+</ul>
+</li>
+<li>源码细节
+<ul>
+<li>成员变量ctl是AtomicInteger类型，高三位用于表示线程池状态，后面29位用来记录线程池线程个数。</li>
+<li>实际上是一个生产者消费者模型，用户提娜佳任务到线程池时相当于生产者生产元素，workers线程工作集中的线程直接执行任务或者从任务队列里面获取任务相当于消费元素。</li>
+<li>当线程数小于coresize或者阻塞队列满时，任务都不会经过阻塞队列，而是会直接被新创建的线程执行，因为任务会直接与worker绑定</li>
+<li>Worker
+<ul>
+<li>继承了AQS，并且实现了Runnable</li>
+<li>final Thread thread</li>
+<li>Runnable firstTask</li>
+<li>volatile long completedTasks</li>
+</ul>
+</li>
+<li>Worker每次创建时都会和一个task绑定，执行时优先执行firstTask，然后再选择从阻塞队列中取任务</li>
+<li>takeTask（）就是从阻塞队列中取任务，就是一个消费者。如果线程数大于核心线程数，就用poll方法，可以设置超时时间，一旦超时就销毁线程</li>
+<li>如果线程数小于核心线程数，会用take方法，不设置超时时间</li>
+</ul>
+</li>
 </ol>
 
     </div>

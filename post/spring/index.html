@@ -49,7 +49,7 @@
 <meta itemprop="description" content="spring中bean的细节 创建bean的三种方式 使用默认构造函数创建：使用bean标签，配置id和class属性并且没有其他属性和标签时，">
 <meta itemprop="datePublished" content="2020-08-18T14:51:07&#43;08:00" />
 <meta itemprop="dateModified" content="2020-08-18T14:51:07&#43;08:00" />
-<meta itemprop="wordCount" content="1665">
+<meta itemprop="wordCount" content="1970">
 
 
 
@@ -320,11 +320,22 @@ public class Logger {
 </div>
 </div><h2 id="spring-bean的生命周期">Spring bean的生命周期</h2>
 <ol>
-<li>声明周期大概包括以下部分
+<li>声明周期大概包括以下三个阶段，分别对应于以下三个函数
 <ul>
-<li>实例化：createBeanInstance</li>
-<li>填充属性：populateBean</li>
-<li>初始化：initializeBean</li>
+<li>实例化：createBeanInstance()</li>
+<li>填充属性：populateBean()</li>
+<li>初始化：initializeBean()</li>
+</ul>
+</li>
+<li>创建一个bean的过程如下所示
+<ul>
+<li>获取bean定义</li>
+<li>实例化一个bean</li>
+<li>执行生命周期函数（前，注册注入选项？）</li>
+<li>创建依赖项（注册注入选项？）</li>
+<li>填充bean（@Autowired注入）</li>
+<li>初始化bean</li>
+<li>执行生命周期函数（后）</li>
 </ul>
 </li>
 </ol>
@@ -342,6 +353,17 @@ public class Logger {
 <li>实例化bean之后将其放入缓存中</li>
 <li>然后对bean进行属性注入时，如果有依赖其他的bean，就会首先从缓存中获取该bean，如果没有再去实例化bean</li>
 <li>三级缓存解决bean的本质其实就是利用了bean处在实例化但还未初始化的这种中间状态</li>
+</ul>
+</li>
+<li>只用一级缓存
+<ul>
+<li>此时缓存中既有完整的已经注入属性的对象，也有不完整的没有注入属性的对象，如果有其他线程来获取对象，就有可能获取到不完整的对象。</li>
+</ul>
+</li>
+<li>只用二级缓存
+<ul>
+<li>如果有aop的话，代理对象是在初始化完成之后的postProcessAfterInitialization()中进行替换的</li>
+<li>只用二级缓存的话，在aop情况下，会导致注入到其他bean的不是最终的代理对象，而是原始对象</li>
 </ul>
 </li>
 </ol>

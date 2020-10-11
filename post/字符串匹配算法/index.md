@@ -164,7 +164,50 @@
 
 ### KMP 算法
 1. 通过更快移动模式串来优化 BR 算法。
+2. next[i]表示pattern[i]表示的最长后缀相等的最长前缀的最后一个位置的下标，也就是说通过next数组，可以直接得到对应的最长前缀的位置。
+3. 之所以可以用`j=next[j]`这种写法，是因为pattern[i-1]和pattern[j]是一样的。
+3. 代码
+```java
+    //KMP算法
+	// next数组的构建与kmp算法结构上很相似
+    public static void preNext(int[] next, String p) {
+        int m = p.length();
+        for (int i = 0; i < m; i++) {
+            next[i] = -1;
+        }
+        for (int i = 1; i < m; i++) {
+            int j = next[i - 1];
+            while (j != -1 && p.charAt(j + 1) != p.charAt(i))
+                j = next[j];
+            if (p.charAt(j + 1) == p.charAt(i))
+                next[i] = j + 1;
+        }
+    }
+
+    public static int KMP(String text, String pattern) {
+        int pLen = pattern.length();
+        int tLen = text.length();
+        int[] next = new int[pLen];
+        preNext(next, pattern);
+        // 被匹配串pattern的index
+        int match = -1;
+		// i 不会后退！
+        for (int i = 0; i < tLen; i++) {
+			// 只会让match后退，而且后退多少由next数组决定
+            while (match != -1 && pattern.charAt(match + 1) != text.charAt(i))
+                match = next[match];
+            if (pattern.charAt(match + 1) == text.charAt(i)) {
+                match++;
+                if (match == pLen - 1)
+                    return (i-match);
+            }
+        }
+        return -1;
+    }
+```
 2. 时间复杂度 $O(n+m)$
+	- next数组构建复杂度：
+	- 比较时间复杂度
 2. reference
 	- https://ethsonliu.com/2018/04/kmp.html
 	- http://www.ruanyifeng.com/blog/2013/05/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm.html

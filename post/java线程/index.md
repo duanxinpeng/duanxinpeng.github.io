@@ -88,3 +88,21 @@ https://github.com/duanxinpeng/Java-E-xamples/blob/master/src/concurrent/ThreadC
 	- FixedThreadPool和SingleThreadPool：阻塞队列无界！
 	- CachedThreadPool和Scheduled THreadPool：maximumPoolSize=Integer.MAX_VALUE；
 11. https://github.com/duanxinpeng/Java-E-xamples/blob/master/src/concurrent/TheadPoolTest.java	
+12. 线程池状态（五种）
+	- RUNNING：接受新任务并且处理阻塞队列中的任务
+	- SHUTDOWN：拒绝新任务但是处理阻塞队列中的任务（shutdown())
+	- STOP：拒绝新任务并且抛弃阻塞队列中的任务，同时中断正在处理的任务(shutdownNow())
+	- TIDYING：所有任务都执行完
+	- TERMINATED
+13. 源码细节
+	- 成员变量ctl是AtomicInteger类型，高三位用于表示线程池状态，后面29位用来记录线程池线程个数。
+	- 实际上是一个生产者消费者模型，用户提娜佳任务到线程池时相当于生产者生产元素，workers线程工作集中的线程直接执行任务或者从任务队列里面获取任务相当于消费元素。
+	- 当线程数小于coresize或者阻塞队列满时，任务都不会经过阻塞队列，而是会直接被新创建的线程执行，因为任务会直接与worker绑定
+	- Worker
+		- 继承了AQS，并且实现了Runnable
+		- final Thread thread 
+		- Runnable firstTask 
+		- volatile long completedTasks
+	- Worker每次创建时都会和一个task绑定，执行时优先执行firstTask，然后再选择从阻塞队列中取任务
+	- takeTask（）就是从阻塞队列中取任务，就是一个消费者。如果线程数大于核心线程数，就用poll方法，可以设置超时时间，一旦超时就销毁线程
+	- 如果线程数小于核心线程数，会用take方法，不设置超时时间

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>容器 on Even - A super concise theme for Hugo</title>
+    <link>http://localhost:1313/tags/%E5%AE%B9%E5%99%A8/</link>
+    <description>Recent content in 容器 on Even - A super concise theme for Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 01 Sep 2020 10:06:52 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/%E5%AE%B9%E5%99%A8/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Java容器</title>
+      <link>http://localhost:1313/post/java%E5%AE%B9%E5%99%A8/</link>
+      <pubDate>Tue, 01 Sep 2020 10:06:52 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/java%E5%AE%B9%E5%99%A8/</guid>
+      <description>继承关系 Iterable/Collection List CopyOnWriteList Vector &amp;mdash; Stack ArrayList LinkedList Set HashSet &amp;mdash; LinkedHashSet SortedSet &amp;mdash; TreeSet EnumSet CopyOnWriteArraySet ConcurrentSkipListSet Queue Deque ArrayDeque BlockingDeque BlockingQueue ArrayBlocingQueue LinkedBlockingQueue SynchronousQueue PriorityBlockingQueue PriorityQueue Map HashMap HashTable TreeMap ConcurrentHashMap 常见问题 Map没有实现iterable怎么遍历？ 通过内部生成Col</description>
+    </item>
+    
+  </channel>
+</rss>

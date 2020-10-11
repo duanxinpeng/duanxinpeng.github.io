@@ -88,10 +88,18 @@ public class Logger {
 ```
 
 ## Spring bean的生命周期
-1. 声明周期大概包括以下部分
-	- 实例化：createBeanInstance
-	- 填充属性：populateBean
-	- 初始化：initializeBean
+1. 声明周期大概包括以下三个阶段，分别对应于以下三个函数
+	- 实例化：createBeanInstance()
+	- 填充属性：populateBean()
+	- 初始化：initializeBean()
+2. 创建一个bean的过程如下所示
+	- 获取bean定义
+	- 实例化一个bean
+	- 执行生命周期函数（前，注册注入选项？）
+	- 创建依赖项（注册注入选项？）
+	- 填充bean（@Autowired注入）
+	- 初始化bean
+	- 执行生命周期函数（后）
 	
 ## Spring 如何解决循环依赖
 1. Spring的循环依赖包括以下三种
@@ -102,6 +110,12 @@ public class Logger {
 	- 实例化bean之后将其放入缓存中
 	- 然后对bean进行属性注入时，如果有依赖其他的bean，就会首先从缓存中获取该bean，如果没有再去实例化bean
 	- 三级缓存解决bean的本质其实就是利用了bean处在实例化但还未初始化的这种中间状态
+3. 只用一级缓存
+	- 此时缓存中既有完整的已经注入属性的对象，也有不完整的没有注入属性的对象，如果有其他线程来获取对象，就有可能获取到不完整的对象。
+4. 只用二级缓存
+	- 如果有aop的话，代理对象是在初始化完成之后的postProcessAfterInitialization()中进行替换的
+	- 只用二级缓存的话，在aop情况下，会导致注入到其他bean的不是最终的代理对象，而是原始对象
+	
 	
 ## SpringAOP 代理对象的创建
 1. 代理对象是在bean实例化完成之后再去创建的

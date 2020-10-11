@@ -13,6 +13,9 @@
 	- 静态方法引用: Class::static_method
 	- 特定类的任意对象的方法引用：Class::method
 	- 特定对象的方法引用：instance::method
+## 默认函数
+1. 之前接口中的方法必须是抽象方法
+2. jdk8之后在方法前面加一个  default 就可以实现默认方法！
 ## 函数式接口（jdk8之前就有，但jdk8新增了java.util.function）
 1. 有且仅有一个抽象方法的接口；
 2. 函数式接口可以被隐式转为lambda表达式；

@@ -49,7 +49,7 @@
 <meta itemprop="description" content="java Queue add/offer add：向队列末尾添加一个元素，若队列已满，则抛出异常 offer：不会抛异常，返回false。 remove/poll remove：移除队列队头元素，若队列">
 <meta itemprop="datePublished" content="2020-07-20T10:22:53&#43;08:00" />
 <meta itemprop="dateModified" content="2020-07-20T10:22:53&#43;08:00" />
-<meta itemprop="wordCount" content="2842">
+<meta itemprop="wordCount" content="3125">
 
 
 
@@ -150,6 +150,8 @@
     <li><a href="#java四种访问权限">java四种访问权限</a></li>
     <li><a href="#java数组存储">java数组存储</a></li>
     <li><a href="#integer-valueof-缓存">Integer valueOf 缓存</a></li>
+    <li><a href="#java基本数据类型">java基本数据类型</a></li>
+    <li><a href="#基本类型和包装类的区别为什么要有包装类">基本类型和包装类的区别，为什么要有包装类</a></li>
   </ul>
 </nav>
   </div>
@@ -436,6 +438,85 @@
 <h2 id="integer-valueof-缓存">Integer valueOf 缓存</h2>
 <ol>
 <li>-128到127之间直接在缓存中取！</li>
+</ol>
+<h2 id="java基本数据类型">java基本数据类型</h2>
+<p>java基本数据类型一共8种,如下所示</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>默认值</th>
+<th>大小</th>
+<th>最小值</th>
+<th>最大值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>boolean</td>
+<td>false</td>
+<td>1bit</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>byte</td>
+<td>0</td>
+<td>8bit/1byte</td>
+<td>-128</td>
+<td>127</td>
+</tr>
+<tr>
+<td>short</td>
+<td>0</td>
+<td>16bit/2byte</td>
+<td>-32768(三万)</td>
+<td>32767</td>
+</tr>
+<tr>
+<td>char</td>
+<td>&lsquo;\u0000&rsquo;(也就是0)</td>
+<td>16bit</td>
+<td>&lsquo;\u0000&rsquo;/0</td>
+<td>&lsquo;\uffff&rsquo;（即为65,535）</td>
+</tr>
+<tr>
+<td>int</td>
+<td>0</td>
+<td>32bit/4byte</td>
+<td>-2,147,483,648（20亿）</td>
+<td>2,147,483,647</td>
+</tr>
+<tr>
+<td>float</td>
+<td>0.0f</td>
+<td>32bit/4byte</td>
+<td>略</td>
+<td>略</td>
+</tr>
+<tr>
+<td>long</td>
+<td>0L</td>
+<td>64bit/8byte</td>
+<td>-9,223,372,036,854,775,808(-2^63)</td>
+<td>9,223,372,036,854,775,807</td>
+</tr>
+<tr>
+<td>double</td>
+<td>0.0d</td>
+<td>64bit/8byte</td>
+<td>略</td>
+<td>略</td>
+</tr>
+</tbody>
+</table>
+<h2 id="基本类型和包装类的区别为什么要有包装类">基本类型和包装类的区别，为什么要有包装类</h2>
+<ol>
+<li>包装类是对象，基本类型是普通变量</li>
+<li>包装类是引用传递，基本类型是值传递</li>
+<li>声明方式不同，存储位置不同</li>
+<li>初始值不同，int初始值是0，包装类初始值都是null</li>
+<li>为了使基本类型拥有对象的性质，保证其面向对象的完整性。</li>
 </ol>
 
     </div>

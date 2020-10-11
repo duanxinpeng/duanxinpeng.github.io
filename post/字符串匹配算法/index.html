@@ -49,7 +49,7 @@
 <meta itemprop="description" content="问题描述 给定一个主字符串 text 和一个模式字符串 pattern，返回字符串 text 中和字符串 pattern 相同的子串的起始位置。 实现方法 BR暴力法 先找到和 s 中和 p 的">
 <meta itemprop="datePublished" content="2020-07-24T09:37:19&#43;08:00" />
 <meta itemprop="dateModified" content="2020-07-24T09:37:19&#43;08:00" />
-<meta itemprop="wordCount" content="1649">
+<meta itemprop="wordCount" content="2051">
 
 
 
@@ -467,7 +467,95 @@ public int BoyerMoore(String pattern, String text) {
 <h3 id="kmp-算法">KMP 算法</h3>
 <ol>
 <li>通过更快移动模式串来优化 BR 算法。</li>
-<li>时间复杂度 $O(n+m)$</li>
+<li>next[i]表示pattern[i]表示的最长后缀相等的最长前缀的最后一个位置的下标，也就是说通过next数组，可以直接得到对应的最长前缀的位置。</li>
+<li>之所以可以用<code>j=next[j]</code>这种写法，是因为pattern[i-1]和pattern[j]是一样的。</li>
+<li>代码</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java">    <span class="c1">//KMP算法
+</span><span class="c1"></span>	<span class="c1">// next数组的构建与kmp算法结构上很相似
+</span><span class="c1"></span>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">preNext</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">next</span><span class="o">,</span> <span class="n">String</span> <span class="n">p</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="na">length</span><span class="o">();</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">m</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="n">next</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">1</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">1</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">m</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">next</span><span class="o">[</span><span class="n">i</span> <span class="o">-</span> <span class="n">1</span><span class="o">];</span>
+            <span class="k">while</span> <span class="o">(</span><span class="n">j</span> <span class="o">!=</span> <span class="o">-</span><span class="n">1</span> <span class="o">&amp;&amp;</span> <span class="n">p</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">j</span> <span class="o">+</span> <span class="n">1</span><span class="o">)</span> <span class="o">!=</span> <span class="n">p</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">))</span>
+                <span class="n">j</span> <span class="o">=</span> <span class="n">next</span><span class="o">[</span><span class="n">j</span><span class="o">];</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">p</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">j</span> <span class="o">+</span> <span class="n">1</span><span class="o">)</span> <span class="o">==</span> <span class="n">p</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">))</span>
+                <span class="n">next</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">j</span> <span class="o">+</span> <span class="n">1</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">KMP</span><span class="o">(</span><span class="n">String</span> <span class="n">text</span><span class="o">,</span> <span class="n">String</span> <span class="n">pattern</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">pLen</span> <span class="o">=</span> <span class="n">pattern</span><span class="o">.</span><span class="na">length</span><span class="o">();</span>
+        <span class="kt">int</span> <span class="n">tLen</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="na">length</span><span class="o">();</span>
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">next</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">pLen</span><span class="o">];</span>
+        <span class="n">preNext</span><span class="o">(</span><span class="n">next</span><span class="o">,</span> <span class="n">pattern</span><span class="o">);</span>
+        <span class="c1">// 被匹配串pattern的index
+</span><span class="c1"></span>        <span class="kt">int</span> <span class="n">match</span> <span class="o">=</span> <span class="o">-</span><span class="n">1</span><span class="o">;</span>
+		<span class="c1">// i 不会后退！
+</span><span class="c1"></span>        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">tLen</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+			<span class="c1">// 只会让match后退，而且后退多少由next数组决定
+</span><span class="c1"></span>            <span class="k">while</span> <span class="o">(</span><span class="n">match</span> <span class="o">!=</span> <span class="o">-</span><span class="n">1</span> <span class="o">&amp;&amp;</span> <span class="n">pattern</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">match</span> <span class="o">+</span> <span class="n">1</span><span class="o">)</span> <span class="o">!=</span> <span class="n">text</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">))</span>
+                <span class="n">match</span> <span class="o">=</span> <span class="n">next</span><span class="o">[</span><span class="n">match</span><span class="o">];</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">pattern</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">match</span> <span class="o">+</span> <span class="n">1</span><span class="o">)</span> <span class="o">==</span> <span class="n">text</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">))</span> <span class="o">{</span>
+                <span class="n">match</span><span class="o">++;</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">match</span> <span class="o">==</span> <span class="n">pLen</span> <span class="o">-</span> <span class="n">1</span><span class="o">)</span>
+                    <span class="k">return</span> <span class="o">(</span><span class="n">i</span><span class="o">-</span><span class="n">match</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="o">-</span><span class="n">1</span><span class="o">;</span>
+    <span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>时间复杂度 $O(n+m)$
+<ul>
+<li>next数组构建复杂度：</li>
+<li>比较时间复杂度</li>
+</ul>
+</li>
 <li>reference
 <ul>
 <li><a href="https://ethsonliu.com/2018/04/kmp.html">https://ethsonliu.com/2018/04/kmp.html</a></li>

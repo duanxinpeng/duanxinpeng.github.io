@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="段新朋" /><meta name="description" content="ACID 原子性 一致性 隔离性 持久性 原子性 基于日志的REDO/UNDO机制 undo log （回滚日志）：用作回滚 提供回滚操作，一般是逻辑日志（可以认为当delet" /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="段新朋" /><meta name="description" content="ACID 原子性 一致性 隔离性 持久性 原子性 基于日志的REDO/UNDO机制 undo log （回滚日志）：用作回滚 提供回滚操作，一般是逻辑日志 主要有两个作用：回滚、" /><meta name="keywords" content="Hugo, theme, even" />
 
 
 
@@ -40,22 +40,22 @@
 
 
 <meta property="og:title" content="Mysql事务的实现" />
-<meta property="og:description" content="ACID 原子性 一致性 隔离性 持久性 原子性 基于日志的REDO/UNDO机制 undo log （回滚日志）：用作回滚 提供回滚操作，一般是逻辑日志（可以认为当delet" />
+<meta property="og:description" content="ACID 原子性 一致性 隔离性 持久性 原子性 基于日志的REDO/UNDO机制 undo log （回滚日志）：用作回滚 提供回滚操作，一般是逻辑日志 主要有两个作用：回滚、" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/post/mysql%E4%BA%8B%E5%8A%A1%E7%9A%84%E5%AE%9E%E7%8E%B0/" />
 <meta property="article:published_time" content="2020-07-28T20:25:00+08:00" />
 <meta property="article:modified_time" content="2020-07-28T20:25:00+08:00" />
 <meta itemprop="name" content="Mysql事务的实现">
-<meta itemprop="description" content="ACID 原子性 一致性 隔离性 持久性 原子性 基于日志的REDO/UNDO机制 undo log （回滚日志）：用作回滚 提供回滚操作，一般是逻辑日志（可以认为当delet">
+<meta itemprop="description" content="ACID 原子性 一致性 隔离性 持久性 原子性 基于日志的REDO/UNDO机制 undo log （回滚日志）：用作回滚 提供回滚操作，一般是逻辑日志 主要有两个作用：回滚、">
 <meta itemprop="datePublished" content="2020-07-28T20:25:00&#43;08:00" />
 <meta itemprop="dateModified" content="2020-07-28T20:25:00&#43;08:00" />
-<meta itemprop="wordCount" content="2273">
+<meta itemprop="wordCount" content="2137">
 
 
 
 <meta itemprop="keywords" content="mysql,acid," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Mysql事务的实现"/>
-<meta name="twitter:description" content="ACID 原子性 一致性 隔离性 持久性 原子性 基于日志的REDO/UNDO机制 undo log （回滚日志）：用作回滚 提供回滚操作，一般是逻辑日志（可以认为当delet"/>
+<meta name="twitter:description" content="ACID 原子性 一致性 隔离性 持久性 原子性 基于日志的REDO/UNDO机制 undo log （回滚日志）：用作回滚 提供回滚操作，一般是逻辑日志 主要有两个作用：回滚、"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -158,19 +158,17 @@
 <li>基于日志的REDO/UNDO机制</li>
 <li>undo log （回滚日志）：用作回滚
 <ul>
-<li>提供回滚操作，一般是逻辑日志（可以认为当delete一条记录时，undo log中会记录一条对应的insert记录），用来回滚行记录到某个版本。（undo log也会产生redo log，因为undo log也要实现持久性保护。）</li>
+<li>提供回滚操作，一般是逻辑日志</li>
 <li>主要有两个作用：回滚、MVCC；</li>
 <li>为了实现事务原子性，要么全部完成commit，要么全部回滚rollback，Innodb用于实现mvcc（多版本并发控制）</li>
-<li>例如：将user=’A’ 改为 user=’B’，则undo log中会记录下user=’A’和事务版本等信息</li>
+<li>innodb为每行记录都实现了三个隐藏字段：<code>隐藏di</code>，<code>6字节的事务di</code>，<code>7字节的回滚指针</code></li>
+<li>每次update操作，都会进行以下过程：用排它锁锁定该行、记录redo log、把改行修改前的值copy到undo log、修改当前行的内容（事务id就是当前事务的id，回滚指针指向undo log中的上一个版本的行数据）</li>
+<li>再有其他update操作会重复上述过程，从而在undo log 里形成一条由回滚指针连接起来的链表</li>
+<li>innodb中存在purge线程，会定时清理那些比现在最老的活动事务id还小的undo log，从而保证undo log 不会无限增长；</li>
+<li>回滚时需要根据回滚指针找出当前事务修改前的版本</li>
+<li>insert操作没有上一个版本，所以不需要往undo log里复制内容</li>
+<li>delete并不是真正的删除，只是打了一个删除的标记，真正的删除是purge线程完成的</li>
 <li>一旦事务完成，所有修改必须被记录下，保证数据一致性（后面redo log解释）</li>
-</ul>
-</li>
-<li>redo log （重做日志）：用作持久化！
-<ul>
-<li>重做日志，提供前滚操作，通常是物理日志，它用来恢复提交后的物理数据页，且只能恢复到最后一次提交的位置</li>
-<li>如果使用undo log作为持久化数据，意味着修改数据和undo log必须同时写入磁盘持久化，这必定带来巨大的磁盘io，解决方案为了平衡磁盘io和一致性，引入redo log。</li>
-<li>数据和undo log可定时从缓冲刷至磁盘，但是redo log必须实时写入磁盘，当系统奔溃时，可依据redo log进行数据重做。</li>
-<li>InnoDB存储引擎层的日志。</li>
 </ul>
 </li>
 </ol>
@@ -233,12 +231,12 @@
 </ol>
 <h2 id="持久性">持久性</h2>
 <ol>
-<li>主要是通过各种日志来实现：redo log, undo log, bin log, relay log等。</li>
-<li>redo log （重做日志）：用作持久化！
+<li>通过redo log实现</li>
+<li>redo log （重做日志）：用来恢复提交后的物理页数据（持久化）
 <ul>
-<li>重做日志，提供前滚操作，通常是物理日志，它用来恢复提交后的物理数据页，且只能恢复到最后一次提交的位置</li>
-<li>如果使用undo log作为持久化数据，意味着修改数据和undo log必须同时写入磁盘持久化，这必定带来巨大的磁盘io，解决方案为了平衡磁盘io和一致性，引入redo log。</li>
-<li>数据和undo log可定时从缓冲刷至磁盘，但是redo log必须实时写入磁盘，当系统奔溃时，可依据redo log进行数据重做。</li>
+<li>是物理日志，记录的是数据库中每个页的修改</li>
+<li>包括两部分：1）内存中的日志缓冲（redo log buffer）；2）磁盘上的重做日志</li>
+<li>通过<code>force log at commit</code>机制实现事务的持久性；</li>
 <li>InnoDB存储引擎层的日志。</li>
 </ul>
 </li>
@@ -324,7 +322,8 @@
 
   <span class="copyright-year">
     &copy; 
-    2020
+    2020 - 
+    2021
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>

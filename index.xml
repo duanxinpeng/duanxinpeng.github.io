@@ -17,7 +17,7 @@
       <pubDate>Tue, 28 Jul 2020 20:25:00 +0800</pubDate>
       
       <guid>http://localhost:1313/post/mysql%E4%BA%8B%E5%8A%A1%E7%9A%84%E5%AE%9E%E7%8E%B0/</guid>
-      <description>ACID 原子性 一致性 隔离性 持久性 原子性 基于日志的REDO/UNDO机制 undo log （回滚日志）：用作回滚 提供回滚操作，一般是逻辑日志（可以认为当delet</description>
+      <description>ACID 原子性 一致性 隔离性 持久性 原子性 基于日志的REDO/UNDO机制 undo log （回滚日志）：用作回滚 提供回滚操作，一般是逻辑日志 主要有两个作用：回滚、</description>
     </item>
     
     <item>
@@ -62,7 +62,7 @@
       <pubDate>Tue, 01 Sep 2020 10:06:52 +0800</pubDate>
       
       <guid>http://localhost:1313/post/java%E5%AE%B9%E5%99%A8/</guid>
-      <description>继承关系 Iterable/Collection List CopyOnWriteList Vector &amp;mdash; Stack ArrayList LinkedList Set HashSet &amp;mdash; LinkedHashSet SortedSet &amp;mdash; TreeSet EnumSet CopyOnWriteArraySet ConcurrentSkipListSet Queue Deque ArrayDeque BlockingDeque BlockingQueue ArrayBlocingQueue LinkedBlockingQueue SynchronousQueue PriorityBlockingQueue PriorityQueue Map HashMap HashTable TreeMap ConcurrentHashMap 常见问题 Map没有实现iterable怎么遍历？ 通过内部生成Col</description>
+      <description>继承关系 Iterable/Collection List CopyOnWriteList Vector &amp;mdash; Stack ArrayList LinkedList Set HashSet &amp;mdash; LinkedHashSet SortedSet &amp;mdash; TreeSet EnumSet CopyOnWriteArraySet ConcurrentSkipListSet Queue Deque ArrayDeque BlockingDeque BlockingQueue ArrayBlocingQueue LinkedBlockingQueue SynchronousQueue PriorityBlockingQueue PriorityQueue Map HashMap HashTable TreeMap ConcurrentHashMap LinkedHashMap：LRU 常见问题 Map没有实现itera</description>
     </item>
     
     <item>
@@ -89,7 +89,7 @@
       <pubDate>Wed, 19 Aug 2020 01:10:15 +0800</pubDate>
       
       <guid>http://localhost:1313/post/%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/</guid>
-      <description>代理模式 控制对基础对象的访问 在访问时增加额外的功能 动态代理 静态代理需要生成代理类，代理类的Class文件在编译期生成 动态代理利用反射机制在运</description>
+      <description>代理模式 控制对基础对象的访问 在访问时增加额外的功能 代理模式和装饰器模式 代理模式是在被代理对象不能或者不容易获取的情况下，对被代理对象进行访问</description>
     </item>
     
     <item>
@@ -107,7 +107,7 @@
       <pubDate>Tue, 18 Aug 2020 14:51:07 +0800</pubDate>
       
       <guid>http://localhost:1313/post/spring/</guid>
-      <description>spring中bean的细节 创建bean的三种方式 使用默认构造函数创建：使用bean标签，配置id和class属性并且没有其他属性和标签时，</description>
+      <description>spring design spring最主要的特点就是IOC/DI，也就是控制反转/依赖注入，主要的目的就是实现对象之间的解耦！ IOC的主要思想可以简单解释为：通</description>
     </item>
     
     <item>
@@ -116,7 +116,7 @@
       <pubDate>Tue, 18 Aug 2020 09:28:27 +0800</pubDate>
       
       <guid>http://localhost:1313/post/mybatis/</guid>
-      <description>自定义mybatis mybatis环境搭建 mybatis表格之间的关系 一对一 使用 typeMap 定义映射关系 在typeMap中使用association定</description>
+      <description>自定义mybatis 配置文件 配置文件中主要包括连接数据库的基本信息和Mapper配置文件，基于xml和基于注解的唯一不同点在于得到Mappe</description>
     </item>
     
     <item>
@@ -161,7 +161,7 @@
       <pubDate>Thu, 30 Jul 2020 09:12:47 +0800</pubDate>
       
       <guid>http://localhost:1313/post/java%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5/</guid>
-      <description>synchronized synchronized 关键字的用法 修饰代码块，指定加锁对象，对给定对象加锁，进入同步代码库前要获得给定对象的锁。 修饰普通方法，对象锁，进入同步代码前要获得当前</description>
+      <description>java内存模型是java线程同步的基础 synchronized 关键字 用法 修饰代码块，指定加锁对象，对给定对象加锁，进入同步代码库前要获得给定对象的锁。 修饰普通方</description>
     </item>
     
     <item>
@@ -404,7 +404,7 @@
       <pubDate>Mon, 13 Jul 2020 15:37:21 +0800</pubDate>
       
       <guid>http://localhost:1313/post/java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/</guid>
-      <description></description>
+      <description>JMM java内存模型是java并发编程的基础 主内存：java线程之间的通信是采用的共享内存模型，主内存就可以理解为这里的共享内存，线程的变量都</description>
     </item>
     
     <item>

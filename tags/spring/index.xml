@@ -17,7 +17,7 @@
       <pubDate>Tue, 18 Aug 2020 14:51:07 +0800</pubDate>
       
       <guid>http://localhost:1313/post/spring/</guid>
-      <description>spring中bean的细节 创建bean的三种方式 使用默认构造函数创建：使用bean标签，配置id和class属性并且没有其他属性和标签时，</description>
+      <description>spring design spring最主要的特点就是IOC/DI，也就是控制反转/依赖注入，主要的目的就是实现对象之间的解耦！ IOC的主要思想可以简单解释为：通</description>
     </item>
     
   </channel>

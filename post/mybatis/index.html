@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="段新朋" /><meta name="description" content="自定义mybatis mybatis环境搭建 mybatis表格之间的关系 一对一 使用 typeMap 定义映射关系 在typeMap中使用association定" /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="段新朋" /><meta name="description" content="自定义mybatis 配置文件 配置文件中主要包括连接数据库的基本信息和Mapper配置文件，基于xml和基于注解的唯一不同点在于得到Mappe" /><meta name="keywords" content="Hugo, theme, even" />
 
 
 
@@ -40,22 +40,22 @@
 
 
 <meta property="og:title" content="Mybatis" />
-<meta property="og:description" content="自定义mybatis mybatis环境搭建 mybatis表格之间的关系 一对一 使用 typeMap 定义映射关系 在typeMap中使用association定" />
+<meta property="og:description" content="自定义mybatis 配置文件 配置文件中主要包括连接数据库的基本信息和Mapper配置文件，基于xml和基于注解的唯一不同点在于得到Mappe" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/post/mybatis/" />
 <meta property="article:published_time" content="2020-08-18T09:28:27+08:00" />
 <meta property="article:modified_time" content="2020-08-18T09:28:27+08:00" />
 <meta itemprop="name" content="Mybatis">
-<meta itemprop="description" content="自定义mybatis mybatis环境搭建 mybatis表格之间的关系 一对一 使用 typeMap 定义映射关系 在typeMap中使用association定">
+<meta itemprop="description" content="自定义mybatis 配置文件 配置文件中主要包括连接数据库的基本信息和Mapper配置文件，基于xml和基于注解的唯一不同点在于得到Mappe">
 <meta itemprop="datePublished" content="2020-08-18T09:28:27&#43;08:00" />
 <meta itemprop="dateModified" content="2020-08-18T09:28:27&#43;08:00" />
-<meta itemprop="wordCount" content="1305">
+<meta itemprop="wordCount" content="1646">
 
 
 
 <meta itemprop="keywords" content="mybatis," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Mybatis"/>
-<meta name="twitter:description" content="自定义mybatis mybatis环境搭建 mybatis表格之间的关系 一对一 使用 typeMap 定义映射关系 在typeMap中使用association定"/>
+<meta name="twitter:description" content="自定义mybatis 配置文件 配置文件中主要包括连接数据库的基本信息和Mapper配置文件，基于xml和基于注解的唯一不同点在于得到Mappe"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -134,7 +134,13 @@
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#自定义mybatis">自定义mybatis</a></li>
+    <li><a href="#自定义mybatis">自定义mybatis</a>
+      <ul>
+        <li><a href="#配置文件">配置文件</a></li>
+        <li><a href="#mappers">mappers</a></li>
+        <li><a href="#基本流程">基本流程</a></li>
+      </ul>
+    </li>
     <li><a href="#mybatis环境搭建">mybatis环境搭建</a></li>
     <li><a href="#mybatis表格之间的关系">mybatis表格之间的关系</a>
       <ul>
@@ -155,6 +161,7 @@
       <ul>
         <li><a href="#mybatis开启别名">mybatis开启别名</a></li>
         <li><a href="#mybatis事务">mybatis事务</a></li>
+        <li><a href="#mybatis-实例类">mybatis 实例类</a></li>
       </ul>
     </li>
   </ul>
@@ -163,6 +170,15 @@
 </div>
     <div class="post-content">
       <h2 id="自定义mybatis">自定义mybatis</h2>
+<h3 id="配置文件">配置文件</h3>
+<p>配置文件中主要包括连接数据库的基本信息和Mapper配置文件，基于xml和基于注解的唯一不同点在于得到Mappers对象的方式不同，但是无论xml还是注解都会先得到Mappers对象</p>
+<h3 id="mappers">mappers</h3>
+<ul>
+<li>对应接口的全限定类名+方法名为key</li>
+<li>以sql语句+返回参数类型（实体类）作为value</li>
+</ul>
+<h3 id="基本流程">基本流程</h3>
+<p>以配置文件为基础，依次得到SqlSessionFactoryBuilder、SqlSessionFactory、SqlSession，SqlSession再根据传入的接口的全限定类名以动态代理的方式得到对应接口的代理类。代理类中有mappers和connection，根据connection和mappers就可以连接数据库并执行对应的sql语句，然后将返回结果封装好后返回。</p>
 <h2 id="mybatis环境搭建">mybatis环境搭建</h2>
 <h2 id="mybatis表格之间的关系">mybatis表格之间的关系</h2>
 <h3 id="一对一">一对一</h3>
@@ -460,7 +476,9 @@ session = factory.openSession(true);
 accountDao = session.getMapper(IAccountDao.class);
 </code></pre></td></tr></table>
 </div>
-</div>
+</div><h3 id="mybatis-实例类">mybatis 实例类</h3>
+<p>必须可序列化</p>
+
     </div>
 
     <div class="post-copyright">
@@ -526,7 +544,8 @@ accountDao = session.getMapper(IAccountDao.class);
 
   <span class="copyright-year">
     &copy; 
-    2020
+    2020 - 
+    2021
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>

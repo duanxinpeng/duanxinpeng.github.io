@@ -17,7 +17,7 @@
       <pubDate>Tue, 18 Aug 2020 09:28:27 +0800</pubDate>
       
       <guid>http://localhost:1313/post/mybatis/</guid>
-      <description>自定义mybatis mybatis环境搭建 mybatis表格之间的关系 一对一 使用 typeMap 定义映射关系 在typeMap中使用association定</description>
+      <description>自定义mybatis 配置文件 配置文件中主要包括连接数据库的基本信息和Mapper配置文件，基于xml和基于注解的唯一不同点在于得到Mappe</description>
     </item>
     
   </channel>

@@ -1,28 +1,29 @@
-## synchronized
-### synchronized 关键字的用法
+`java内存模型是java线程同步的基础`
+## synchronized 关键字
+### 用法
 1. 修饰代码块，指定加锁对象，对给定对象加锁，进入同步代码库前要获得给定对象的锁。
 2. 修饰普通方法，对象锁，进入同步代码前要获得当前对象实例的锁
 3. 修饰静态方法，类锁（Demo.class），所有对象共用一把锁，进入同步代码前要获得当前类对象的锁。 
-### synchronized 内部实现 
-1. 锁的状态记录在对象头的 mark word 中 
+### 底层原理
+1. 锁的状态记录在对象头的 `mark word` 中 
 	- 001 无状态
 	- 101 偏向锁 
 	- 00 轻量级锁 
 	- 10 重量级锁 
-2. Lock Record
+2. 线程持有锁的情况则是被记录在`Lock Record`
 	- 线程在执行同步块之前，JVM会先在当前的线程的栈帧中创建一个 Lock Record
 	- 包括两部分
-		- Displaced Mark word：用于存储对象头中的 mark word 
+		- Displaced Mark word：用于复制对象头中的 mark word，因为轻量级锁要用cas对对象头的mark word进行改写，改写之前肯定要对当前的mark word备份一下用来释放锁时的恢复！
 		- Object Reference：指向对象的指针
 1. 偏向锁
 	- `mark word` 中存储的是偏向的线程ID；
 	-  当来了新的线程，需要升级为轻量级锁！
 	- 对象创建
-		- 当新创建一个对象时，如果该对象所属的 class 没有关闭偏向锁模式，那新建的对象处于可偏向状态，此时 mark word中的 thread id 为0，表示未偏向任何线程，也叫做匿名偏向。
+		- 当新创建一个对象时，如果该对象所属的 class 没有关闭偏向锁模式，那新建的对象处于可偏向状态，此时 mark word 中的 thread id 为0，表示未偏向任何线程，也叫做匿名偏向。
 	- 加锁过程
 		- 如果此时处于匿名偏向状态，将mark word中的thread id 由 0 改为当前线程 id。如果成功，则成功获得偏向锁。
 	- 重入过程
-		- 当偏向的线程再次进入同步块时，发现锁对象偏向的就是当前线程，就会往当前的栈中添加一条 Displaced Mark Word 为 null 的 Lock Record，将 Lock Record 的 obj 指向该对象。、
+		- 当偏向的线程再次进入同步块时，发现锁对象偏向的就是当前线程，就会往当前的栈中添加一条 Displaced Mark Word 为 null 的 Lock Record，将 Lock Record 的 obj 指向该对象。
 	- 产生竞争
 		- 如果当前对象已经被其他线程获取偏向锁，则会走到`撤销偏向锁`的过程，如果占用线程还存活，则升级为轻量级锁，原偏向线程继续拥有锁，当前线程进行锁升级。
 	- 解锁过程
@@ -31,7 +32,7 @@
 	- `mark word` 中存储的是指向线程栈中的 `Lock Record` 的指针
 
 	- 加锁过程
-		- 在线程中创建一个 `Lock Record` 将其 `obj` 字段指向锁对象
+		- 在线程中创建一个 `Lock Record` 将其 `obj` 字段指向锁对象；并用displaced mark word记录对象当前的mark word
 		- 通过 `CAS` 指令将 `Lock Record` 的地址存储在对象头的 `mark word` 中，如果成功，获得轻量级锁，否则进入自旋状态
 		- 当有线程超过10次自旋/自旋线程数超过cpu核数的一半，就需要升级为重量级锁。
 	- 锁重入
@@ -100,6 +101,7 @@
 	- 因为在 JVM 启动过程中肯定有锁竞争。
 7. 
 ## AQS
+`AQS用于线程同步，逻辑都是基本固定的，具体实现只需要考虑怎么获取锁，怎么设置state，这些都只需要在tryAcquire、tryAcquireShared、tryRelease、tryReleaseShared等方法内具体实现`
 ### 继承关系
 1. AbstractQueuedSynchronizer
 	- Sync 
@@ -154,14 +156,36 @@
 	- AQS还有一个很重要的内部类ConditionObject，它实现了Condition接口，主要用于实现条件锁
 ### ConditionObject
 1. await()
-	- 
+	- aqs已经定义好的过程：大概过程是释放锁，从aqs队列中移除再加入到条件队列中
 2. signal()
 	- 从条件队列中取出一个线程，并将其唤醒
 	- 只有条件队列不为空时，才会做唤醒操作，否则什么都不用做，所以先调用signal，再调用await是无法唤醒的！
 	- 上面这一点和 Object.wait()/Object.notify()是一致的，但是和 LockSupport.park/LockSupport.unpart是不一致的。
-### 使用了AQS的同步工具（只需要实现tryAcquire和tryRelease，其他的逻辑都是固定的！）
+### AQS应用
+`使用了AQS的同步工具（只需要实现tryAcquire和tryRelease，其他的逻辑都是固定的！）`
 1. ReentrantLock
+	- 公平非公平锁的实现方式：公平锁每次获取锁之前都要先判断队列中是否有线程等待，而非公平锁就直接获取锁；所以非公平锁并不能保证获得锁的顺序
+	- 可重入实现特别简单，因为是可重入时是单线程，所以直接用将state加1即可，不需要考虑并发问题
+	- 具体实现只包括两部分：initialTryLock() 和 tryAcquire()； 前者通过cas直接设置锁，并考虑可重入问题；后者只是单纯的getstate+cas；前者是在acquire之前，后者会在acquire函数中被调用，具体过程则是aqs已经定义好的！
+	- 释放锁只需要重写aqs的tryRelease函数即可（其他过程按照aqs定义好的即可）：把state减1、判断释放锁的线程和拥有锁的线程是否是同一个、判断state是否为0、根据state是否为0决定是否把拥有当前锁的线程设为null以及返回值；
+	
 2. ReentrantReadWriteLock
+	- 写锁重写tryAcquire和tryRelease
+	- 用 volatile 修饰的 state 来记录读锁和写锁的数量，高位表示读锁，低位表示写锁
+	- tryAcquire 
+		- 如果读锁不为0，不具备获取锁的资格
+		- 如果读锁为0，写锁不为0，判断是否重入，如果写锁被其他线程持有，不具备获取锁的资格！
+		- `注意，只有写锁是可重入的，如果当前线程已经持有读锁，写锁是不可重入的！！！`
+	- tryRelease 
+		- state减1，并判断写锁数量
+		- 根据判断结果来决定是否将独占锁线程置为null
+	- 读锁重写tryAcquireShared和tryReleaseShared
+	- tryAcquireShared 
+		- 写锁被其他线程持有，不具备获取锁的资格
+		- 其他情况都是具备获取锁的资格的！`也就是说写读是可重入的，但是读写是不可重入的！`
+		- 如果具备了获取锁的资格，但是因为cas或者读锁重入问题而获取锁失败，则进入fullTryAcquireShared函数（todo）！
+	- tryReleaseShared
+		- 
 3. Semaphore
 4. CountDownLatch
 
@@ -326,6 +350,8 @@ public static void main(String[] args) throws InterruptedException {
 	- 指的是其他线程进行了多次操作之后，将变量恢复为原来的样子，线程无法区分是否发生了改变。
 	- 通过加版本号可以解决该问题，jdk1.5之后提供了 AtomicStampedReference类来解决这个问题。
 3. 是否具有原子性：底层实现，通过对总线加锁！
+## StampedLock(todo)
+
 ## volatile
 1. 
 

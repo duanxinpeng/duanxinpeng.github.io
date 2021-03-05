@@ -49,7 +49,7 @@
 <meta itemprop="description" content="JVM组成 类加载器 运行时数据区 执行引擎 本地接口库 类加载器 JVM把描述类的数据从二进制字节码文件加载到内存，并对数据进行校验、转换解析和初始化">
 <meta itemprop="datePublished" content="2020-07-13T15:38:32&#43;08:00" />
 <meta itemprop="dateModified" content="2020-07-13T15:38:32&#43;08:00" />
-<meta itemprop="wordCount" content="2832">
+<meta itemprop="wordCount" content="3109">
 
 
 
@@ -137,14 +137,12 @@
     <li><a href="#jvm组成">JVM组成</a></li>
     <li><a href="#类加载器">类加载器</a>
       <ul>
+        <li><a href="#分类">分类</a></li>
+        <li><a href="#双亲委派模型">双亲委派模型</a></li>
         <li><a href="#类加载过程">类加载过程</a></li>
       </ul>
     </li>
-    <li><a href="#运行时数据区">运行时数据区</a>
-      <ul>
-        <li><a href="#jvm内存模型一共五个部分其中程序计数器虚拟机栈">JVM内存模型，一共五个部分，其中程序计数器、虚拟机栈</a></li>
-      </ul>
-    </li>
+    <li><a href="#运行时数据区">运行时数据区</a></li>
     <li><a href="#垃圾回收">垃圾回收</a>
       <ul>
         <li><a href="#回收算法">回收算法</a></li>
@@ -169,16 +167,22 @@
 <p><img src="/media/jvm.jpg" alt=""></p>
 <p><img src="/media/jvm2.jpg" alt=""></p>
 <h2 id="类加载器">类加载器</h2>
-<p><code>JVM把描述类的数据从二进制字节码文件加载到内存，并对数据进行校验、转换解析和初始化，最终形成可以被虚拟机直接使用的java类型，这个过程被称为虚拟机的类加载机制。</code>
-###分类</p>
+<p><code>JVM把描述类的数据从二进制字节码文件加载到内存，并对数据进行校验、转换解析和初始化，最终形成可以被虚拟机直接使用的java类型，这个过程被称为虚拟机的类加载机制。</code></p>
+<h3 id="分类">分类</h3>
 <ol>
 <li>启动类加载器</li>
 <li>扩展类加载器</li>
 <li>应用程序类加载器</li>
-<li>双亲委派模型
-<ul>
+<li>自定义类加载器</li>
+</ol>
+<h3 id="双亲委派模型">双亲委派模型</h3>
+<ol>
 <li>一个类加载器接收到类加载任务，会先交给父类加载器去完成，只有确认父类加载器无法完成加载任务时，才会尝试进行类加载</li>
 <li>类加载器和全限定类名才能确定其在JVM中的唯一性。</li>
+<li>打破双亲委派模型
+<ul>
+<li>重写 loadClass() 方法</li>
+<li>使用线程上下文类加载器</li>
 </ul>
 </li>
 </ol>
@@ -187,7 +191,7 @@
 <li>加载
 <ul>
 <li>通过一个类的全限定类名来获取其定义的二进制字节流</li>
-<li>将这个字节流所代表的静态存储结构转化为方法区的运行时数据结构</li>
+<li>将这个字节流所代表的静态存储结构转化为<code>方法区</code>的运行时数据结构</li>
 <li>在<code>堆</code>中生成一个代表这个类的Class对象，作为方法区中这些数据的访问入口</li>
 <li>类变量（静态变量）随着 Class 对象一起存放到堆中。</li>
 </ul>
@@ -219,7 +223,7 @@
 </li>
 </ol>
 <h2 id="运行时数据区">运行时数据区</h2>
-<h3 id="jvm内存模型一共五个部分其中程序计数器虚拟机栈">JVM内存模型，一共五个部分，其中程序计数器、虚拟机栈</h3>
+<p><code>JVM内存模型，一共五个部分；线程私有：程序计数器、java虚拟机栈、本地方法栈；线程共享：堆和方法区</code></p>
 <ol>
 <li>程序计数器
 <ul>
@@ -282,8 +286,8 @@
 <li>可达性分析法（执行上下文、全局性引用）
 <ul>
 <li>虚拟机栈中引用的对象</li>
-<li>方法去中静态变量、常量引用的对象</li>
 <li>本地方法栈中引用的对象</li>
+<li>被方法区中静态变量、常量引用的对象</li>
 <li>被synchronized持有的对象</li>
 </ul>
 </li>
@@ -321,7 +325,7 @@
 <li>没有被执行的代码的安全点解决方案</li>
 </ul>
 </li>
-<li>记忆集与卡表
+<li>记忆集与卡表（用于跨代引用）
 <ul>
 <li>记忆集是一种用于记录从<code>非收集区域</code>指向<code>收集区域</code>的指针集合的抽象数据结构</li>
 <li>垃圾收集的场景中，只需要通过记忆集判断某一块区域是否存有指向收集区域的指针就可以了，根据<code>某一块区域</code>的粒度大小，可分为字长精度、对象精度、卡精度。</li>
@@ -331,7 +335,7 @@
 <li>一个卡页内存中通常不止包含一个对象，但只要有一个对象存在跨代引用，那么对应的卡页就标识为1（变脏）</li>
 </ul>
 </li>
-<li>写屏障
+<li>写屏障（卡表的具体实现）
 <ul>
 <li>有其他分代区域中对象引用了本区域对象时，对应卡页元素就应该变脏</li>
 <li>必须找到一个机器码层面的手段把维护卡表的动作放到每一个赋值操作之中</li>
@@ -411,224 +415,59 @@
 <td>响应速度优先</td>
 <td>面型服务端应用</td>
 </tr>
-<tr>
-<td>2. ZGC：</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>- 在jdk14中移除了CMS，</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>- jdk13发行ZGC</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>- jdk14 ZGC支持所有平台</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>3. ZGC回收过程</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>- 标记</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>- 迁移</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>- 重映射</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>3. CMS（Concurrent Mark Sweep）</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>- 初始标记：STW</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>- 并发标记</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>- 重新标记：STW</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>- 并发清除</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>4. CMS缺点</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>- 无法处理浮动垃圾：在标记过程后出现的垃圾，容易导致Full GC</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>- 空间碎片！</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>5. Garbage First（G1）</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>- 能够建立起时间停顿模型的收集器，在一个长度为M毫秒的时间片段内，消耗在垃圾收集器上的时间大概率不超过N毫秒。</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>- 也就是说垃圾回收的时间必须可控！</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>- 垃圾收集的范围不再局限于新生代（Minor GC）或者老年代（Major GC）或者整个堆（Full GC），而是针对一个由内存块组成的回收集。</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>- 把Java堆分成多个相等独立的region，每个region都可以根据需要扮演Eden、Survivor、老年代等。、</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>- 还有一类特殊的区域，专门用于存放大对象。</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>6. G1回收过程</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>- 初始标记</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>- 并发标记</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>- 最终标记</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>- 筛选回收</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
 </tbody>
 </table>
+<ol start="2">
+<li>ZGC：
+<ul>
+<li>在jdk14中移除了CMS，</li>
+<li>jdk13发行ZGC</li>
+<li>jdk14 ZGC支持所有平台</li>
+</ul>
+</li>
+<li>ZGC回收过程
+<ul>
+<li>标记</li>
+<li>迁移</li>
+<li>重映射</li>
+</ul>
+</li>
+<li>CMS（Concurrent Mark Sweep）
+<ul>
+<li>初始标记：STW</li>
+<li>并发标记</li>
+<li>重新标记：STW</li>
+<li>并发清除</li>
+</ul>
+</li>
+<li>CMS缺点
+<ul>
+<li>无法处理浮动垃圾：在标记过程后出现的垃圾，容易导致Full GC</li>
+<li>空间碎片！</li>
+</ul>
+</li>
+<li>Garbage First（G1）
+<ul>
+<li>能够建立起<code>时间停顿模型</code>的收集器，在一个长度为M毫秒的时间片段内，消耗在垃圾收集器上的时间大概率不超过N毫秒。</li>
+<li>也就是说<code>垃圾回收的时间必须可控</code>！</li>
+<li>垃圾收集的范围不再局限于新生代（Minor GC）或者老年代（Major GC）或者整个堆（Full GC），而是针对一个由内存块组成的回收集。</li>
+<li>把Java堆分成多个相等独立的region，每个region都可以根据需要扮演Eden、Survivor、老年代等。</li>
+<li>还有一类特殊的区域，专门用于存放大对象。</li>
+<li>主要的难点在于不同region之间的相互引用</li>
+<li>解决思路是利用之前用于解决跨代引用的<code>记忆集</code>来实现region内存活对象的判断</li>
+<li>G1中的每个region都有一个对应的<code>记忆集</code>，虚拟机发现程序在对Reference类型数据进行写操作时，会产生一个Write Barrier暂时中断写操作，并检查持有Reference的对象和Reference指向的对象是否处于同一个region，如果不是，就把相关信息记录到Reference指向对象所属的region的<code>记忆集</code>中</li>
+<li>内存分配算法是TLAB</li>
+</ul>
+</li>
+<li>G1回收过程
+<ul>
+<li>初始标记</li>
+<li>并发标记</li>
+<li>最终标记</li>
+<li>筛选回收</li>
+</ul>
+</li>
+</ol>
 
     </div>
 
@@ -695,7 +534,8 @@
 
   <span class="copyright-year">
     &copy; 
-    2020
+    2020 - 
+    2021
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>

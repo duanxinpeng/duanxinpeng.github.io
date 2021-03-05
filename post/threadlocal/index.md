@@ -66,3 +66,11 @@ public class Reference {
 	- 正如上面所说，Entry是一个指向ThreadLocal的弱引用，当ThreadLocal的强引用（在代码中自己声明的）被置为空时，ThreadLocal对象会在下一次垃圾回收发生时自动被回收。
 	- 但是Entry中还有一个指向value的强引用（this.value)，这将导致value一直无法被回收进而导致内存泄漏。
 	- 如何避免？及时调用remove方法，去掉Entry与map的联系，那么在下一次垃圾回收时Entry对象（包括其中的value）就会被自动回收了！
+5. 补充
+	- get：先从当前线程Thread中取得ThreadLocalMap，再以ThreadLocal为key，从ThreadLocalMap中取得对应的value。
+	- ThreadLocalMap是一个散列表，其中存放的是一个指向ThreadLocal的弱引用Entry。
+	- Entry本身是一个指向ThreadLocal的弱引用，同时其中包含对应于线程的value值。
+	- 指向ThreadLocal的弱引用解决了key的问题，但是value的问题没有解决，而且因为这些value很难再被访问到了
+	- Map中的value之所以一直存在是因为来自Current Thread的强引用，所以只要线程结束了，map中的value自然就被回收了。
+	- 而且为了减小内存泄漏的可能性，在ThreadLocal进行get和set的时候，都会清除掉Map中key为null的value。
+	- 真正会发生内存泄露的情况是使用了线程池的时候，ThreadLocal设为null了，然后线程结束，线程放回线程池中，这个线程一直不被使用，或者使用了但不调用get、set方法，那么这个期间就会发生真正的内存泄漏。

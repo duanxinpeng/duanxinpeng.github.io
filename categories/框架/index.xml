@@ -17,7 +17,7 @@
       <pubDate>Tue, 18 Aug 2020 14:51:07 +0800</pubDate>
       
       <guid>http://localhost:1313/post/spring/</guid>
-      <description>spring中bean的细节 创建bean的三种方式 使用默认构造函数创建：使用bean标签，配置id和class属性并且没有其他属性和标签时，</description>
+      <description>spring design spring最主要的特点就是IOC/DI，也就是控制反转/依赖注入，主要的目的就是实现对象之间的解耦！ IOC的主要思想可以简单解释为：通</description>
     </item>
     
     <item>
@@ -26,7 +26,7 @@
       <pubDate>Tue, 18 Aug 2020 09:28:27 +0800</pubDate>
       
       <guid>http://localhost:1313/post/mybatis/</guid>
-      <description>自定义mybatis mybatis环境搭建 mybatis表格之间的关系 一对一 使用 typeMap 定义映射关系 在typeMap中使用association定</description>
+      <description>自定义mybatis 配置文件 配置文件中主要包括连接数据库的基本信息和Mapper配置文件，基于xml和基于注解的唯一不同点在于得到Mappe</description>
     </item>
     
   </channel>

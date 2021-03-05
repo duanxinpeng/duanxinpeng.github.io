@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="段新朋" /><meta name="description" content="代理模式 控制对基础对象的访问 在访问时增加额外的功能 动态代理 静态代理需要生成代理类，代理类的Class文件在编译期生成 动态代理利用反射机制在运" /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="段新朋" /><meta name="description" content="代理模式 控制对基础对象的访问 在访问时增加额外的功能 代理模式和装饰器模式 代理模式是在被代理对象不能或者不容易获取的情况下，对被代理对象进行访问" /><meta name="keywords" content="Hugo, theme, even" />
 
 
 
@@ -40,22 +40,22 @@
 
 
 <meta property="og:title" content="动态代理" />
-<meta property="og:description" content="代理模式 控制对基础对象的访问 在访问时增加额外的功能 动态代理 静态代理需要生成代理类，代理类的Class文件在编译期生成 动态代理利用反射机制在运" />
+<meta property="og:description" content="代理模式 控制对基础对象的访问 在访问时增加额外的功能 代理模式和装饰器模式 代理模式是在被代理对象不能或者不容易获取的情况下，对被代理对象进行访问" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/post/%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/" />
 <meta property="article:published_time" content="2020-08-19T01:10:15+08:00" />
 <meta property="article:modified_time" content="2020-08-19T01:10:15+08:00" />
 <meta itemprop="name" content="动态代理">
-<meta itemprop="description" content="代理模式 控制对基础对象的访问 在访问时增加额外的功能 动态代理 静态代理需要生成代理类，代理类的Class文件在编译期生成 动态代理利用反射机制在运">
+<meta itemprop="description" content="代理模式 控制对基础对象的访问 在访问时增加额外的功能 代理模式和装饰器模式 代理模式是在被代理对象不能或者不容易获取的情况下，对被代理对象进行访问">
 <meta itemprop="datePublished" content="2020-08-19T01:10:15&#43;08:00" />
 <meta itemprop="dateModified" content="2020-08-19T01:10:15&#43;08:00" />
-<meta itemprop="wordCount" content="478">
+<meta itemprop="wordCount" content="648">
 
 
 
 <meta itemprop="keywords" content="java,cglib,动态代理," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="动态代理"/>
-<meta name="twitter:description" content="代理模式 控制对基础对象的访问 在访问时增加额外的功能 动态代理 静态代理需要生成代理类，代理类的Class文件在编译期生成 动态代理利用反射机制在运"/>
+<meta name="twitter:description" content="代理模式 控制对基础对象的访问 在访问时增加额外的功能 代理模式和装饰器模式 代理模式是在被代理对象不能或者不容易获取的情况下，对被代理对象进行访问"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -135,6 +135,7 @@
     <nav id="TableOfContents">
   <ul>
     <li><a href="#代理模式">代理模式</a></li>
+    <li><a href="#代理模式和装饰器模式">代理模式和装饰器模式</a></li>
     <li><a href="#动态代理">动态代理</a></li>
     <li><a href="#基于jdk的动态代理">基于jdk的动态代理</a></li>
     <li><a href="#基于cglib的动态代理">基于cglib的动态代理</a></li>
@@ -147,6 +148,11 @@
 <ol>
 <li>控制对基础对象的访问</li>
 <li>在访问时增加额外的功能</li>
+</ol>
+<h2 id="代理模式和装饰器模式">代理模式和装饰器模式</h2>
+<ol>
+<li>代理模式是在被代理对象不能或者不容易获取的情况下，对被代理对象进行访问控制，强调的代理；</li>
+<li>装饰器模式其实是继承的一种代替方案，被装饰的对象是比较容易或者已经被获得了，只不过要在原来的功能上添加更强大的功能！</li>
 </ol>
 <h2 id="动态代理">动态代理</h2>
 <ol>
@@ -163,6 +169,13 @@
 <li>被代理对象的类加载器：类加载器和全限定类名才能唯一确定一个对象</li>
 <li>被代理对象的接口数组：通过反射</li>
 <li>InvoccationHandler对象：作为一个代理类的成员变量存在</li>
+</ul>
+</li>
+<li>三个参数的作用
+<ul>
+<li>为接口创建代理类的字节码文件</li>
+<li>用类加载器将字节码文件加载到jvm</li>
+<li>创建代理类的实例对象，执行对象的目标方法</li>
 </ul>
 </li>
 </ul>
@@ -250,7 +263,8 @@
 
   <span class="copyright-year">
     &copy; 
-    2020
+    2020 - 
+    2021
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>

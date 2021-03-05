@@ -27,6 +27,7 @@
 2. HashTable
 2. TreeMap
 3. ConcurrentHashMap
+4. LinkedHashMap：LRU
 
 ## 常见问题
 1. Map没有实现iterable怎么遍历？

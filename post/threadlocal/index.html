@@ -49,7 +49,7 @@
 <meta itemprop="description" content="强软弱虚 强引用： 只要强引用存在，被引用的对象就永远不会被回收 软引用： 只被软引用关联着的对象在系统将要发生内存溢出时就会被列入回收范进行回收 j">
 <meta itemprop="datePublished" content="2020-08-18T22:46:20&#43;08:00" />
 <meta itemprop="dateModified" content="2020-08-18T22:46:20&#43;08:00" />
-<meta itemprop="wordCount" content="1140">
+<meta itemprop="wordCount" content="1619">
 
 
 
@@ -274,6 +274,17 @@
 <li>如何避免？及时调用remove方法，去掉Entry与map的联系，那么在下一次垃圾回收时Entry对象（包括其中的value）就会被自动回收了！</li>
 </ul>
 </li>
+<li>补充
+<ul>
+<li>get：先从当前线程Thread中取得ThreadLocalMap，再以ThreadLocal为key，从ThreadLocalMap中取得对应的value。</li>
+<li>ThreadLocalMap是一个散列表，其中存放的是一个指向ThreadLocal的弱引用Entry。</li>
+<li>Entry本身是一个指向ThreadLocal的弱引用，同时其中包含对应于线程的value值。</li>
+<li>指向ThreadLocal的弱引用解决了key的问题，但是value的问题没有解决，而且因为这些value很难再被访问到了</li>
+<li>Map中的value之所以一直存在是因为来自Current Thread的强引用，所以只要线程结束了，map中的value自然就被回收了。</li>
+<li>而且为了减小内存泄漏的可能性，在ThreadLocal进行get和set的时候，都会清除掉Map中key为null的value。</li>
+<li>真正会发生内存泄露的情况是使用了线程池的时候，ThreadLocal设为null了，然后线程结束，线程放回线程池中，这个线程一直不被使用，或者使用了但不调用get、set方法，那么这个期间就会发生真正的内存泄漏。</li>
+</ul>
+</li>
 </ol>
 
     </div>
@@ -342,7 +353,8 @@
 
   <span class="copyright-year">
     &copy; 
-    2020
+    2020 - 
+    2021
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>

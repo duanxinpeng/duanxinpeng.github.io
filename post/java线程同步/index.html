@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="段新朋" /><meta name="description" content="synchronized synchronized 关键字的用法 修饰代码块，指定加锁对象，对给定对象加锁，进入同步代码库前要获得给定对象的锁。 修饰普通方法，对象锁，进入同步代码前要获得当前" /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="段新朋" /><meta name="description" content="java内存模型是java线程同步的基础 synchronized 关键字 用法 修饰代码块，指定加锁对象，对给定对象加锁，进入同步代码库前要获得给定对象的锁。 修饰普通方" /><meta name="keywords" content="Hugo, theme, even" />
 
 
 
@@ -40,22 +40,22 @@
 
 
 <meta property="og:title" content="Java线程同步" />
-<meta property="og:description" content="synchronized synchronized 关键字的用法 修饰代码块，指定加锁对象，对给定对象加锁，进入同步代码库前要获得给定对象的锁。 修饰普通方法，对象锁，进入同步代码前要获得当前" />
+<meta property="og:description" content="java内存模型是java线程同步的基础 synchronized 关键字 用法 修饰代码块，指定加锁对象，对给定对象加锁，进入同步代码库前要获得给定对象的锁。 修饰普通方" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/post/java%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5/" />
 <meta property="article:published_time" content="2020-07-30T09:12:47+08:00" />
 <meta property="article:modified_time" content="2020-07-30T09:12:47+08:00" />
 <meta itemprop="name" content="Java线程同步">
-<meta itemprop="description" content="synchronized synchronized 关键字的用法 修饰代码块，指定加锁对象，对给定对象加锁，进入同步代码库前要获得给定对象的锁。 修饰普通方法，对象锁，进入同步代码前要获得当前">
+<meta itemprop="description" content="java内存模型是java线程同步的基础 synchronized 关键字 用法 修饰代码块，指定加锁对象，对给定对象加锁，进入同步代码库前要获得给定对象的锁。 修饰普通方">
 <meta itemprop="datePublished" content="2020-07-30T09:12:47&#43;08:00" />
 <meta itemprop="dateModified" content="2020-07-30T09:12:47&#43;08:00" />
-<meta itemprop="wordCount" content="5499">
+<meta itemprop="wordCount" content="6507">
 
 
 
 <meta itemprop="keywords" content="java," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Java线程同步"/>
-<meta name="twitter:description" content="synchronized synchronized 关键字的用法 修饰代码块，指定加锁对象，对给定对象加锁，进入同步代码库前要获得给定对象的锁。 修饰普通方法，对象锁，进入同步代码前要获得当前"/>
+<meta name="twitter:description" content="java内存模型是java线程同步的基础 synchronized 关键字 用法 修饰代码块，指定加锁对象，对给定对象加锁，进入同步代码库前要获得给定对象的锁。 修饰普通方"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -134,10 +134,10 @@
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#synchronized">synchronized</a>
+    <li><a href="#synchronized-关键字">synchronized 关键字</a>
       <ul>
-        <li><a href="#synchronized-关键字的用法">synchronized 关键字的用法</a></li>
-        <li><a href="#synchronized-内部实现">synchronized 内部实现</a></li>
+        <li><a href="#用法">用法</a></li>
+        <li><a href="#底层原理">底层原理</a></li>
         <li><a href="#monitor">Monitor</a></li>
         <li><a href="#synchronized-常见问题">synchronized 常见问题</a></li>
       </ul>
@@ -153,16 +153,17 @@
         <li><a href="#共享锁的获取与释放">共享锁的获取与释放</a></li>
         <li><a href="#aqs同步队列">AQS同步队列</a></li>
         <li><a href="#conditionobject">ConditionObject</a></li>
+        <li><a href="#aqs应用">AQS应用</a></li>
       </ul>
     </li>
-    <li><a href="#await">await()</a>
+    <li><a href="#tryreleaseshared">tryReleaseShared</a>
       <ul>
-        <li><a href="#使用了aqs的同步工具只需要实现tryacquire和tryrelease其他的逻辑都是固定的">使用了AQS的同步工具（只需要实现tryAcquire和tryRelease，其他的逻辑都是固定的！）</a></li>
         <li><a href="#使用aqs实现一个共享锁">使用AQS实现一个共享锁</a></li>
       </ul>
     </li>
     <li><a href="#locksupport">LockSupport</a></li>
     <li><a href="#cas">CAS</a></li>
+    <li><a href="#stampedlocktodo">StampedLock(todo)</a></li>
     <li><a href="#volatile">volatile</a></li>
     <li><a href="#atomic">Atomic</a></li>
     <li><a href="#常见问题">常见问题</a></li>
@@ -171,16 +172,17 @@
   </div>
 </div>
     <div class="post-content">
-      <h2 id="synchronized">synchronized</h2>
-<h3 id="synchronized-关键字的用法">synchronized 关键字的用法</h3>
+      <p><code>java内存模型是java线程同步的基础</code></p>
+<h2 id="synchronized-关键字">synchronized 关键字</h2>
+<h3 id="用法">用法</h3>
 <ol>
 <li>修饰代码块，指定加锁对象，对给定对象加锁，进入同步代码库前要获得给定对象的锁。</li>
 <li>修饰普通方法，对象锁，进入同步代码前要获得当前对象实例的锁</li>
 <li>修饰静态方法，类锁（Demo.class），所有对象共用一把锁，进入同步代码前要获得当前类对象的锁。</li>
 </ol>
-<h3 id="synchronized-内部实现">synchronized 内部实现</h3>
+<h3 id="底层原理">底层原理</h3>
 <ol>
-<li>锁的状态记录在对象头的 mark word 中
+<li>锁的状态记录在对象头的 <code>mark word</code> 中
 <ul>
 <li>001 无状态</li>
 <li>101 偏向锁</li>
@@ -188,12 +190,12 @@
 <li>10 重量级锁</li>
 </ul>
 </li>
-<li>Lock Record
+<li>线程持有锁的情况则是被记录在<code>Lock Record</code>
 <ul>
 <li>线程在执行同步块之前，JVM会先在当前的线程的栈帧中创建一个 Lock Record</li>
 <li>包括两部分
 <ul>
-<li>Displaced Mark word：用于存储对象头中的 mark word</li>
+<li>Displaced Mark word：用于复制对象头中的 mark word，因为轻量级锁要用cas对对象头的mark word进行改写，改写之前肯定要对当前的mark word备份一下用来释放锁时的恢复！</li>
 <li>Object Reference：指向对象的指针</li>
 </ul>
 </li>
@@ -205,7 +207,7 @@
 <li>当来了新的线程，需要升级为轻量级锁！</li>
 <li>对象创建
 <ul>
-<li>当新创建一个对象时，如果该对象所属的 class 没有关闭偏向锁模式，那新建的对象处于可偏向状态，此时 mark word中的 thread id 为0，表示未偏向任何线程，也叫做匿名偏向。</li>
+<li>当新创建一个对象时，如果该对象所属的 class 没有关闭偏向锁模式，那新建的对象处于可偏向状态，此时 mark word 中的 thread id 为0，表示未偏向任何线程，也叫做匿名偏向。</li>
 </ul>
 </li>
 <li>加锁过程
@@ -215,7 +217,7 @@
 </li>
 <li>重入过程
 <ul>
-<li>当偏向的线程再次进入同步块时，发现锁对象偏向的就是当前线程，就会往当前的栈中添加一条 Displaced Mark Word 为 null 的 Lock Record，将 Lock Record 的 obj 指向该对象。、</li>
+<li>当偏向的线程再次进入同步块时，发现锁对象偏向的就是当前线程，就会往当前的栈中添加一条 Displaced Mark Word 为 null 的 Lock Record，将 Lock Record 的 obj 指向该对象。</li>
 </ul>
 </li>
 <li>产生竞争
@@ -238,7 +240,7 @@
 <li>
 <p>加锁过程</p>
 <ul>
-<li>在线程中创建一个 <code>Lock Record</code> 将其 <code>obj</code> 字段指向锁对象</li>
+<li>在线程中创建一个 <code>Lock Record</code> 将其 <code>obj</code> 字段指向锁对象；并用displaced mark word记录对象当前的mark word</li>
 <li>通过 <code>CAS</code> 指令将 <code>Lock Record</code> 的地址存储在对象头的 <code>mark word</code> 中，如果成功，获得轻量级锁，否则进入自旋状态</li>
 <li>当有线程超过10次自旋/自旋线程数超过cpu核数的一半，就需要升级为重量级锁。</li>
 </ul>
@@ -360,6 +362,7 @@
 <li></li>
 </ol>
 <h2 id="aqs">AQS</h2>
+<p><code>AQS用于线程同步，逻辑都是基本固定的，具体实现只需要考虑怎么获取锁，怎么设置state，这些都只需要在tryAcquire、tryAcquireShared、tryRelease、tryReleaseShared等方法内具体实现</code></p>
 <h3 id="继承关系">继承关系</h3>
 <ol>
 <li>AbstractQueuedSynchronizer
@@ -472,8 +475,10 @@
 </ol>
 <h3 id="conditionobject">ConditionObject</h3>
 <ol>
-<li>
-<h2 id="await">await()</h2>
+<li>await()
+<ul>
+<li>aqs已经定义好的过程：大概过程是释放锁，从aqs队列中移除再加入到条件队列中</li>
+</ul>
 </li>
 <li>signal()
 <ul>
@@ -483,12 +488,55 @@
 </ul>
 </li>
 </ol>
-<h3 id="使用了aqs的同步工具只需要实现tryacquire和tryrelease其他的逻辑都是固定的">使用了AQS的同步工具（只需要实现tryAcquire和tryRelease，其他的逻辑都是固定的！）</h3>
+<h3 id="aqs应用">AQS应用</h3>
+<p><code>使用了AQS的同步工具（只需要实现tryAcquire和tryRelease，其他的逻辑都是固定的！）</code></p>
 <ol>
-<li>ReentrantLock</li>
-<li>ReentrantReadWriteLock</li>
-<li>Semaphore</li>
-<li>CountDownLatch</li>
+<li>
+<p>ReentrantLock</p>
+<ul>
+<li>公平非公平锁的实现方式：公平锁每次获取锁之前都要先判断队列中是否有线程等待，而非公平锁就直接获取锁；所以非公平锁并不能保证获得锁的顺序</li>
+<li>可重入实现特别简单，因为是可重入时是单线程，所以直接用将state加1即可，不需要考虑并发问题</li>
+<li>具体实现只包括两部分：initialTryLock() 和 tryAcquire()； 前者通过cas直接设置锁，并考虑可重入问题；后者只是单纯的getstate+cas；前者是在acquire之前，后者会在acquire函数中被调用，具体过程则是aqs已经定义好的！</li>
+<li>释放锁只需要重写aqs的tryRelease函数即可（其他过程按照aqs定义好的即可）：把state减1、判断释放锁的线程和拥有锁的线程是否是同一个、判断state是否为0、根据state是否为0决定是否把拥有当前锁的线程设为null以及返回值；</li>
+</ul>
+</li>
+<li>
+<p>ReentrantReadWriteLock</p>
+<ul>
+<li>写锁重写tryAcquire和tryRelease</li>
+<li>用 volatile 修饰的 state 来记录读锁和写锁的数量，高位表示读锁，低位表示写锁</li>
+<li>tryAcquire
+<ul>
+<li>如果读锁不为0，不具备获取锁的资格</li>
+<li>如果读锁为0，写锁不为0，判断是否重入，如果写锁被其他线程持有，不具备获取锁的资格！</li>
+<li><code>注意，只有写锁是可重入的，如果当前线程已经持有读锁，写锁是不可重入的！！！</code></li>
+</ul>
+</li>
+<li>tryRelease
+<ul>
+<li>state减1，并判断写锁数量</li>
+<li>根据判断结果来决定是否将独占锁线程置为null</li>
+</ul>
+</li>
+<li>读锁重写tryAcquireShared和tryReleaseShared</li>
+<li>tryAcquireShared
+<ul>
+<li>写锁被其他线程持有，不具备获取锁的资格</li>
+<li>其他情况都是具备获取锁的资格的！<code>也就是说写读是可重入的，但是读写是不可重入的！</code></li>
+<li>如果具备了获取锁的资格，但是因为cas或者读锁重入问题而获取锁失败，则进入fullTryAcquireShared函数（todo）！</li>
+</ul>
+</li>
+<li>
+<h2 id="tryreleaseshared">tryReleaseShared</h2>
+</li>
+</ul>
+</li>
+<li>
+<p>Semaphore</p>
+</li>
+<li>
+<p>CountDownLatch</p>
+</li>
 </ol>
 <h3 id="使用aqs实现一个共享锁">使用AQS实现一个共享锁</h3>
 <p><code>实现一个锁，它是一个共享锁，但是每次至多支持两个线程同时获取锁，若当前已经有两个线程获取了锁，则其他获取锁的线程需要等待</code></p>
@@ -810,6 +858,7 @@
 </li>
 <li>是否具有原子性：底层实现，通过对总线加锁！</li>
 </ol>
+<h2 id="stampedlocktodo">StampedLock(todo)</h2>
 <h2 id="volatile">volatile</h2>
 <ol>
 <li></li>
@@ -885,7 +934,8 @@
 
   <span class="copyright-year">
     &copy; 
-    2020
+    2020 - 
+    2021
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>

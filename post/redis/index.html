@@ -49,7 +49,7 @@
 <meta itemprop="description" content="常规数据类型 string SDS 简单动态字符串 二进制安全（意思是输入任何字节都能正确处理，不会依赖于\0来判断字符是否结束），所以可以存储任何数据 最大能存储">
 <meta itemprop="datePublished" content="2020-07-01T01:13:27&#43;08:00" />
 <meta itemprop="dateModified" content="2020-07-01T01:13:27&#43;08:00" />
-<meta itemprop="wordCount" content="2945">
+<meta itemprop="wordCount" content="3246">
 
 
 
@@ -579,6 +579,9 @@
 </li>
 <li>解决方案
 <ul>
+<li>随机设置redis缓存过期时间，如果过期时间相同，容易造成雪崩。</li>
+<li>redis集群分布，把热点key放到不同的节点上</li>
+<li>跑定时任务，定时刷缓存</li>
 <li>更多页面静态化处理</li>
 <li>构建多级缓存架构
 <ul>
@@ -591,7 +594,35 @@
 </li>
 </ol>
 <h3 id="缓存击穿">缓存击穿</h3>
+<ol>
+<li>问题本质
+<ul>
+<li>热点数据缓存失效，然后同一时间大量请求直接涌入数据库，导致数据库崩溃</li>
+</ul>
+</li>
+<li>解决方案
+<ul>
+<li>缓存永不过期</li>
+<li>分布式锁：请求数据库操作加锁，只有一个线程可以抢到锁，其他抢不到锁的线程先睡几毫秒，然后重新去redis读取即可。</li>
+</ul>
+</li>
+</ol>
 <h3 id="缓存穿透">缓存穿透</h3>
+<ol>
+<li>本质
+<ul>
+<li>恶意用户请求数据库中不存在的数据，从而导致该请求穿透redis缓存，直达数据库</li>
+</ul>
+</li>
+<li>解决方案
+<ul>
+<li>如果数据库中没有对应数据，在redis中设置一个空值对应这个请求</li>
+<li>对请求规范性进行检查</li>
+<li>对恶意ip进行拉黑</li>
+<li>布隆过滤器：通过布隆过滤器快速判断数据是否存在，如果不存在及时返回</li>
+</ul>
+</li>
+</ol>
 
     </div>
 
@@ -658,7 +689,8 @@
 
   <span class="copyright-year">
     &copy; 
-    2020
+    2020 - 
+    2021
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>

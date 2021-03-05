@@ -1,5 +1,11 @@
 ## 自定义mybatis
-
+### 配置文件
+配置文件中主要包括连接数据库的基本信息和Mapper配置文件，基于xml和基于注解的唯一不同点在于得到Mappers对象的方式不同，但是无论xml还是注解都会先得到Mappers对象
+### mappers
+- 对应接口的全限定类名+方法名为key
+- 以sql语句+返回参数类型（实体类）作为value
+### 基本流程
+以配置文件为基础，依次得到SqlSessionFactoryBuilder、SqlSessionFactory、SqlSession，SqlSession再根据传入的接口的全限定类名以动态代理的方式得到对应接口的代理类。代理类中有mappers和connection，根据connection和mappers就可以连接数据库并执行对应的sql语句，然后将返回结果封装好后返回。
 ## mybatis环境搭建
 
 
@@ -135,6 +141,7 @@
 	- @many
 
 ## mybatis细节
+
 ### mybatis开启别名
 ```
 <typeAliases>
@@ -152,3 +159,5 @@ SqlSessionFactory factory = builder.build(config);
 session = factory.openSession(true);
 accountDao = session.getMapper(IAccountDao.class);
 ```
+### mybatis 实例类
+必须可序列化

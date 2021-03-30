@@ -1,7 +1,7 @@
 ## 继承关系
 ### Iterable/Collection
 1. List
-	- CopyOnWriteList
+	- CopyOnWriteList ：优雅地解决读多写少场景下的并发问题
 	- Vector --- Stack
 	- ArrayList
 	- LinkedList

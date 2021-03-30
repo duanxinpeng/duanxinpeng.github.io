@@ -49,7 +49,7 @@
 <meta itemprop="description" content="强软弱虚 强引用： 只要强引用存在，被引用的对象就永远不会被回收 软引用： 只被软引用关联着的对象在系统将要发生内存溢出时就会被列入回收范进行回收 j">
 <meta itemprop="datePublished" content="2020-08-18T22:46:20&#43;08:00" />
 <meta itemprop="dateModified" content="2020-08-18T22:46:20&#43;08:00" />
-<meta itemprop="wordCount" content="1619">
+<meta itemprop="wordCount" content="1739">
 
 
 
@@ -256,7 +256,7 @@
 <li>ThreadLocal
 <ul>
 <li>将ThreadLcoal本身作为key，将变量作为value，放入当前线程的ThreadLocalMap中！</li>
-<li>本质上其实是将key和value封装到一个Entry对象中，而Entry的本质是一个指向key（ThreadLocal对象）的弱引用，但是Entry中还有一个指向value的强引用，这也是导致threadlocal内存泄露的关键</li>
+<li>本质上其实是将value封装到一个Entry对象中，而Entry的本质是一个指向key（ThreadLocal对象）的弱引用，但是Entry中还有一个指向value的强引用，这也是导致threadlocal内存泄露的关键（自定义的ThreadLocal是一个强引用，这个强引用断开之后，ThreadLocal（key）对象只有Entry这个弱引用，下一次垃圾回收会自动被回收，但是entry不会被回收，entry中指向value的强引用就一直存在！从而导致内存泄露！）</li>
 </ul>
 </li>
 <li>ThreadLocalMap

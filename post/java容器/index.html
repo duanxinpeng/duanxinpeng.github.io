@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="段新朋" /><meta name="description" content="继承关系 Iterable/Collection List CopyOnWriteList Vector &amp;mdash; Stack ArrayList LinkedList Set HashSet &amp;mdash; LinkedHashSet SortedSet &amp;mdash; TreeSet EnumSet CopyOnWriteArraySet ConcurrentSkipListSet Queue Deque ArrayDeque BlockingDeque BlockingQueue ArrayBlocingQueue LinkedBlockingQueue SynchronousQueue PriorityBlockingQueue PriorityQueue Map HashMap HashTable TreeMap ConcurrentHashMap LinkedHashMap：LRU 常见问题 Map没有实现itera" /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="段新朋" /><meta name="description" content="继承关系 Iterable/Collection List CopyOnWriteList ：优雅地解决读多写少场景下的并发问题 Vector &amp;mdash; Stack ArrayList LinkedList Set HashSet &amp;mdash; LinkedHashSet SortedSet &amp;mdash; TreeSet EnumSet CopyOnWriteArraySet ConcurrentSkipListSet Queue Deque ArrayDeque BlockingDeque BlockingQueue ArrayBlocingQueue LinkedBlockingQueue SynchronousQueue PriorityBlockingQueue PriorityQueue Map HashMap HashTable TreeMap ConcurrentHashMap LinkedHashMap：L" /><meta name="keywords" content="Hugo, theme, even" />
 
 
 
@@ -40,22 +40,22 @@
 
 
 <meta property="og:title" content="Java容器" />
-<meta property="og:description" content="继承关系 Iterable/Collection List CopyOnWriteList Vector &mdash; Stack ArrayList LinkedList Set HashSet &mdash; LinkedHashSet SortedSet &mdash; TreeSet EnumSet CopyOnWriteArraySet ConcurrentSkipListSet Queue Deque ArrayDeque BlockingDeque BlockingQueue ArrayBlocingQueue LinkedBlockingQueue SynchronousQueue PriorityBlockingQueue PriorityQueue Map HashMap HashTable TreeMap ConcurrentHashMap LinkedHashMap：LRU 常见问题 Map没有实现itera" />
+<meta property="og:description" content="继承关系 Iterable/Collection List CopyOnWriteList ：优雅地解决读多写少场景下的并发问题 Vector &mdash; Stack ArrayList LinkedList Set HashSet &mdash; LinkedHashSet SortedSet &mdash; TreeSet EnumSet CopyOnWriteArraySet ConcurrentSkipListSet Queue Deque ArrayDeque BlockingDeque BlockingQueue ArrayBlocingQueue LinkedBlockingQueue SynchronousQueue PriorityBlockingQueue PriorityQueue Map HashMap HashTable TreeMap ConcurrentHashMap LinkedHashMap：L" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/post/java%E5%AE%B9%E5%99%A8/" />
 <meta property="article:published_time" content="2020-09-01T10:06:52+08:00" />
 <meta property="article:modified_time" content="2020-09-01T10:06:52+08:00" />
 <meta itemprop="name" content="Java容器">
-<meta itemprop="description" content="继承关系 Iterable/Collection List CopyOnWriteList Vector &mdash; Stack ArrayList LinkedList Set HashSet &mdash; LinkedHashSet SortedSet &mdash; TreeSet EnumSet CopyOnWriteArraySet ConcurrentSkipListSet Queue Deque ArrayDeque BlockingDeque BlockingQueue ArrayBlocingQueue LinkedBlockingQueue SynchronousQueue PriorityBlockingQueue PriorityQueue Map HashMap HashTable TreeMap ConcurrentHashMap LinkedHashMap：LRU 常见问题 Map没有实现itera">
+<meta itemprop="description" content="继承关系 Iterable/Collection List CopyOnWriteList ：优雅地解决读多写少场景下的并发问题 Vector &mdash; Stack ArrayList LinkedList Set HashSet &mdash; LinkedHashSet SortedSet &mdash; TreeSet EnumSet CopyOnWriteArraySet ConcurrentSkipListSet Queue Deque ArrayDeque BlockingDeque BlockingQueue ArrayBlocingQueue LinkedBlockingQueue SynchronousQueue PriorityBlockingQueue PriorityQueue Map HashMap HashTable TreeMap ConcurrentHashMap LinkedHashMap：L">
 <meta itemprop="datePublished" content="2020-09-01T10:06:52&#43;08:00" />
 <meta itemprop="dateModified" content="2020-09-01T10:06:52&#43;08:00" />
-<meta itemprop="wordCount" content="492">
+<meta itemprop="wordCount" content="510">
 
 
 
 <meta itemprop="keywords" content="java,容器," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Java容器"/>
-<meta name="twitter:description" content="继承关系 Iterable/Collection List CopyOnWriteList Vector &mdash; Stack ArrayList LinkedList Set HashSet &mdash; LinkedHashSet SortedSet &mdash; TreeSet EnumSet CopyOnWriteArraySet ConcurrentSkipListSet Queue Deque ArrayDeque BlockingDeque BlockingQueue ArrayBlocingQueue LinkedBlockingQueue SynchronousQueue PriorityBlockingQueue PriorityQueue Map HashMap HashTable TreeMap ConcurrentHashMap LinkedHashMap：LRU 常见问题 Map没有实现itera"/>
+<meta name="twitter:description" content="继承关系 Iterable/Collection List CopyOnWriteList ：优雅地解决读多写少场景下的并发问题 Vector &mdash; Stack ArrayList LinkedList Set HashSet &mdash; LinkedHashSet SortedSet &mdash; TreeSet EnumSet CopyOnWriteArraySet ConcurrentSkipListSet Queue Deque ArrayDeque BlockingDeque BlockingQueue ArrayBlocingQueue LinkedBlockingQueue SynchronousQueue PriorityBlockingQueue PriorityQueue Map HashMap HashTable TreeMap ConcurrentHashMap LinkedHashMap：L"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -151,7 +151,7 @@
 <ol>
 <li>List
 <ul>
-<li>CopyOnWriteList</li>
+<li>CopyOnWriteList ：优雅地解决读多写少场景下的并发问题</li>
 <li>Vector &mdash; Stack</li>
 <li>ArrayList</li>
 <li>LinkedList</li>

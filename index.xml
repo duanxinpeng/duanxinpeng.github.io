@@ -62,7 +62,7 @@
       <pubDate>Tue, 01 Sep 2020 10:06:52 +0800</pubDate>
       
       <guid>http://localhost:1313/post/java%E5%AE%B9%E5%99%A8/</guid>
-      <description>继承关系 Iterable/Collection List CopyOnWriteList Vector &amp;mdash; Stack ArrayList LinkedList Set HashSet &amp;mdash; LinkedHashSet SortedSet &amp;mdash; TreeSet EnumSet CopyOnWriteArraySet ConcurrentSkipListSet Queue Deque ArrayDeque BlockingDeque BlockingQueue ArrayBlocingQueue LinkedBlockingQueue SynchronousQueue PriorityBlockingQueue PriorityQueue Map HashMap HashTable TreeMap ConcurrentHashMap LinkedHashMap：LRU 常见问题 Map没有实现itera</description>
+      <description>继承关系 Iterable/Collection List CopyOnWriteList ：优雅地解决读多写少场景下的并发问题 Vector &amp;mdash; Stack ArrayList LinkedList Set HashSet &amp;mdash; LinkedHashSet SortedSet &amp;mdash; TreeSet EnumSet CopyOnWriteArraySet ConcurrentSkipListSet Queue Deque ArrayDeque BlockingDeque BlockingQueue ArrayBlocingQueue LinkedBlockingQueue SynchronousQueue PriorityBlockingQueue PriorityQueue Map HashMap HashTable TreeMap ConcurrentHashMap LinkedHashMap：L</description>
     </item>
     
     <item>

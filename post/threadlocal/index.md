@@ -56,7 +56,7 @@ public class Reference {
 	- 比如同一个事务内如果使用不同的连接，就饿没办法统一管理事务，所以需要用ThreadLocal保证同一个线程得到的连接都是同一个。
 2. ThreadLocal
 	- 将ThreadLcoal本身作为key，将变量作为value，放入当前线程的ThreadLocalMap中！
-	- 本质上其实是将key和value封装到一个Entry对象中，而Entry的本质是一个指向key（ThreadLocal对象）的弱引用，但是Entry中还有一个指向value的强引用，这也是导致threadlocal内存泄露的关键
+	- 本质上其实是将value封装到一个Entry对象中，而Entry的本质是一个指向key（ThreadLocal对象）的弱引用，但是Entry中还有一个指向value的强引用，这也是导致threadlocal内存泄露的关键（自定义的ThreadLocal是一个强引用，这个强引用断开之后，ThreadLocal（key）对象只有Entry这个弱引用，下一次垃圾回收会自动被回收，但是entry不会被回收，entry中指向value的强引用就一直存在！从而导致内存泄露！）
 3. ThreadLocalMap 
 	- 本质是一个散列表（一个Entry数组！），不同于HashMap的是，ThreadLocalMap采用的是线性探测法来解决哈希冲突。
 	- set(): 先用哈希函数得到key（ThreadLocal对象）的哈希值，再通过取模找到数组中的位置，如果不为空，则从当前位置向后查找直到找到第一个不为空的位置
